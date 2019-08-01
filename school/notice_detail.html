@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<title>消息通知详情</title>
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="renderer" content="webkit">
+	<link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="css/mui.min.css">
+	<link rel="stylesheet" href="css/notice_detail.css" />
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="navTop">
+				通知详情
+				<img class="back" src="./images/back_top.png" alt="" @click="back" />
+			</div>
+			<iframe id="dom" :src="urls" frameborder="0"></iframe>
+			<div id="bg" class="bg">
+				<div id="loading" class="loading">
+					<img src="images/loading.gif" alt="" />
+				</div>
+			</div>
+		</div>
+
+		<script src="js/flexible.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					urls: '',
+					id: ''
+				},
+				mounted: function() {
+					this.urls = GetQueryString('url');
+					this.id = GetQueryString('id');
+					loadEnd('dom', 'bg');
+				},
+				methods: {
+					back: function() {
+						window.location.href = "./first.html?id=" + this.id;
+					}
+				}
+			});
+
+			//iframe窗口加载状态
+			function loadEnd(id, ids) {
+				var list = document.getElementById(id);
+				document.getElementById(ids).style.display = 'block';
+				if(list) {
+					list.onload = function() {
+						document.getElementById(ids).style.display = 'none';
+						list.height = document.documentElement.clientHeight || document.body.clientHeight;
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

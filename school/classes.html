@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>班级信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/vant.css">
+		<link rel="stylesheet" href="css/classes.css" />
+		<style>
+			body {
+				background: #ffffff;
+			}
+			
+			.mui-bar {
+				background: #19B8EF;
+				box-shadow: 0 0 0 #19B8EF;
+				height: 62px;
+				padding-top: 18px;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.mui-title {
+				color: #fff;
+				height: 44px;
+				line-height: 44px;
+			}
+			
+			.mui-table-view-cell {
+				padding: 15px 0;
+			}
+			
+			.mui-content {
+				background: #ffffff;
+				width: 100%;
+			}
+			
+			.mui-table-view-cell {
+				border-bottom: 1px solid #eee;
+			}
+			
+			.mui-table-view:before,
+			.mui-table-view:after {
+				height: 0;
+			}
+			
+			.mui-table-view-cell:after {
+				height: 0;
+			}
+			
+			.font {
+				font-size: 0px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="list" id="app" v-cloak>
+			<div class="navTop">
+				班级信息
+				<img class="editor" src="./images/editor.png" alt="" @tap="goEditor" />
+			</div>
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="background: #ffffff;margin-top: 44px;margin-bottom: 51px;">
+				<div class="mui-content">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" v-for="(v,k) in list" @tap.stop="open_detail(v.lessonid)">
+							<div class="mui-slider-right mui-disabled" @tap.stop="del(k,v.lessonid,$event)">
+								<a href="javascript:;" class="mui-btn mui-btn-red">删除</a>
+							</div>
+							<div class="mui-slider-handle lists">
+								<div class="list_right">
+									<div class="list_title">
+										<h4 v-if="v.lessontype == 1">课程安排</h4>
+										<h4 v-if="v.lessontype == 2">家庭作业</h4>
+										<span class="date">{{v.time}}</span>
+									</div>
+									<span class="text">{{v.lessoncontent}}</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div v-if="show == 1" class="no">
+				<img src="images/no.png" alt="" />
+			</div>
+			<nav-bar :active="active" @choice="choice"></nav-bar>
+		</div>
+		<script src="js/flexible.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/vant.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			var notice = new Vue({
+				el: "#app",
+				data: {
+					list: [],
+					show: 0,
+					active: 2
+				},
+				methods: {
+					del: function(index, id, event) {
+						var that = this;
+						var li = event.currentTarget.parentNode;
+						//删除信息操作
+						this.$dialog.confirm({
+							title: '信息',
+							message: '确定删除此班级信息吗'
+						}).then(() => {
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "teacherlessondelete",
+								uid: uid,
+								lessonid: id
+							}
+							ajax(datas, function(res) {
+								if(res.result == 0) {
+									that.list.splice(index, 1);
+									if(that.list == []) {
+										notice.show = 1;
+										document.getElementsByClassName('mui-pull-caption')[1].style.fontSize = '0px';
+										document.getElementsByClassName('mui-spinner')[0].style.height = '0px';
+										document.getElementsByClassName('list')[0].style.height = '100%';
+									}
+									setTimeout(function() {
+										mui.swipeoutClose(li);
+									}, 0);
+								}
+							});
+						}).catch(() => {
+							setTimeout(function() {
+								mui.swipeoutClose(li);
+							}, 0);
+							return;
+						});
+					},
+					choice: function(item) {
+						if(item == 0) {
+							window.location.href = "./first.html";
+						} else if(item == 1) {
+							window.location.href = "./baby_two.html";
+						} else if(item == 2) {
+							window.location.href = "./classes.html";
+						} else if(item == 3) {
+							window.location.href = "./display.html";
+						}
+					},
+					goEditor: function() {
+						window.location.href = "./editor.html";
+					},
+					open_detail: function(id) {
+						window.location.href = './classes_detail.html?id=' + id;
+					}
+				}
+			});
+
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						offset: '80px',
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			var count = 1;
+			var num = 0;
+
+			function pullupRefresh() {
+				var state = app.getState();
+				var uid = state.uid;
+				var datas = {
+					cmd: "teacherlessonlist",
+					uid: uid,
+					nowPage: count,
+					pageCount: "4"
+				}
+				ajax(datas, successLoad);
+			}
+
+			function successLoad(res) {
+				if(res.result == 0) {
+					//暂无数据提示信息显示
+					if(res.dataList == undefined || res.dataList.length == 0) {
+						notice.show = 1;
+						document.getElementsByClassName('mui-pull-caption')[1].style.fontSize = '0px';
+						document.getElementsByClassName('mui-spinner')[0].style.height = '0px';
+						document.getElementsByClassName('list')[0].style.height = '100%';
+					} else if(res.dataList.length > 0) {
+						notice.show = 0;
+						document.getElementsByClassName('mui-pull-caption')[1].style.fontSize = '15px';
+						document.getElementsByClassName('mui-spinner')[0].style.height = '24px';
+						for(var i = 0; i < res.dataList.length; i++) {
+							notice.list.push(res.dataList[i])
+						}
+					}
+					num = res.totalPage;
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > num)); 
+				}
+			}
+
+			function pulldownRefresh() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+				notice.list = [];
+				count = 1;
+			}
+		</script>
+	</body>
+
+</html>

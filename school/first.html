@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页展示</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/vant.css">
+		<link rel="stylesheet" href="css/photoswipe.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/swiper.css" />
+		<link rel="stylesheet" href="css/first.css" />
+		<style>
+			.warn {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				bottom: 50px;
+				z-index: 1000;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				background: #fff;
+			}
+			
+			.warn_img {
+				width: 160px;
+				height: 160px;
+			}
+			
+			.warn_img img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="first_box">
+				<h3 class="title">{{title}}</h3>
+				<div class="banner">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" v-for="v in swiperImg">
+								<img preview="0" v-lazy="v.bannerIcon" alt="" />
+							</div>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+				<div class="report">
+					<div class="mui-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" v-for="(v,k) in list">
+								<div class="mui-slider-right mui-disabled" @tap.stop="del(v.messageId,k,$event)">
+									<a href="javascript:;" class="mui-btn mui-btn-red">删除</a>
+								</div>
+								<div class="mui-slider-handle lists" @tap="open_detail(v.messageDetail,v.messageId)">
+									<div class="list_left">
+										<img src="images/warn.png" alt="" />
+										<span v-show="v.messageRead == 0" class="mui-badge"></span>
+									</div>
+									<div class="list_right">
+										<div class="list_title">
+											<h4 v-if="v.messagetype == 1">园内信息</h4>
+											<h4 v-if="v.messagetype == 2">平台信息</h4>
+											<span class="date">{{v.adtime}}</span>
+										</div>
+										<span class="text">{{v.messageTitle}}</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="warn" v-show="onOff">
+				<div class="warn_img">
+					<img src="images/no.png" alt="">
+				</div>
+			</div>
+			<nav-bar :active="active" @choice="choice"></nav-bar>
+		</div>
+		<script src="js/flexible.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/vant.js"></script>
+		<script src="js/lazyload.js"></script>
+		<script src="js/photoswipe.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/swiper.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			//实现图片的懒加载方法
+			Vue.use(VueLazyload, {
+				loading: "./images/60x60.gif",
+				listenEvents: ['touchmove']
+			});
+			//实现图片预览放大功能
+			var options = {
+				fullscreenEl: false
+			}
+			Vue.use(vuePhotoPreview, options);
+
+			var first = new Vue({
+				el: "#app",
+				data: {
+					swiperImg: [],
+					list: [],
+					active: 0,
+					title: '',
+					onOff:false
+				},
+				created: function() {
+					var that = this;
+					if(GetQueryString('user') != undefined && GetQueryString('pw') != undefined){
+						this.phone = GetQueryString('user')
+						this.pass = GetQueryString('pw')
+						//三方获取用户和密码保存开始
+						var loginInfo = {
+							cmd: "userLogin",
+							phone: this.phone,
+							password: hex_md5(this.pass)
+						};
+						
+						ajax(loginInfo, function(res) {
+							if (res.result == 0) {
+								that.$toast("登陆成功");
+								app.login(res.dataobject, hex_md5(that.pass));
+								// setTimeout(function() {
+								// 	window.location.href = "first.html";
+								// }, 1500);
+							} else if(res.result == 1){
+								that.$toast(res.resultNote);
+							}
+						});
+						//三方获取用户和密码保存结束
+					}
+				},
+				mounted: function() {
+					this.onLoad();
+				},
+				methods: {
+					onLoad: function() {
+						var that = this;
+						var id = setInterval(function() {
+							var state = app.getState();
+							var uid = state.uid;
+							if(uid == undefined) {
+								return
+							} else {
+								clearInterval(id);
+								var state = app.getState();
+								var uid = state.uid;
+								var datas = {
+									cmd: "teacherhomepage",
+									uid: uid
+								}
+								ajax(datas, that.successLoad);
+							}
+						}, 100);
+					},
+					successLoad: function(res) {
+						this.title = res.schoolname;
+						if(res.result == 0) {
+							this.swiperImg = res.dataList;
+							this.list = res.messList;
+							if(this.swiperImg == undefined && this.list == undefined){
+								this.onOff = true;
+							}
+							if(GetQueryString('id') != null) {
+								for(var i = 0; i < this.list.length; i++) {
+									if(this.list[i].messageId == GetQueryString('id')) {
+										this.list[i].messageRead = 1;
+									}
+								}
+								var state = app.getState();
+								var uid = state.uid;
+								var datas = {
+									cmd: "teachermessageread",
+									uid: uid,
+									messageId: GetQueryString('id')
+								}
+								ajax(datas, function() {});
+							}
+							setTimeout(function() {
+								//轮播图初始化
+								var swiper = new Swiper('.swiper-container', {
+									pagination: {
+										el: '.swiper-pagination',
+									},
+									autoplay: true
+								});
+								first.$previewRefresh();
+							}, 200);
+						}
+					},
+					choice: function(item) {
+						if(item == 0) {
+							window.location.href = "./first.html";
+						} else if(item == 1) {
+							window.location.href = "./baby_two.html";
+						} else if(item == 2) {
+							window.location.href = "./classes.html";
+						} else if(item == 3) {
+							window.location.href = "./display.html";
+						}
+					},
+					del: function(id, item, event) {
+						var that = this;
+						var li = event.currentTarget.parentNode;
+						//删除信息操作
+						this.$dialog.confirm({
+							title: '信息',
+							message: '确定删除此通知信息吗'
+						}).then(() => {
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "teachermessagedelete",
+								uid: uid,
+								messageId: id
+							}
+							ajax(datas, function(res) {
+								if(res.result == 0) {
+									that.list.splice(item, 1);
+									setTimeout(function() {
+										mui.swipeoutClose(li);
+									}, 0);
+								}
+							});
+						}).catch(() => {
+							setTimeout(function() {
+								mui.swipeoutClose(li);
+							}, 0);
+							return;
+						});
+					},
+					open_detail: function(urls, id) {
+						window.location.href = "./notice_detail.html?url=" + urls + "&id=" + id;
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>
