@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<link rel="stylesheet" href="./static/css/default.css">
+		<script src="./static/js/mui.min.js"></script>
+		<script src="./static/js/md5.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.14&key=64f004184ffa1345e687318d205ad50e"></script>
+		<script src="https://webapi.amap.com/maps?v=1.4.14&key=64f004184ffa1345e687318d205ad50e&plugin=AMap.PolyEditor"></script>
+		<script src="https://webapi.amap.com/maps?v=1.4.14&key=64f004184ffa1345e687318d205ad50e&plugin=AMap.Driving"></script>
+		<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+		<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3ug0lA8q2ZLNLMwypAbgzmicvQ59M7py"></script> -->
+		<title>通行证</title>
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			.mui-toast-container {
+				position: fixed;
+				z-index: 10000;
+				bottom: 50px;
+				width: 100%;
+				-webkit-transition: opacity .8s;
+				transition: opacity .8s;
+				opacity: 0
+			}
+
+			.mui-toast-container.mui-active {
+				opacity: 1
+			}
+
+			.mui-toast-message {
+				font-size: 14px;
+				width: 270px;
+				margin: 5px auto;
+				padding: 5px;
+				text-align: center;
+				color: #000;
+				border-radius: 7px;
+				background-color: #d8d8d8
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script>
+			mui.init({
+				keyEventBind: {
+					backbutton: true //关闭back按键监听
+				}
+			})
+			// //首页返回键处理
+			// //处理逻辑：1秒内，连续两次按返回键，则退出应用；
+			var first = null
+			mui.back = function() {
+				//首次按键，提示‘再按一次退出应用’
+				if (!first) {
+					first = new Date().getTime() //记录第一次按下回退键的时间
+					mui.toast('再按一次退出应用') //给出提示
+					setTimeout(function() { //1s中后清除
+						first = null
+					}, 1000)
+				} else {
+					if (new Date().getTime() - first < 1000) { //如果两次按下的时间小于1s，
+						plus.runtime.quit() //那么就退出app
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

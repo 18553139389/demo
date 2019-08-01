@@ -1,0 +1,12 @@
+{
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "static/css/default.css",
+      "static/js/mui.min.js",
+      "static/js/md5.js"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}
