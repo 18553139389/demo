@@ -1,0 +1,109 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+}
+
+.container,.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.list_item {
+	width: 100%;
+	padding: 0.3rem;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+}
+
+.list_img {
+	width: 1.6rem;
+	height: 1.6rem;
+	margin-right: 0.4rem;
+}
+
+.list_img img {
+	width: 100%;
+	height: 100%;
+}
+
+.list_content {
+	width: 55%;
+	height: 1.6rem;
+	padding: 0.1rem 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.list_content h3 {
+	width: 100%;
+	font-size: 30px;
+	color: #333;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+[data-dpr="1"] .list_content h3 {
+	font-size: 15px;
+}
+
+[data-dpr="3"] .list_content h3 {
+	font-size: 45px;
+}
+
+.list_address {
+	display: flex;
+	align-items: center;
+}
+
+.list_address img {
+	width: 0.5rem;
+	height: 0.5rem;
+}
+
+.list_address span {
+	width: 80%;
+	display: inline-block;
+	margin-left: 0.2rem;
+	font-size: 28px;
+	color: #666;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+[data-dpr="1"] .list_address span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .list_address span {
+	font-size: 42px;
+}
+
+.voucher {
+	font-size: 28px;
+	color: #FA9441;
+	padding: 0 0.15rem;
+	text-align: center;
+	border: 1px solid #FA9441;
+	border-radius: 4px;
+}
+
+[data-dpr="1"] .voucher {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .voucher {
+	font-size: 42px;
+}
+
+[v-cloak] {
+    display: none !important;
+}

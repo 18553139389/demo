@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/vant.css">
+		<link rel="stylesheet" href="Resource/css/my_balance.css" />
+		<title>我的余额</title>
+	</head>
+
+	<body>
+		<div id="app" class="list">
+			<div class="balance">
+				<span class="cash">{{balance}}</span>
+				<span class="current">当前余额</span>
+			</div>
+			<div class="detail">
+				<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+					<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+						<h3>-收支明细-</h3>
+						<ul class="detail_list">
+							<li v-for="v in list">
+								<span class="title">{{v.title}}</span>
+								<span v-if="v.type == 0" class="pay_money">- {{v.amount}}</span>
+								<span v-if="v.type == 1" class="money">+ {{v.amount}}</span>
+								<span class="date">{{v.adtime}}</span>
+							</li>
+						</ul>
+					</van-pull-refresh>
+				</van-list>
+			</div>
+			<button class="submit" type="button" @click="submit">提现</button>
+		</div>
+		
+		<script src="Resource/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="Resource/js/vant.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script>
+			// var res = {
+			// 	totalPage: 4,
+			// 	balance: "4500.00",
+			// 	dataList: [{
+			// 			title: "好友消费奖励",
+			// 			money: "￥7000.0",
+			// 			type: 0,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "提现",
+			// 			money: "￥600.0",
+			// 			type: 1,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "好友消费奖励",
+			// 			money: "￥1200.0",
+			// 			type: 0,
+			// 			date: "2018-11-07"
+			// 		},
+			// 		{
+			// 			title: "好友消费奖励",
+			// 			money: "￥7000.0",
+			// 			type: 0,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "提现",
+			// 			money: "￥600.0",
+			// 			type: 0,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "好友消费奖励",
+			// 			money: "￥1200.0",
+			// 			type: 1,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "好友消费奖励",
+			// 			money: "￥7000.0",
+			// 			type: 1,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "提现",
+			// 			money: "￥600.0",
+			// 			type: 1,
+			// 			date: "2018-09-07"
+			// 		},
+			// 		{
+			// 			title: "好友消费奖励",
+			// 			money: "￥1200.0",
+			// 			type: 1,
+			// 			date: "2018-09-07"
+			// 		}
+			// 	]
+			// }
+			var app = new Vue({
+				el: "#app",
+				data: {
+					isLoading: false,
+					list: [],
+					loading: false,
+					finished: false,
+					page: 1,
+					totalPage: 10,
+					balance: ''
+				},
+				methods: {
+					onRefresh: function() {
+						var self = this
+						this.list = [];
+						this.page = 1;
+						this.totalPage = 10;
+						this.onLoad();
+						setTimeout(function() {
+							self.$toast('刷新成功');
+							self.isLoading = false;
+						}, 500);
+					},
+					onLoad: function() {
+						//注意在此处的滚动加载必须产生滚动条所以多加载几条数据
+						if (this.page <= this.totalPage) {
+							var datas = {
+								uid: uid,
+								page: this.page
+							}
+							 queryData('/userBalance', datas, this.successLoad);
+
+							// //此处只是示例模拟后台返回的数据的开始
+							// this.balance = res.balance;
+							// this.totalPage = res.totalPage;
+							// for (var i = 0; i < res.dataList.length; i++) {
+							// 	this.list.push(res.dataList[i]);
+							// }
+							// console.log(this.list);
+							// //此处只是示例模拟后台返回的数据的结束
+							this.page++;
+							// 加载状态结束
+							this.loading = false;
+						} else {
+							this.loading = false;
+							this.finished = true;
+						}
+					},
+					successLoad: function(res) {
+						console.log(res)
+						if (res.result == 0) {
+							this.balance = res.balance;
+							this.totalPage = res.totalPage;
+							if (res.dataList) {
+								for (var i = 0; i < res.dataList.length; i++) {
+									this.list.push(res.dataList[i]);
+								}
+							}
+							return this.list;
+						}
+					},
+					submit: function() {
+						window.location.href = "./apply_cash.html?money=" + this.balance;
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

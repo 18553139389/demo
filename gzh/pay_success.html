@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/pay_success.css" />
+		<title>支付成功</title>
+		<script src="Resource/js/flexible.js"></script>
+		<script src="Resource/js/vue.min.js"></script>
+		<script src="Resource/js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div class="list">
+			<div class="top_img">
+				<img src="Resource/images/success.png" alt="" />
+			</div>
+			<h3>支付成功！</h3>
+			<button class="submit" type="button">完成</button>
+		</div>
+		
+		<script>
+			$('.submit').click(function(){
+				window.location.href = "./cash_order.html";
+			});
+		</script>
+	</body>
+
+</html>

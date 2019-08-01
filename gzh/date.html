@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>星期日</th>
+					<th>星期一</th>
+					<th>星期二</th>
+					<th>星期三</th>
+					<th>星期四</th>
+					<th>星期五</th>
+					<th>星期六</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				
+			</tbody>
+		</table>
+		<script>
+			var tbody = document.getElementById('tbody');
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			// year是要获取的年份，闰年不一样
+			// month是要获取的月份
+			// 返回当前月天数
+			function getMonthDays(year, month) {
+				return new Date(year, month, 0).getDate();
+			}
+
+			// year是要获取的年份
+			// month是要获取的月份
+			// 返回数字几则是星期几
+			function getWeekday(year, month, day) {
+				return new Date(year, month - 1, day).getDay();
+			}
+
+			// year是要获取的年份
+			// month是要获取的月份
+			// 返回当前月包含几个星期
+			function getweeksInMonth(year, month) {
+				var days = getMonthDays(year, month);
+				var FirstDayWeekday = getWeekday(year, month, 1);
+				return Math.ceil(days + FirstDayWeekday);
+			}
+
+			// year是要获取的年份
+			// month是要获取的月份
+			// day天，用来判断是否是当前天
+			// type表明要星期几开头，0为星期一开头，1为星期日开头，默认为0
+			// 返回当前月包含几个星期
+
+			var WEEKTABLE = [{
+				cn: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+				cns: ['日', '一', '二', '三', '四', '五', '六'],
+				en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+			}, {
+				cn: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+				cns: ['一', '二', '三', '四', '五', '六', '日'],
+				en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			}]
+
+			function getMonthDaysArray(year, month, day, type){
+				if(typeof day === 'undefined' && year === YEAR && month === MONTH) day = DAY;
+
+				var dayArrays = [];
+				var days = this.getMonthDays(year, month),
+					preDays = this.getMonthDays(year, month - 1);
+				var thisMonthFirstDayInWeek = this.getWeekday(year, month, 1),
+					thisMonthLastDayInWeek = this.getWeekday(year, month, days);
+
+				type = !type || type !== 1 ? 0 : 1;
+
+				//上月在当月日历面板中的排列
+				for(var i = 0; i < thisMonthFirstDayInWeek; i++) {
+					dayArrays.push({
+						dayNum: (preDays - thisMonthFirstDayInWeek + i + 1),
+						weekDay: WEEKTABLE[type].cn[i]
+					})
+				}
+				//当月日历面板中的排列
+				for(var i = 1; i <= days; i++) {
+					var weekDayFlag = (thisMonthFirstDayInWeek + i - 1) % 7
+					dayArrays.push({
+						dayNum: i,
+						weekDay: WEEKTABLE[type].cn[weekDayFlag],
+						selected: i === +day,
+						isThisMonth: true
+					})
+				};
+				//下月在当月日历面板中的排列
+				for(var i = 1; i <= (6 - thisMonthLastDayInWeek); i++) {
+					var weekDayFlag = (thisMonthFirstDayInWeek + days + i - 1) % 7
+					dayArrays.push({
+						dayNum: i,
+						weekDay: WEEKTABLE[type].cn[weekDayFlag]
+					})
+				};
+				return dayArrays;
+			}
+		</script>
+	</body>
+
+</html>

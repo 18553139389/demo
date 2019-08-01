@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/vant.css">
+		<link rel="stylesheet" href="Resource/css/couponDetail.css" />
+		<title>优惠券详情</title>
+		<script src="Resource/js/flexible.js"></script>
+		<script src="Resource/js/vue.min.js"></script>
+		<script src="Resource/js/vant.js"></script>
+		<script src="Resource/js/jquery.min.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<style>
+			.box {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: 12px;
+				color: #333;
+				position: relative;
+				padding: 30px 0 0;
+			}
+			
+			.code {
+				width: 3rem;
+				height: 3rem;
+			}
+			
+			.btn {
+				padding: 0.1rem 0.3rem;
+				background: #FF9800;
+				border-radius: 4px;
+				font-size: 12px;
+				color: #fff;
+				position: absolute;
+				top: 30px;
+				right: 0.3rem;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="app" class="container" v-cloak>
+			<div class="box">
+				<img class="code" src="./Resource/images/share.png" alt="">
+				<div style="margin-top: 12px;">请领取下方优惠券并扫描二维码关注公众号进行消费</div>
+				<!-- <div class="btn">分享优惠券</div> -->
+			</div>
+			<div class="coupon-item list" style="padding: 0 0.3rem;box-sizing: border-box;">
+				<ul class="wrapper">
+					<li class="type-list">
+						<div class="item1">
+							<div class="first" style="font-size: 18px;color: red;" v-if="list.type == 1">￥{{list.amount}}</div>
+							<div class="first" style="font-size: 18px;color: red;" v-if="list.type == 2">{{list.amount}}折</div>
+							<span v-if="list.type == 1">满{{list.price}}元可用</span>
+							<span v-if="list.type == 2">满{{list.price}}元可用</span>
+						</div>
+						<div class="item1" style="margin-left: 30px;">
+							<div class="first" v-if="list.type == 1">满减券</div>
+							<div class="first" v-if="list.type == 2">折扣券</div>
+							<span>{{list.endTime}}到期</span>
+						</div>
+						<div class="btns" @click.stop="coupon">
+							<div>领券</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="coupon-item detail">
+				<div class="title">优惠券详情：</div>
+			</div>
+			<div class="coupon-item test">
+				<iframe :src="list.url" frameborder="0" width="100%" height="100%"></iframe>
+			</div>
+		</div>
+		
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					list:{},
+					id: '',
+					type: 1
+				},
+				created: function(){
+					this.id = GetQueryString('id')
+					if(GetQueryString('type') == 1){
+						this.type = 2
+					}
+				},
+				mounted:function(){
+					this.init()
+				},
+				methods: {
+					init: function() {
+						var datas = {
+							couponId: this.id,
+							type: this.type
+						}
+						queryData('/couponDetail', datas, this.successList);
+					},
+					successList: function(res) {
+						if (res.result == 0) {
+							this.list = res
+							setTimeout(function(){
+								var iframeHeight = $('body').outerHeight(true) - $('.box').outerHeight(true) - $('.list').outerHeight(true) - $('.detail').outerHeight(true) 
+								$('.test').height(iframeHeight-30 + 'px')
+							},300)
+						} else {
+							this.$toast(res.resultNote)
+						}
+					},
+					coupon: function() {
+						datas = {
+							uid: uid,
+							couponId: this.id,
+							type: this.type == 1 ? '1' : '2'
+						}
+						queryData('/addCoupon', datas, this.successCoupon);
+					},
+					successCoupon: function(res) {
+						if (res.result == 0) {
+							this.$toast('领取成功');
+						} else {
+							this.$toast(res.resultNote)
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

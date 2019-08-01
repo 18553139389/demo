@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/vant.css">
+		<link rel="stylesheet" href="Resource/css/bind_phone.css" />
+		<title>绑定账号</title>
+		<script src="Resource/js/flexible.js"></script>
+		<script src="Resource/js/vue.min.js"></script>
+		<script src="Resource/js/vant.js"></script>
+		<script src="Resource/js/jquery.min.js"></script>
+		<script src="Resource/js/common.js"></script>
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="phone">
+				<input v-model="phone" type="text" placeholder="请输入绑定手机号" />
+			</div>
+			<div class="sure">
+				<input v-model="validate" type="text" placeholder="请输入验证码" />
+				<button id="send" class="send" type="button" @click="send">发送验证码</button>
+			</div>
+			<button class="submit" type="button" @click="submit">确认绑定</button>
+		</div>
+
+		<script>
+			var phone = new Vue({
+				el: "#app",
+				data: {
+					phone: '',
+					validate: ''
+				},
+				methods: {
+					send: function() {
+						var send = document.getElementById('send');
+						var phone = this.phone;
+						if (phone == '') {
+							this.$toast('手机号码不能为空');
+							return;
+						}
+						var datas = {
+							phone: phone
+						}
+						queryData('/sendSms', datas, function(){});
+						settime(send);
+					},
+					submit: function() {
+						var phone = this.phone;
+						var code = this.validate;
+						if (phone == '' || code == '') {
+							this.$toast("手机号或验证码不能为空");
+							return;
+						}
+
+						if (!(/^1[34578]\d{9}$/.test(phone))) {
+							this.$toast("手机号码格式不正确");
+							return;
+						}
+						var datas = {
+							uid: uid,
+							phone: phone,
+							code: code
+						}
+						queryData('/bindPhone', datas, this.successPhone);
+					},
+					successPhone: function(res) {
+						if (res.result == 0) {
+							this.$toast("绑定成功");
+							setTimeout(function(){
+								window.location.href = './person_center.html';
+							},300);
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

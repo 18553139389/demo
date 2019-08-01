@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>屏幕共享</title>
+		<script src="Resource/js/jquery.min.js"></script>
+		<script src="Resource/js/common.js"></script>
+	</head>
+	<body>
+		<script>
+			var id = GetQueryString('couponId');
+			alert(id)
+			window.location.href = publicUrl + '/wxLogin?type=3&couponId=' +id;
+		</script>
+	</body>
+</html>

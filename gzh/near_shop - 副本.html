@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/vant@1.4/lib/index.css">
+		<link rel="stylesheet" href="Resource/css/near_shop.css" />
+		<title>附近商铺</title>
+	</head>
+
+	<body>
+		<div id="app" class="container">
+			<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+				<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+					<div class="list">
+						<div class="list_item" v-for="v in list">
+							<div class="list_img">
+								<img :src="v.url" alt="" />
+							</div>
+							<div class="list_content">
+								<h3>{{v.name}}</h3>
+								<div class="list_address">
+									<img src="Resource/images/nav.png" alt="" />
+									<span>{{v.location}}</span>
+								</div>
+							</div>
+							<div class="voucher" @click="coupon(v.shopId)">领券</div>
+						</div>
+					</div>
+				</van-pull-refresh>
+			</van-list>
+		</div>
+		<script src="Resource/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="http://cdn.jsdelivr.net/npm/vant@1.4/lib/vant.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script>
+			var res = {
+				totalPage: 4,
+				dataList: [{
+						url: "Resource/images/list-1.jpg",
+						name: "长得帅",
+						location: "郑东新区通泰路",
+						shopId: 1
+					},
+					{
+						url: "Resource/images/list-2.jpg",
+						name: "玩的嗨",
+						location: "金水区紫荆山路",
+						shopId: 2
+					},
+					{
+						url: "Resource/images/list-3.jpg",
+						name: "身正不怕影子斜",
+						location: "金水区大石桥",
+						shopId: 3
+					},
+					{
+						url: "Resource/images/list-1.jpg",
+						name: "长得帅",
+						location: "郑东新区通泰路",
+						shopId: 4
+					},
+					{
+						url: "Resource/images/list-2.jpg",
+						name: "玩的嗨",
+						location: "金水区紫荆山路",
+						shopId: 5
+					},
+					{
+						url: "Resource/images/list-3.jpg",
+						name: "身正不怕影子斜",
+						location: "金水区大石桥",
+						shopId: 6
+					},
+					{
+						url: "Resource/images/list-1.jpg",
+						name: "长得帅",
+						location: "郑东新区通泰路",
+						shopId: 7
+					},
+					{
+						url: "Resource/images/list-2.jpg",
+						name: "玩的嗨",
+						location: "金水区紫荆山路",
+						shopId: 8
+					},
+					{
+						url: "Resource/images/list-3.jpg",
+						name: "身正不怕影子斜",
+						location: "金水区大石桥",
+						shopId: 9
+					}
+				]
+			}
+			var app = new Vue({
+				el: "#app",
+				data: {
+					isLoading: false,
+					list: [],
+					loading: false,
+					finished: false,
+					lat: '',
+					lon: '',
+					page: 1,
+					totalPage: 10
+				},
+				methods: {
+					onRefresh: function() {
+						console.log("123")
+						var self = this
+						this.list = [];
+						this.page = 1;
+						this.totalPage = 10;
+						this.onLoad();
+						setTimeout(function() {
+							self.$toast('刷新成功');
+							self.isLoading = false;
+						}, 500);
+					},
+					onLoad: function() {
+						console.log("1")
+						if (this.page <= this.totalPage) {
+							console.log("12")
+							var datas = {
+								lat: GetQueryString('lat'),
+								lon: GetQueryString('lon'),
+								page: this.page
+							}
+							console.log(GetQueryString('lat'),GetQueryString('lon'))
+							 queryData('/nearbyShop', datas, this.successLoad);
+							this.totalPage = res.totalPage;
+							for (var i = 0; i < res.dataList.length; i++) {
+								this.list.push(res.dataList[i]);
+							}
+							console.log(this.list);
+							this.page++;
+							// 加载状态结束
+							this.loading = false;
+						} else {
+							this.loading = false;
+							this.finished = true;
+						}
+					},
+					successLoad: function(res) {
+						console.log(res)
+						if (res.result == 0) {
+							this.totalPage = res.totalPage;
+							if (res.dataList.length > 0) {
+								for (var i = 0; i < res.dataList.length; i++) {
+									this.list.push(res.dataList[i]);
+								}
+							}
+							return this.list;
+						}
+					},
+					coupon: function(id) {
+						datas = {
+							uid: uid,
+							shopId: id
+						}
+						console.log(datas)
+						queryData('/addCoupon', datas, this.successCoupon);
+					},
+					successCoupon: function(res) {
+						console.log(res)
+						if(res.result == 0) {
+							this.$toast('领取成功');
+						}else{
+						   this.$toast(res.resultNote)
+						}
+					}
+				}
+			})
+
+		</script>
+	</body>
+
+</html>

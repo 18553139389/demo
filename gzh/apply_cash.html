@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/vant.css">
+		<link rel="stylesheet" href="Resource/css/apply_cash.css" />
+		<title>申请提现</title>
+	</head>
+
+	<body>
+		<div id="app" class="list">
+			<div class="choice_title">
+				<a href="javascript:;">提现账号</a>
+				<a href="javascript:;" style="color: #0ABB08;">微信钱包</a>
+			</div>
+			<div class="money">
+				<input v-model="value" type="text" placeholder="请输入提现金额" />
+			</div>
+			<div class="residue">
+				可提现余额：
+				<span style="color: #0ABB08;font-weight: 600;">{{money}}</span>
+			</div>
+			<button class="submit" type="button" @click="submit">提交申请</button>
+		</div>
+
+		<script src="Resource/js/flexible.js"></script>
+		<script src="Resource/js/vue.min.js"></script>
+		<script src="Resource/js/vant.js"></script>
+		<script src="Resource/js/jquery.min.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script>
+			var cash = new Vue({
+				el: "#app",
+				data: {
+					money: '',
+					value: ''
+				},
+				mounted: function() {
+					this.onLoad();
+				},
+				methods: {
+					onLoad: function() {
+						this.money = GetQueryString('money');
+					},
+					submit: function() {
+						var reg = /^[0-9]+(.[0-9]{1,3})?$/;
+						if (!reg.test(this.value)) {
+							this.$toast('金额输入错误');
+							return;
+						}
+						if (parseInt(this.value) > parseInt(this.money)) {
+							this.$toast('提现金额不能超过余额');
+							return;
+						}
+						datas = {
+							uid: uid,
+							amount: this.value
+						}
+						console.log(datas);
+					 queryData('/addCashOrder', datas, this.successLoad);
+					},
+					successLoad: function(res) {
+						console.log(res)
+						if (res.result == 0) {
+							this.$toast('提交成功');
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.4/lib/index.css">
+		<link rel="stylesheet" href="Resource/css/partner_apply.css" />
+		<title>合伙人申请</title>
+		<script src="Resource/js/flexible.js"></script>
+		<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=X6LBZ-XCMWJ-FR3FQ-KX63V-HDRVQ-V4FKZ&libraries=convertor"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vant@1.4/lib/vant.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="Resource/js/common.js"></script>
+	</head>
+
+	<body>
+		<div id="app" class="list">
+			<div class="list_item">
+				<label for="shop_user">店铺名称</label>
+				<input v-model="user" id="shop_user" type="text" placeholder="请输入店铺名称" />
+			</div>
+			<div class="list_item">
+				<label for="shop_location">店铺位置</label>
+				<div id="shop_location" @click="goMap">点击地图选点</div>
+			</div>
+			<div class="list_item">
+				<label for="shop_tel">手机号</label>
+				<input v-model="phone" id="shop_tel" type="text" placeholder="请输入手机号" />
+			</div>
+			<button class="submit" type="button" @click="submit">提交申请</button>
+			<p>注：建议使用常用微信进行申请</p>
+			<div id="box">
+				<div id="container"></div>
+				<div class="position_btn" @click="sure">确定</div>
+			</div>
+		</div>
+
+		<script>
+			var apply = new Vue({
+				el: "#app",
+				data: {
+					lat: '',
+					lng: '',
+					address: '',
+					user: '',
+					phone: ''
+				},
+				methods: {
+					goMap: function() {
+						$('#box').animate({
+							left: '0'
+						}, 'fast', 'linear', this.location)
+					},
+					location: function() {
+						if (navigator.geolocation) {
+							navigator.geolocation.getCurrentPosition(this.showPosition);
+						} else {
+							$("#box").html("浏览器不支持定位.")
+						}
+					},
+					showPosition: function(position) {
+						var that = this;
+						this.lat = position.coords.latitude;
+						this.lng = position.coords.longitude;
+						//调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
+						qq.maps.convertor.translate(new qq.maps.LatLng(this.lat, this.lng), 1, function(res) {
+							//取出经纬度并且赋值
+							latlng = res[0];
+							datas = {
+								lon: that.lng,
+								lat: that.lat
+							}
+							var center = new qq.maps.LatLng(that.lat, that.lng);
+							var map = new qq.maps.Map(document.getElementById('container'), {
+								center: center,
+								zoom: 15,
+								zoomControl: false
+							});
+							var marker = new qq.maps.Marker({
+								map: map,
+								position: latlng,
+								draggable: true
+							});
+							var geocoder = new qq.maps.Geocoder();
+							geocoder.setComplete(function(result) {
+								map.setCenter(result.detail.location);
+								that.address = result.detail.address;
+								that.lat = result.detail.location.lat;
+								that.lng = result.detail.location.lng;
+							});
+							geocoder.getAddress(latlng);
+							qq.maps.event.addListener(marker, 'dragend', function() {
+								var latLng = new qq.maps.LatLng(marker.getPosition().lat, marker.getPosition().lng);
+								geocoder.getAddress(latLng);
+							});
+						});
+					},
+					sure: function() {
+						$('#shop_location').html(this.address);
+						$('#box').animate({
+							left: '100%'
+						}, 'fast', 'linear')
+					},
+					submit: function() {
+						if(this.user == '' || this.phone == ''){
+							this.$toast('店铺名称或手机号码不能为空');
+							return;
+						}
+						
+						if (!(/^1[34578]\d{9}$/.test(this.phone))) {
+							this.$toast("手机号码格式不正确");
+							return;
+						}
+						
+						if(this.address == ''){
+							this.$toast('请选择店铺位置');
+							return;
+						}
+						
+						datas = {
+							shopName: this.user
+						}
+						queryData('/checkShopName', datas, this.successGet);
+					},
+					successGet: function(res) {
+						if(res.result == 0) {
+							datas = {
+								uid: uid,
+								shopName: this.user,
+								lon: this.lng,
+								lat: this.lat,
+								address: this.address,
+								phone: this.phone
+							}
+							queryData('/joinShop', datas, this.successApply);
+						}else if(res.result == 1) {
+							this.$toast("店铺名称已被使用");
+						}
+					},
+					successApply: function(res) {
+						if(res.result == 0) {
+							this.$toast('提交成功');
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

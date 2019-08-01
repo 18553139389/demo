@@ -1,0 +1,131 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+}
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0.4rem 0.5rem;
+	box-sizing: border-box;
+}
+
+.list p{
+	width: 100%;
+	text-align: center;
+	font-size: 28px;
+	color: #999;
+	margin: 0.6rem 0;
+}
+
+[data-dpr="1"] .list p{font-size: 14px;}
+[data-dpr="3"] .list p{font-size: 42px;}
+
+.list_item{
+	width: 100%;
+	height: 1.2rem;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.6rem;
+}
+
+.list_item label{
+	display: inline-block;
+	width: 2.4rem;
+	padding-right: 0.3rem;
+	box-sizing: border-box;
+	font-size: 30px;
+	color: #333;
+}
+
+[data-dpr="1"] .list_item label{font-size: 15px;}
+[data-dpr="3"] .list_item label{font-size: 45px;}
+
+.list_item input{
+	flex:1;
+	height: 1.2rem;
+	line-height: 1.2rem;
+	background: #F5F5F5;
+	outline: none;
+	border: none;
+	border-radius: 4px;
+	padding-left: 0.4rem;
+	font-size: 30px;
+	color: #333;
+}
+
+[data-dpr="1"] .list_item input{font-size: 15px;}
+[data-dpr="3"] .list_item input{font-size: 45px;}
+
+#shop_location{
+	flex:1;
+	height: 1.2rem;
+	line-height: 1.2rem;
+	background: #F5F5F5;
+	outline: none;
+	border: none;
+	border-radius: 4px;
+	padding-left: 0.4rem;
+	font-size: 30px;
+	color: #666;
+	text-align: left;
+	overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+
+[data-dpr="1"] #shop_location{font-size: 15px;}
+[data-dpr="3"] #shop_location{font-size: 45px;}
+
+.submit{
+	width: 100%;
+	height: 1.2rem;
+	line-height: 1.2rem;
+	background: #FA9441;
+	outline: none;
+	border: none;
+	color: #fff;
+	font-size: 30px;
+	border-radius: 4px;
+	margin-top: 0.3rem;
+}
+
+[data-dpr="1"] .submit{font-size: 15px;}
+[data-dpr="3"] .submit{font-size: 45px;}
+
+[v-cloak] {
+    display: none !important;
+}
+
+#box {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 100%;
+	z-index: 999;
+	background: #EEDDEE;
+}
+
+#container {
+	width: 100%;
+	height: 100%;
+}
+
+.position_btn {
+	width: 100px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 15px;
+	color: #FFFFFF;
+	position: absolute;
+	left: 50%;
+	margin-left: -50px;
+	bottom: 15%;
+	background: #FA9441;
+	border-radius: 4px;
+	text-align: center;
+}

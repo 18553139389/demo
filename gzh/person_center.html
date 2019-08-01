@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/person_center.css" />
+		<link rel="stylesheet" href="Resource/css/swiper.css" />
+		<title>个人中心</title>
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<div class="list">
+				<div class="message">
+					<div class="msg_img">
+						<img :src="datas.icon" alt="" v-if="datas.icon"/>
+						<img src="Resource/images/1.jpg" alt="" v-else/>
+					</div>
+					<span>{{datas.username}}</span>
+				</div>
+				<div class="top_img">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+						<!-- {{imgList}} -->
+							<div class="swiper-slide" v-for="v in imgList">
+								<img :src="v" alt="" />
+							</div>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+			</div>
+			<ul class="list_wrapper">
+				<li class="list_item">
+					<a href="./my_balance.html">
+						<div class="nav_left">
+							<img src="Resource/images/my.png" alt="" />
+							<span>我的余额</span>
+						</div>
+						<div class="nav_right">
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./hail-fellow.html">
+						<div class="nav_left">
+							<img src="Resource/images/friends.png" alt="" />
+							<span>我的好友</span>
+						</div>
+						<div class="nav_right">
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./coupon1.html">
+						<div class="nav_left">
+							<img src="Resource/images/card.png" alt="" />
+							<span>我的优惠券</span>
+						</div>
+						<div class="nav_right">
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./cash_order.html">
+						<div class="nav_left">
+							<img src="Resource/images/cash.png" alt="" />
+							<span>消费订单</span>
+						</div>
+						<div class="nav_right">
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./bind_phone.html">
+						<div class="nav_left">
+							<img src="Resource/images/order.png" alt="" />
+							<span>绑定账号</span>
+						</div>
+						<div class="nav_right">
+							<span>{{orderBind}}</span>
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./partner_apply.html">
+						<div class="nav_left">
+							<img src="Resource/images/partner.png" alt="" />
+							<span>合伙人申请</span>
+						</div>
+						<div class="nav_right">
+							<span>{{company}}</span>
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./produce.html">
+						<div class="nav_left">
+							<img src="Resource/images/produce.png" alt="" />
+							<span>公司简介</span>
+						</div>
+						<div class="nav_right">
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+				<li class="list_item">
+					<a href="./about.html">
+						<div class="nav_left">
+							<img src="Resource/images/about.png" alt="" />
+							<span>关于我们</span>
+						</div>
+						<div class="nav_right">
+							<img src="Resource/images/icon_right.png" alt="" />
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="Resource/js/flexible.js"></script>
+		<script src="Resource/js/vue.min.js"></script>
+		<script src="Resource/js/jquery.min.js"></script>
+		<script src="Resource/js/swiper.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script>
+		console.log(uid)
+			var person = new Vue({
+				el: "#app",
+				data: {
+					imgList: [],
+					orderBind: '',
+					company: '',
+					datas:{},
+				},
+				mounted: function() {
+					this.onLoad()
+				},
+				methods: {
+					onLoad: function() {
+						var datas = {
+							uid: uid
+						}
+						queryData('/userInfo', datas, this.successLoad)
+					},
+					successLoad: function(res) {
+						console.log(res)
+						if (res.result == 0) {
+                           this.datas=res;
+							this.imgList = res.dataList;
+							if (res.bind == 0) {
+								this.orderBind = '未绑定'
+							} else {
+								this.orderBind = '已绑定'
+							}
+							if (res.apply == 0) {
+								this.company = '未申请'
+							} else if (res.apply == 1) {
+								this.company = '审核中'
+							} else if (res.apply == 2) {
+								this.company = '已通过'
+							} else if (res.apply == 3) {
+								this.company = '已拒绝'
+							}
+							setTimeout(function() {
+								//轮播图初始化
+								var swiper = new Swiper('.swiper-container', {
+									pagination: {
+										el: '.swiper-pagination',
+									},
+									autoplay: true
+								})
+							}, 200);
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>
