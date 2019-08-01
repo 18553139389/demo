@@ -1,0 +1,120 @@
+body {
+	background: #fff;
+}
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem 0.4rem;
+	box-sizing: border-box;
+}
+
+.navTop {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	background: #47c6f2;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 32px;
+	color: #fff;
+}
+
+[data-dpr="1"] .navTop {
+	font-size: 16px;
+}
+
+[data-dpr="3"] .navTop {
+	font-size: 48px;
+}
+
+.back {
+	position: absolute;
+	width: 10px;
+	height: 15px;
+	top: 14px;
+	left: 0.4rem;
+}
+
+.list_mark {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.list_mark span {
+	font-size: 28px;
+	color: #999;
+}
+
+[data-dpr="1"] .list_mark span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .list_mark span {
+	font-size: 42px;
+}
+
+.teacher {
+	display: flex;
+	align-items: center;
+}
+
+.icon_img {
+	flex: 0 0 1.6rem;
+	width: 1.6rem;
+	height: 1.6rem;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.icon_img img {
+	width: 100%;
+	height: 100%;
+}
+
+h3 {
+	width: 100%;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	font-size: 36px;
+	color: #333;
+	margin-left: 0.5rem;
+}
+
+[data-dpr="1"] h3 {
+	font-size: 18px;
+}
+
+[data-dpr="3"] h3 {
+	font-size: 54px;
+}
+
+p {
+	width: 100%;
+	text-align: justify;
+	font-size: 30px;
+	color: #666;
+	letter-spacing: 2px;
+	margin-top: 0.4rem;
+}
+
+[data-dpr="1"] p {
+	font-size: 15px;
+}
+
+[data-dpr="3"] p {
+	font-size: 45px;
+}
+
+img {
+	width: 100%;
+}
+
+[v-cloak] {
+    display: none !important;
+}

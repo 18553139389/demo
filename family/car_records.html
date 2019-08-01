@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>宝贝考勤</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<link rel="stylesheet" href="css/car_records.css" />
+	</head>
+
+	<body>
+		<div class="list">
+			<div class="navTop">
+				宝贝考勤
+				<img id="back" class="back" src="./images/back_top.png" />
+			</div>
+			<div class="car_list">
+				<div class="car_title" id="car_records" data-options='{"type":"date"}'>
+					<div class="car_left">
+						<img class="car_log" src="./images/car_log.png" alt="" />
+						<span id="info" style="margin-top: 2px;"></span>
+					</div>
+					<img class="car_right_img" src="./images/car_right.png" alt="" />
+				</div>
+				<div id="app" class="car_clock" v-cloak>
+					<template v-if="show == 0">
+						<img src="images/car_sort.png" alt="" />
+						<ul class="car_time">
+							<template v-for="v in list">
+								<li v-if="v.type == 1" style="padding-top: 2px;">
+									<h4>上午上学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+							<template v-for="v in list">
+								<li v-if="v.type == 2" style="padding-top: 54px;">
+									<h4>中午放学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+							<template v-for="v in list">
+								<li v-if="v.type == 3" style="padding-top: 49px;">
+									<h4>下午上学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+							<template v-for="v in list">
+								<li v-if="v.type == 4" style="padding-top: 49px;">
+									<h4>下午放学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+						</ul>
+					</template>
+					<template v-if="show == 1">
+						<div class="no">
+							<img src="images/wu.png" alt="" />
+							<span>暂时没有宝宝的考勤记录</span>
+						</div>
+					</template>
+				</div>
+			</div>
+		</div>
+		<script src="js/flexible.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			var dateObj = (function() {
+				var _date = new Date(); 
+				return {
+					getDate: function() {
+						return _date;
+					},
+					setDate: function(date) {
+						_date = date;
+					}
+				};
+			})();
+			var car = new Vue({
+				el: "#app",
+				data: {
+					list: [],
+					show: 0
+				},
+				mounted: function() {
+					this.onLoad();
+				},
+				methods: {
+					onLoad: function() {
+						var that = this;
+						var id = setInterval(function() {
+							var state = app.getState();
+							var uid = state.uid;
+							if(uid == undefined) {
+								return
+							} else {
+								clearInterval(id);
+								var datas = {
+									cmd: "babyattendance",
+									uid: uid,
+									month: getMonth(dateObj.getDate()),
+									date: getNow(dateObj.getDate())
+								}
+								ajax(datas, that.successDefault);
+							}
+						}, 200);
+					},
+					successDefault: function(res) {
+						if(res.dataList == undefined || res.dataList == []) {
+							this.show = 1;
+						} else if(res.dataList.length > 0) {
+							this.show = 0;
+							car.list = res.dataList;
+						}
+					}
+				}
+			})
+			
+			document.getElementById('back').addEventListener('click',function(){
+				window.history.go(-1);
+			});
+			var info = document.getElementById("info");
+			var dDate = new Date();
+			var year = dDate.getFullYear();
+			var month = dDate.getMonth();
+			var time = dDate.getDate();
+			info.innerHTML = year + "/" + (month + 1) + "/" + time;
+			var info = document.getElementById('info');
+			(function($) {
+				$.init();
+				document.getElementById('car_records').addEventListener('click', function() {
+					var _self = this;
+					if(_self.picker) {
+						_self.picker.show(function(rs) {
+							info.innerText = rs.text;
+							_self.picker.dispose();
+							_self.picker = null;
+						});
+					} else {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						/*
+						 * 首次显示时实例化组件
+						 * 示例为了简洁，将 options 放在了按钮的 dom 上
+						 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+						 */
+						_self.picker = new $.DtPicker(options);
+						_self.picker.show(function(rs) {
+							/*
+							 * rs.value 拼合后的 value
+							 * rs.text 拼合后的 text
+							 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+							 * rs.m 月，用法同年
+							 * rs.d 日，用法同年
+							 * rs.h 时，用法同年
+							 * rs.i 分（minutes 的第二个字母），用法同年
+							 */
+							info.innerText = rs.text;
+							/* 
+							 * 返回 false 可以阻止选择框的关闭
+							 * return false;
+							 */
+							/*
+							 * 释放组件资源，释放后将将不能再操作组件
+							 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+							 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+							 */
+							_self.picker.dispose();
+							_self.picker = null;
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "babyattendance",
+								uid: uid,
+								month: getMonth(dateObj.getDate()),
+								date: rs.text
+							}
+							ajax(datas, successDate);
+						});
+					}
+				});
+			})(mui);
+
+			function successDate(res) {
+				if(res.dataList == undefined || res.dataList == []) {
+					car.show = 1;
+				} else if(res.dataList.length > 0) {
+					car.show = 0;
+					car.list = res.dataList;
+				}
+			}
+		</script>
+	</body>
+
+</html>

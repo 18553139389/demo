@@ -1,0 +1,112 @@
+body {
+	background: #fff;
+}
+
+.list {
+	width: 100%;
+	padding: 60px 0.4rem 0.5rem;
+	box-sizing: border-box;
+}
+
+.navTop {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	background: #47c6f2;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 32px;
+	color: #fff;
+	z-index: 20;
+}
+
+[data-dpr="1"] .navTop {
+	font-size: 16px;
+}
+
+[data-dpr="3"] .navTop {
+	font-size: 48px;
+}
+
+.back {
+	position: absolute;
+	width: 10px;
+	height: 15px;
+	top: 14px;
+	left: 0.4rem;
+}
+
+#btn {
+	display: block;
+	width: 90%;
+	margin: 1rem auto 0;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #19B8EF;
+	border-radius: 6px;
+	padding: 0;
+	border: none;
+	color: #fff;
+	font-size: 30px;
+}
+
+[data-dpr="1"] #btn {
+	font-size: 15px;
+}
+
+[data-dpr="3"] #btn {
+	font-size: 45px;
+}
+
+.content {
+	width: 100%;
+	height: 8rem;
+	background: #FAFAFA;
+	border-radius: 6px;
+}
+
+textarea {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	font-size: 30px;
+	color: #333;
+}
+
+[data-dpr="1"] textarea {
+	font-size: 15px;
+}
+
+[data-dpr="3"] textarea {
+	font-size: 45px;
+}
+
+#btn {
+	display: block;
+	width: 100%;
+	margin: 1rem auto 0;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #19B8EF;
+	border-radius: 6px;
+	padding: 0;
+	border: none;
+	color: #fff;
+	font-size: 30px;
+}
+
+[data-dpr="1"] #btn {
+	font-size: 15px;
+}
+
+[data-dpr="3"] #btn {
+	font-size: 45px;
+}
+
+[v-cloak] {
+    display: none !important;
+}

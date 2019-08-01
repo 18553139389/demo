@@ -1,0 +1,88 @@
+body{
+	background: #FFFFFF;
+}
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.message {
+	width: 100%;
+	padding: 2.6rem 0 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid #eee;
+}
+
+.head{
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.head img{
+	width: 100%;
+	height: 100%;
+}
+
+.message span{
+	font-size: 30px;
+	color: #333;
+	margin-top: 0.3rem;
+}
+
+[data-dpr="1"] .message span {
+	font-size: 15px;
+}
+
+[data-dpr="3"] .message span {
+	font-size: 45px;
+}
+
+.tab {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 0.8rem;
+}
+
+.tab_item {
+	width: 33%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tab_item img{
+	width: 0.8rem;
+	height: 0.7rem;
+}
+
+.tab_item span{
+	font-size: 28px;
+	color: #666;
+	margin-top: 0.2rem;
+}
+
+[data-dpr="1"] .tab_item span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .tab_item span {
+	font-size: 42px;
+}
+
+.van-tabbar-item__icon img {
+	width: 24px;
+	height: 24px;
+}
+
+[v-cloak] {
+    display: none !important;
+}

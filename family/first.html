@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/vant.css">
+		<link rel="stylesheet" href="css/photoswipe.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/swiper.css" />
+		<link rel="stylesheet" href="css/first.css" />
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<h3 class="title">{{title}}</h3>
+			<div class="banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="v in swiperImg">
+							<img preview="0" v-lazy="v.bannerIcon" alt="" />
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li style="background: #EEEEFF;" id="school_center" @tap="schoolCenter">
+					<a href="javascript:;">
+						<h3>校园中心</h3>
+						<img src="images/center.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #FCE3DB;" id="notice" @tap="goNotice">
+					<a href="javascript:;">
+						<h3>
+							消息通知
+							<span v-show="obj.messagenum != 0" class="mui-badge">{{obj.messagenum}}</span>
+						</h3>
+						<img src="images/notice.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #FFE9CC;" id="baby" @tap="goBaby">
+					<a href="javascript:;">
+						<h3>宝贝在线</h3>
+						<img src="images/line.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #E5F4D6;" id="records" @tap="goRecords">
+					<a href="javascript:;">
+						<h3>宝贝考勤</h3>
+						<img src="images/car.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #E5F4D6;" id="health" @tap="goHealth">
+					<a href="javascript:;">
+						<h3>健康管理</h3>
+						<img src="images/health.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #EEEEFF;" id="activity" @tap="goActivity">
+					<a href="javascript:;">
+						<h3>课程安排</h3>
+						<img src="images/classes.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #FCEDD1;" id="class_display" @tap="goDisplay">
+					<a href="javascript:;">
+						<h3>班级展示</h3>
+						<img src="images/display.png" alt="" />
+					</a>
+				</li>
+				<li style="background: #FCE3D8;" id="food" @tap="goFood">
+					<a href="javascript:;">
+						<h3>一周食谱</h3>
+						<img src="images/food.png" alt="" />
+					</a>
+				</li>
+			</ul>
+			<nav-bar :active="active" @choice="choice"></nav-bar>
+		</div>
+
+		<script src="js/flexible.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vant.js"></script>
+		<script src="js/lazyload.js"></script>
+		<script src="js/photoswipe.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/swiper.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/md5.js"></script>
+		<script>
+			mui.init();
+			//实现图片的懒加载方法
+			Vue.use(VueLazyload, {
+				loading: "./images/60x60.gif",
+				listenEvents: ['touchmove']
+			});
+			//实现图片预览放大功能
+			var options = {
+				fullscreenEl: false
+			}
+			Vue.use(vuePhotoPreview, options);
+
+			var first = new Vue({
+				el: "#app",
+				data: {
+					swiperImg: [],
+					obj: {
+						messagenum: 0
+					},
+					active: 0,
+					title: '',
+					phone: '',
+					pass: ''
+				},
+				created: function() {
+					var that = this;
+					if(GetQueryString('user') != undefined && GetQueryString('pw') != undefined){
+						this.phone = GetQueryString('user')
+						this.pass = GetQueryString('pw')
+						//三方获取用户和密码保存开始
+						var loginInfo = {
+							cmd: "userLogin",
+							phone: this.phone,
+							password: hex_md5(this.pass)
+						};
+						
+						ajax(loginInfo, function(res) {
+							if (res.result == 0) {
+								that.$toast("登陆成功");
+								app.login(res.dataobject, hex_md5(that.pass));
+								// setTimeout(function() {
+								// 	window.location.href = "first.html";
+								// }, 1500);
+							} else if(res.result == 1){
+								that.$toast(res.resultNote);
+							}
+						});
+						//三方获取用户和密码保存结束
+					}
+				},
+				mounted: function() {
+					this.onLoad();
+				},
+				methods: {
+					onLoad: function() {
+						var that = this;
+						var id = setInterval(function() {
+							var state = app.getState();
+							var uid = state.uid;
+							if (uid == undefined) {
+								return
+							} else {
+								clearInterval(id);
+								var datas = {
+									cmd: "homepage",
+									uid: uid
+								}
+								ajax(datas, that.successLoad);
+							}
+						}, 100);
+					},
+					successLoad: function(res) {
+						this.title = res.schoolname;
+						if (res.result == 0) {
+							this.swiperImg = res.dataList;
+							this.obj = res.dataobject;
+							setTimeout(function() {
+								//轮播图初始化
+								var swiper = new Swiper('.swiper-container', {
+									pagination: {
+										el: '.swiper-pagination',
+									},
+									autoplay: true
+								});
+								first.$previewRefresh();
+							}, 200);
+						}
+					},
+					choice: function(item) {
+						if (item == 0) {
+							window.location.href = "./first.html";
+						} else if (item == 1) {
+							window.location.href = "./information.html";
+						} else if (item == 2) {
+							window.location.href = "./baby.html";
+						} else if (item == 3) {
+							window.location.href = "./my.html";
+						}
+					},
+					schoolCenter: function() {
+						window.location.href = "./school_center.html";
+					},
+					goNotice: function() {
+						window.location.href = "./notice.html";
+					},
+					goBaby: function() {
+						if (this.obj.babyonlinestate == 0) {
+							window.location.href = "./baby_two.html";
+						} else if (this.obj.babyonlinestate == 1) {
+							mui.toast('您暂时没有权限访问该模块');
+						}
+					},
+					goRecords: function() {
+						if (this.obj.babyattendancestate == 0) {
+							window.location.href = "./records.html";
+						} else if (this.obj.babyattendancestate == 1) {
+							mui.toast('您暂时没有权限访问该模块');
+						}
+					},
+					goHealth: function() {
+						if (this.obj.babyhealthystate == 0) {
+							window.location.href = "./health.html";
+						} else if (this.obj.babyhealthystate == 1) {
+							mui.toast('您暂时没有权限访问该模块');
+						}
+					},
+					goActivity: function() {
+						window.location.href = "./activity.html";
+					},
+					goDisplay: function() {
+						if (this.obj.classshowstate == 0) {
+							window.location.href = "./class_display.html";
+						} else if (this.obj.classshowstate == 1) {
+							mui.toast('您暂时没有权限访问该模块');
+						}
+					},
+					goFood: function() {
+						if (this.obj.babydietstate == 0) {
+							window.location.href = "./food.html";
+						} else if (this.obj.babydietstate == 1) {
+							mui.toast('您暂时没有权限访问该模块');
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

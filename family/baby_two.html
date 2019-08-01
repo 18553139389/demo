@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>宝贝在线</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/baby_two.css" />
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="navTop">
+				宝贝在线
+				<img class="back" src="./images/back_top.png" @click="goBack" />
+			</div>
+			<ul class="wrapper">
+				<li>
+					<img src="./images/camer.jpg" alt="" />
+					<div class="title">1号摄像头</div>
+				</li>
+				<li>
+					<img src="./images/camer.jpg" alt="" />
+					<div class="title">2号摄像头</div>
+				</li>
+				<li>
+					<img src="./images/camer.jpg" alt="" />
+					<div class="title">3号摄像头</div>
+				</li>
+				<li>
+					<img src="./images/camer.jpg" alt="" />
+					<div class="title">4号摄像头</div>
+				</li>
+				<li>
+					<img src="./images/camer.jpg" alt="" />
+					<div class="title">5号摄像头</div>
+				</li>
+			</ul>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="js/flexible.js"></script>
+		<script>
+			mui.init();
+			var app = new Vue({
+				el: "#app",
+				data: {},
+				methods: {
+					goBack: function() {
+						window.location.href = './first.html';
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>健康资讯详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/information_detail.css" />
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="navTop">
+				资讯详情
+				<img class="back" src="./images/back_top.png" alt="" @tap="back" />
+			</div>
+			<div id="bg" class="bg">
+				<div id="loading" class="loading">
+					<img src="images/loading.gif" alt="" />
+				</div>
+			</div>
+			<div class="infor_top">
+				<iframe name="dom" id="dom" :src="url" width="100%" scrolling="auto" frameborder="0"></iframe>
+				<div class="list_wrapper">
+					<div class="box_left">
+						<div class="store" @tap="toggleStore(id)">
+							<img v-if="storeState == 0" src="./images/store.png" alt="" />
+							<img v-else src="./images/store_light.png" alt="" />
+							<span>收藏</span>
+						</div>
+						<div class="goods" style="margin-left: 0.3rem;" @tap="toggleGoods(id)">
+							<img v-if="goodsState == 0" src="./images/goods.png" alt="" />
+							<img v-else src="./images/goods_light.png" alt="" />
+							<span>点赞</span>
+						</div>
+					</div>
+					<div id="share" class="box_right">
+						<img src="./images/share.png" alt="" />
+						<span>分享</span>
+					</div>
+				</div>
+				<div class="line"></div>
+			</div>
+			<div class="comment_wrapper" style="padding-top: 0;">
+				<h3 class="c_title">评论</h3>
+				<div class="comment_list">
+					<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="background: #ffffff;">
+						<div class="mui-scroll">
+							<ul class="comment_box">
+								<li v-for="v in comments">
+									<div class="comment_contain">
+										<div class="comment_item">
+											<div class="item_img">
+												<img :src="v.usericon" alt="" />
+											</div>
+											<span style="margin-left: 0.3rem;">{{v.username}}</span>
+										</div>
+										<span style="color: #999;">{{v.adtime}}</span>
+									</div>
+									<p class="comment_text">{{v.commentcontent}}</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="list_send">
+			<input id="write" type="text" placeholder="请填写评论内容" />
+			<button id="btn" type="button">发送</button>
+		</div>
+		<script src="js/flexible.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						offset: '80px',
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: false,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+
+			function getDefaultData() {
+				return {
+					id: '',
+					count: 1,
+					storeState: 0,
+					goodsState: 0,
+					comments: [],
+					allData: [],
+					url: ''
+				}
+			}
+
+			var detail = new Vue({
+				el: "#app",
+				data: getDefaultData(),
+				mounted: function() {
+					this.onLoad();
+				},
+				methods: {
+					back: function() {
+						window.location.href = "./information.html";
+					},
+					onLoad: function() {
+						var state = app.getState();
+						var uid = state.uid;
+						var datas = {
+							cmd: "informationlist",
+							uid: uid,
+							nowPage: this.count
+						}
+						ajax(datas, this.successLoad);
+					},
+					successLoad: function(res) {
+						if (res.result == 0) {
+							this.count++;
+							for (var i = 0; i < res.dataList.length; i++) {
+								this.allData.push(res.dataList[i])
+							}
+							if (this.count <= res.totalPage) {
+								var state = app.getState();
+								var uid = state.uid;
+								var datas = {
+									cmd: "informationlist",
+									uid: uid,
+									nowPage: this.count
+								}
+								ajax(datas, this.successLoad);
+							} else {
+								for (var i = 0; i < this.allData.length; i++) {
+									if (this.allData[i].informationid == GetQueryString('id')) {
+										this.url = this.allData[i].informationdetail;
+										this.id = GetQueryString('id');
+										this.storeState = this.allData[i].iscollect;
+										this.goodsState = this.allData[i].iszan;
+									}
+								}
+								loadEnd('dom', 'bg');
+								pullupRefresh();
+							}
+						}
+					},
+					resetData: function() {
+						Object.assign(this.$data, getDefaultData());
+					},
+					toggleStore: function(id) {
+						if (this.storeState == 1) {
+							this.storeState = 0;
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "informationcollect",
+								uid: uid,
+								informationid: id
+							}
+							ajax(datas, function() {
+								mui.toast("取消了收藏");
+							});
+						} else {
+							this.storeState = 1;
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "informationcollect",
+								uid: uid,
+								informationid: id
+							}
+							ajax(datas, function() {
+								mui.toast("收藏成功");
+							});
+						}
+					},
+					toggleGoods: function(id) {
+						if (this.goodsState == 1) {
+							this.goodsState = 0;
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "informationzan",
+								uid: uid,
+								informationid: id
+							}
+							ajax(datas, function() {
+								mui.toast("取消了点赞");
+							});
+						} else {
+							this.goodsState = 1;
+							var state = app.getState();
+							var uid = state.uid;
+							var datas = {
+								cmd: "informationzan",
+								uid: uid,
+								informationid: id
+							}
+							ajax(datas, function() {
+								mui.toast("谢谢点赞");
+							});
+						}
+					}
+				}
+			});
+
+			//初始化评论列表数据
+			var count = 1;
+			var num = 0;
+
+			function pullupRefresh() {
+				var state = app.getState();
+				var uid = state.uid;
+				var datas = {
+					cmd: "informationcommentlist",
+					uid: uid,
+					informationid: detail.id,
+					nowPage: count,
+					pageCount: "4"
+				}
+				ajax(datas, successLoad);
+			}
+
+			function successLoad(res) {
+				if (res.result == 0) {
+					if (res.dataList != undefined && res.dataList != []) {
+						for (var i = 0; i < res.dataList.length; i++) {
+							detail.comments.push(res.dataList[i]);
+						}
+					}
+					num = res.totalPage;
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > num)); //参数为true代表没有更多数据了。
+				}
+			}
+
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+				detail.comments = [];
+				count = 1;
+				pullupRefresh();
+			}
+
+			//发表评论功能
+			document.getElementById('btn').addEventListener('tap', function() {
+				var write = document.getElementById('write').value;
+				if (write) {
+					var state = app.getState();
+					var uid = state.uid;
+					var datas = {
+						cmd: "informationcomment",
+						uid: uid,
+						informationid: detail.id,
+						content: write
+					}
+					ajax(datas, successWrite);
+				} else if (write == '') {
+					mui.toast("评论内容不能为空");
+					return
+				}
+			});
+
+			function successWrite(res) {
+				if (res.result == 0) {
+					document.getElementById('write').value = '';
+					mui.toast("评论发表成功");
+					pulldownRefresh();
+				}
+			}
+
+			//iframe窗口加载状态
+			function loadEnd(id, ids) {
+				var list = document.getElementById(id);
+				document.getElementById(ids).style.display = 'block';
+				if (list) {
+					list.onload = function() {
+						document.getElementById(ids).style.display = 'none';
+						list.height = '87%';
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

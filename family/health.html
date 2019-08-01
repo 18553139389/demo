@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>健康管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/health.css" />
+	</head>
+
+	<body>
+		<div class="navTop">
+			健康管理
+			<img id="back" class="back" src="./images/back_top.png" />
+		</div>
+		<div class="mui-content" style="height: 38px; margin-top: 44px;">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" style="background: #EFF5FF;">
+						<a class="mui-control-item" href="javascript:;">
+							3月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							4月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							5月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							6月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							9月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							10月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							11月份
+						</a>
+						<a class="mui-control-item" href="javascript:;">
+							12月份
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="charts" class="charts"></div>
+		<script src="js/flexible.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/echarts-all.js"></script>
+		<script>
+			mui.init();
+			document.getElementById('back').addEventListener('click', function() {
+				window.history.go(-1);
+			});
+			var height = [];
+			var heightTime = [];
+			var weight = [];
+			var weightTime = [];
+			var temperature = [];
+			var temperatureTime = [];
+			var state = app.getState();
+			var uid = state.uid;
+			var initTime = new Date();
+			var initYear = initTime.getFullYear();
+			var initMonth = initTime.getMonth() + 1;
+			if(initMonth == 7 || initMonth == 8) {
+				initMonth = 6;
+			}
+			if(initMonth == 1 || initMonth == 2) {
+				initMonth = 12;
+			}
+			mui(".mui-scroll a").each(function(el, i) {
+				if(parseInt(this.innerHTML) == initMonth) {
+					this.classList.add("mui-active");
+				}
+			});
+			initMonth = (initMonth > 9) ? ("" + initMonth) : ("0" + initMonth);
+			var id = setInterval(function() {
+				var state = app.getState();
+				var uid = state.uid;
+				if(uid == undefined) {
+					return
+				} else {
+					clearInterval(id);
+					var datas = {
+						cmd: "babyhealthy",
+						uid: uid,
+						month: initMonth
+					}
+					ajax(datas, successDefault);
+				}
+			}, 100);
+
+			mui(".mui-scroll").on('tap', 'a', function(e) {
+				var index = parseInt(this.innerHTML);
+				var id = setInterval(function() {
+					var state = app.getState();
+					var uid = state.uid;
+					if(uid == undefined) {
+						return
+					} else {
+						clearInterval(id);
+						var datas = {
+							cmd: "babyhealthy",
+							uid: uid,
+							month: index
+						}
+						ajax(datas, successDefault);
+					}
+				}, 100);
+			});
+
+			var str1 = '<div class="chart3" id="baby_height" style="margin: 0.5rem 0;">' +
+				'<div id="no1" class="no" style="display: none;">' +
+				'<img src="images/wu.png" alt="" />' +
+				'<div>暂无本月宝贝身高数据</div>' +
+				'</div>' +
+				'</div>';
+			str1 += '<div class="chart3" id="baby_weight" style="margin: 0.5rem 0;">' +
+				'<div id="no2" class="no" style="display: none;">' +
+				'<img src="images/wu.png" alt="" />' +
+				'<div>暂无本月宝贝体重数据</div>' +
+				'</div>' +
+				'</div>';
+			str1 += '<div class="chart3" id="baby_temperature" style="margin: 0.5rem 0;">' +
+				'<div id="no3" class="no" style="display: none;">' +
+				'<img src="images/wu.png" alt="" />' +
+				'<div>暂无本月宝贝体温数据</div>' +
+				'</div>' +
+				'</div>';
+
+			function successDefault(res) {
+				if(res.result == 0) {
+					initState();
+					charts.innerHTML = '';
+					charts.innerHTML = str1;
+					if(res.heightList == undefined || res.heightList == []) {
+						var no1 = document.getElementById('no1');
+						no1.style.display = "block";
+					} else if(res.heightList.length > 0) {
+						for(var i = 0; i < res.heightList.length; i++) {
+							height.push(res.heightList[i].height);
+							heightTime.push(res.heightList[i].time);
+						}
+						heightInit();
+					}
+
+					if(res.weightList == undefined || res.weightList == []) {
+						var no2 = document.getElementById('no2');
+						no2.style.display = "block";
+					} else if(res.weightList.length > 0) {
+						for(var i = 0; i < res.weightList.length; i++) {
+							weight.push(res.weightList[i].weight);
+							weightTime.push(res.weightList[i].time);
+						}
+						weightInit();
+					}
+
+					if(res.temperatureList == undefined || res.temperatureList == []) {
+						var no3 = document.getElementById('no3');
+						no3.style.display = "block";
+					} else if(res.temperatureList.length > 0) {
+						for(var i = 0; i < res.temperatureList.length; i++) {
+							temperature.push(res.temperatureList[i].weight);
+							temperatureTime.push(res.temperatureList[i].time);
+						}
+						temperatureInit();
+					}
+				}
+			}
+
+			function initState() {
+				height = [];
+				heightTime = [];
+				weight = [];
+				weightTime = [];
+				temperature = [];
+				temperatureTime = [];
+			}
+
+			function heightInit() {
+				var babyHeight = echarts.init(document.getElementById("baby_height"));    
+				var getOption = function(chartType) {
+					var chartOption = {
+						legend: {
+							data: ['身高信息（cm）']
+						},
+						tooltip: {
+							show: true,
+							trigger: 'item',
+							formatter: function(params) {
+								var color = params.color; //图例颜色
+								var htmlStr = '<div>';
+								htmlStr += params.name + '<br/>'; //x轴的名称
+								//为了保证和原来的效果一样，这里自己实现了一个点的效果
+								htmlStr += '<spanstyle="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>';
+								htmlStr += params.seriesName + '：' + params.value + 'cm';
+
+								htmlStr += '</div>';
+
+								return htmlStr;
+							}
+						},
+						grid: {
+							x: 35,
+							x2: 10,
+							y: 30,
+							y2: 25,
+							borderWidth: '0'
+						},
+						xAxis: {
+							type: 'category',
+							axisLine: {
+								show: true,
+								lineStyle: {
+									color: '#ccc',
+									width: 1
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							data: function() {
+								var list = [];
+								list = heightTime;
+								return list
+							}()
+						},
+						yAxis: {
+							type: 'value',
+							axisLine: {
+								show: true,
+								lineStyle: {
+									color: '#ccc',
+									width: 1
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							axisTick: {
+								show: false,
+							},
+							axisLabel: {
+								show: true,
+								inside: true
+							},
+							min: 70,
+							max: 110,
+							splitNumber: 4
+						},
+						series: [{
+							name: '身高信息（cm）',
+							data: height,
+							type: 'line',
+							itemStyle: {
+								normal: {
+									color: '#30E5D1', //圈圈的颜色
+									lineStyle: {
+										color: '#30E5D1' //线的颜色
+									}
+								}
+							},
+						}]
+					};
+					return chartOption;
+				};
+				babyHeight.setOption(getOption('line'), true);
+			}
+
+			function weightInit() {
+				var babyWeight = echarts.init(document.getElementById("baby_weight"));    
+				var weightOption = function(chartType) {
+					var chartOption = {
+						legend: {
+							data: ['体重信息（kg）']
+						},
+						tooltip: {
+							show: true,
+							trigger: 'item',
+							formatter: function(params) {
+								var color = params.color; //图例颜色
+								var htmlStr = '<div>';
+								htmlStr += params.name + '<br/>'; //x轴的名称
+								//为了保证和原来的效果一样，这里自己实现了一个点的效果
+								htmlStr += '<spanstyle="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>';
+								htmlStr += params.seriesName + '：' + params.value + 'kg';
+
+								htmlStr += '</div>';
+
+								return htmlStr;
+							}
+						},
+						grid: {
+							x: 35,
+							x2: 10,
+							y: 30,
+							y2: 25,
+							borderWidth: '0'
+						},
+						xAxis: {
+							type: 'category',
+							axisLine: {
+								show: true,
+								lineStyle: {
+									color: '#ccc',
+									width: 1
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							data: function() {
+								var list = [];
+								list = weightTime;
+								return list
+							}()
+						},
+						yAxis: {
+							type: 'value',
+							axisLine: {
+								show: true,
+								lineStyle: {
+									color: '#ccc',
+									width: 1
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							axisTick: {
+								show: false,
+							},
+							axisLabel: {
+								show: true,
+								inside: true
+							},
+							min: 10,
+							max: 20,
+							splitNumber: 4
+						},
+						series: [{
+							name: '体重信息（kg）',
+							data: weight,
+							type: 'line',
+							itemStyle: {
+								normal: {
+									color: '#30E5D1', //圈圈的颜色
+									lineStyle: {
+										color: '#30E5D1' //线的颜色
+									}
+								}
+							},
+						}]
+					};
+					return chartOption;
+				};
+				babyWeight.setOption(weightOption('line'), true);
+			}
+
+			function temperatureInit() {
+				var babyTemperature = echarts.init(document.getElementById("baby_temperature"));    
+				var temperatureOption = function(chartType) {
+					var chartOption = {
+						legend: {
+							data: ['体温信息（℃）']
+						},
+						tooltip: {
+							show: true,
+							trigger: 'item',
+							formatter: function(params) {
+								var color = params.color; //图例颜色
+								var htmlStr = '<div>';
+								htmlStr += params.name + '<br/>'; //x轴的名称
+								//为了保证和原来的效果一样，这里自己实现了一个点的效果
+								htmlStr += '<spanstyle="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>';
+								htmlStr += params.seriesName + '：' + params.value + '℃';
+
+								htmlStr += '</div>';
+
+								return htmlStr;
+							}
+						},
+						grid: {
+							x: 35,
+							x2: 10,
+							y: 30,
+							y2: 25,
+							borderWidth: '0'
+						},
+						xAxis: {
+							type: 'category',
+							axisLine: {
+								show: true,
+								lineStyle: {
+									color: '#ccc',
+									width: 1
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							data: function() {
+								var list = [];
+								list = temperatureTime;
+								return list
+							}()
+						},
+						yAxis: {
+							type: 'value',
+							axisLine: {
+								show: true,
+								lineStyle: {
+									color: '#ccc',
+									width: 1
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							axisTick: {
+								show: false,
+							},
+							axisLabel: {
+								show: true,
+								inside: true
+							},
+							min: 36.4,
+							max: 38,
+							splitNumber: 4
+						},
+						series: [{
+							name: '体温信息（℃）',
+							data: temperature,
+							type: 'line',
+							itemStyle: {
+								normal: {
+									color: '#30E5D1', //圈圈的颜色
+									lineStyle: {
+										color: '#30E5D1' //线的颜色
+									}
+								}
+							},
+						}]
+					};
+					return chartOption;
+				};
+				babyTemperature.setOption(temperatureOption('line'), true);
+			}
+
+			function babyMonth(month) {
+				var time = new Date();
+				var _year = time.getFullYear();
+
+				_month = (month > 9) ? ("" + month) : ("0" + month);
+				return _year + "-" + _month;
+			}
+		</script>
+	</body>
+
+</html>

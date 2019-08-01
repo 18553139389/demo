@@ -1,0 +1,104 @@
+body {
+	background: #fff;
+}
+
+.list {
+	width: 100%;
+	padding: 0.5rem 0.4rem;
+	box-sizing: border-box;
+}
+
+.navTop {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	background: #47c6f2;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 32px;
+	color: #fff;
+	z-index: 20;
+}
+
+[data-dpr="1"] .navTop {
+	font-size: 16px;
+}
+
+[data-dpr="3"] .navTop {
+	font-size: 48px;
+}
+
+.back {
+	position: absolute;
+	width: 10px;
+	height: 15px;
+	top: 14px;
+	left: 0.4rem;
+}
+
+.food_wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 44px;
+}
+
+.food_wrapper li {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+
+.food_wrapper li img{
+	flex: 0 0 2.2rem;
+	width: 2.2rem;
+	height: 1.7rem;
+}
+
+.food_text {
+	width: 75%;
+	height: 1.7rem;
+	display: flex;
+	flex-direction: column;
+	padding-left: 0.4rem;
+	box-sizing: border-box;
+	justify-content: center;
+}
+
+.food_text h3{
+	font-size: 30px;
+	color: #333;
+}
+
+[data-dpr="1"] .food_text h3 {
+	font-size: 15px;
+}
+
+[data-dpr="3"] .food_text h3 {
+	font-size: 45px;
+}
+
+.food_text span{
+	display: inline-block;
+	width: 100%;
+	font-size: 28px;
+	color: #666;
+	overflow: hidden;
+  	text-overflow:ellipsis;
+  	white-space:nowrap;
+}
+
+[data-dpr="1"] .food_text span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .food_text span {
+	font-size: 42px;
+}
+
+[v-cloak] {
+    display: none !important;
+}

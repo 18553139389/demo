@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>健康资讯</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/vant.css">
+		<link rel="stylesheet" href="css/photoswipe.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/information.css" />
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="navTop">
+				资讯
+			</div>
+			<div class="wrapper" style="margin-top: 44px;">
+				<ul>
+					<li :class="{active:tabIndex == k}" v-for="(v,k) in tab" @tap="tabChange(k,v.informationtypeid)">
+						{{v.informationtypename}}
+					</li>
+				</ul>
+			</div>
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="background: #ffffff;margin-top: 82px;margin-bottom: 51px;">
+				<div class="mui-scroll">
+					<div class="list_wrapper">
+						<template v-for="(v,k) in list">
+							<div class="list_item" v-if="v.informationImg.length == 1" @tap="open_detail(v.informationid)">
+								<template v-for="item in v.informationImg">
+									<img v-lazy="item" alt="" />
+								</template>
+								<div class="item_right">
+									<p>{{v.informationtitle}}</p>
+									<div class="comment">
+										<div class="type">
+											<span>{{v.zanNum}}点赞</span>
+											<span style="margin-left: 0.1rem;">{{v.commentNum}}评论</span>
+										</div>
+										<span>{{v.adtime.substr(0,10)}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="list_more" v-if="v.informationImg.length > 1" @tap="open_detail(v.informationid)">
+								<p>{{v.informationtitle}}</p>
+								<div class="list_img">
+									<template v-for="item in v.informationImg">
+										<img v-lazy="item" alt="" />
+									</template>
+								</div>
+								<div class="comment" style="margin-top: 0.3rem;">
+									<div class="type">
+										<span>{{v.zanNum}}点赞</span>
+										<span style="margin-left: 0.1rem;">{{v.commentNum}}评论</span>
+									</div>
+									<span>{{v.adtime.substr(0,10)}}</span>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+			<nav-bar :active="active" @choice="choice"></nav-bar>
+			<div v-if="show == 1" class="no">
+				<img src="images/no.png" alt="" />
+			</div>
+		</div>
+
+		<script src="js/flexible.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/vant.js"></script>
+		<script src="js/lazyload.js"></script>
+		<script src="js/photoswipe.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/scroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/app.js"></script>
+		<script>
+			//实现图片的懒加载方法
+			Vue.use(VueLazyload, {
+				loading: "./images/60x60.gif",
+				listenEvents: ['scroll']
+			});
+			//实现图片预览放大功能
+			var options = {
+				fullscreenEl: false
+			}
+			Vue.use(vuePhotoPreview, options);
+			setTimeout(function() {
+				var scroll = new BScroll('.wrapper', {
+					scrollX: true,
+					scrollY: false,
+					click: true
+				});
+			}, 1000);
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						offset: '80px',
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			var infor = new Vue({
+				el: "#app",
+				data: {
+					list: [],
+					tabIndex: 0,
+					tab: [],
+					types: '',
+					show: 0,
+					active: 1
+				},
+				methods: {
+					tabChange: function(item, type) {
+						this.tabIndex = item;
+						this.types = type;
+						infor.list = [];
+						count = 1;
+						window.scrollTo(0, 0);
+						mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+						pullupRefresh();
+					},
+					choice: function(item) {
+						if(item == 0) {
+							window.location.href = "./first.html";
+						} else if(item == 1) {
+							window.location.href = "./information.html";
+						} else if(item == 2) {
+							window.location.href = "./baby.html";
+						} else if(item == 3) {
+							window.location.href = "./my.html";
+						}
+					}
+				}
+			});
+
+			var count = 1;
+			var num = 0;
+
+			function pullupRefresh() {
+				var id = setInterval(function() {
+					var state = app.getState();
+					var uid = state.uid;
+					if(uid == undefined) {
+						return
+					} else {
+						clearInterval(id);
+						var datas = {
+							cmd: "informationtypelist",
+							uid: uid,
+						}
+						ajax(datas, successLoad);
+					}
+				}, 400);
+			}
+
+			function successLoad(res) {
+				if(res.result == 0) {
+					infor.tab = [];
+					if(res.dataList == undefined || res.dataList.length == 0){
+						infor.show = 1;
+						document.getElementsByClassName('mui-pull-caption')[1].style.fontSize = '0px';
+						document.getElementsByClassName('mui-spinner')[0].style.height = '0px';
+						document.getElementsByClassName('list')[0].style.height = '100%';
+					}else if(res.dataList.length > 0){
+						for(var i = 0; i < res.dataList.length; i++) {
+							infor.tab.push(res.dataList[i])
+						}
+					}
+
+					//初始化获取资讯列表
+					if(localStorage.getItem("listData")) {
+						count = localStorage.getItem("count");
+						infor.types = localStorage.getItem("informationtypeid");
+						infor.list = JSON.parse(localStorage.getItem("listData"));
+						infor.tabIndex = localStorage.getItem("tabIndex")
+						localStorage.removeItem("listData");
+						localStorage.removeItem("tabIndex");
+						localStorage.removeItem("count");
+						localStorage.removeItem("informationtypeid");
+						var state = app.getState();
+						var uid = state.uid;
+						var datas = {
+							cmd: "informationlist",
+							informationtypeid: infor.types,
+							uid: uid,
+							nowPage: count,
+							pageCount: "4"
+						}
+						ajax(datas, successStore);
+					} else {
+						var state = app.getState();
+						var uid = state.uid;
+						infor.types = infor.types == '' ? infor.tab[0].informationtypeid : infor.types;
+						var datas = {
+							cmd: "informationlist",
+							informationtypeid: infor.types,
+							uid: uid,
+							nowPage: count,
+							pageCount: "4"
+						}
+						ajax(datas, successList);
+					}
+				}
+			}
+
+			function successStore(res) {
+				num = res.totalPage;
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > num));
+			}
+
+			function successList(res) {
+				if(res.result == 0) {
+					if(res.dataList == undefined || res.dataList.length == 0) {
+						infor.show = 1;
+						document.getElementsByClassName('mui-pull-caption')[1].style.fontSize = '0px';
+						document.getElementsByClassName('mui-spinner')[0].style.height = '0px';
+						document.getElementsByClassName('list')[0].style.height = '100%';
+					} else if(res.dataList.length > 0) {
+						infor.show = 0;
+						document.getElementsByClassName('mui-pull-caption')[1].style.fontSize = '15px';
+						document.getElementsByClassName('mui-spinner')[0].style.height = '24px';
+						document.getElementsByClassName('list')[0].style.height = 'auto';
+						for(var i = 0; i < res.dataList.length; i++) {
+							infor.list.push(res.dataList[i])
+						}
+					}
+					num = res.totalPage;
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > num));
+				}
+			}
+
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+				infor.list = [];
+				count = 1;
+			}
+
+			function open_detail(id) {
+				localStorage.setItem("listData", JSON.stringify(infor.list));
+				localStorage.setItem("tabIndex", infor.tabIndex);
+				localStorage.setItem("count", count);
+				localStorage.setItem("informationtypeid", infor.types);
+				window.location.href = './information_detail.html?id=' + id;
+			}
+		</script>
+	</body>
+
+</html>

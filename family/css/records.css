@@ -1,0 +1,272 @@
+body {
+	background: #FFFFFF;
+	width: 100%;
+	height: 100%;
+}
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.top_date {
+	width: 100%;
+	height: 370px;
+	background: url(../images/bg.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+}
+
+.date_list {
+	width: 90%;
+	height: 80%;
+	background: url(../images/date_box.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 5%;
+	bottom: 5%;
+}
+
+.no {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.no img {
+	width: 3rem !important;
+	height: 3rem !important;
+	margin: 1rem 0;
+}
+
+.no span {
+	font-size: 28px;
+	color: #333;
+}
+
+[data-dpr="1"] .no span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .no span {
+	font-size: 42px;
+}
+
+.calendar {
+	width: 100%;
+	height: 100%;
+	display: block;
+	padding-top: 1.2rem;
+	box-sizing: border-box;
+}
+
+
+/**
+ * * 设置日历顶部盒子
+*/
+
+.calendar .calendar-title-box {
+	position: relative;
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+}
+
+.calendar-title-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0.5rem;
+	box-sizing: border-box;
+}
+
+#calendarTitle {
+	display: inline-block;
+	font-size: 30px;
+}
+
+[data-dpr="1"] #calendarTitle {
+	font-size: 15px;
+}
+
+[data-dpr="3"] #calendarTitle {
+	font-size: 45px;
+}
+
+#calendarTable tr td,
+#calendarTable th td {
+	font-size: 14px;
+}
+
+
+/**
+* 设置上个月的按钮图标
+*/
+
+.calendar .prev-month {
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	border-left: 0px;
+	border-top: 6px solid transparent;
+	border-right: 8px solid #8EE0FF;
+	border-bottom: 6px solid transparent;
+	cursor: pointer;
+	margin-right: 0.4rem;
+}
+
+.mark {
+	width: 0.7rem;
+	height: 0.7rem;
+}
+
+
+/**
+ * 设置下个月的按钮图标
+ */
+
+.calendar .next-month {
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	border-right: 0px;
+	border-top: 6px solid transparent;
+	border-left: 8px solid #8EE0FF;
+	border-bottom: 6px solid transparent;
+	cursor: pointer;
+	margin-left: 0.4rem;
+}
+
+
+/* 设置日历表格样式 */
+
+.calendar-table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+
+/* 表格行高 */
+
+.calendar-table tr {
+	height: 30px;
+	line-height: 30px;
+}
+
+
+/* 当前天 颜色特殊显示 */
+
+.currentDay {
+	color: #8EE0FF !important;
+}
+
+
+/* 本月 文字颜色 */
+
+.currentMonth {
+	color: #333;
+}
+
+
+/* 其他月颜色 */
+
+.otherMonth {
+	color: #999;
+}
+
+.car_list {
+	width: 90%;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 0.6rem;
+}
+
+.car_title {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.car_left {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.car_log {
+	width: 0.6rem;
+}
+
+.car_left>span{
+	font-size: 28px;
+	color: #333;
+	margin-left: 0.5rem;
+}
+
+[data-dpr="1"] .car_left>span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .car_left>span {
+	font-size: 42px;
+}
+
+.car_right_img{
+	width: 0.25rem;
+}
+
+.car_clock {
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	margin: 0.8rem 0;
+}
+
+.car_clock img{
+	width: 22px;
+	height: 292px;
+}
+
+.car_time {
+	width: auto;
+	overflow: hidden;
+	margin-left: 0.5rem;
+}
+
+.car_time li h4 {
+	font-size: 28px;
+	color: #333;
+	margin: 0;
+}
+
+[data-dpr="1"] .car_time li h4 {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .car_time li h4 {
+	font-size: 42px;
+}
+
+.car_time li div {
+	font-size: 28px;
+	color: #999;
+	margin-top: 6px;
+}
+
+[data-dpr="1"] .car_time li div {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .car_time li div {
+	font-size: 42px;
+}
+
+[v-cloak] {
+    display: none !important;
+}

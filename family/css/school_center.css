@@ -1,0 +1,133 @@
+html,
+body {
+	background: #ffffff;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.list {
+	width: 100%;
+}
+
+.navTop {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	background: #47c6f2;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 32px;
+	color: #fff;
+	z-index: 20;
+}
+
+[data-dpr="1"] .navTop {
+	font-size: 16px;
+}
+
+[data-dpr="3"] .navTop {
+	font-size: 48px;
+}
+
+.back {
+	position: absolute;
+	width: 10px;
+	height: 15px;
+	top: 14px;
+	left: 0.4rem;
+}
+
+.mui-segmented-control .mui-control-item img {
+	height: 1rem;
+}
+
+.mui-segmented-control .mui-control-item span {
+	font-size: 28px;
+	color: #666;
+}
+
+[data-dpr="1"] .mui-segmented-control .mui-control-item span {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .mui-segmented-control .mui-control-item span {
+	font-size: 42px;
+}
+
+.mui-control-content {
+	width: 100%;
+	height: 100%;
+}
+
+.news_box {
+	width: 100%;
+	position: absolute;
+	top: 3.5rem;
+	bottom: 0;
+	z-index: 10;
+}
+
+.title {
+	width: 100%;
+	height: 1rem;
+	line-height: 1rem;
+	font-size: 28px;
+	color: #666;
+	text-align: center;
+}
+
+[data-dpr="1"] .title {
+	font-size: 14px;
+}
+
+[data-dpr="3"] .title {
+	font-size: 42px;
+}
+
+.tab_img {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.tab_img img {
+	width: 100%;
+}
+
+.bg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 1);
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.loading {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -30px;
+	margin-left: -30px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.loading img {
+	width: 100%;
+	height: 100%;
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+}
+
+[v-cloak] {
+    display: none !important;
+}

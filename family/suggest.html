@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>意见反馈</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/suggest.css" />
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="navTop">
+				意见反馈
+				<img class="back" src="./images/back_top.png" @tap="goBack" />
+			</div>
+			<div class="content">
+				<textarea placeholder="请输入您要反馈的内容" v-model="content"></textarea>
+			</div>
+			<button id="btn" type="button" @click="submit">确认提交</button>
+		</div>
+		<script src="js/flexible.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			var feed = new Vue({
+				el: "#app",
+				data: {
+					content: ''
+				},
+				methods: {
+					submit: function() {
+						if(this.content == '') {
+							mui.toast("内容不能为空");
+							return;
+						}
+
+						if(this.content.length > 200) {
+							mui.toast("内容不能超过200个字");
+							return;
+						}
+
+						var that = this;
+						var id = setInterval(function() {
+							var state = app.getState();
+							var uid = state.uid;
+							if(uid == undefined) {
+								return
+							} else {
+								clearInterval(id);
+								var datas = {
+									cmd: "addFeedback",
+									uid: uid,
+									content: that.content
+								}
+								ajax(datas, that.successLoad);
+							}
+						}, 200);
+					},
+					successLoad: function(res) {
+						if(res.result == 0) {
+							this.content = '';
+							mui.toast("反馈成功");
+						}
+					},
+					goBack: function() {
+						window.history.go(-1);
+					}
+				}
+			});
+			mui.init();
+		</script>
+	</body>
+
+</html>

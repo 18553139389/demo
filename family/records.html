@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>宝贝考勤</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" href="css/demo.css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/records.css" />
+		<style>
+			.mui-bar {
+				position: relative;
+				border: none;
+				box-shadow: none;
+				background: rgba(0, 0, 0, 0);
+				padding-top: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app" class="list" v-cloak>
+			<div class="top_date">
+				<header id="header" class="mui-bar mui-bar-nav">
+					<a style="color: #fff;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				</header>
+				<div class="date_list">
+					<div class='calendar' id='calendar'></div>
+				</div>
+			</div>
+			<div class="car_list">
+				<div class="car_title" id="car_records" @tap="goDetail">
+					<div class="car_left">
+						<img class="car_log" src="./images/car_log.png" alt="" />
+						<span id="info">2018/12/10</span>
+					</div>
+					<img class="car_right_img" src="./images/car_right.png" alt="" />
+				</div>
+				<div class="car_clock">
+					<template v-if="show == 0">
+						<img src="images/car_sort.png" alt="" />
+						<ul class="car_time">
+							<template v-for="v in records">
+								<li v-if="v.type == 1" style="padding-top: 2px;">
+									<h4>上午上学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+							<template v-for="v in records">
+								<li v-if="v.type == 2" style="padding-top: 54px;">
+									<h4>中午放学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+							<template v-for="v in records">
+								<li v-if="v.type == 3" style="padding-top: 49px;">
+									<h4>下午上学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+							<template v-for="v in records">
+								<li v-if="v.type == 4" style="padding-top: 49px;">
+									<h4>下午放学</h4>
+									<div>{{v.time}}</div>
+								</li>
+							</template>
+						</ul>
+					</template>
+					<template v-if="show == 1">
+						<div class="no">
+							<img src="images/wu.png" alt="" />
+							<span>暂时没有宝宝的考勤记录</span>
+						</div>
+					</template>
+				</div>
+			</div>
+		</div>
+		<script src="js/flexible.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/date.js"></script>
+		<script>
+			var record = new Vue({
+				el: "#app",
+				data: {
+					records: [],
+					show: 0
+				},
+				methods: {
+					goDetail: function() {
+						window.location.href = './car_records.html';
+					}
+				}
+			});
+
+			mui.init();
+			var timer = [];
+			// 表格中显示日期
+			showCalendarData();
+			var info = document.getElementById("info");
+			var dDate = new Date();
+			var year = dDate.getFullYear();
+			var month = dDate.getMonth();
+			var time = dDate.getDate();
+			info.innerHTML = year + "/" + (month + 1) + "/" + time;
+			//判断日历是左滑动还是右滑动
+			var startX, endX;
+			document.getElementById('calendar-body-box').addEventListener('touchstart', function(e) {
+				e.preventDefault();
+				startX = e.touches[0].pageX;
+			});
+			document.getElementById('calendar-body-box').addEventListener('touchmove', function(e) {
+				e.preventDefault();
+				endX = e.touches[0].pageX;
+			});
+			document.getElementById('calendar-body-box').addEventListener('touchend', function(e) {
+				e.preventDefault();
+				var offsetX = endX - startX;
+				if(offsetX > 0) {
+					toPrevMonth();
+				} else if(offsetX < 0) {
+					toNextMonth();
+				}
+			});
+			/**
+			 * 表格中显示数据，并设置类名
+			 */
+			function showCalendarData() {
+				var _year = dateObj.getDate().getFullYear();
+				var _month = dateObj.getDate().getMonth() + 1;
+				var _dateStr = getDateStr(dateObj.getDate());
+
+				// 设置顶部标题栏中的 年、月信息
+				var calendarTitle = document.getElementById("calendarTitle");
+				var titleStr = _dateStr.substr(4, 2) + "月";
+				calendarTitle.innerText = titleStr;
+
+				// 设置表格中的日期数据
+				var _table = document.getElementById("calendarTable");
+				var _tds = _table.getElementsByTagName("td");
+				var _firstDay = new Date(_year, _month - 1, 1); // 当前月第一天
+				for(var i = 0; i < _tds.length; i++) {
+					var _thisDay = new Date(_year, _month - 1, i + 1 - _firstDay.getDay());
+					var _thisDayStr = getDateStr(_thisDay);
+					_tds[i].innerText = _thisDay.getDate();
+					_tds[i].setAttribute('data', _thisDayStr);
+					if(_thisDayStr.substr(0, 6) == getDateStr(_firstDay).substr(0, 6)) {
+						_tds[i].className = 'currentMonth'; // 当前月
+					} else if(_thisDayStr == getDateStr(new Date())) { // 当前天
+						_tds[i].className = 'currentDay';
+					} else { // 其他月
+						_tds[i].className = 'otherMonth';
+					}
+				}
+
+				var id = setInterval(function() {
+					var state = app.getState();
+					var uid = state.uid;
+					if(uid == undefined) {
+						return
+					} else {
+						clearInterval(id);
+						var datas = {
+							cmd: "babyattendance",
+							uid: uid,
+							month: getMonth(dateObj.getDate()),
+							date: getNow(dateObj.getDate())
+						}
+						ajax(datas, successDate);
+					}
+				}, 200);
+			}
+
+			function successDate(res) {
+				var currentNum;
+				var _year = dateObj.getDate().getFullYear();
+				var _month = dateObj.getDate().getMonth() + 1;
+				var _dateStr = getDateStr(dateObj.getDate());
+				// 设置表格中的日期数据
+				var _table = document.getElementById("calendarTable");
+				var _tds = _table.getElementsByTagName("td");
+				var _firstDay = new Date(_year, _month - 1, 1); // 当前月第一天
+				if(res.result == 0) {
+					if(res.signList == undefined || res.signList == []) {
+						mui.toast('暂时没有本月的考勤记录');
+						for(var i = 0; i < _tds.length; i++) {
+							_tds[i].style.background = 'none';
+						}
+						record.show = 1;
+					} else if(res.signList.length > 0) {
+						currentNum = res.signList;
+						timer = res.dataList;
+						if(res.dataList == undefined || res.dataList == []) {
+							record.show = 1;
+						} else if(res.dataList.length > 0) {
+							record.show = 0;
+							record.records = res.dataList;
+						}
+						for(var i = 0; i < _tds.length; i++) {
+							var _thisDay = new Date(_year, _month - 1, i + 1 - _firstDay.getDay());
+							var _thisDayStr = getDateStr(_thisDay);
+							if(_thisDayStr.substr(0, 6) == getDateStr(_firstDay).substr(0, 6)) {
+								_tds[i].className = 'currentMonth'; // 当前月
+								for(var k = 0; k < currentNum.length; k++) {
+									if(_tds[i].innerHTML == currentNum[k]) {
+										_tds[i].style.background = 'url(./images/kaoqin.png) no-repeat center center';
+										_tds[i].style.backgroundSize = '26px 26px'
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

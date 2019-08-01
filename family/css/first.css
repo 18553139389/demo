@@ -1,0 +1,140 @@
+body {
+	background: #FFFFFF;
+}
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0 0.4rem;
+	box-sizing: border-box;
+}
+
+.title {
+	width: 100%;
+	height: 1rem;
+	line-height: 1rem;
+	font-size: 36px;
+	color: #333;
+}
+
+[data-dpr="1"] .title {
+	font-size: 18px;
+}
+
+[data-dpr="3"] .title {
+	font-size: 54px;
+}
+
+.banner {
+	width: 100%;
+	height: 5.5rem;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;
+	border-radius: 6px;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide span {
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.1rem;
+	background: #eee;
+}
+
+.nav {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0.8rem;
+	margin-bottom: 52px;
+}
+
+.nav li {
+	width: 48%;
+	margin-bottom: 0.4rem;
+	padding: 0.2rem 0.5rem;
+	box-sizing: border-box;
+	border-radius: 6px;
+}
+
+.nav li a {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav li a h3 {
+	font-family: "黑体";
+	width: 32px;
+	font-size: 30px;
+	color: #333;
+	line-height: 20px;
+	position: relative;
+}
+
+[data-dpr="1"] .nav li a h3 {
+	font-size: 15px;
+}
+
+[data-dpr="3"] .nav li a h3 {
+	font-size: 45px;
+}
+
+.nav li a img {
+	width: 2rem;
+}
+
+.mui-badge {
+	position: absolute;
+	top: -6px;
+	right: -16px;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	border-radius: 50%;
+	background: #DD524D;
+	font-size: 70%;
+	color: #fff;
+	padding: 0;
+}
+
+.van-tabbar-item__icon img {
+	width: 24px;
+	height: 24px;
+}
+
+[v-cloak] {
+    display: none !important;
+}
