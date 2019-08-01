@@ -1,0 +1,101 @@
+/* pages/xuanzemenpiao/xuanzemenpiao.wxss */
+
+/* .radioBox{display:none;} */
+
+.radioText {
+  position: absolute;
+  z-index: 111;
+  left: 0;
+  top: 0;
+  /* background: rgba(252, 248, 238, 1); */
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: rgba(17, 17, 17, 1);
+  border: 1px solid #bf931c;
+  box-sizing: border-box;
+  width: 144rpx;
+  height: 72rpx;
+  text-align: center;
+  line-height: 72rpx;
+}
+
+.radiono {
+  position: absolute;
+  z-index: 111;
+  left: 0;
+  top: 0;
+  background: rgba(248, 248, 248, 1);
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 72rpx;
+  font-size: 28rpx;
+  color: rgba(17, 17, 17, 1);
+  border: 1px solid rgba(248, 248, 248, 1);
+  box-sizing: border-box;
+  width: 144rpx;
+  height: 72rpx;
+}
+
+.radio {
+  display: none;
+}
+
+.radioBox {
+  display: block;
+  width: 144rpx;
+  height: 72rpx;
+  position: relative;
+  margin-right: 20rpx;
+}
+
+.radioImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.radiocontent {
+  display: flex;
+}
+
+.xz_1 {
+  width: 238rpx;
+  height: 137rpx;
+  border-radius: 10rpx;
+}
+
+.xz_2 {
+  width: 90%;
+  font-size: 24rpx;
+  color: rgba(17, 17, 17, 1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.xz_3 {
+  font-size: 40rpx;
+  color: rgba(255, 75, 75, 1);
+}
+
+.xz_5 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 98rpx;
+  text-align: center;
+  line-height: 98rpx;
+  font-size: 30rpx;
+  color: rgba(190, 126, 80, 1);
+  border-top: 1px solid #ebebeb;
+}
+
+.calendar-board {
+  color: #c7cbe2;
+  font-weight: bold;
+}

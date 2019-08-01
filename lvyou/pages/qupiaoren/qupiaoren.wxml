@@ -1,0 +1,34 @@
+<view class="" hover-class="none" hover-stop-propagation="false">
+  <van-row>
+    <van-col span="6" offset="1">
+      <text class="qp_2" selectable="false" space="false" decode="false">姓名</text>
+    </van-col>
+    <van-col span="7">
+      <text class="qp_2" selectable="false" space="false" decode="false">电话</text>
+    </van-col>
+    <van-col span="10">
+      <text class="qp_2" selectable="false" space="false" decode="false">身份证号</text>
+    </van-col>
+  </van-row>
+  <van-checkbox-group value="{{radio}}" bind:change="onChange">
+    <view class="qp_4" wx:for="{{people}}" wx:key="{{index}}">
+      <view class="s_1"></view>
+      <van-row>
+        <van-col span="6" offset="1">
+          <van-checkbox name="{{index}}" checked-color="#BE7E50" style="display:flex;align-items:center;font-size:14px;margin-top:6rpx;">{{item.name}}</van-checkbox>
+        </van-col>
+        <van-col span="7">
+          <text class="qp_3" selectable="false" space="false" decode="false">{{item.phone}}</text>
+        </van-col>
+        <van-col span="10">
+          <text class="qp_3" selectable="false" space="false" decode="false">{{item.idCard}}</text>
+        </van-col>
+      </van-row>
+    </view>
+  </van-checkbox-group>
+  <view class="no" wx:if="{{people.length == 0}}">暂无取票人，请去添加</view>
+  <view class="s_10"></view>
+  <view class="btn b_btn" hover-class="none" hover-stop-propagation="false" bindtap="ok" wx:if="{{people.length > 0}}">
+    <text>确定</text>
+  </view>
+</view>

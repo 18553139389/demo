@@ -1,0 +1,44 @@
+/* components/title/index.wxss */
+.address_box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  height:220rpx;
+  background:#fff;
+  border-radius:12rpx;
+}
+.address_icon{
+  display: block;
+  flex:0 0 auto;
+  width:35rpx;
+  padding:26rpx;
+}
+.address_mes{
+  flex:1 1 auto;
+}
+.address_name{
+  font-size:36rpx;
+  color:#1A1A1A;
+  font-weight: bold;
+  line-height:40rpx;
+}
+.address_right{
+  width:22rpx;
+  flex:0 0 auto;
+  padding:28rpx;
+}
+.address_phone{
+  font-size:28rpx;
+  font-weight:bold;
+  color:rgba(153,153,153,1);
+  line-height:40rpx;
+  padding-left:19rpx;
+}
+.address_add{
+  display: block;
+  font-size:28rpx;
+  color:rgba(51,51,51,1);
+  line-height:34rpx;
+  padding-top:28rpx;
+}

@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-tab": "/path/to/vant-weapp/dist/tab/index",
+    "van-tabs": "/path/to/vant-weapp/dist/tabs/index",
+    "van-icon": "/path/to/vant-weapp/dist/icon/index",
+    "panel": "../../components/panel",
+    "van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index"
+  },
+  "navigationBarTitleText":"订单"
+}

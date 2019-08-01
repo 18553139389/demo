@@ -1,0 +1,11 @@
+var split=function(val,str){
+    var arr=(val+"").split(str);
+    var strBox=""
+    arr.forEach(function(item){
+        strBox+=item;
+    })
+    return strBox;
+}
+module.exports={
+    split:split
+};

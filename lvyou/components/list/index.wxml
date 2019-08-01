@@ -1,0 +1,19 @@
+<!--components/list/index.wxml-->
+<view class="list_1">
+  <view class="list">
+    <view class="list_2" wx:for="{{list}}" wx:key="{{index}}" wx-if="{{index%2==0}}" bindtap="goto" data-id="{{item.id}}">
+      <image class="list_3" src="{{item.image}}" mode="widthFix"></image>
+      <text class="list_4">{{item.name}}</text>
+      <text class="list_5">{{item.lableName}}</text>
+      <text class="list_6">￥{{item.price}}</text>
+    </view>
+  </view>
+  <view class="list">
+    <view class="list_2" wx:for="{{list}}" wx:key="{{index}}" wx-if="{{index%2==1}}" bindtap="goto" data-id="{{item.id}}">
+      <image class="list_3" src="{{item.image}}" mode="widthFix"></image>
+      <text class="list_4">{{item.name}}</text>
+      <text class="list_5">{{item.lableName}}</text>
+      <text class="list_6">￥{{item.price}}</text>
+    </view>
+  </view>
+</view>

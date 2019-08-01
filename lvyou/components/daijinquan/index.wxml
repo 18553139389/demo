@@ -1,0 +1,25 @@
+<!-- components/daijinquan/index.wxml -->
+<view>
+  <block wx:for="{{list}}" wx:key="{{item}}">
+    <van-row>
+      <van-col span="22" offset="1">
+        <view class="dj_box">
+          <view class="dj_header">
+            <view>
+              <text class="dj_f">￥</text>
+              <text class="dj_m">{{item.amount}}</text>
+            </view>
+            <text class="dj_title">{{item.name}}</text>
+            <view class="dj_btn" wx:if="{{item.status==1}}" data-cid="{{item.id}}" data-ind="{{index}}" bindtap="gouse">
+              <text>去使用</text>
+            </view>
+          </view>
+          <view class="dj_mes">
+            <text>限{{item.phone}}使用</text>
+            <text>不可与等级折扣同享</text>
+          </view>
+        </view>
+      </van-col>
+    </van-row>
+  </block>
+</view>

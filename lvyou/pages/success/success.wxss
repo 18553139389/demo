@@ -1,0 +1,5 @@
+.su_1{width:302rpx;height:302rpx;margin:0 auto;display: block;}
+.su_2{display:block;text-align:center;font-size:30rpx;
+color:rgba(17,17,17,1);}
+.su_3{display:block;text-align:center;}
+.su_4{display:block;text-align:center;}

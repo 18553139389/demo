@@ -1,0 +1,41 @@
+<view class="kp_1">
+  <view class="s_2"></view>
+  <panel>
+    <view class="kp_2">
+      <text>发票信息</text>
+    </view>
+    <view class="kp_4" style="width:100%;" hover-class="none" hover-stop-propagation="false">
+      <text class="kp_5" selectable="false" space="false" decode="false">抬头类型</text>
+      <van-radio-group value="{{ radio }}" bind:change="onChange">
+        <view class="kp_3" hover-class="none" hover-stop-propagation="false">
+          <van-radio name="1" checked-color='#BF931C' >个人</van-radio>
+        </view>
+        <view class="kp_3" hover-class="none" hover-stop-propagation="false">
+          <van-radio name="2" checked-color='#BF931C'>企业</van-radio>
+        </view>
+      </van-radio-group>
+    </view>
+    <view>
+      <van-cell-group>
+        <van-field value="{{ username }}" data-name="titile" bindinput="setval" clearable label="发票抬头"  placeholder="填写抬头" />
+        <van-field value="{{ username }}" data-name="number" bindinput="setval" clearable label="税号"  placeholder="填写纳税人识别号" />
+        <van-field value="{{ password }}" data-name="money" bindinput="setval" type="number" label="发票金额" placeholder="金额" border="{{ false }}" />
+      </van-cell-group>
+    </view>
+  </panel>
+  <view class="s_2"></view>
+  <panel>
+    <view class="kp_2">
+      <text>接受信息</text>
+    </view>
+    <view>
+      <van-cell-group>
+        <van-field value="{{ username }}" data-name="name" bindinput="setval" clearable label="姓名"  placeholder="填写接收人姓名" />
+        <van-field value="{{ username }}" data-name="email" bindinput="setval" clearable label="邮箱"  placeholder="填写接收邮箱" />
+        <van-field value="{{ password }}" data-name="phone" bindinput="setval" type="number"  label="电话" placeholder="填写接收人手机号" border="{{ false }}" />
+      </van-cell-group>
+    </view>
+  </panel>
+  <view class="s_8"></view>
+  <view class="btn b_btn" bindtap="sub">提交</view>
+</view>

@@ -1,0 +1,39 @@
+<view class="o_h">
+  <view class="s_3"></view>
+  <panel back-class="q_1">
+    <view wx:if="{{id==1}}">
+      <text class="q_2">账户余额将提现到微信</text>
+    </view>
+    <view wx:if="{{id==3}}">
+      <text class="q_2">请输入充值金币</text>
+    </view>
+    <view wx:if="{{id==2}}">
+      <text class="q_2">押金金额</text>
+    </view>
+    <view class="q_7" wx:if="{{id==1 || id==3}}">
+      <text class="q_3">￥</text>
+      <input type="digit" class="q_4" placeholder="请输入金额" placeholder-class='q_9' value="{{getmoney}}" bindinput="setmoney"></input>
+    </view>
+    <view class="q_7" wx:if="{{id==2}}">
+      <text class="q_3">￥</text>
+      <input type="digit" class="q_4" disabled placeholder="请输入金额" placeholder-class='q_9' value="{{price}}"></input>
+    </view>
+    <view class="q_8" wx:if="{{id==1}}">
+      <text class="q_5">账户余额：￥{{money}}</text>
+      <text class="q_6" bindtap="tixian">全部提现</text>
+    </view>
+    <view class="q_8" wx:if="{{id==3}}">
+      <text class="q_5">使用微信充值</text>
+    </view>
+    <view class="q_8" wx:if="{{id==2}}">
+      <text class="q_5">退回时退回到微信钱包</text>
+    </view>
+  </panel>
+  <view class="s_10"></view>
+  <view class="btn b_btn" bindtap="ok" wx:if="{{id==1 || id==3}}">
+    <text>确定</text>
+  </view>
+  <view class="btn b_btn" bindtap="backMoney" wx:if="{{id==2 && price!=0 && flag!=1}}">
+    <text>申请退押金</text>
+  </view>
+</view>

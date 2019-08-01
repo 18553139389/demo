@@ -1,0 +1,58 @@
+<view>
+  <view class="swiper-contain">
+    <swiper autoplay="true" circular="true" bindchange="swiperChange">
+      <swiper-item wx:for="{{dataList.imagelist}}" wx:key="{{index}}">
+        <image src="{{item}}"></image>
+      </swiper-item>
+    </swiper>
+    <view class="swiper-num">
+      <text>{{current}}/</text>
+      <text>{{dataList.imagelist.length}}</text>
+    </view>
+  </view>
+  <view class="jq_1">
+    <view class="jq_2">
+      <view class="jq_3">{{dataList.lableName}}</view>
+      <text class="jq_4">{{dataList.name}}</text>
+    </view>
+    <view class="jq_5">
+      <view class="jq_6">
+        <text class="jq_7">￥{{dataList.price}}</text>
+        <text class="jq_8">/人</text>
+      </view>
+      <text class="jq_9">月售{{dataList.sales}}</text>
+    </view>
+  </view>
+  <view class="s_2" style="background-color:#F8F8F8"></view>
+  <van-cell title="简介" is-link bind:click="showTip" data-i="1" />
+  <van-cell title="订购须知事项" is-link bind:click="showTip" data-i="2" />
+  <view class="s_2" style="background-color:#F8F8F8"></view>
+  <view class="jq_10">
+    <text class="title">套餐</text>
+  </view>
+  <block wx:for="{{dataList.skuList}}" wx:key="{{item}}">
+    <van-cell title="{{item.name}}" link-type="navigateTo" bindtap="golist" data-ind="{{index}}" data-name="{{item.name}}">
+      <view slot="title">
+        <text>{{item.name}}</text>
+      </view>
+      <view class="jq_12">
+        <text class="jq_7">￥{{item.price}}</text>
+        <text class="jq_8">月售{{item.sales}}</text>
+      </view>
+    </van-cell>
+  </block>
+  <van-popup show="{{show1}}" position="bottom" overlay="{{true }}" bind:click-overlay="onClose">
+    <view class="jq_13">
+      <text class="jq_14">景区简介</text>
+      <text class="jq_15">{{dataList.url1}}</text>
+      <view class="jq_16" bindtap="onClose">确定</view>
+    </view>
+  </van-popup>
+  <van-popup show="{{show2}}" position="bottom" overlay="{{true }}" bind:click-overlay="onClose">
+    <view class="jq_13">
+      <text class="jq_14">订购须知事项</text>
+      <text class="jq_15">{{dataList.url2}}</text>
+      <view class="jq_16" bindtap="onClose">确定</view>
+    </view>
+  </van-popup>
+</view>

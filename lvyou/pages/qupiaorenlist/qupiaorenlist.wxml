@@ -1,0 +1,24 @@
+<view>
+  <van-row>
+    <van-col span="4" offset="1">
+      <text class="qp_1">姓名</text>
+    </van-col>
+    <van-col span="8">
+      <text class="qp_1">电话</text>
+    </van-col>
+    <van-col span="10">
+      <text class="qp_1">身份证号</text>
+    </van-col>
+  </van-row>
+  <van-row wx:for="{{list}}" wx:key="{{item}}">
+    <van-col span="4" offset="1">
+      <text class="qp_2">{{item.name}}</text>
+    </van-col>
+    <van-col span="8">
+      <text class="qp_2">{{item.phone}}</text>
+    </van-col>
+    <van-col span="10">
+      <text class="qp_2">{{item.idCard}}</text>
+    </van-col>
+  </van-row>
+</view>

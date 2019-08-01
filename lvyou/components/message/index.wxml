@@ -1,0 +1,5 @@
+<!--components/message/index.wxml-->
+<view class="message-box">
+  <image src="./images/message.png" mode="aspectFit" ></image>
+  <view class="message" wx:if="{{true}}"></view>
+</view>

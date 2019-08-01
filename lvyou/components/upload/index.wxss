@@ -1,0 +1,26 @@
+/* components/upload/index.wxss */
+.ui_uploader_cell{
+  width:136rpx;
+  height:136rpx;
+}
+.ui_uploader_item{
+  width:136rpx;
+  height:136rpx;
+  position:relative;
+}
+.ui_uploader{
+  width:136rpx;
+  height:136rpx;
+}
+.ui_uploader image{
+  width:136rpx;
+  height:136rpx;
+}
+.ui_uploader_item_icon{
+  position:absolute;
+  right:-10rpx;
+  top:-10rpx;
+}
+.ui_uploader_item image{
+  width:136rpx;height:136rpx;
+}

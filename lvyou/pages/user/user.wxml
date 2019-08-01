@@ -1,0 +1,10 @@
+<!-- pages/login/login.wxml -->
+<view class="lg_1" hover-class="none" hover-stop-propagation="false">
+  <view class="lg_2" hover-class="none" hover-stop-propagation="false">
+    <image class="lg_4" src="/images/logo.png" lazy-load="false" binderror="" bindload="" />
+    <view class="s_1"></view>
+    <view class="lg_10" bindtap='getOrder' style="background:rgba(255,255,255,.8)">账号登录</view>
+    <button class="lg_10" style="margin-top: 40rpx;color:#fff;" open-type="getUserInfo" bindgetuserinfo="goLogin">微信登录</button>
+  </view>
+  <image class="lg_3" src="/images/bck.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
+</view>

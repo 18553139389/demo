@@ -1,0 +1,25 @@
+<!--pages/jiaoyimingxi/jiaoyimingxi.wxml-->
+<view>
+  <scroll-view class="tab_content" scroll-y="{{true}}" bindscrolltolower="scrollBootom">
+    <van-cell-group>
+      <block wx:for='{{scoreList}}' wx:key="{{item}}">
+        <van-cell>
+          <view slot="title">
+            <view>
+              <text class="jy_2">{{item.title}}</text>
+            </view>
+            <view>
+              <text class="jy_3">{{item.time}}</text>
+            </view>
+          </view>
+          <view class="jy_4" wx-if="{{item.flag == 1}}">
+            <text class="jy_5">+{{item.point}}积分</text>
+          </view>
+          <view class="jy_4" wx-if="{{item.flag == 2}}">
+            <text class="jy_5">-{{item.point}}积分</text>
+          </view>
+        </van-cell>
+      </block>
+    </van-cell-group>
+  </scroll-view>
+</view>

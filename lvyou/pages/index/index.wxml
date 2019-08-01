@@ -1,0 +1,50 @@
+<scroll-view scroll-y="{{true}}" style="height:100vh;" bindscrolltolower="tolower">
+  <view class="ind_1">
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="ind_2" bindtap="gocity">{{address}}</view>
+    </picker>
+    <view class="ind_3">
+      <van-icon name="location" size="30rpx" color="#111111" />
+    </view>
+    <view class="ind_4">
+      <van-search value="{{ value }}" shape="round" placeholder="请输入关键字搜索景区/目的地" use-action-slot bind:search="onSearch" readonly bindtap="gosearch"></van-search>
+    </view>
+  </view>
+  <swiper indicator-dots="{{true}}" indicator-active-color="#BE7E50" autoplay="{{true}}" circular="{{true}}" class="ind_11">
+    <block wx:for="{{adList}}" wx:key="{{index}}">
+      <swiper-item bindtap="goText" data-item="{{item.status}}" data-id="{{item.id}}" data-url="{{item.url}}">
+        <image class="ind_10" src="{{item.image}}" class="ind_18"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="ind_5" wx:if="{{cateGoryList[0]}}">
+    <text class="title">景区分类</text>
+    <view class="ind_6">
+      <view class="ind_7" wx:for="{{cateGoryList}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="golist">
+        <image class="ind_8" src="{{item.image}}"></image>
+        <text class="ind_9">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  <view style="padding:20rpx;">
+    <view class="s_2"></view>
+    <text class="title" style="padding-left:10rpx;">环渡精选</text>
+    <view class="s_2"></view>
+    <view wx:if="{{!list[0]}}" style="text-align:center;font-size:24rpx;">
+      <text>暂无</text>
+    </view>
+    <list wx:if="{{list[0]}}" list="{{list}}" bindclick="gotoList"></list>
+    <view class="load" wx:if="{{loading}}">加载中...</view>
+  </view>
+  <view class="ind_12" hidden="{{showBox}}">
+    <view class="ind_13">
+      <view class="ind_14">
+        <text class="ind_15">尊敬的用户：</text>
+        <text class="ind_16">
+          您好，欢迎您使用环渡旅行旗下的产品！在您试用期间，您有两次无押金下单的使用次数，在您使用期间，有任何问题都可以联系环渡客服，环渡客户7*24小时守护您的出行，愿我们的服务能改变您的生活！
+        </text>
+      </view>
+      <image class="ind_17" src="../../images/i7.png" mode="widthFix" bindtap="hiddenBox"></image>
+    </view>
+  </view>
+</scroll-view>

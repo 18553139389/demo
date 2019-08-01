@@ -1,0 +1,72 @@
+<!--pages/dingdansousuo/dingdansousuo.wxml-->
+<view>
+  <van-search value="{{ currentVal }}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" bind:change="setSearch" shape="round">
+    <view slot="action" bind:tap="onSearch">搜索</view>
+  </van-search>
+  <view class="dd_2">
+    <view class='no' wx-if="{{show}}">
+      <image src="../../images/no.png"></image>
+      <text>暂没搜索到相关订单</text>
+    </view>
+    <view class="s_2"></view>
+    <block wx:for="{{searchList}}" wx:for-item="items" wx:for-index="indexs" wx:key="{{items}}">
+      <view class="dd_3">
+        <view class="dd_6">
+          <van-row>
+            <van-col span="8" offset="1">
+              <text class="dd_4">{{items.userName}} 等{{items.num}}人</text>
+            </van-col>
+            <van-col span="4" offset="11">
+              <text class="dd_5" wx:if="{{items.status==1}}" data-i="待付款">待付款</text>
+              <text class="dd_5" wx:if="{{items.status==2}}" data-i="未使用">未使用</text>
+              <text class="dd_5" wx:if="{{items.status==3}}" data-i="已完成">已完成</text>
+              <text class="dd_5" wx:if="{{items.status==4}}" data-i="已取消">已取消</text>
+              <text class="dd_5" wx:if="{{items.status==5}}" data-i="已发票">已发票</text>
+              <text class="dd_5" wx:if="{{items.status==6}}" data-i="退款中">待审核</text>
+              <text class="dd_5" wx:if="{{items.status==7}}" data-i="已退款">已退款</text>
+            </van-col>
+          </van-row>
+        </view>
+        <view class="dd_7" hover-class="none" hover-stop-propagation="false">
+          <view class="s_2" hover-class="none" hover-stop-propagation="false"></view>
+          <van-row>
+            <van-col span="22" offset="1">
+              <view class="dd_9">
+                <text class="dd_8" selectable="false" space="false" decode="false">{{items.name}}</text>
+                <text class="dd_8" selectable="false" space="false" decode="false">￥{{items.price}}</text>
+              </view>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col offset="1" span="22">
+              <view class="s_2" hover-class="none" hover-stop-propagation="false"></view>
+              <text class="dd_10" selectable="false" space="false" decode="false">门票种类：{{items.cateName}}</text>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="15" offset="1">
+              <view class="dd_11">
+                <text>出行日期：{{items.time}}</text>
+              </view>
+            </van-col>
+            <van-col span="4" offset="3">
+              <view class="dd_12">
+                <text>数量：{{items.number}}</text>
+              </view>
+            </van-col>
+          </van-row>
+        </view>
+        <view class="dd_13" hover-class="none" hover-stop-propagation="false">
+          <van-row>
+            <van-col span="22" offset="1">
+              <text class="dd_16">共计：￥{{items.orderMoney}}元</text>
+            </van-col>
+          </van-row>
+          <view class="dd_18">
+            <text>共计{{items.number}}件商品>></text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

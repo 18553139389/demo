@@ -1,0 +1,50 @@
+<!-- pages/login/login.wxml -->
+<view class="lg_1" hover-class="none" hover-stop-propagation="false">
+  <view class="back">
+    <image bindtap='goBack' class='backIcon' src="/images/back.png" mode="aspectFill" />
+  </view>
+  <view class="lg_2" hover-class="none" hover-stop-propagation="false">
+    <image class="lg_4" src="/images/logo.png" lazy-load="false" binderror="" bindload="" />
+    <view class="s_1"></view>
+    <form bindsubmit="submit">
+      <view class="lg_12">
+        <van-row>
+          <van-col span="8">
+            <text class="lg_5">手机号码:</text>
+          </van-col>
+          <van-col span="16">
+            <input class="lg_6" type="number" name="phone" maxlength="11" placeholder="请输入手机号码" placeholder-class="lg_13"></input>
+          </van-col>
+        </van-row>
+      </view>
+      <view class="s_4"></view>
+      <view class="lg_12">
+        <van-row>
+          <van-col span="8">
+            <text class="lg_5">登录密码:</text>
+          </van-col>
+          <van-col span="16">
+            <input class="lg_6" type="password" name="password" maxlength="11" placeholder="请输入密码" placeholder-class="lg_13"></input>
+          </van-col>
+        </van-row>
+      </view>
+      <view class="s_2"></view>
+      <van-row>
+        <van-col span="10" offset="2">
+          <view class="lg_7">
+            <text class="lg_9" bindtap="gozc">注册账号</text>
+          </view>
+        </van-col>
+        <van-col span="10">
+          <view class="lg_8">
+            <text class="lg_9" bindtap="gowj">忘记密码</text>
+          </view>
+        </van-col>
+      </van-row>
+      <view class="s_10"></view>
+      <button form-type="submit" class="lg_10">登录</button>
+      <!-- <button class="lg_10" style="margin-top: 40rpx;" open-type="getUserInfo" bindgetuserinfo="goLogin">微信登录</button> -->
+    </form>
+  </view>
+  <image class="lg_3" src="/images/bck.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
+</view>

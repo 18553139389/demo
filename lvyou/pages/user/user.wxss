@@ -1,0 +1,18 @@
+/* pages/login/login.wxss */
+
+.lg_1{position:relative;top:0;left:0;width:100vw;height:100vh;}
+.back{position:absolute;top:70rpx;left:60rpx;z-index:1000;width:600rpx;height:100rpx;}
+.backIcon{width: 40rpx;height: 40rpx;}
+.lg_2{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1000;width:600rpx;margin:auto;height:900rpx;text-align:center;}
+.lg_3{position:absolute;left:0;right:0;z-index:999;width:100vw;height:100vh;}
+.lg_4{width:355rpx;height:265rpx;margin-bottom:120rpx;}
+.lg_5{font-size:15px;color:#fff;}
+.lg_6{text-align:left;height:90rpx;line-height:90rpx;color:#fff;font-size:15px;}
+.lg_7{text-align:left;}
+.lg_8{text-align:right;}
+.lg_9{font-size:24rpx;color:#fff;}
+.lg_10{width:600rpx;height:76rpx;background:rgba(190,126,80,1);border-radius:45rpx;outline:none;font-size:34rpx;
+color:#0696E1;line-height:76rpx;}
+.lg_10::after{border:none;}
+.lg_12{background-color:rgba(255,255,255,.2);border-radius:90rpx;height:90rpx;line-height:90rpx;}
+.lg_13{color:#fff;}

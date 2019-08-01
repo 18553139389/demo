@@ -1,0 +1,22 @@
+<!--components/tabs/index.wxml-->
+<!-- tabbar -->
+<view>
+  <van-tabbar active="{{ ind }}" bind:change="onChange" active-color="#012931">
+    <van-tabbar-item>
+      <image slot="icon" src="{{urlBox[0].iconPath}}" mode="aspectFit" />
+      <image slot="icon-active" src="{{urlBox[0].selectedIconPath}}" mode="aspectFit" />
+      首页
+    </van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="{{urlBox[1].iconPath}}" mode="aspectFit" />
+      <image slot="icon-active" src="{{urlBox[1].selectedIconPath}}" mode="aspectFit" />
+      订单
+    </van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="{{urlBox[2].iconPath}}" mode="aspectFit" />
+      <image slot="icon-active" src="{{urlBox[2].selectedIconPath}}" mode="aspectFit" />
+      我的
+    </van-tabbar-item>
+</van-tabbar>
+</view>
+

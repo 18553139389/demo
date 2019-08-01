@@ -1,0 +1,14 @@
+.q_1{padding:30rpx;box-sizing:border-box;}
+.q_2{font-size:30rpx;
+color:rgba(102,102,102,1);}
+.q_3{}
+.q_4{font-size:80rpx;
+font-weight:bold;
+color:rgba(17,17,17,1);line-height:100rpx;height:80rpx;}
+.q_5{font-size:28rpx;
+color:rgba(192,192,192,1);}
+.q_6{font-size:30rpx;
+color:rgba(190,126,80,1);}
+.q_7{padding-top:60rpx;display: flex;align-items:flex-end;}
+.q_8{display:flex;justify-content:space-between;padding-top:80rpx;}
+.q_9{font-weight:normal;font-size:60rpx;}

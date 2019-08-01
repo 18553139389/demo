@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-search": "/path/to/vant-weapp/dist/search/index",
+    "van-icon": "/path/to/vant-weapp/dist/icon/index"
+  },
+  "navigationBarTitleText":"搜索"
+}

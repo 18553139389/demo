@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-field": "/path/to/vant-weapp/dist/field/index",
+    "van-cell": "/path/to/vant-weapp/dist/cell/index",
+    "van-cell-group": "/path/to/vant-weapp/dist/cell-group/index",
+    "van-radio": "/path/to/vant-weapp/dist/radio/index",
+    "van-radio-group": "/path/to/vant-weapp/dist/radio-group/index",
+    "van-action-sheet": "/path/to/vant-weapp/dist/action-sheet/index"
+  },
+  "navigationBarTitleText":"个人资料"
+}

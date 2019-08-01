@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "panel": "../../components/panel"
+  },
+  "navigationBarTitleText":"提现"
+}

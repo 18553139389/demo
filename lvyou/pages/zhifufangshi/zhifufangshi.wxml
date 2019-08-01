@@ -1,0 +1,35 @@
+<view>
+  <view class="zf_1">
+    <view class="tit">
+      <image bindtap="goBack" class="back1" src="../../images/back1.png"></image>
+      <text style="margin-left:30rpx;">选择支付方式</text>
+    </view>
+    <view class="zf_2">
+      <text class="zf_3">￥</text>
+      <text class="zf_4">{{price}}</text>
+    </view>
+    <view class="zf_5">需支付</view>
+  </view>
+  <view class="s_2" style="background-color:#F8F8F8"></view>
+  <van-radio-group value="{{ radio }}" bind:change="onChange">
+    <van-cell-group>
+      <van-cell title="余额支付" clickable data-name="1" bind:click="onClick">
+        <view slot="icon">
+          <image mode="widthFix" class="zf_11" src="../../images/15.png"></image>
+        </view>
+        <van-radio name="1" checked-color="#BF931C" />
+      </van-cell>
+      <van-cell title="微信支付" clickable data-name="2" bind:click="onClick">
+        <view slot="icon">
+          <image mode="widthFix" class="zf_11" src="../../images/16.png"></image>
+        </view>
+        <van-radio name="2" checked-color="#BF931C" />
+      </van-cell>
+    </van-cell-group>
+  </van-radio-group>
+  <view class="s_10" hover-class="none" hover-stop-propagation="false">
+  </view>
+  <button class="btn b_btn" open-type="getUserInfo" bindgetuserinfo="goPay">
+    <text>去支付</text>
+  </button>
+</view>

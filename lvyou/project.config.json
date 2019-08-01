@@ -1,0 +1,294 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.5",
+	"appid": "wx86e0deb09dbd8a5c",
+	"projectname": "zx",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 34,
+			"list": [
+				{
+					"id": 0,
+					"name": "上传照片",
+					"pathName": "pages/upimg/upimg",
+					"query": "ind=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "地址管理",
+					"pathName": "pages/addressset/addressset",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "添加地址",
+					"pathName": "pages/address/address",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提交订单",
+					"pathName": "pages/subOrder/subOrder",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "材料库",
+					"pathName": "pages/product/product",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息中心",
+					"pathName": "pages/message/message",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单中心",
+					"pathName": "pages/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "下单成功",
+					"pathName": "pages/ordersuccess/ordersuccess",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "订单详情",
+					"pathName": "pages/orderlsit/orderlsit",
+					"query": "cid=011a9676ab0b43da8bcacafb11232d44",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "材料清单",
+					"pathName": "pages/cailiaolist/cailiaolist",
+					"query": "cid=16b5da9c10714156bf4c981a648945ab",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "售后",
+					"pathName": "pages/shouhou/shouhou",
+					"query": "cid=cfa7b89b10cb4d02bc85f0051976a3d8",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息中心",
+					"pathName": "pages/paysuccess/paysuccess",
+					"query": "cid=d4c8d43975844fbf82f70ce6c8a4d17d",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人信息",
+					"pathName": "pages/gemessage/gemessage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "等级中心",
+					"pathName": "pages/vipqy/vipqy",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "意见反馈",
+					"pathName": "pages/yijian/yijian",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "常见问题",
+					"pathName": "pages/asklist/asklist",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "选择地图",
+					"pathName": "pages/chooseAddress/chooseAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "网页",
+					"pathName": "pages/web/web",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员",
+					"pathName": "pages/openvip/openvip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pages/sousuo/sousuo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "忘记密码",
+					"pathName": "pages/xiugaimima/xiugaimima",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "城市",
+					"pathName": "pages/city/city",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "取票人列表",
+					"pathName": "pages/qupiaoren/qupiaoren",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "钱包",
+					"pathName": "pages/wodeqianbao/wodeqianbao",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "pages/gouwuche/gouwuche",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "意见反馈",
+					"pathName": "pages/yijianfankui/yijianfankui",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/dingdanlist/dingdanlist",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/orderdetail/orderdetail",
+					"query": "cid=b86c3fa39e654e82b719eb96bd9dcbb9",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "geren",
+					"pathName": "pages/gerenzhiliao/gerenzhiliao",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "开发票",
+					"pathName": "pages/kaipiaoxinxi/kaipiaoxinxi",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "panel": "../../components/panel",
+    "van-field": "/path/to/vant-weapp/dist/field/index",
+    "van-cell": "/path/to/vant-weapp/dist/cell/index",
+    "van-radio": "/path/to/vant-weapp/dist/radio/index",
+    "van-radio-group": "/path/to/vant-weapp/dist/radio-group/index"
+  },
+  "navigationBarTitleText":"开票信息"
+}

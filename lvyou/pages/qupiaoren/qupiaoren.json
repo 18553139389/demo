@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "van-checkbox": "/path/to/vant-weapp/dist/checkbox/index",
+    "van-checkbox-group": "/path/to/vant-weapp/dist/checkbox-group/index"
+  },
+  "navigationBarTitleText":"取票人列表"
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "panel": "../../components/panel"
+  },
+  "navigationBarTitleText":"修改密码"
+}

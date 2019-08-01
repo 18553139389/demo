@@ -1,0 +1,7 @@
+.kp_1{background-color:#F8F8F8;width:100vw;min-height:100vh;}
+.kp_2{padding:22rpx;font-size:30rpx;
+font-weight:bold;
+color:rgba(17,17,17,1);border-bottom:1px solid #F8F8F8;}
+.kp_3{display:inline-block;padding-left:70rpx;}
+.kp_4{padding: 24rpx;font-size:28rpx;
+color:rgba(51,51,51,1);border-bottom:1px solid #F8F8F8;}

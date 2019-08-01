@@ -1,0 +1,8 @@
+/* components/panel/index.wxss */
+.panel_box{
+    width:100%;
+    min-height:80rpx;
+    border-radius:16rpx;
+    background-color:#fff;
+    overflow:hidden;
+}

@@ -1,0 +1,5 @@
+.qp_1{font-size:30rpx;
+font-weight:bold;
+color:rgba(17,17,17,1);border-bottom:1px solid #F8F8F8;display:block;width:100%;line-height:77rpx;}
+.qp_2{font-size:28rpx;
+color:rgba(51,51,51,1);border-bottom:1px solid #F8F8F8;display:block;width:100%;line-height:77rpx;}

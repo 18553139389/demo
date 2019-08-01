@@ -1,0 +1,79 @@
+<view class="gw_1">
+  <view class="gw_16">
+    <van-cell title="取票人" is-link border="{{ false }}" bindclick="getconfirm" />
+    <scroll-view class="gw_13" scroll-y="{{true}}" hidden="{{showScroll}}">
+      <van-radio-group value="{{ result }}" bind:change="onChangePeople">
+        <van-cell-group>
+          <van-cell wx:for="{{ list }}" wx:key="index" title="{{item.name}}" clickable data-name="{{ item.id }}" bind:click="toggle">
+            <van-radio checked-color="#BF931C" slot="icon" class="gw_15" name="{{ index }}" />
+          </van-cell>
+        </van-cell-group>
+      </van-radio-group>
+    </scroll-view>
+  </view>
+  <view wx:for="{{test}}" wx:key="{{item}}">
+    <view class="s_2" style="background-color:#F8F8F8"></view>
+    <panel>
+      <view class="gw_2">
+        <van-checkbox checked-color="#BF931C" value="{{ checklist[index] }}" bind:change="onChange" name="{{index}}" data-i="{{index}}">{{item.name}}</van-checkbox>
+      </view>
+      <view class="gw_2" hover-class="none" hover-stop-propagation="false" wx:for="{{item.cartList}}" wx:for-index="index1" wx:for-item="item1" wx:key="{{item1}}">
+        <van-swipe-cell right-width="{{ 65 }}">
+          <van-checkbox-group value="{{ resultlist[index] }}" bind:change="onChangelist" data-i="{{index}}">
+            <van-checkbox name="{{index1}}" checked-color="#BF931C">
+              <view class="s_2"></view>
+              <view style="width:550rpx;">
+                <van-row>
+                  <van-col span="19" offset="1">
+                    <text class="gw_3">{{item1.name}}</text>
+                  </van-col>
+                  <van-col span="4">
+                    <text class="gw_4">￥{{item1.price}}</text>
+                  </van-col>
+                </van-row>
+                <view class="s_2" hover-class="none" hover-stop-propagation="false"></view>
+                <van-row>
+                  <van-col span="9" offset="1">
+                    <text class="gw_5">门票种类:{{item1.cateName}}</text>
+                  </van-col>
+                  <van-col span="8">
+                    <text class="gw_5">取票人:{{item1.collectorName}}</text>
+                  </van-col>
+                </van-row>
+                <van-row>
+                  <van-col span="15" offset="1">
+                    <text class="gw_5">出行日期：{{item1.time}}</text>
+                  </van-col>
+                  <van-col span="8">
+                    <text class="gw_5">数量：{{item1.number}}</text>
+                  </van-col>
+                </van-row>
+                <view class="s_1" hover-class="none" hover-stop-propagation="false"></view>
+              </view>
+            </van-checkbox>
+          </van-checkbox-group>
+          <view slot="right" class="gw_11" bind:tap="del" data-id="{{item1.id}}">
+            <text class="gw_12">删除</text>
+          </view>
+        </van-swipe-cell>
+      </view>
+    </panel>
+  </view>
+  <view class="s_10" style="background-color:#F8F8F8"></view>
+  <view class="gw_6">
+    <view class="gw_10" hover-class="none" hover-stop-propagation="false">
+      <van-checkbox value="{{ checkTotal }}" bind:change="onChangeTotal" checked-color="#BF931C" style="display:flex;">
+        <text class="gw_7">总价</text>
+        <text class="gw_8">￥{{total}}</text>
+      </van-checkbox>
+    </view>
+    <view class="gw_9" bindtap="ok">
+      <text>结算</text>
+    </view>
+  </view>
+  <view class='no' wx-if="{{cart}}">
+    <image src="../../images/no.png"></image>
+    <text>购物车空空如也，去逛逛~~</text>
+  </view>
+  <!-- <van-action-sheet show="{{ show }}" actions="{{ actions }}" cancel-text="取消" bind:close="onClose" /> -->
+</view>

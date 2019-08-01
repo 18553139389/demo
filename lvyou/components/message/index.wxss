@@ -1,0 +1,19 @@
+/* components/message/index.wxss */
+.message-box{
+  position:relative;
+  width:36rpx;
+  height:40rpx;
+}
+.message-box image{
+  width:100%;
+  height:40rpx
+}
+.message{
+  position:absolute;
+  right:0;
+  top:0;
+  width:14rpx;
+  height:14rpx;
+  border-radius:100%;
+  background-color:#FF4444;
+}

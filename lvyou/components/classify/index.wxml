@@ -1,0 +1,11 @@
+<!--components/classify/index.wxml-->
+<view class="classify" bindtap="closeTo">
+  <scroll-view scroll-y="true" class="classify-box" catch:tap="gogo">
+    <view class="classify-content">
+      <view class="classify-list" wx:for="{{list}}" wx:key="{{item}}" data-index="{{index}}" catch:tap="getMessage">
+        <image src="{{item.cover}}" mode="aspectFit"></image>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

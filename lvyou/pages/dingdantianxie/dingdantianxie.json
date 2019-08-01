@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "van-field": "/path/to/vant-weapp/dist/field/index",
+    "van-cell": "/path/to/vant-weapp/dist/cell/index",
+    "van-cell-group": "/path/to/vant-weapp/dist/cell-group/index",
+    "van-icon": "/path/to/vant-weapp/dist/icon/index",
+    "van-stepper": "/path/to/vant-weapp/dist/stepper/index",
+    "van-popup": "/path/to/vant-weapp/dist/popup/index"
+  },
+  "navigationBarTitleText":"订单填写"
+}

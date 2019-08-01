@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "van-icon": "/path/to/vant-weapp/dist/icon/index",
+    "van-nav-bar": "/path/to/vant-weapp/dist/nav-bar/index"
+  },
+  "navigationStyle":"custom"
+}
