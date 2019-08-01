@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "购物车",
+  "usingComponents": {
+    "van-button": "/static/vant/button/index",
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-switch-cell": "/static/vant/switch-cell/index",
+    "van-card": "/static/vant/card/index",
+    "van-submit-bar": "/static/vant/submit-bar/index",
+    "van-checkbox": "/static/vant/checkbox/index",
+    "van-checkbox-group": "/static/vant/checkbox-group/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-stepper": "/static/vant/stepper/index",
+    "van-icon": "/static/vant/icon/index"
+  }
+}

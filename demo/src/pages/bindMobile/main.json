@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "手机号",
+	"usingComponents": {
+	  "Dialog": "/static/vant/dialog/index"
+	}
+}

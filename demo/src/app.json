@@ -1,0 +1,32 @@
+{
+  "pages": [
+    
+    "pages/index/main",
+    "pages/login/main",
+    "pages/register/main",
+    "pages/bindMobile/main",
+    
+    "pages/category/main",
+		"pages/productDetail/main",
+		"pages/customerService/main",
+		"pages/search/main",
+	"pages/card/main",
+    "pages/person/main",
+		"pages/card/cardOrder/main",
+	"pages/order/main", 
+    "pages/points/main",
+    "pages/coupon/main",
+    "pages/accountInfo/main",
+    "pages/consignees/main",
+		"pages/consignees/textCons/main",
+		"pages/forget/main",
+    "pages/cms/main",
+    "pages/auther/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f7f7fa",
+    "navigationBarTitleText": "首页",
+    "navigationBarTextStyle": "black"
+  }
+}
