@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/header.css" />
+		<link rel="stylesheet" href="Resource/css/watch_detail.css" />
+		<link rel="stylesheet" href="Resource/css/nav.css" />
+		<link rel="stylesheet" href="Resource/css/bottom.css" />
+		<title>线下广告详情页</title>
+	</head>
+
+	<body>
+		<div class="container" id="app" v-cloak>
+			<header-show></header-show>	
+			<div class="tab">
+				<nav-top :set-data="navList" :item-index="itemIndex" @choice="choice"></nav-top>
+			</div>
+			<template v-for="vm in detailData">
+				<div class="detail_list">
+					<div class="detail_top">
+						<div class="detail_img">
+							<img :src="vm.images[0]" alt="" />
+						</div>
+						<div class="detail_right">
+							<div class="w_contain">
+								<div class="w_tit">{{vm.shopName}}</div>
+								<div class="w_loaction">
+									<img src="Resource/image/weizhi.png" alt="" />
+									<span>{{vm.address}}</span>
+								</div>
+							</div>
+							<div class="w_date">
+								<div class="w_date_top">
+									<div class="w_year">{{year}}年</div>
+									<div class="w_icon" @click="next">
+										<img src="Resource/image/16.png" alt="" />
+									</div>
+								</div>
+								<div class="w_swiper">
+									<div class="w_slide">
+										<ul class="w_num">
+											<li v-for="(v,k) in months">{{v.month}}</li>
+										</ul>
+									</div>
+								</div>
+								<div class="w_time">
+									<h3>选择时段：</h3>
+									<ul class="w_time_list">
+										<li :class="{time_change: timeIndex == k}" v-for="(v,k) in timeList" @click="getTime(k,vm.skuList[0].skuId)">
+											{{v.time}}
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="t_price">
+								<div class="t_date">
+									<span class="t_num" style="font-size: 20px;color: red;margin-left: 0;">
+									￥{{vm.skuList[0].skuPrice}}
+									</span>
+								</div>
+								<div class="t_tel">
+									<img src="Resource/image/dianhau.png" alt="" />
+									<span>{{vm.phone}}</span>
+								</div>
+							</div>
+							<div class="t_btn">
+								<i-button size="large" type="warning" @click="fixData">立即预定</i-button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab_list">
+					<div class="tab_title">
+						<div :class="{tab_change: tabIndex == k}" class="tab_cap" v-for="(v,k) in tabList" @click="tabChange(k)">
+							{{v.title}}</div>
+					</div>
+					<div class="tab_text" v-show="tabIndex == 0">
+						<div class="tab_content" v-html="contents"></div>
+					</div>
+					
+					<div class="tab_text" v-show="tabIndex == 1">
+						<div class="comment_list" v-for="v in commentData">
+							<div class="c_user">
+								<div class="self">
+									<img :src="v.userIcon" alt="" />
+								</div>
+								<span>{{v.userName}}</span>
+							</div>
+							<div class="c_content">
+								<div class="c_contain">
+									<div class="c_time">
+										<span class="c_month">{{v.adtime}}</span>
+										<!-- <span class="c_hour">10:00~12:00</span> -->
+										<template>
+											<rate disabled v-model="valueDisabled" />
+										</template>
+									</div>
+									<!-- <div class="c_right">
+										<span class="r_date">09/20</span>
+										<span class="r_time">14:20</span>
+									</div> -->
+								</div>
+								<p class="c_response">{{v.content}}</p>
+								<ul class="response_img">
+									<li v-for="s in v.images">
+										<img :src="s" alt="" />
+									</li>
+								</ul>
+								<p class="self_response">
+									商家回复：
+									<span>{{v.reply}}</span>
+								</p>
+							</div>
+						</div>
+						<div class="msg_page">
+							<template>
+								<Page :total="msgPage" :page-size="2" @on-change="getPage" />
+							</template>
+						</div>
+					</div>
+				</div>
+			</template>
+			<bottom @back="back"></bottom>
+		</div>
+
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/iview/3.1.4/iview.js"></script>
+		<script src="Resource/js/header.js"></script>
+		<script src="Resource/js/nav.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script src="Resource/js/bottom.js"></script>
+		<script>
+			new Vue({
+				el: "#app",
+				data: {
+					msgPage: 1,
+					value1: 1,
+					itemIndex: 1,
+					timeIndex: 0,
+					tabIndex: 0,
+					valueDisabled: 4,
+					year: 0,
+					mark: 0,
+					state: false,
+					detailUrl: '',
+					detailType: '',
+					detailData: [],
+					dateArr: [],
+					contents: '',
+					timeDate: "",
+					commentData:[],
+					months: [{
+							month: 1
+						},
+						{
+							month: 2
+						},
+						{
+							month: 3
+						},
+						{
+							month: 4
+						},
+						{
+							month: 5
+						},
+						{
+							month: 6
+						},
+						{
+							month: 7
+						},
+						{
+							month: 8
+						},
+						{
+							month: 9
+						},
+						{
+							month: 10
+						},
+						{
+							month: 11
+						},
+						{
+							month: 12
+						},
+						{
+							month: 1
+						},
+						{
+							month: 2
+						},
+						{
+							month: 3
+						},
+						{
+							month: 4
+						},
+						{
+							month: 5
+						},
+						{
+							month: 6
+						},
+						{
+							month: 7
+						},
+						{
+							month: 8
+						},
+						{
+							month: 9
+						},
+						{
+							month: 10
+						},
+						{
+							month: 11
+						},
+						{
+							month: 12
+						}
+					],
+					timeList: [{
+							time: "10：00-12:00"
+						},
+						{
+							time: "12：00-14:00"
+						},
+						{
+							time: "14：00-16:00"
+						},
+						{
+							time: "16：00-18:00"
+						},
+						{
+							time: "18：00-20:00"
+						},
+						{
+							time: "20：00-22:00"
+						}
+					],
+					navList: [{
+							title: "首页",
+							url: "./index.html"
+						},
+						{
+							title: "线下广告",
+							url: "./watch.html"
+						},
+						{
+							title: "网络广告",
+							url: "./net.html"
+						},
+						{
+							title: "素材设计",
+							url: "./source.html"
+						}
+					],
+					tabList: [{
+							title: "商品介绍"
+						},
+						{
+							title: "评价列表"
+						}
+					],
+					nowPage: 0
+				},
+				mounted: function() {
+					//判断用户登录
+					loginUser()
+
+					var self = this
+					setTimeout(function() {
+						self.getYear()
+						self.datePick('.w_num li')
+					}, 300)
+					//初始化详情页面数据
+					this.initData()
+					//获取评论列表
+					this.initComment()
+				},
+				methods: {
+					getPage: function(page) {
+						this.nowPage = page
+						var data = {
+							shopId: getRequest('shopId'),
+							page:page,
+							pageCount:2
+						}
+						queryData('/commentList', data, this.getComment)
+					},
+					choice: function(item) {
+						this.itemIndex = item;
+					},
+					tabChange: function(item) {
+						this.tabIndex = item
+					},
+					getTime: function(item, id) {
+						this.timeIndex = item
+						this.timeDate = id
+					},
+					getYear: function() {
+						var date = new Date()
+						var year = date.getFullYear()
+						var now = date.getMonth() + 1
+						this.year = year
+
+						$('.w_num li').each(function(i, ele) {
+							if(i <= 11) {
+								if(parseInt($(ele).html()) < now) {
+									$(this).addClass('disable');
+								}
+							}
+						});
+					},
+					//月份区间选择判断
+					datePick: function(el) {
+						var self = this
+						$(el).not('.disable').each(function(i, ele) {
+							$(this).click(function() {
+								var sort = ++self.mark;
+								if(!$(el).hasClass('add1')) {
+									$(this).addClass('add1');
+								} else if($(el).hasClass('add1') && !$(el).hasClass('add2') && !$(this).hasClass('add1')) {
+									$(this).addClass('add2');
+								} else if($(el).hasClass('add1') && $(el).hasClass('add2') && !(sort % 2) && !$(this).hasClass('add2')) {
+									$(this).addClass('add1').siblings().removeClass('add1');
+								} else if($(el).hasClass('add1') && $(el).hasClass('add2') && (sort % 2) && !$(this).hasClass('add1')) {
+									$(this).addClass('add2').siblings().removeClass('add2');
+								}
+							});
+						});
+					},
+					next: function() {
+						if(!this.state) {
+							this.year += 1
+							$('.w_icon img').css({
+								transition: 'all 0.5s',
+								transform: 'rotate(-180deg)'
+							})
+
+							$('.w_slide').animate({
+								left: '-100%'
+							}, 500)
+							this.state = !this.state
+						} else {
+							this.year -= 1
+							$('.w_icon img').css({
+								transition: 'all 0.5s',
+								transform: 'rotate(0deg)'
+							})
+							$('.w_slide').animate({
+								left: 0
+							}, 500);
+							this.state = !this.state
+						}
+					},
+					back: function() {
+						timer = setInterval(function() {
+							let osTop = document.documentElement.scrollTop || document.body.scrollTop
+							let ispeed = Math.floor(-osTop / 5)
+							document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+							this.isTop = true
+							if(osTop === 0) {
+								clearInterval(timer)
+							}
+						}, 30)
+					},
+					initData: function() {
+						this.detailUrl = getRequest('shopId')
+						this.detailType = getRequest('type')
+						var data = {
+							shopId: this.detailUrl,
+							type: this.detailType
+						}
+						queryData('/shopDetail', data, this.getDetail)
+					},
+					getDetail: function(res) {
+						console.log(res);
+						if(res !== undefined) {
+							console.log(res)
+							this.detailData.push(res)
+							this.timeDate = res.skuList[0].skuName
+							this.contents = this.unescape(this.detailData[0].content)
+						}
+					},
+					initComment:function(){
+						var data = {
+							shopId: getRequest('shopId'),
+							page:1,
+							pageCount:2
+						}
+						queryData('/commentList', data, this.getComment)
+					},
+					getComment:function(res){
+						if(res.dataList !== undefined) {
+							this.valueDisabled = res.dataList[0].score
+							this.commentData = res.dataList
+							this.msgPage = res.totalPage * 2
+						}
+					},
+					fixData: function() {
+						var dateArr = ''
+						var date = new Date()
+						var date1 = ''
+						var date2 = ''
+						$('.w_num li').each(function(i, ele) {
+							if(i <= 11 && $(ele).hasClass('add1')) {
+								date1 = date.getFullYear() + '-' + $(ele).html()
+								dateArr += date1
+							} else if(i > 11 && $(ele).hasClass('add1')) {
+								date1 = (date.getFullYear() + 1) + '-' + $(ele).html()
+								dateArr += date1
+							}
+
+							if(i <= 11 && $(ele).hasClass('add2')) {
+								date2 = date.getFullYear() + '-' + $(ele).html()
+								dateArr += date2
+							} else if(i > 11 && $(ele).hasClass('add2')) {
+								date2 = (date.getFullYear() + 1) + '-' + $(ele).html()
+								dateArr += ' ' + date2
+							}
+						});
+						this.deteArr = dateArr
+						var data = {
+							shopId: this.detailUrl,
+							skuId: this.timeDate,
+							date: this.deteArr
+						}
+						if(!this.deteArr){
+							this.$Message.error('请选择月份');
+						}else{
+							queryData('/checkTvStock', data, this.getReserve)
+						}
+					},
+					getReserve: function(res) {
+						if(res.status == 0) {
+							var uid = sessionStorage.getItem("uid")
+							var data = {
+								uid: uid,
+								shopId: this.detailUrl,
+								type: this.detailType,
+								skuId: this.timeDate,
+								date: this.deteArr
+							}
+							queryData('/reserve', data, this.getResponse)
+						} else if(res.status == 1) {
+							this.$Message.warning('预定失败')
+						}
+					},
+					getResponse: function(res) {
+						if(res.result == 0){
+							this.$Message.success('预定成功')
+						}else{
+							console.log(res.resultNote)
+						}
+					},
+					unescape: function(html) {
+						return html
+							.replace(html ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+							.replace(/&lt;/g, "<")
+							.replace(/&gt;/g, ">")
+							.replace(/&quot;/g, "\"")
+							.replace(/&#39;/g, "\'");
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

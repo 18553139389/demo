@@ -1,0 +1,133 @@
+.contain{
+	width: 100%;
+	background: #fafafa;
+	overflow: hidden;
+}
+
+.top_list{
+	width: 100%;
+	height: 100px;
+	background: #FFF;
+	position: fixed;
+	top: 46px;
+	left: 0;
+	z-index: 20;
+}
+
+.register_top{
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 20px 0;
+	box-sizing: border-box;
+}
+
+.logo {
+	float: left;
+	width: 15%;
+	height: 60px;
+}
+
+.logo>img {
+	width: 70px;
+	height: 70px;
+}
+
+.back-header{
+	display: flex;
+	align-items:center;
+	float: right;
+	height: 60px;
+}
+
+.back-header a{
+	font-size: 14px;
+	color: #FF9000;
+	margin-left: 12px;
+}
+
+.register_main{
+	width: 100%;
+	height: 500px;
+	background: url(../image/denglutu.png) no-repeat;
+	background-size: 100% 100%;
+	padding: 60px 0;
+	box-sizing: border-box;
+	margin-bottom: 540px;
+	margin-top: 146px;
+}
+
+.form_box{
+	width: 500px;
+	height: 960px;
+	background: #fff;
+	border-radius: 6px;
+	margin: 0 auto;
+	padding: 20px 70px;
+	box-sizing: border-box;
+}
+
+.form_box h3{
+	width: 100%;
+	height: 30px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 22px;
+	color: #333;
+}
+
+.form_list{
+	width: 100%;
+	margin-top: 20px;
+}
+
+.register_type{
+	width: 45%;
+	float: left;
+}
+
+.register_choice{
+	width: 40%;
+	float: right;
+}
+
+.business_all{
+	width: 100%;
+	display: flex;
+	justify-content:space-between;
+}
+
+.licence_upload,.weibo_upload{
+	width: 30%;
+	display: flex;
+	flex-direction:column;
+	align-items:center;
+}
+
+.all_img{
+	width: 110px;
+	height: 110px;
+}
+
+.img1>img,.img2>img,.img3>img{
+	width: 100%;
+	height: 100%;
+}
+
+.dis{
+	margin-top: 8px;
+	font-size: 14px;
+	color: #999;
+}
+
+.ivu-btn-large span{
+	font-size: 18px !important;
+}
+
+.editor_btn{
+	display: none;
+}
+
+[v-cloak] {
+    display: none !important;
+}

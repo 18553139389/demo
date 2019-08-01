@@ -1,0 +1,65 @@
+.list_all{
+	width: 100%;
+	background: #fff;
+	overflow: hidden;
+}
+
+.list_watch{
+	width: 1200px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.source_list{
+	width: 100%;
+	overflow: hidden;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.source_list li{
+	float: left;
+	margin-right: 30px;
+	display: flex;
+	align-items:center;
+	cursor: default;
+}
+
+.source_list li span{
+	font-size: 16px;
+	color: #333;
+}
+
+.source_list li img{
+	margin-left: 10px;
+}
+
+.source_add {
+	color: #FF9000 !important; 
+}
+
+.ivu-page{
+	display: flex;
+	justify-content:center;
+	margin-bottom: 80px;
+}
+
+.ivu-page-item-active a, .ivu-page-item-active:hover a{
+	color: #ff9000 !important;
+}
+
+.ivu-page-item-active{
+	border-color: #ff9000 !important;
+}
+
+.ivu-page li:hover{
+	border-color: #ff9000 !important;
+}
+
+.ivu-page li:hover a{
+	color: #ff9000 !important;
+}
+
+[v-cloak] {
+    display: none !important;
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/source.css" />
+		<link rel="stylesheet" href="Resource/css/find.css" />
+		<link rel="stylesheet" href="Resource/css/header.css" />
+		<link rel="stylesheet" href="Resource/css/nav.css" />
+		<link rel="stylesheet" href="Resource/css/swiper.css" />
+		<link rel="stylesheet" href="Resource/css/bottom.css" />
+		<link rel="stylesheet" href="Resource/css/list.css" />
+		<link rel="stylesheet" href="Resource/css/search.css" />
+		<title>素材设计</title>
+	</head>
+
+	<body>
+		<div class="container" id="app" ref="box" v-cloak>
+			<header-show></header-show>
+			<div class="search_wrapper">
+				<div class="search_box">
+					<div class="location" @click="goLocation">
+						<span>{{location}}</span>
+					</div>
+					<search :select-title="selectTitle" :search-data="selectData" :select-index="selectIndex" :show="show" :pro-id="val"
+					 @change="changes" @set="sets" @hide="hides" @search="searchs" @protext="protext">
+					</search>
+				</div>
+			</div>
+			<nav-search :set-data="navList" :item-index="itemIndex" @choice="choice"></nav-search>
+			<div class="banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="v in swiperPic">
+							<img :id="v.bannerId" :src="v.image" alt="" />
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<div class="list_all">
+				<div class="list_watch">
+					<ul class="source_list">
+						<li>
+							<span>筛选:</span>
+						</li>
+						<li v-for="(v,k) in sourceList" @click="getSource(k,v.sort)">
+							<span :class="{'source_add':sourceIndex == k}">{{v.title}}</span>
+							<img :src="v.url" alt="" />
+						</li>
+					</ul>
+					<source-list :source-data="sourceData" @sourceurl="sourceurl"></source-list>
+					<template>
+						<Page :total="totalPage" page-size="8" @on-change="getPage" />
+					</template>
+				</div>
+			</div>
+			<bottom @back="back"></bottom>
+		</div>
+
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/iview/3.1.4/iview.js"></script>
+		<script src="Resource/js/swiper.js"></script>
+		<script src="Resource/js/header.js"></script>
+		<script src="Resource/js/nav.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script src="Resource/js/list.js"></script>
+		<script src="Resource/js/bottom.js"></script>
+		<script src="Resource/js/search.js"></script>
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					swiperPic: [],
+					sort:0,
+					totalPage: 0,
+					itemIndex: 3,
+					sourceIndex: 0,
+					sourceData: [],
+					selectIndex: 0,
+					navList: [{
+							title: "首页",
+							url: "./index.html"
+						},
+						{
+							title: "线下广告",
+							url: "./watch.html"
+						},
+						{
+							title: "网络广告",
+							url: "./net.html"
+						},
+						{
+							title: "素材设计",
+							url: "./source.html"
+						}
+					],
+					sourceList: [{
+							sort: 0,
+							title: "不限",
+							url: ""
+						},
+						{
+							sort: 1,
+							title: "评价:",
+							url: "Resource/image/pingjia1.png"
+						},
+						{
+							sort: 2,
+							title: "销量",
+							url: "Resource/image/pingjia2.png"
+						}
+					],
+					selectData: [{
+							type: 1,
+							title: "线下广告"
+						},
+						{
+							type: 2,
+							title: "网络广告"
+						},
+						{
+							type: 3,
+							title: "素材设计"
+						}
+					],
+					selectTitle: "线下广告",
+					selectIndex: 0,
+					val: '',
+					show: false,
+					location: '搜索定位',
+					type: 1,
+				},
+				mounted: function() {
+					//判断用户是否登陆
+					loginUser()
+					//轮播图接口加载图片
+					queryData('/indexBanner', {}, this.swiperImg)
+					//素材列表初始化数据
+					var psData = {
+						page: 1,
+						pageCount:8
+					}
+					queryData('/designList', psData, this.getSourceData)
+				},
+				methods: {
+					goLocation: function() {
+						window.location.href = './location.html?' + 'type=1'
+					},
+					hides: function() {
+						this.show = !this.show
+					},
+					
+					changes: function(item) {
+						this.selectIndex = item
+					},
+					sets: function(item, html, type) {
+						console.log(item, html, type)
+						this.selectIndex = item
+						this.selectTitle = html
+						this.type = type
+					},
+					searchs: function() {
+						if (this.type == 1) {
+							window.location.href = './find.html?townId=' + local.getItem("townId") + '&lon=' + local.getItem("lon") + '&lat=' + local.getItem("lat") + '&keyword=' + encodeURIComponent(this.val) + '&type=1'
+						} else if (this.type == 2) {
+							window.location.href = './find.html?keyword=' + encodeURIComponent(this.val) + '&type=2'
+						} else if (this.type == 3) {
+							window.location.href = './find.html?keyword=' + encodeURIComponent(this.val) + '&type=3'
+						}
+					},
+					protext: function(val) {
+						this.val = val
+					},
+					swiperImg: function(res) {
+						this.swiperPic = res.dataList
+						//轮播图初始化对象
+						setTimeout(function() {
+							var swiper = new Swiper('.swiper-container', {
+								pagination: {
+									el: '.swiper-pagination',
+									clickable: true,
+								},
+								loop: true,
+								autoplay: true
+							});
+						}, 400)
+					},
+					choice: function(item) {
+						this.itemIndex = item;
+					},
+					getSource: function(item,sort) {
+						console.log(item,sort);
+						this.sourceIndex = item
+						this.sort = sort
+						console.log(this.sourceIndex,this.sort);
+						var data = {
+							sort:sort,
+							page: 1,
+							pageCount:8
+						}
+						console.log(data);
+						queryData('/designList', data, this.getSourceData)
+					},
+					getSourceData: function(res) {
+						this.sourceData = []
+						console.log(res);
+						if(res.dataList !== undefined) {
+							this.sourceData = res.dataList
+							this.totalPage = res.totalPage * 8
+						}
+						return this.sourceData
+					},
+					getPage:function(page){
+						var data = {
+							sort:this.sort,
+							page: page,
+							pageCount:8
+						}
+						queryData('/designList', data, this.getSourceData)
+					},
+					//返回顶部
+					back: function() {
+						timer = setInterval(function() {
+							let osTop = document.documentElement.scrollTop || document.body.scrollTop
+							let ispeed = Math.floor(-osTop / 5)
+							document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+							this.isTop = true
+							if(osTop === 0) {
+								clearInterval(timer)
+							}
+						}, 30)
+					},
+					sourceurl:function(id){
+						window.location.href = './source_detail.html?shopId='+id+'&type=3'
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

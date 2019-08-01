@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/net_detail.css" />
+		<link rel="stylesheet" href="Resource/css/find.css" />
+		<link rel="stylesheet" href="Resource/css/header.css" />
+		<link rel="stylesheet" href="Resource/css/nav.css" />
+		<link rel="stylesheet" href="Resource/css/bottom.css" />
+		<link rel="stylesheet" href="Resource/css/list.css" />
+		<title>素材设计</title>
+	</head>
+
+	<body>
+		<div class="container" id="app" ref="box" v-cloak>
+			<header-show></header-show>
+			<nav-top :set-data="navList" :item-index="itemIndex" @choice="choice"></nav-top>
+			<div class="net_list">
+				<div class="net_choice">
+					<ul class="media">
+						<li style="color: #999;">分类：</li>
+						<li :class="{'source_add':mediaIndex == k}" v-for="(v,k) in mediaList" @click="getMedia(k,v.categoryId)">{{v.categoryName}}</li>
+					</ul>
+					<ul class="terrace">
+						<li style="color: #999;">平台：</li>
+						<li :class="{'source_add':terraceIndex == k}" v-for="(v,k) in terraceList" @click="getTerrace(k,v.childId)">{{v.childName}}</li>
+					</ul>
+					<ul class="source_list">
+						<li>
+							<span style="color: #999;">筛选：</span>
+						</li>
+						<li v-for="(v,k) in sourceList" @click="getSource(k,v.sort)">
+							<span :class="{'source_add':sourceIndex == k}">{{v.title}}</span>
+							<img :src="v.url" alt="" />
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="list_all">
+				<div class="list_watch">
+					<net-list :net-data="netData" @neturl="neturl"></net-list>
+					<template>
+						<Page :total="totalPage" page-size="8" @on-change="getPage" />
+					</template>
+				</div>
+			</div>
+			<bottom @back="back"></bottom>
+		</div>
+
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.17/vue.min.js"></script>
+		<script src="//unpkg.com/iview/dist/iview.min.js"></script>
+		<script src="Resource/js/header.js"></script>
+		<script src="Resource/js/nav.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script src="Resource/js/list.js"></script>
+		<script src="Resource/js/bottom.js"></script>
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					itemIndex: 2,
+					selectIndex: 0,
+					mediaIndex: 0,
+					terraceIndex: 0,
+					sourceIndex: 0,
+					show: false,
+					mediaList: [],
+					terraceList: [],
+					netData: [],
+					categoryId: "",
+					sort: "0",
+					totalPage: 0,
+					navList: [{
+							title: "首页",
+							url: "./index.html"
+						},
+						{
+							title: "线下广告",
+							url: "./watch.html"
+						},
+						{
+							title: "网络广告",
+							url: "./net.html"
+						},
+						{
+							title: "素材设计",
+							url: "./source.html"
+						}
+					],
+					sourceList: [{
+							sort: 0,
+							title: "默认",
+							url: ""
+						},
+						{
+							sort: 1,
+							title: "粉丝量",
+							url: "Resource/image/pingjia1.png"
+						},
+						{
+							sort: 2,
+							title: "评价",
+							url: "Resource/image/pingjia2.png"
+						},
+						{
+							sort: 3,
+							title: "销量",
+							url: "Resource/image/pingjia1.png"
+						}
+					]
+				},
+				mounted: function() {
+					loginUser()
+					//初始化分类列表
+					var typeData = {
+						type: 2
+					}
+					queryData('/shopCategoryList', typeData, this.typeData)
+
+				},
+				methods: {
+					close: function() {
+						this.show = false
+					},
+					hide: function() {
+						this.show = !this.show
+					},
+					choice: function(item) {
+						this.itemIndex = item
+					},
+					change: function(item) {
+						this.selectIndex = item
+					},
+					set: function(item, html) {
+						this.selectIndex = item
+						this.selectTitle = html
+					},
+					getMedia: function(item, id) {
+						this.mediaIndex = item
+						//分类切换对应的平台选项
+						for(var i = 0; i < this.mediaList.length; i++) {
+							if(this.mediaList[i].categoryId == id) {
+								this.terraceList = this.mediaList[i].childList
+							}
+						}
+
+						//点击一级分类默认的初始化数据
+						console.log(this.terraceList)
+						this.categoryId = this.terraceList[0].childId
+						this.terraceIndex = 0
+						var media = {
+							categoryId: this.categoryId,
+							sort: this.sort,
+							page: 1,
+							pageCount: 8
+						}
+						queryData('/internetList', media, this.getTotal)
+					},
+					getTerrace: function(item, id) {
+						this.terraceIndex = item
+						this.categoryId = id
+						var media = {
+							categoryId: this.categoryId,
+							sort: this.sort,
+							page: 1,
+							pageCount: 8
+						}
+						queryData('/internetList', media, this.getTotal)
+					},
+					getSource: function(item, id) {
+						this.sourceIndex = item
+						this.sort = id
+						var media = {
+							categoryId: this.categoryId,
+							sort: this.sort,
+							page: 1,
+							pageCount: 8
+						}
+						queryData('/internetList', media, this.getTotal)
+					},
+					back: function() {
+						timer = setInterval(function() {
+							let osTop = document.documentElement.scrollTop || document.body.scrollTop
+							let ispeed = Math.floor(-osTop / 5)
+							document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+							this.isTop = true
+							if(osTop === 0) {
+								clearInterval(timer)
+							}
+						}, 30)
+					},
+					typeData: function(res) {
+						this.mediaList = res.dataList
+						this.getMedia(getRequest('key'), getRequest('categoryId'))
+						this.categoryId = getRequest('keyword')
+						var initData = {
+							categoryId: getRequest('keyword'),
+							page: 1,
+							pageCount: 8
+						}
+						queryData('/internetList', initData, this.getTotal)
+					},
+					getPage: function(page) {
+						var pageData = {
+							categoryId: this.categoryId,
+							sort: this.sort,
+							page: page,
+							pageCount: 8
+						}
+						queryData('/internetList', pageData, this.getTotal)
+					},
+					getTotal: function(res) {
+						this.netData = []
+						if(res.dataList !== undefined) {
+							this.netData = res.dataList
+							this.totalPage = res.totalPage * 8
+						}
+						console.log(this.netData);
+						return this.netData
+					},
+					neturl: function(id) {
+						window.location.href = './net_list.html?shopId=' + id + '&type=2'
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

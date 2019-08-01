@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/watch.css" />
+		<link rel="stylesheet" href="Resource/css/find.css" />
+		<link rel="stylesheet" href="Resource/css/header.css" />
+		<link rel="stylesheet" href="Resource/css/nav.css" />
+		<link rel="stylesheet" href="Resource/css/swiper.css" />
+		<link rel="stylesheet" href="Resource/css/bottom.css" />
+		<link rel="stylesheet" href="Resource/css/list.css" />
+		<link rel="stylesheet" href="Resource/css/search.css" />
+		<title>线下广告</title>
+	</head>
+	<body>
+		<div class="container" id="app" ref="box" v-cloak>
+			<header-top 
+			:showmap="showmap" 
+			:province-list="provinceList" 
+			:province-index="provinceIndex" 
+			:market-list="marketList"
+			:market-index="marketIndex" 
+			:town-list="townList"
+			:town-index="townIndex" 
+			@getprovince="getProvince" 
+			@getmarket="getMarket" 
+			@gettown="getTown" 
+			@showmaps="showmaps" 
+			@hidemaps="hidemaps">
+			</header-top>
+			<div class="search_wrapper">
+				<div class="search_box">
+					<div class="location" @click="goLocation">
+						<span>{{location}}</span>
+					</div>
+					<search :select-title="selectTitle" :search-data="selectData" :select-index="selectIndex" :show="show" :pro-id="val"
+					 @change="changes" @set="sets" @hide="hides" @search="searchs" @protext="protext">
+					</search>
+				</div>
+			</div>
+			<nav-search :set-data="navList" :item-index="itemIndex" @choice="choice"></nav-search>
+			<div class="banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="v in swiperPic">
+							<img :id="v.bannerId" :src="v.image" alt="" />
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<div class="list_all">
+				<div class="list_watch">
+					<!-- <div class="list_location">
+						<h5>省地：</h5>
+						<ul class="province">
+							<li :class="{'font':provinceIndex == k}" v-for="(v,k) in provinceList" @click="getProvince(k,v.id,v.name)">{{v.name}}</li>
+						</ul>
+					</div>
+					<div class="list_location">
+						<h5 style="padding: 0;">市区：</h5>
+						<ul class="market">
+							<li :class="{'font':marketIndex == k}" v-for="(v,k) in marketList" @click="getMarket(k,v.id,v.name)">{{v.name}}</li>
+						</ul>
+					</div>
+					<div class="list_location">
+						<h5 style="padding: 0;">县区：</h5>
+						<ul class="market">
+							<li :class="{'font':townIndex == k}" v-for="(v,k) in townList" @click="getTown(k,v.id,v.name)">{{v.name}}</li>
+						</ul>
+					</div> -->
+					<div class="list_location">
+						<h5 style="padding: 0;">分类：</h5>
+						<ul class="market">
+							<li :class="{'font':typeIndex == k}" v-for="(v,k) in typeList" @click="getList(k,v.categoryId)">{{v.categoryName}}</li>
+						</ul>
+					</div>
+				</div>
+				<list :list-data="listData" @targeturl="targeturl"></list>
+				<template>
+					<Page :total="totalPage" page-size="8" @on-change="getPage" />
+				</template>
+			</div>
+			<bottom @back="back"></bottom>
+		</div>
+		
+		<script src="Resource/js/vue.js"></script>
+		<script src="Resource/js/iview.js"></script>
+		<script src="Resource/js/jquery.js"></script>
+		<script src="Resource/js/swiper.js"></script>
+		<script src="Resource/js/t_province.js"></script>
+		<script src="Resource/js/t_city.js"></script>
+		<script src="Resource/js/t_town.js"></script>
+		<script src="Resource/js/header.js"></script>
+		<script src="Resource/js/nav.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script src="Resource/js/list.js"></script>
+		<script src="Resource/js/bottom.js"></script>
+		<script src="Resource/js/search.js"></script>
+		<script>
+			var itemPro = local.getItem("itemPro")
+			var proId = local.getItem("proId")
+			var currentPro = local.getItem("currentPro")
+			var itemCity = local.getItem("itemCity")
+			var cityId = local.getItem("cityId")
+			var currentCity = local.getItem("currentCity")
+			var itemTown = local.getItem("itemTown")
+			var townId = local.getItem("townId")
+			var currentTown = local.getItem("currentTown")
+			var app = new Vue({
+						el: "#app",
+						data: {
+							itemIndex: 1,
+							showmap: false,
+							selectIndex: 0,
+							provinceIndex: 0,
+							marketIndex: 0,
+							townIndex: 0,
+							typeIndex:0,
+							provinceCode:'',
+							show: false,
+							selectIndex: 0,
+							swiperPic: [],
+							navList: [{
+									title: "首页",
+									url:"./index.html"
+								},
+								{
+									title: "线下广告",
+									url:"./watch.html"
+								},
+								{
+									title: "网络广告",
+									url:"./net.html"
+								},
+								{
+									title: "素材设计",
+									url:"./source.html"
+								}
+							],
+							selectData: [{
+									type: 1,
+									title: "线下广告"
+								},
+								{
+									type: 2,
+									title: "网络广告"
+								},
+								{
+									type: 3,
+									title: "素材设计"
+								}
+							],
+							selectTitle: "线下广告",
+							val: '',
+							show: false,
+							location: '搜索定位',
+							type: 1,
+							provinceList: [],
+							marketList: [],
+							townList: [],
+							typeList: [],
+							listData: [],
+							cateId:0,
+							townId:null,
+							cityUser:'',
+							getPro:'',
+							totalPage:0
+						},
+						mounted: function() {
+							loginUser()
+							//获取省市数据
+							//轮播图接口加载图片
+							queryData('/indexBanner', {}, this.swiperImg)
+							var self = this
+							
+							//电视广告分类接口
+							var typeData={
+								type:1
+							}
+							queryData('/shopCategoryList',typeData,this.typeData)
+						},
+						methods: {
+							goLocation: function() {
+								window.location.href = './location.html?' + 'type=1'
+							},
+							hides: function() {
+								this.show = !this.show
+							},
+							
+							changes: function(item) {
+								this.selectIndex = item
+							},
+							sets: function(item, html, type) {
+								console.log(item, html, type)
+								this.selectIndex = item
+								this.selectTitle = html
+								this.type = type
+							},
+							searchs: function() {
+								if (this.type == 1) {
+									window.location.href = './find.html?townId=' + local.getItem("townId") + '&lon=' + local.getItem("lon") + '&lat=' + local.getItem("lat") + '&keyword=' + encodeURIComponent(this.val) + '&type=1'
+								} else if (this.type == 2) {
+									window.location.href = './find.html?keyword=' + encodeURIComponent(this.val) + '&type=2'
+								} else if (this.type == 3) {
+									window.location.href = './find.html?keyword=' + encodeURIComponent(this.val) + '&type=3'
+								}
+							},
+							protext: function(val) {
+								this.val = val
+							},
+							swiperImg: function(res) {
+								this.swiperPic = res.dataList
+								//轮播图初始化对象
+								setTimeout(function() {
+									var swiper = new Swiper('.swiper-container', {
+										pagination: {
+											el: '.swiper-pagination',
+											clickable: true,
+										},
+										loop: true,
+										autoplay: true
+									});
+								}, 400)
+							},
+							showmaps: function() {
+								this.showmap = true
+							},
+							hidemaps: function() {
+								this.showmap = false
+							},
+							close: function() {
+								this.show = false
+							},
+							hide: function() {
+								this.show = !this.show
+							},
+							choice: function(item) {
+								this.itemIndex = item;
+							},
+							change: function(item) {
+								this.selectIndex = item
+							},
+							set: function(item, html) {
+								this.selectIndex = item
+								this.selectTitle = html
+							},
+							getType: function(item) {
+								this.typeIndex = item
+							},
+							getProvince: function(item, code, name) {
+								var self = this
+								this.marketList = []
+								this.provinceIndex = item
+								this.marketIndex = 0
+								this.townIndex = 0
+								var city = address_city.RECORDS
+								var cityName = ''
+								var cityId = null
+								city.forEach(function(ele, i) {
+									if (ele.pid == code) {
+										self.marketList.push(ele)
+									}
+								})
+							
+								if (this.marketList.length == 0) {
+									cityId = code
+								} else {
+									cityName = this.marketList[0].name
+									cityId = this.marketList[0].id
+									var town = address_town.RECORDS
+									self.townList = []
+									town.forEach(function(ele, i) {
+										if (ele.cid == cityId) {
+											self.townList.push(ele)
+										}
+									})
+								}
+								var allName = name + this.marketList[0].name
+								var tv = {
+									townId: this.townList[0].id,
+									page: 1,
+									categoryId:this.cateId,
+									pageCount:8
+								}
+								getPosition(tv, allName, this.townList[0].name)
+								tv.lon = lon
+								tv.lat = lat
+								queryData('/tvList', tv, this.getTv)
+								local.setItem("itemPro", item)
+								local.setItem("proId", code)
+								local.setItem("currentPro", name)
+								local.setItem("itemCity", 0)
+								local.setItem("cityId", this.marketList[0].id)
+								local.setItem("currentCity", this.marketList[0].name)
+								local.setItem("itemTown", 0)
+								local.setItem("townId", this.townList[0].id)
+								local.setItem("currentTown", this.townList[0].name)
+							},
+							getMarket: function(item, id, name) {
+								var self = this
+								this.marketIndex = item
+								this.townList = []
+								this.townIndex = 0
+								var town = address_town.RECORDS
+								var townName = ''
+								var townId = null
+								town.forEach(function(ele, i) {
+									if (ele.cid == id) {
+										self.townList.push(ele)
+									}
+								})
+								if (this.townList.length == 0) {
+									townId = id
+								} else {
+									townName = this.townList[0].name
+									townId = this.townList[0].id
+								}
+								var proName = ''
+								if(local.getItem("currentPro")){
+									proName = local.getItem("currentPro") + name
+								}else{
+									var province = address_province.RECORDS
+									this.provinceList = province
+									proName = this.provinceList[0].name
+								}
+								var allName = proName + name 
+								var tv = {
+									townId: this.townList[0].id,
+									page: 1,
+									categoryId:this.cateId,
+									pageCount:8
+								}
+								getPosition(tv, allName, this.townList[0].name)
+								tv.lon = lon
+								tv.lat = lat
+								console.log(tv)
+								queryData('/tvList', tv, this.getTv)
+								if(!local.getItem("currentPro")){
+									local.setItem("itemPro", 0)
+									local.setItem("proId", this.provinceList[0].id)
+									local.setItem("currentPro", this.provinceList[0].name)
+								}
+								local.setItem("itemCity", item)
+								local.setItem("cityId", id)
+								local.setItem("currentCity", name)
+								local.setItem("itemTown", 0)
+								local.setItem("townId", this.townList[0].id)
+								local.setItem("currentTown", this.townList[0].name)
+							},
+							getTown: function(item, id, name) {
+								this.townIndex = item
+								var proName = ''
+								if(local.getItem("currentCity")){
+									proName = local.getItem("currentPro") + local.getItem("currenCity")
+								}else{
+									proName = this.provinceList[0].name
+								}
+								var allName = proName 
+								var tv = {
+									townId: id,
+									page: 1,
+									categoryId:this.cateId,
+									pageCount:8
+								}
+								getPosition(tv, allName, name)
+								tv.lon = lon
+								tv.lat = lat
+								queryData('/tvList', tv, this.getTv)
+								if(!local.getItem("currentCity")){
+									local.setItem("itemPro", 0)
+									local.setItem("proId", this.provinceList[0].id)
+									local.setItem("currentPro", this.provinceList[0].name)
+									local.setItem("itemCity", 0)
+									local.setItem("cityId", this.marketList[0].id)
+									local.setItem("currentCity", this.marketList[0].name)
+								}
+								local.setItem("itemTown", item)
+								local.setItem("townId", id)
+								local.setItem("currentTown", name)
+							},
+							getTv:function(res){
+								this.listData = []
+								if(res.dataList !== undefined){
+									this.listData = res.dataList
+									this.totalPage = res.totalPage * 8
+								}
+								return this.listData
+							},
+							getList:function(item,cateId){
+								this.typeIndex = item
+								this.cateId = cateId
+								var Prov = ''
+								var town = ''
+								if(local.getItem("townId")){
+									this.townId = local.getItem("townId")
+									Prov = local.getItem("currentPro") + local.getItem("currentCity")
+									town = local.getItem("currentTown")
+								}else{
+									this.townId = this.townList[0].id
+									Prov = this.provinceList[0].name + this.marketList[0].name
+									town = this.townList[0].name
+								}
+								var cate={
+									townId:this.townId,
+									page:1,
+									categoryId:cateId,
+									pageCount:8
+								}
+								getPosition(cate,Prov,town)
+								cate.lon = lon
+								cate.lat = lat
+								queryData('/tvList',cate,this.getTv)
+							},
+							getPage:function(page){
+								if(local.getItem("townId")){
+									this.townId = local.getItem("townId")
+									Prov = local.getItem("currentPro") + local.getItem("currentCity")
+									town = local.getItem("currentTown")
+								}else{
+									this.townId = this.townList[0].id
+									Prov = this.provinceList[0].name + this.marketList[0].name
+									town = this.townList[0].name
+								}
+								var pageData ={
+									townId:this.townId,
+									page:page,
+									categoryId:this.cateId,
+									pageCount:8
+								}
+								getPosition(pageData,Prov,town)
+								pageData.lon = lon
+								pageData.lat = lat
+								queryData('/tvList',pageData,this.getTv)
+							},
+							typeData:function(res){
+								var self = this
+								this.typeList = res.dataList
+								this.cateId=this.typeList[0].categoryId
+								//电视广告初始化页面数据
+								if (townId == null) {
+									//电视广告初始化页面数据
+									this.provinceList = address_province.RECORDS
+									console.log('省份呢')
+									this.provinceIndex = 0
+									this.marketIndex = 0
+									this.townIndex = 0
+									this.marketList = [{
+										"id": 110100,
+										"name": '北京市',
+										"pid": "110000"
+									}]
+									var town = address_town.RECORDS
+									town.forEach(function(ele, i) {
+										if (ele.cid == self.marketList[0].id) {
+											self.townList.push(ele)
+										}
+									})
+									var tv = {
+										townId: self.townList[0].id,
+										page: 1,
+										categoryId:self.cateId,
+										pageCount:8
+									}
+									getPosition(tv, '北京市', self.townList[0].name)
+									tv.lon = lon
+									tv.lat = lat
+									console.log(tv)
+									queryData('/tvList', tv, this.getTv)
+								} else {
+									this.provinceList = address_province.RECORDS
+									this.provinceIndex = itemPro
+									var city = address_city.RECORDS
+									city.forEach(function(ele, i) {
+										if (ele.pid == proId) {
+											self.marketList.push(ele)
+										}
+									})
+									this.marketIndex = itemCity
+									var town = address_town.RECORDS
+									town.forEach(function(ele, i) {
+										if (ele.cid == cityId) {
+											self.townList.push(ele)
+										}
+									})
+									this.townIndex = itemTown
+									var tv = {
+										townId: townId,
+										page: 1,
+										categoryId:self.cateId,
+										pageCount:8
+									}
+									var location = currentPro + currentCity
+									getPosition(tv, location, currentTown)
+									tv.lon = lon
+									tv.lat = lat
+									queryData('/tvList', tv, this.getTv)
+								}
+							},
+							back: function() {
+								timer = setInterval(function() {
+									let osTop = document.documentElement.scrollTop || document.body.scrollTop
+									let ispeed = Math.floor(-osTop / 5)
+									document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+									this.isTop = true
+									if(osTop === 0) {
+										clearInterval(timer)
+									}
+								}, 30)
+							},
+							targeturl:function(id){
+								window.location.href = './watch_detail.html?shopId='+id+'&type=1'
+							}
+						}
+					})
+		</script>
+	</body>
+</html>
