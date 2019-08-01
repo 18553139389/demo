@@ -1,0 +1,1 @@
+export const axiosUrl = 'http://39.107.108.223/kindergarten/api/service?json=';
