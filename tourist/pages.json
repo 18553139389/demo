@@ -13,6 +13,12 @@
 			}
 		},
 		{
+			"path": "pages/shop/shop",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/vip/vip",
 			"style": {
 				"navigationBarTitleText": ""
@@ -383,6 +389,102 @@
 				"animationType": "slide-in-right",
 				"animationDuration": 500
 			}
+		},
+		{
+			"path": "pages/shopSearch/shopSearch",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopDetail/shopDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopOrder/shopOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopPay/shopPay",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopAddress/shopAddress",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/addAddress/addAddress",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopSuc/shopSuc",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopType/shopType",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopList/shopList",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopListDetail/shopListDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/logistics/logistics",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/service/service",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
 		}
 	],
 	"globalStyle": {
@@ -401,7 +503,7 @@
 			"selectedIconPath": "static/bar/icon1.png",
 			"text": "首页"
 		}, {
-			"pagePath": "pages/no/no",
+			"pagePath": "pages/shop/shop",
 			"iconPath": "static/bar/icon2_select.png",
 			"selectedIconPath": "static/bar/icon2.png",
 			"text": "会员商城"

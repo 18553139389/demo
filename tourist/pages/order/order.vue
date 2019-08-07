@@ -49,7 +49,7 @@
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
-			<view class="item">
+			<view class="item" @tap="goShop">
 				<view class="item-left">
 					<img src="../../static/img/huiyuanshangchengdingdan.png" alt="">
 					<view style="margin-left: 20upx;">会员商城订单</view>
@@ -116,6 +116,11 @@
 			goVipList() {
 				uni.navigateTo({
 					url: '../vipOrderList/vipOrderList'
+				})
+			},
+			goShop() {
+				uni.navigateTo({
+					url: '../shopList/shopList'
 				})
 			}
 		}
