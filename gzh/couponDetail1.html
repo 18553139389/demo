@@ -52,7 +52,7 @@
 				<div style="margin-top: 12px;">请领取下方优惠券并扫描二维码关注公众号进行消费</div>
 				<!-- <div class="btn">分享优惠券</div> -->
 			</div>
-			<div class="coupon-item list">
+			<div class="coupon-item list" style="padding: 0 0.3rem;box-sizing: border-box;">
 				<ul class="wrapper">
 					<li class="type-list">
 						<div class="item1">
@@ -81,8 +81,6 @@
 		</div>
 		
 		<script>
-			var iframeHeight = $('body').height() - $('.box').height() - $('.list').height() - $('.detail').height() 
-			$('.test').height(iframeHeight-30 + 'px')
 			var app = new Vue({
 				el: "#app",
 				data: {
@@ -91,13 +89,14 @@
 					type: 1
 				},
 				created: function(){
-					this.id = GetQueryString('id')
+					this.id = GetQueryString('couponId')
 				},
 				mounted:function(){
 					this.init()
 				},
 				methods: {
 					init: function() {
+						this.id = GetQueryString('couponId')
 						datas = {
 							couponId: this.id,
 							type: 2
@@ -107,14 +106,19 @@
 					successList: function(res) {
 						if (res.result == 0) {
 							this.list = res
+							setTimeout(function(){
+								var iframeHeight = $('body').outerHeight(true) - $('.box').outerHeight(true) - $('.list').outerHeight(true) - $('.detail').outerHeight(true) 
+								$('.test').height(iframeHeight-30 + 'px')
+							},300)
 						} else {
 							this.$toast(res.resultNote)
 						}
 					},
 					coupon: function() {
+						uid = GetQueryString('uid')
 						datas = {
 							uid: uid,
-							couponId: id,
+							couponId: this.id,
 							type: 2
 						}
 						queryData('/addCoupon', datas, this.successCoupon);

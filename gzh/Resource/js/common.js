@@ -3,6 +3,7 @@ var publicUrl = "http://gongxiang.thekingbull.com/api/gzh"
 //http://gongxiang.thekingbull.com
 //http://116.255.239.151:9080/api/gzh
 var uid;
+var couponIds = ''
 var local = window.localStorage;
 if (window.location.search.indexOf("uid") > -1) {
 	var uids = window.location.search.split("uid=")[1];
