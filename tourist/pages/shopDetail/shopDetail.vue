@@ -11,16 +11,16 @@
 		<view class="produce">
 			<view class="title">
 				<block v-if="list.type == 1">
-					<view class="price">￥{{v.oldPrice}}</view>
+					<view class="price">￥{{list.oldPrice}}</view>
 					<view class="score">积分：0</view>
 				</block>
 				<block v-if="list.type == 2">
-					<view class="price">￥{{v.oldPrice}}</view>
-					<view class="score">积分：{{v.point}}</view>
+					<view class="price">￥{{list.oldPrice}}</view>
+					<view class="score">积分：{{list.point}}</view>
 				</block>
 				<block v-if="list.type == 3">
 					<view class="price">￥0</view>
-					<view class="score">积分：{{v.point}}</view>
+					<view class="score">积分：{{list.point}}</view>
 				</block>
 			</view>
 			<view class="name">{{list.title}}</view>
@@ -31,8 +31,8 @@
 					<view class="activity">商品详情</view>
 				</view>
 			</view>
-			<view style="width:100%;height:calc(100vh - 200px - 166upx - 76upx - 130upx)">
-				<webView :url="url"></webView>
+			<view style="width:100%;height:calc(100vh - 200px - 166upx - 76upx - 130upx)" v-if="list">
+				<webView :url="list.url"></webView>
 			</view>
 		</view>
 		<view class="buy" @tap="goOrder">立即购买</view>
@@ -46,7 +46,7 @@
 		data() {
 			return {
 				url: 'http://m.xgcyz1978.com/display/activity?id=cd300ecb3c1d47868d1db6fda97b9228',
-				list: {},
+				list: '',
 				bannerList: [],
 				ids: ''
 			}

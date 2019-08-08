@@ -9,7 +9,7 @@
 		<view class="list">
 			<img class="recommend_img" src="../../static/img/shopSuc.png" alt="">
 			<view class="suc">支付成功！</view>
-			<view class="look">查看订单详情</view>
+			<view class="look" @tap="look">查看订单详情</view>
 		</view>
 	</view>
 </template>
@@ -45,6 +45,11 @@
 			Back() {
 				uni.navigateBack({
 					delta: 1
+				})
+			},
+			look() {
+				uni.navigateTo({
+					url: '../shopList/shopList'
 				})
 			}
 		}

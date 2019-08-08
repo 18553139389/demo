@@ -60,6 +60,11 @@
 				for(let i=0;i<this.list.length;i++){
 					if(this.list[i].id == id){
 						this.$store.commit('changeSaveAddress', this.list[i])
+						setTimeout(function() {
+							uni.navigateBack({
+								delta: 1
+							})
+						}, 300)
 					}
 				}
 			},
@@ -87,7 +92,7 @@
 	
 	.lists {
 		width: 100%;
-		padding: 30upx;
+		padding: 30upx 30upx 100upx;
 		box-sizing: border-box;
 	}
 	

@@ -43,4 +43,9 @@
 		height: 100%;
 		background: #F8F8F8;
 	}
+	
+	iframe {
+		left: 30upx;
+		/* margin-top: 80upx; */
+	}
 </style>

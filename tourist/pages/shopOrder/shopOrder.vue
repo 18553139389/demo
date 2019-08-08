@@ -12,7 +12,7 @@
 			<img class="right1" src="../../static/img/right1.png" alt="">
 		</view>
 		<view class="list">
-			<img class="list_left" src="../../static/img/list.jpg" alt="">
+			<img class="list_left" :src="list.image" alt="">
 			<view class="list_right">
 				<view class="name">{{list.title}}</view>
 				<view class="score" v-if="list.type == 1">积分：0</view>
@@ -27,22 +27,24 @@
 				</view>
 			</view>
 		</view>
-		<view class="count">
+		<!-- <view class="count">
 			<view>积分余额</view>
 			<view class="num">2000</view>
-		</view>
+		</view> -->
 		<view class="beizhu">
 			<view class="beizhu_title">备注</view>
 			<textarea v-model="text" placeholder="买家留言"></textarea>
 		</view>
 		<view class="pay">
-			<view class="total">实付款：<text style="color: #DE2910;">￥730</text></view>
+			<view class="total">实付款：<text style="color: #DE2910;">￥{{total}}</text></view>
 			<view class="submit" @tap="money">立即购买</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {ajax} from '../../common/js/util.js'
+	import {Toast} from 'vant'
 	export default {
 		data() {
 			return {
@@ -80,9 +82,9 @@
 			total() {
 				let total = 0
 				if (this.list.type == 1) {
-					total = parseInt(this.list.oldPrice) * values
+					total = parseFloat(this.list.oldPrice) * this.values
 				} else if (this.list.type == 2) {
-					total = parseInt(this.list.price) * values
+					total = parseFloat(this.list.price) * this.values
 				} else if (this.list.type == 3) {
 					total = 0
 				}
@@ -107,6 +109,10 @@
 				})
 			},
 			money() {
+				if(this.address == '请选择收货地址'){
+					Toast('收货地址不能为空')
+					return
+				}
 				let list = JSON.stringify(this.list)
 				console.log(list)
 				uni.navigateTo({

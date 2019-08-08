@@ -38,7 +38,8 @@ const store = new Vuex.Store({
 		customer: '',
 		refund: '',
 		searchState: 0,
-		saveAddress: null
+		saveAddress: null,
+		saveAddressId: ''
 	},
 	//切记：Vuex中store数据改变的唯一方法就是mutation！
 	mutations: {
@@ -146,6 +147,9 @@ const store = new Vuex.Store({
 		},
 		changeSaveAddress(state,item) {
 			state.saveAddress = item
+		},
+		changeSaveAddressId(state,item) {
+			state.saveAddressId = item
 		}
 	}
 })

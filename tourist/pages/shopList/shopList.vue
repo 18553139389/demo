@@ -30,9 +30,9 @@
 						<img class="c_img" src="../../static/img/list.jpg" alt="">
 						<view class="c_content">
 							<view>{{v.title}}</view>
-							<view v-if="v.type == 1">积分:0</view>
-							<view v-if="v.type == 2">积分:{{v.point}}</view>
-							<view v-if="v.type == 3">积分:{{v.point}}</view>
+							<view v-if="v.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view>
+							<view v-if="v.type == 2" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view>
+							<view v-if="v.type == 3" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view>
 							<view class="money">
 								<view v-if="v.type == 1" style="color: #DE2910;font-size: 16px;">{{v.oldPrice}}</view>
 								<view v-if="v.type == 2" style="color: #DE2910;font-size: 16px;">{{v.price}}</view>
@@ -62,7 +62,7 @@
 				Color: '#DE2910',
 				value: '',
 				backColor: '#FFFFFF',
-				datas: ['全部','待付款', '待发货', '待收货', '已完成'],
+				datas: ['全部', '待发货', '待收货', '已完成'],
 				itemIndex: 0,
 				tabType: 0,
 				list: [],
@@ -165,12 +165,10 @@
 				if (this.tabType === 0) {
 					self.init('',mescroll)
 				} else if (this.tabType === 1) {
-					self.init('0',mescroll)
-				} else if (this.tabType === 2) {
 					self.init('1',mescroll)
-				} else if (this.tabType === 3) {
+				} else if (this.tabType === 2) {
 					self.init('2',mescroll)
-				} else if (this.tabType === 4) {
+				} else if (this.tabType === 3) {
 					self.init('3',mescroll)
 				} 
 			},

@@ -1,13 +1,13 @@
 {
 	"pages": [
 		{
-			"path": "pages/index/index",
+			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path": "pages/login/login",
+			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": ""
 			}
@@ -480,6 +480,14 @@
 		},
 		{
 			"path": "pages/service/service",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopScore/shopScore",
 			"style": {
 				"navigationBarTitleText": "",
 				"animationType": "slide-in-right",

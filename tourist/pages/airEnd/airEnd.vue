@@ -456,7 +456,7 @@
 
 	.title {
 		width: 100%;
-		height: 80upx;
+		height: 50px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -514,7 +514,7 @@
 		width: 15%;
 		position: fixed;
 		right: 0;
-		top: 190upx;
+		top: 210upx;
 		height: 106upx;
 		border-left: 1px solid #fff;
 		display: flex;
@@ -536,7 +536,7 @@
 	.result {
 		width: 100%;
 		position: absolute;
-		top: 320upx;
+		top: 340upx;
 		bottom: 200upx;
 		left: 0;
 		right: 0;

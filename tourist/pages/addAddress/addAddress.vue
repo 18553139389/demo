@@ -4,7 +4,9 @@
 			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
 				<block slot="backText"></block>
 				<block slot="content">新增收货地址</block>
-				<block slot="right" @tap="goDel">删除</block>
+				<block slot="right">
+					<view @tap="goDel">删除</view>
+				</block>
 			</cu-custom>
 		</view>
 		<view class="list">
@@ -29,7 +31,7 @@
 				<input type="text" placeholder="邮政编码" v-model="code">
 			</view>
 		</view>
-		<view class="buy" @tap="save">保存并使用</view>
+		<view class="buy" @tap="save">保存</view>
 		<lotus-address @choseVal="choseValue" :lotusAddressData="lotusAddressData"></lotus-address>
 	</view>
 </template>
@@ -40,6 +42,9 @@
 		Toast,
 		Dialog
 	} from 'vant'
+	import {
+		ajax
+	} from '../../common/js/util.js'
 	export default {
 		data() {
 			return {
@@ -79,6 +84,7 @@
 		},
 		methods: {
 			save() {
+				let self = this
 				if (this.user == '') {
 					Toast('收货人不能为空')
 					return
@@ -107,7 +113,6 @@
 					return
 				}
 
-				let self = this
 				let datas = {
 					uid: this.$store.state.uid,
 					receiverId: this.ids,
@@ -123,50 +128,6 @@
 					success: function(res) {
 						if (res.data.result == 0) {
 							Toast('保存成功')
-							self.chengeAddress()
-						}
-					}
-				}
-				ajax(data)
-			},
-			chengeAddress() {
-				let self = this
-				let datas = {
-					uid: this.$store.state.uid
-				}
-				let data = {
-					url: '/api/gzh/receiverList',
-					data: datas,
-					success: function(res) {
-						if (res.data.result == 0) {
-							self.listData = res.data.dataList
-							for (let i = 0; i < self.listData[i].length; i++) {
-								if (self.ids == self.listData[i].id) {
-									self.$store.commit('changeSaveAddress', self.listData[i])
-									setTimeout(function() {
-										uni.navigateBack({
-											delta: 2
-										})
-									}, 300)
-								}
-							}
-						}
-					}
-				}
-				ajax(data)
-			},
-			goDel() {
-				let self = this
-				let datas = {
-					uid: this.$store.state.uid,
-					receiverId: this.ids
-				}
-				let data = {
-					url: '/api/gzh/delReceiver',
-					data: datas,
-					success: function(res) {
-						if (res.data.result == 0) {
-							Toast('删除成功')
 							setTimeout(function() {
 								uni.navigateBack({
 									delta: 1
@@ -176,6 +137,48 @@
 					}
 				}
 				ajax(data)
+			},
+			goDel() {
+				let self = this
+				Dialog.confirm({
+					title: '删除',
+					message: '确认删除此收货地址吗'
+				}).then(() => {
+					// on confirm
+					let datas = {
+						uid: this.$store.state.uid,
+						receiverId: this.ids
+					}
+					let data = {
+						url: '/api/gzh/delReceiver',
+						data: datas,
+						success: function(res) {
+							if (res.data.result == 0) {
+								Toast('删除成功')
+								console.log(self.$store.state.saveAddress)
+								if(self.$store.state.saveAddress != null){
+									if(self.ids == self.$store.state.saveAddress.id){
+										self.$store.commit('changeSaveAddress', null)
+									}
+									setTimeout(function() {
+										uni.navigateBack({
+											delta: 1
+										})
+									}, 300)
+								}else{
+									setTimeout(function() {
+										uni.navigateBack({
+											delta: 1
+										})
+									}, 300)
+								}
+							}
+						}
+					}
+					ajax(data)
+				}).catch(() => {
+					// on cancel
+				});
 			},
 			//打开picker
 			openPicker() {

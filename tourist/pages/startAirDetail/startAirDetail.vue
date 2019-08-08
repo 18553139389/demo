@@ -45,7 +45,7 @@
 						<view>极速出票</view>
 						<view>实时政策</view>
 					</view>
-					<view class="recommend">{{v.CabinName}}{{v.Discount}}折</view>
+					<view class="recommend" v-if="v.Discount >= 100 ? false : true">{{v.CabinName}}{{v.Discount/100}}折</view>
 					<!-- <view class="recommend">退改详情 | 托运行李20公斤</view> -->
 				</view>
 			</scroll-view>
@@ -143,8 +143,8 @@
 
 	.title {
 		width: 100%;
-		height: 80upx;
-		line-height: 80upx;
+		height: 50px;
+		line-height: 50px;
 		text-align: center;
 		font-size: 15px;
 		color: #fff;

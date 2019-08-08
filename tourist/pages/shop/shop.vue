@@ -17,7 +17,7 @@
 			</van-swipe-item>
 		</van-swipe>
 		<view class="score">
-			<view class="score_list" @tap="goOpen">
+			<view class="score_list" @tap="goType">
 				<image mode="scaleToFill" src="../../static/img/shop1.png"></image>
 			</view>
 			<view class="score_list" @tap="goScore">
@@ -31,7 +31,7 @@
 				</view>
 			</view>
 			<view class="recommend">
-				<!-- <view class="recommend_list" @tap="goDetail(v.productId)" v-for="(v,k) in productList" :key="k">
+				<view class="recommend_list" @tap="goDetail(v.productId)" v-for="(v,k) in productList" :key="k">
 					<img class="recommend_img" :src="v.image" alt="">
 					<view class="recommend_title">{{v.title}}</view>
 					<view class="recommend_price">
@@ -47,14 +47,6 @@
 							<view class="price">￥0</view>
 							<view class="scores">积分：{{v.point}}</view>
 						</block>
-					</view>
-				</view> -->
-				<view class="recommend_list" @tap="goDetail">
-					<img class="recommend_img" src="../../static/img/shop2.png" alt="">
-					<view class="recommend_title">商店的名称</view>
-					<view class="recommend_price">
-						<view class="price">￥800</view>
-						<view class="scores">积分：100</view>
 					</view>
 				</view>
 			</view>
@@ -125,11 +117,10 @@
 					url: '../shopType/shopType'
 				})
 			},
-			goOpen() {
-
-			},
 			goScore() {
-
+				uni.navigateTo({
+					url: '../shopScore/shopScore'
+				})
 			}
 		}
 	}
@@ -225,7 +216,7 @@
 		width: 100%;
 		height: 50upx;
 		line-height: 50upx;
-		padding-left: 20upx;
+		padding-left: 24upx;
 		box-sizing: border-box;
 		overflow: hidden;
 		text-overflow: ellipsis;

@@ -54,11 +54,26 @@
 		},
 		methods: {
 			afterRead(e) {
+				console.log(e.file)
 				if(this.fileList.length >= 5){
 					Toast('最多上传5张照片')
 					return 
 				}else{
 					this.fileList.push(e.content)
+					var formdata = new FormData()
+					formdata.append('file', e.file)
+					console.log(formdata)
+					let data = {
+						url: '/api/uploadFile',
+						data: formdata,
+						success: function(res) {
+							console.log(res)
+							// if (res.data.result == 0) {
+							// 	Toast('提交成功')
+							// }
+						}
+					}
+					ajax(data)
 				}
 			},
 			imgPreview() {

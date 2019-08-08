@@ -29,6 +29,9 @@
 				</view>
 			</scroll-view>
 		</view>
+		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
+			<van-loading type="spinner" />
+		</van-popup>
 	</view>
 </template>
 
@@ -45,13 +48,11 @@
 				mainCur: 0,
 				verticalNavTop: 0,
 				load: true,
+				sub: false
 			}
 		},
 		onLoad() {
-			uni.showLoading({
-				title: '加载中...',
-				mask: true
-			});
+			this.sub = true
 			let self = this
 			let data = {
 				url: '/api/gzh/productCategoryList',
@@ -64,15 +65,13 @@
 							for (let i = 0; i < self.list.length; i++) {
 								self.list[i].ids = i;
 							}
+							self.sub = false
 							// self.listCur = self.list[0];
 						}
 					}
 				}
 			}
 			ajax(data)
-		},
-		onReady() {
-			uni.hideLoading()
 		},
 		methods: {
 			TabSelect(e) {

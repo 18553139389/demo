@@ -440,7 +440,7 @@
 
 	.title {
 		width: 100%;
-		height: 80upx;
+		height: 50px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -498,7 +498,7 @@
 		width: 15%;
 		position: fixed;
 		right: 0;
-		top: 140upx;
+		top: 160upx;
 		height: 106upx;
 		border-left: 1px solid #fff;
 		display: flex;

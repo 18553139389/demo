@@ -36,23 +36,23 @@
 						<img class="icon" src="../../static/img/fangzi.png" alt="">
 						<view style="margin: 0 20upx;">{{list.title}}</view>
 					</view>
-					<view class="states" v-if="v.state == 0">待付款</view>
-					<view class="states" v-if="v.state == 1">待发货</view>
-					<view class="states" v-if="v.state == 2">待收货</view>
-					<view class="states" v-if="v.state == 3">已完成</view>
+					<view class="states" v-if="list.state == 0">待付款</view>
+					<view class="states" v-if="list.state == 1">待发货</view>
+					<view class="states" v-if="list.state == 2">待收货</view>
+					<view class="states" v-if="list.state == 3">已完成</view>
 				</view>
 				<view class="list_content">
 					<img class="c_img" src="../../static/img/list.jpg" alt="">
 					<view class="c_content">
 						<view>{{list.title}}</view>
-						<view v-if="list.type == 1">积分:0</view>
-						<view v-if="list.type == 2">积分:{{list.point}}</view>
-						<view v-if="list.type == 3">积分:{{list.point}}</view>
+						<view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view>
+						<view v-if="list.type == 2" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
+						<view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
 						<view class="money">
 							<view v-if="list.type == 1" style="color: #DE2910;font-size: 16px;">{{list.oldPrice}}</view>
 							<view v-if="list.type == 2" style="color: #DE2910;font-size: 16px;">{{list.price}}</view>
 							<view v-if="list.type == 3" style="color: #DE2910;font-size: 16px;">{{list.oldPrice}}</view>
-							<view>x{{v.qty}}</view>
+							<view>x{{list.qty}}</view>
 						</view>
 					</view>
 				</view>
@@ -80,13 +80,15 @@
 				</view>
 				<view class="order">
 					<view>订单状态</view>
-					<view v-if="v.state == 0">待付款</view>
-					<view v-if="v.state == 1">待发货</view>
-					<view v-if="v.state == 2">待收货</view>
-					<view v-if="v.state == 3">已完成</view>
+					<view v-if="list.state == 0">待付款</view>
+					<view v-if="list.state == 1">待发货</view>
+					<view v-if="list.state == 2">待收货</view>
+					<view v-if="list.state == 3">已完成</view>
 				</view>
-				<view class="order">
+				<view class="order" v-if="list.remarks">
 					<view>买家留言</view>
+				</view>
+				<view class="order" v-if="list.remarks">
 					<view>{{list.remarks}}</view>
 				</view>
 			</view>
@@ -105,7 +107,7 @@
 					<view class="btn" style="margin-left: 30upx;" @tap="goService">申请售后</view>
 				</view>
 			</view>
-			<view class="order">
+			<view class="order" v-if="ids">
 				<view>订单号</view>
 				<view>{{ids}}</view>
 			</view>
@@ -113,24 +115,24 @@
 				<view>订单状态</view>
 				<view>2018-05-09 18:00</view>
 			</view> -->
-			<view class="order">
+			<view class="order" v-if="list.payDate">
 				<view>付款时间</view>
 				<view>{{list.payDate}}</view>
 			</view>
-			<view class="order">
+			<view class="order" v-if="list.expressNo">
 				<view>快递单号</view>
 				<view>{{list.expressNo}}</view>
 			</view>
-			<view class="order">
+			<view class="order" v-if="list.sendDate">
 				<view>发货时间</view>
 				<view>{{list.sendDate}}</view>
 			</view>
-			<view class="order">
+			<view class="order" v-if="list.finishDate">
 				<view>确认收货</view>
 				<view>{{list.finishDate}}</view>
 			</view>
 		</view>
-		<view class="buy" @tap="goPay" v-if="list.type == 1">去支付</view>
+		<!-- <view class="buy" @tap="goPay" v-if="list.type == 1">去支付</view> -->
 		<view class="buy" @tap="goOrder" v-if="list.type == 3">确定收货</view>
 		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
 			<van-loading type="spinner" />
@@ -167,6 +169,7 @@
 				url: '/api/gzh/productOrderDetail',
 				data: datas,
 				success: function(res) {
+					console.log(res)
 					if (res.data.result == 0) {
 						self.list = res.data
 					}
