@@ -34,6 +34,7 @@
 	import {
 		ajax
 	} from '../../common/js/util.js'
+	import Request from '../../common/js/upload.js'
 	export default {
 		data() {
 			return {
@@ -42,7 +43,8 @@
 				backColor: '#FFFFFF',
 				val: '',
 				fileList: [],
-				ids: ''
+				ids: '',
+				urls: ''
 			}
 		},
 		components: {
@@ -54,27 +56,37 @@
 		},
 		methods: {
 			afterRead(e) {
-				console.log(e.file)
+				let self = this
 				if(this.fileList.length >= 5){
 					Toast('最多上传5张照片')
 					return 
 				}else{
 					this.fileList.push(e.content)
+					let newfile = ''
+					newfile = self.dataURLtoFile(e.content,'detail.png');//图片文件流
 					var formdata = new FormData()
-					formdata.append('file', e.file)
-					console.log(formdata)
-					let data = {
-						url: '/api/uploadFile',
-						data: formdata,
-						success: function(res) {
-							console.log(res)
-							// if (res.data.result == 0) {
-							// 	Toast('提交成功')
-							// }
+					formdata.append('file', newfile)
+					Request.postRequest('/api/uploadFile', formdata).then(res => {
+						if(res.data.result == 0){
+							self.urls += res.data.url + '|'
 						}
-					}
-					ajax(data)
+					}).catch(res => {
+						console.log(res)
+					})
 				}
+			},
+			dataURLtoFile(dataurl, filename) { //将base64转换为文件
+				var arr = dataurl.split(','),
+					mime = arr[0].match(/:(.*?);/)[1],
+					bstr = atob(arr[1]),
+					n = bstr.length,
+					u8arr = new Uint8Array(n);
+				while (n--) {
+					u8arr[n] = bstr.charCodeAt(n);
+				}
+				return new File([u8arr], filename, {
+					type: mime
+				});
 			},
 			imgPreview() {
 				ImagePreview(this.fileList)
@@ -89,15 +101,12 @@
 				}
 				let self = this
 				let imgs = ''
-				if(this.fileList.length == 1){
-					imgs = this.fileList[0]
-				}else if(this.fileList.length > 1){
-					imgs = this.fileList.join('|')
-				}
+				let urls = this.urls.substr(0,this.urls.length-1)
+				console.log(urls)
 				let datas = {
 					orderId: this.ids,
 					content: this.val,
-					images: imgs
+					images: urls
 				}
 				let data = {
 					url: '/api/gzh/addProductService',
@@ -105,6 +114,11 @@
 					success: function(res) {
 						if (res.data.result == 0) {
 							Toast('提交成功')
+							setTimeout(function(){
+								uni.navigateBack({
+									delta: 1
+								})
+							},300)
 						}
 					}
 				}
