@@ -4,7 +4,7 @@ Vue.use(Vuex)
 // 3d627fab60ad41d1852550d201e65ee2
 const store = new Vuex.Store({
 	state: {
-		uid: '3d627fab60ad41d1852550d201e65ee2',
+		uid: '',
 		city1: '郑州',
 		city2: '北京',
 		city3: '选择出发城市',

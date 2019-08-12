@@ -4,7 +4,7 @@
 			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
 				<block slot="backText"></block>
 				<block slot="content">新增收货地址</block>
-				<block slot="right">
+				<block slot="right" v-if="type == 1">
 					<view @tap="goDel">删除</view>
 				</block>
 			</cu-custom>
@@ -64,7 +64,8 @@
 				},
 				list: {},
 				listData: [],
-				ids: ''
+				ids: '',
+				type: 0
 			}
 		},
 		components: {
@@ -73,6 +74,7 @@
 		},
 		onLoad(option) {
 			if (option.type == 1) {
+				this.type = 1
 				this.list = JSON.parse(option.list)
 				this.ids = this.list.id
 				this.user = this.list.username
@@ -93,7 +95,7 @@
 				if (this.phone == '') {
 					Toast('手机号不能为空')
 					return
-				} else if (!(/^1[345789]\d{9}$/.test(this.phone))) {
+				} else if (!(/^1[3456789]\d{9}$/.test(this.phone))) {
 					Toast('手机号格式不正确')
 					return
 				}

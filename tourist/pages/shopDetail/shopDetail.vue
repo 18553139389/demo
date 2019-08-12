@@ -12,14 +12,15 @@
 			<view class="title">
 				<block v-if="list.type == 1">
 					<view class="price">￥{{list.oldPrice}}</view>
-					<view class="score">积分：0</view>
+					<!-- <view class="score">积分：0</view> -->
 				</block>
 				<block v-if="list.type == 2">
-					<view class="price">￥{{list.oldPrice}}</view>
+					<view class="price">￥{{list.price}}</view>
+					<view class="old">￥{{list.oldPrice}}</view>
 					<view class="score">积分：{{list.point}}</view>
 				</block>
 				<block v-if="list.type == 3">
-					<view class="price">￥0</view>
+					<!-- <view class="price">￥0</view> -->
 					<view class="score">积分：{{list.point}}</view>
 				</block>
 			</view>
@@ -145,12 +146,18 @@
 	}
 	
 	.price {
-		font-size: 16px;
+		font-size: 14px;
 		color: #DE2910;
 	}
 	
 	.score {
 		color: #DE2910;
+	}
+	
+	.old {
+		color: #666;
+		text-decoration: line-through;
+		margin-right: 200upx;
 	}
 	
 	.name {

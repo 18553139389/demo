@@ -18,7 +18,7 @@
 					<view class="list_title">
 						<view class="title_left">
 							<img class="icon" src="../../static/img/fangzi.png" alt="">
-							<view style="margin: 0 20upx;">{{v.title}}</view>
+							<view class="cont" style="margin: 0 20upx;">{{v.title}}</view>
 							<view>{{v.orderId}}</view>
 						</view>
 						<view class="state" v-if="v.state == 0">待付款</view>
@@ -27,16 +27,17 @@
 						<view class="state" v-if="v.state == 3">已完成</view>
 					</view>
 					<view class="list_content">
-						<img class="c_img" src="../../static/img/list.jpg" alt="">
+						<img class="c_img" :src="v.image" alt="">
 						<view class="c_content">
-							<view>{{v.title}}</view>
-							<view v-if="v.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view>
+							<view class="order_cont">{{v.title}}</view>
+							<!-- <view v-if="v.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view> -->
 							<view v-if="v.type == 2" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view>
-							<view v-if="v.type == 3" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view>
+							<!-- <view v-if="v.type == 3" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view> -->
 							<view class="money">
-								<view v-if="v.type == 1" style="color: #DE2910;font-size: 16px;">{{v.oldPrice}}</view>
-								<view v-if="v.type == 2" style="color: #DE2910;font-size: 16px;">{{v.price}}</view>
-								<view v-if="v.type == 3" style="color: #DE2910;font-size: 16px;">{{v.oldPrice}}</view>
+								<view v-if="v.type == 1" style="color: #DE2910;font-size: 14px;">{{v.oldPrice}}</view>
+								<view v-if="v.type == 2" style="color: #DE2910;font-size: 14px;">{{v.price}}</view>
+								<view v-if="v.type == 3" style="color: #DE2910;font-size: 14px;">积分:{{v.point}}</view>
+								<!-- <view v-if="v.type == 3" style="color: #DE2910;font-size: 16px;">￥0</view> -->
 								<view>x{{v.qty}}</view>
 							</view>
 						</view>
@@ -45,7 +46,7 @@
 						<view>{{v.createDate}}</view>
 						<view v-if="v.type == 1">{{v.oldPrice}}</view>
 						<view v-if="v.type == 2">{{v.price}}</view>
-						<view v-if="v.type == 3">{{v.oldPrice}}</view>
+						<view v-if="v.type == 3">{{v.point}}</view>
 					</view>
 				</view>
 			</view>
@@ -122,6 +123,11 @@
 				this.$store.commit('changeUid', uids)
 			}
 		},
+		onShow() {
+			// this.upCallback(this.mescroll)
+			this.list = []
+			this.mescroll.resetUpScroll() // 刷新列表数据
+		},
 		onUnload() {
 			this.mescroll = null;
 		},
@@ -186,6 +192,7 @@
 					url: '/api/gzh/productOrderList',
 					data: datas,
 					success: function(res){
+						console.log(res)
 						if (res.data.result == 0) {
 							for (var j = 0; j < res.data.dataList.length; j++) {
 								self.list.push(res.data.dataList[j])
@@ -292,6 +299,7 @@
 	}
 	
 	.title_left {
+		width: 80%;
 		display: flex;
 		align-items: center;
 	}
@@ -315,7 +323,7 @@
 	}
 	
 	.c_content {
-		flex: 1;
+		width: 80%;
 		padding-left: 30upx;
 		box-sizing: border-box;
 		height: 160upx;
@@ -339,5 +347,19 @@
 		font-size: 14px;
 		color: #666;
 		margin-top: 20upx;
+	}
+	
+	.cont {
+		width: 20%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	.order_cont {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>

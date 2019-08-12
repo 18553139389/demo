@@ -100,7 +100,7 @@
 				},
 				storageDate: [],
 				swiperData: {},
-				slideLeft: 0,
+				slideLeft: 450,
 				isDoRefresh: false,
 				item1: 1,
 				sendDate: '',
@@ -145,7 +145,7 @@
 			this.city2 = city2
 			this.init()
 		},
-		onShow: function(e) {
+		onShow(e) {
 			this.showAir = false
 			if (this.initDate) {
 				let week = new Date(this.initDate).getDay()
@@ -362,6 +362,7 @@
 							this.slideLeft = 50 * i
 						}
 					}
+					console.log(this.slideLeft)
 					console.log(this.swiperData)
 				})
 			},

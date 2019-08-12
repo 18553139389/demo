@@ -13,25 +13,25 @@
 				</view>
 				<view>
 					<view class="msg">
-						<view>商品名称：</view>
-						<view style="margin-left: 30upx;">{{list.title}}</view>
+						<view class="msg_title">商品名称：</view>
+						<view style="width: 75%;">{{list.title}}</view>
 					</view>
 					<view class="msg">
-						<view>商品价格：</view>
-						<view style="margin-left: 30upx;color: #DE2910;" v-if="list.type == 1">￥{{list.oldPrice}}</view>
-						<view style="margin-left: 30upx;color: #DE2910;" v-if="list.type == 2">￥{{list.price}}</view>
-						<view style="margin-left: 30upx;color: #DE2910;" v-if="list.type == 3">￥0</view>
+						<view class="msg_title">商品价格：</view>
+						<view style="color: #DE2910;margin-left: -6upx;" v-if="list.type == 1">￥{{list.oldPrice}}</view>
+						<view style="color: #DE2910;margin-left: -6upx;" v-if="list.type == 2">￥{{list.price}}</view>
+						<view style="color: #DE2910;margin-left: -6upx;" v-if="list.type == 3">￥0</view>
 					</view>
 				</view>
 				<view class="msg">
-					<view>使用积分：</view>
-					<view style="margin-left: 30upx;" v-if="list.type == 1">0</view>
-					<view style="margin-left: 30upx;" v-if="list.type == 2">{{list.point}}</view>
-					<view style="margin-left: 30upx;" v-if="list.type == 3">{{list.point}}</view>
+					<view class="msg_title">使用积分：</view>
+					<view v-if="list.type == 1">0</view>
+					<view v-if="list.type == 2">{{list.point * values}}</view>
+					<view v-if="list.type == 3">{{list.point * values}}</view>
 				</view>
 				<view class="msg">
-					<view>应付总额：</view>
-					<view style="margin-left: 30upx;color: #DE2910;">￥{{total}}</view>
+					<view class="msg_title" style="padding-bottom: 20upx;">应付总额：</view>
+					<view style="color: #DE2910;margin-left: -6upx;">￥{{total}}</view>
 				</view>
 			</view>
 			<view class="list">
@@ -46,7 +46,7 @@
 					<view>{{listData.city + listData.address}}</view>
 				</view>
 			</view>
-			<view class="list">
+			<view class="list" v-if="list.type == 1 || list.type == 2">
 				<view class="list-top">
 					<view class="state">支付方式</view>
 				</view>
@@ -59,6 +59,7 @@
 				</view>
 			</view>
 		</view>
+		<view class="buy" @tap="goSuc" v-if="list.type == 3">立即支付</view>
 		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
 			<van-loading type="spinner" />
 		</van-popup>
@@ -79,7 +80,8 @@
 				ids: '',
 				total: 0,
 				text: '',
-				sub: false
+				sub: false,
+				values: 0
 			}
 		},
 		onLoad(option) {
@@ -88,6 +90,7 @@
 			this.total = option.total
 			this.listData = this.$store.state.saveAddress
 			this.text = option.text
+			this.values = option.values
 		},
 		methods: {
 			goSuc() {
@@ -97,6 +100,7 @@
 					uid: this.$store.state.uid,
 					productId: this.ids,
 					receiverId: this.listData.id,
+					qty: this.values,
 					remarks: this.text
 				}
 				let data = {
@@ -104,14 +108,25 @@
 					data: datas,
 					success: function(res) {
 						if (res.data.result == 0) {
-							let orderId = res.data.orderId
-							let appId = res.data.body.appId
-							let timeStamp = res.data.body.timeStamp
-							let nonceStr = res.data.body.nonceStr
-							let packages = res.data.body.prepay
-							let signType = res.data.body.signType
-							let paySign = res.data.body.paySign
-							self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
+							console.log(res)
+							if(res.data.body.appId){
+								let orderId = res.data.orderId
+								let appId = res.data.body.appId
+								let timeStamp = res.data.body.timeStamp
+								let nonceStr = res.data.body.nonceStr
+								let packages = res.data.body.prepay
+								let signType = res.data.body.signType
+								let paySign = res.data.body.paySign
+								self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
+							}else{
+								self.sub = false
+								// Toast('支付成功')
+								setTimeout(function() {
+									uni.navigateTo({
+										url: '../shopSuc/shopSuc'
+									})
+								}, 300)
+							}
 						} else {
 							Toast(res.data.resultNote)
 							self.sub = false
@@ -198,10 +213,9 @@
 
 	.msg {
 		width: 100%;
-		height: 60upx;
 		padding-left: 24upx;
+		padding-top: 20upx;
 		display: flex;
-		align-items: center;
 	}
 
 	.user {
@@ -239,5 +253,23 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+	}
+	
+	.buy {
+		width: 100%;
+		height: 90upx;
+		line-height: 90upx;
+		text-align: center;
+		font-size: 15px;
+		color: #fff;
+		background: #DE2910;
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		z-index: 999;
+	}
+	
+	.msg_title {
+		width: 25%;
 	}
 </style>

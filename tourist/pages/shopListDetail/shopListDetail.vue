@@ -5,7 +5,7 @@
 				<block slot="backText"></block>
 				<block slot="content">订单详情</block>
 				<block slot="right">
-					<img class="icon" src="../../static/img/phone.png" alt="">
+					<img @tap="goCall" class="icon" src="../../static/img/phone.png" alt="">
 				</block>
 			</cu-custom>
 		</view>
@@ -34,7 +34,8 @@
 				<view class="list_title">
 					<view class="title_left">
 						<img class="icon" src="../../static/img/fangzi.png" alt="">
-						<view style="margin: 0 20upx;">{{list.title}}</view>
+						<view class="conts" style="margin: 0 20upx;">{{list.title}}</view>
+						<view>{{ids}}</view>
 					</view>
 					<view class="states" v-if="list.state == 0">待付款</view>
 					<view class="states" v-if="list.state == 1">待发货</view>
@@ -42,16 +43,16 @@
 					<view class="states" v-if="list.state == 3">已完成</view>
 				</view>
 				<view class="list_content">
-					<img class="c_img" src="../../static/img/list.jpg" alt="">
+					<img class="c_img" :src="list.image" alt="">
 					<view class="c_content">
-						<view>{{list.title}}</view>
-						<view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view>
+						<view class="order_cont">{{list.title}}</view>
+						<!-- <view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view> -->
 						<view v-if="list.type == 2" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
-						<view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
+						<!-- <view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view> -->
 						<view class="money">
-							<view v-if="list.type == 1" style="color: #DE2910;font-size: 16px;">{{list.oldPrice}}</view>
-							<view v-if="list.type == 2" style="color: #DE2910;font-size: 16px;">{{list.price}}</view>
-							<view v-if="list.type == 3" style="color: #DE2910;font-size: 16px;">{{list.oldPrice}}</view>
+							<view v-if="list.type == 1" style="color: #DE2910;font-size: 14px;">{{list.oldPrice}}</view>
+							<view v-if="list.type == 2" style="color: #DE2910;font-size: 14px;">{{list.price}}</view>
+							<view v-if="list.type == 3" style="color: #DE2910;font-size: 14px;">积分:{{list.point}}</view>
 							<view>x{{list.qty}}</view>
 						</view>
 					</view>
@@ -66,7 +67,7 @@
 					<view>订单总价</view>
 					<view v-if="list.type == 1">{{list.oldPrice}}</view>
 					<view v-if="list.type == 2">{{list.price}}</view>
-					<view v-if="list.type == 3">{{list.oldPrice}}</view>
+					<view v-if="list.type == 3">￥0</view>
 				</view>
 				<view class="order">
 					<view>消耗积分</view>
@@ -76,7 +77,8 @@
 				</view>
 				<view class="order">
 					<view>付款方式</view>
-					<view>微信支付</view>
+					<view v-if="list.type == 1 || list.type == 2">微信支付</view>
+					<view v-if="list.type == 3">积分支付</view>
 				</view>
 				<view class="order">
 					<view>订单状态</view>
@@ -133,7 +135,7 @@
 			</view>
 		</view>
 		<!-- <view class="buy" @tap="goPay" v-if="list.type == 1">去支付</view> -->
-		<view class="buy" @tap="goOrder" v-if="list.type == 3">确定收货</view>
+		<view class="buy" @tap="goOrder" v-if="list.state == 2">确定收货</view>
 		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
 			<van-loading type="spinner" />
 		</van-popup>
@@ -240,19 +242,30 @@
 					success: function(res) {
 						if (res.data.result == 0) {
 							Toast('确认完成')
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: 1
+								})
+							}, 300)
 						}
 					}
 				}
 				ajax(data)
 			},
 			goLook() {
+				let list = JSON.stringify(this.list)
 				uni.navigateTo({
-					url: '../logistics/logistics'
+					url: '../logistics/logistics?list=' + list
 				})
 			},
 			goService() {
 				uni.navigateTo({
 					url: '../service/service?id=' + this.ids
+				})
+			},
+			goCall() {
+				uni.makePhoneCall({
+					phoneNumber: this.$store.state.customer
 				})
 			}
 		}
@@ -352,6 +365,7 @@
 	}
 
 	.title_left {
+		width: 80%;
 		display: flex;
 		align-items: center;
 	}
@@ -376,7 +390,7 @@
 	}
 
 	.c_content {
-		flex: 1;
+		width: 80%;
 		padding-left: 30upx;
 		box-sizing: border-box;
 		height: 160upx;
@@ -447,5 +461,19 @@
 		left: 0;
 		bottom: 0;
 		z-index: 999;
+	}
+	
+	.conts {
+		width: 20%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	.order_cont {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>

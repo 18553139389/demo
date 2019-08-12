@@ -15,14 +15,12 @@
 			<img class="list_left" :src="list.image" alt="">
 			<view class="list_right">
 				<view class="name">{{list.title}}</view>
-				<view class="score" v-if="list.type == 1">积分：0</view>
-				<view class="score" v-if="list.type == 2">积分：{{list.point}}</view>
-				<view class="score" v-if="list.type == 3">积分：{{list.point}}</view>
+				<view class="score" v-if="list.type == 2" style="margin-top: 20upx;font-size: 12px;">积分：{{list.point}}</view>
 				<view class="price">
 					<view class="newPrice" v-if="list.type == 1">￥{{list.oldPrice}}</view>
-					<view class="newPrice" v-if="list.type == 2">￥{{list.price}}</view>
-					<view class="newPrice" v-if="list.type == 3">￥0</view>
-					<view class="oldPrice" v-if="list.type == 2">￥{{list.oldPrice}}</view>
+					<view class="newPrice" v-if="list.type == 2">￥{{parseFloat(list.price)}}</view>
+					<view class="oldPrice" v-if="list.type == 2" style="margin-right: 60upx;">￥{{parseFloat(list.oldPrice)}}</view>
+					<view class="score" v-if="list.type == 3">积分：{{list.point}}</view>
 					<van-stepper v-model="values" integer :min="1" disable-input input-width="24px" button-size="20px" />
 				</view>
 			</view>
@@ -36,7 +34,11 @@
 			<textarea v-model="text" placeholder="买家留言"></textarea>
 		</view>
 		<view class="pay">
-			<view class="total">实付款：<text style="color: #DE2910;">￥{{total}}</text></view>
+			<view class="total">
+				实付款：
+				<text v-if="list.type != 3" style="color: #DE2910;">￥{{total}}</text>
+				<text v-if="list.type == 3" style="color: #DE2910;">{{scores}}积分</text>
+			</view>
 			<view class="submit" @tap="money">立即购买</view>
 		</view>
 	</view>
@@ -89,6 +91,17 @@
 					total = 0
 				}
 				return total
+			},
+			scores() {
+				let scores = 0
+				if (this.list.type == 1) {
+					scores = 0
+				} else if (this.list.type == 2) {
+					scores = parseFloat(this.list.point) * this.values
+				} else if (this.list.type == 3) {
+					scores = parseFloat(this.list.point) * this.values
+				}
+				return scores
 			}
 		},
 		methods: {
@@ -116,7 +129,7 @@
 				let list = JSON.stringify(this.list)
 				console.log(list)
 				uni.navigateTo({
-					url: '../shopPay/shopPay?list=' + list + '&total=' + this.total + '&id=' + this.ids + '&text=' + this.text
+					url: '../shopPay/shopPay?list=' + list + '&total=' + this.total + '&id=' + this.ids + '&text=' + this.text + '&values=' + this.values
 				})
 			},
 			goAddress() {
@@ -183,9 +196,10 @@
 	}
 
 	.list_right {
-		flex: 1;
+		/* flex: 1; */
+		width: 75%;
 		height: 200upx;
-		padding-left: 30upx;
+		padding: 0 30upx;
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
@@ -200,9 +214,9 @@
 	}
 
 	.score {
-		font-size: 12px;
+		font-size: 14px;
 		color: #DE2910;
-		margin-top: 28upx;
+		/* margin-top: 28upx; */
 	}
 
 	.price {
@@ -213,7 +227,7 @@
 	}
 
 	.newPrice {
-		font-size: 16px;
+		font-size: 14px;
 		color: #DE2910;
 	}
 

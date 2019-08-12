@@ -59,7 +59,7 @@
 						})
 					} else if (bind == 1 && type == 2) {
 						uni.switchTab({
-							url: '/pages/no/no'
+							url: '/pages/shop/shop'
 						})
 					}
 				}

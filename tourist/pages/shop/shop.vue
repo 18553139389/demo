@@ -37,14 +37,14 @@
 					<view class="recommend_price">
 						<block v-if="v.type == 1">
 							<view class="price">￥{{v.oldPrice}}</view>
-							<view class="scores">积分：0</view>
+							<!-- <view class="scores">积分：0</view> -->
 						</block>
 						<block v-if="v.type == 2">
-							<view class="price">￥{{v.oldPrice}}</view>
+							<view class="price">￥{{v.price}}</view>
 							<view class="scores">积分：{{v.point}}</view>
 						</block>
 						<block v-if="v.type == 3">
-							<view class="price">￥0</view>
+							<!-- <view class="price">￥0</view> -->
 							<view class="scores">积分：{{v.point}}</view>
 						</block>
 					</view>
