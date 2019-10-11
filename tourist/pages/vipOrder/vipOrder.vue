@@ -135,9 +135,6 @@
 				this.$store.commit('changeUid', uids)
 			}
 		},
-		onReady() {
-
-		},
 		onUnload() {
 			this.mescroll = null;
 		},
@@ -279,7 +276,7 @@
 		width: 100%;
 		height: 72upx;
 		position: fixed;
-		top: 90upx;
+		top: 50px;
 		left: 0;
 		background: #fff;
 		z-index: 6;

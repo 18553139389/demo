@@ -26,12 +26,9 @@
 </template>
 
 <script>
-	import {
-		Toast
-	} from 'vant'
-	import {
-		ajax
-	} from '../../common/js/util.js'
+	var jweixin = require('jweixin-module')
+	import {Toast} from 'vant'
+	import {ajax} from '../../common/js/util.js'
 	export default {
 		data() {
 			return {
@@ -46,6 +43,7 @@
 			Toast
 		},
 		onShow() {
+			// this.init()
 			if (this.getRequest('uid')) {
 				var uids = this.getRequest('uid')
 				this.$store.commit('changeUid', uids)
@@ -76,6 +74,44 @@
 					}
 				}
 				return (false);
+			},
+			init() {
+				let url = window.location.href.split('#')[0]
+				// let url = 'http://m.xgcyz1978.com/h5/'
+				let datas = {
+					url: url
+				}
+				alert(url)
+				let data = {
+					url: '/api/gzh/auth',
+					data: datas,
+					success: function(res) {
+						console.log(res)
+						if (res.data.result == 0) {
+							jweixin.config({
+								debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+								appId: res.data.appId, // 必填，公众号的唯一标识
+								timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+								nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+								signature: res.data.signature, // 必填，签名，见附录1
+								jsApiList: ['checkJsApi', 'getLocation']
+							});
+							jweixin.error(function(res) {
+								//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+								alert("扫码出错了1：" + res.errMsg)
+							});
+							jweixin.ready(function() {
+								jweixin.getLocation({
+									type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+									success: function(res) {
+										alert(JSON.stringify(res))
+									}
+								});
+							});
+						}
+					}
+				}
+				ajax(data)
 			},
 			getValidate() {
 				if (this.tel == '') {

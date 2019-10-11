@@ -31,12 +31,8 @@
 <script>
 	import mSearch from '../../components/search/search.vue'
 	import ssSelectCity from '../../components/select-city/select-city.vue'
-	import {
-		airport
-	} from '../../common/js/airport.js'
-	import {
-		Toast
-	} from 'vant'
+	import {airport} from '../../common/js/airport.js'
+	import {Toast} from 'vant'
 	export default {
 		data() {
 			return {
@@ -178,7 +174,7 @@
 				})
 			},
 			onSearch1(name,code) {
-				this.$store.commit('changeSearchState', 1)
+				// this.$store.commit('changeSearchState', 1)
 				if (this.type == 1) {
 					this.$store.commit('changeCity1', name)
 					this.$store.commit('changeStartCity', code)

@@ -4,7 +4,7 @@ Vue.use(Vuex)
 // 3d627fab60ad41d1852550d201e65ee2
 const store = new Vuex.Store({
 	state: {
-		uid: '',
+		uid: 'aebb5db6a9e04121b4e4ebb0252d8d6d',
 		city1: '郑州',
 		city2: '北京',
 		city3: '选择出发城市',
@@ -39,10 +39,29 @@ const store = new Vuex.Store({
 		refund: '',
 		searchState: 0,
 		saveAddress: null,
-		saveAddressId: ''
+		saveAddressId: '',
+		train1: '郑州',
+		train2: '北京',
+		trainDate: '',
+		trainDay: '',
+		startTrainDate: '',
+		hotelCity: '',
+		hotelDate1: '',
+		hotelDate2: '',
+		hotelFullDate1: '',
+		hotelFullDate2: '',
+		hotelLat: '',
+		hotelLng: '',
+		currentLon: '',
+		currentLat: '',
+		currentCity: '',
+		trainCitys: null
 	},
 	//切记：Vuex中store数据改变的唯一方法就是mutation！
 	mutations: {
+		changeTrainCitys(state,city) {
+			state.trainCitys = city
+		},
 		changeCity1(state,city) {
 			state.city1 = city
 		},
@@ -150,7 +169,52 @@ const store = new Vuex.Store({
 		},
 		changeSaveAddressId(state,item) {
 			state.saveAddressId = item
-		}
+		},
+		changeTrain1(state,city) {
+			state.train1 = city
+		},
+		changeTrain2(state,city) {
+			state.train2 = city
+		},
+		changeTrainDate(state, item) {
+			state.trainDate = item
+		},
+		changeTrainDay(state, item) {
+			state.trainDay = item
+		},
+		changeStartTrainDate(state, item) {
+			state.startTrainDate = item
+		},
+		changeHotelCity(state,item) {
+			state.hotelCity = item
+		},
+		changeHotelDate1(state,item) {
+			state.hotelDate1 = item
+		},
+		changeHotelDate2(state,item) {
+			state.hotelDate2 = item
+		},
+		changeHotelFullDate1(state,item) {
+			state.hotelFullDate1 = item
+		},
+		changeHotelFullDate2(state,item) {
+			state.hotelFullDate2 = item
+		},
+		changeHotelLat(state, item) {
+			state.hotelLat = item
+		},
+		changeHotelLng(state, item) {
+			state.hotelLng = item
+		},
+		changeCurrentLon(state, item) {
+			state.currentLon = item
+		},
+		changeCurrentLat(state, item) {
+			state.currentLat = item
+		},
+		changeCurrentCity(state, item) {
+			state.currentCity = item
+		},
 	}
 })
 

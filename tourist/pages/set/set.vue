@@ -19,6 +19,18 @@
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
+			<view class="item" @tap="goModify">
+				<view class="item-left">
+					<view>交易密码设置</view>
+				</view>
+				<img src="../../static/img/right.png" alt="">
+			</view>
+			<view class="item" @tap="goForget">
+				<view class="item-left">
+					<view>交易密码修改</view>
+				</view>
+				<img src="../../static/img/right.png" alt="">
+			</view>
 		</view>
 	</view>
 </template>
@@ -62,6 +74,16 @@
 			goQuestion() {
 				uni.navigateTo({
 					url: '../content/content?url=' + encodeURIComponent('http://m.xgcyz1978.com/display/agreement?id=3')
+				})
+			},
+			goModify() {
+				uni.navigateTo({
+					url: '../setPass/setPass'
+				})
+			},
+			goForget() {
+				uni.navigateTo({
+					url: '../setForget/setForget'
 				})
 			}
 		}

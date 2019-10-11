@@ -26,7 +26,7 @@
 			<scroll-view class="airs" scroll-y scroll-with-animation style="height: 100%;">
 				<view class="data1">
 					<view class="data1-left">
-						<view style="color: #E02B11;font-size: 18px;">￥{{price}}</view>
+						<view style="color: #E02B11;font-size: 18px;">￥{{price1}}</view>
 						<view v-if="!checked" style="margin-left: 12upx;">成人票</view>
 						<view v-if="checked" style="margin-left: 12upx;">儿童票</view>
 						<view style="margin-left: 12upx;">燃油 ￥{{Oil}}</view>
@@ -82,7 +82,7 @@
 				</view>
 				<view class="data2" style="margin-bottom: 20upx;">
 					<view class="protect">
-						<view class="protect-content" @tap="showSafe">
+						<view class="protect-content" @tap.stop="showSafe">
 							<view>{{safe1}}</view>
 							<view style="font-size: 12px;color: #999;margin-top: 8upx;">{{safe2}}</view>
 						</view>
@@ -174,6 +174,7 @@
 				listData: {},
 				checked: false,
 				price: 0,
+				price1: 0,
 				userList: [],
 				safe1: '',
 				safe2: '',
@@ -206,6 +207,23 @@
 		},
 		computed: {
 			total() {
+				let price = 0
+				if(this.$store.state.checked){
+					price = this.price1 + this.Oil + this.Tax + this.childPrice
+				}else{
+					price = this.price1 + this.Oil + this.Tax
+					if(this.checked1){
+						price += this.babyFare + this.babyFare1
+					}
+				}
+				
+				if(this.checked2){
+					price += this.safePrice
+				}
+				
+				return price
+			},
+			total1() {
 				let price = 0
 				if(this.$store.state.checked){
 					price = this.price + this.Oil + this.Tax + this.childPrice
@@ -269,6 +287,7 @@
 			init() {
 				//初始化刷新实时票价
 				let self = this
+				this.sub = true
 				// let datas = {
 				// 	FlightNo: this.list.FlightNo,
 				// 	SCode: this.list.DepartAirportCode,
@@ -361,8 +380,10 @@
 					success: function(res){
 						console.log(res)
 						if(res.data.result == 0){
+							self.sub = false
 							self.BookData = res.data.Data.Policys[0].BookData
 							self.price = res.data.Data.Policys[0].SettlePrice
+							self.price1 = res.data.Data.Policys[0].Fare
 						}
 					}
 				}
@@ -465,7 +486,7 @@
 				
 				let OrderBase = {
 					FlightType: this.$store.state.singleState,
-					Amount: this.total,
+					Amount: this.total1,
 					ContactName: this.user,
 					BabyFare: this.babyFare,
 					ContactTel: '',
@@ -537,11 +558,11 @@
 						OrderBase: OrderBase,
 						AirLines: AirLines,
 						Passengers: Passengers,
-						Policy: Policy
+						Policy: Policy,
+						totalMoney: this.total
 					},
 					success: function(res) {
 						if (res.data.result == 0) {
-							console.log(res)
 							let orderId = res.data.orderId
 							let appId = res.data.body.appId
 							let timeStamp = res.data.body.timeStamp

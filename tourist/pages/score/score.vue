@@ -3,11 +3,11 @@
 		<view class="top">
 			<view class="title">
 				<text class="cuIcon-back back" @tap="back"></text>
-				<view>我的积分</view>
+				<view>我的纪念币</view>
 				<img @tap="goScore" src="../../static/img/guize.png" alt="">
 			</view>
 			<view class="score">{{scores}}</view>
-			<view class="content">全部积分</view>
+			<view class="content">全部纪念币</view>
 		</view>
 		<view class="wrapper">
 			<view class="tabs">

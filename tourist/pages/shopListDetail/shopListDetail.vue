@@ -46,13 +46,13 @@
 					<img class="c_img" :src="list.image" alt="">
 					<view class="c_content">
 						<view class="order_cont">{{list.title}}</view>
-						<!-- <view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view> -->
-						<view v-if="list.type == 2" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
-						<!-- <view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view> -->
+						<!-- <view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">纪念币：0</view> -->
+						<view v-if="list.type == 2" style="color: #DE2910;font-size: 12px;">纪念币: {{list.point}}</view>
+						<!-- <view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">纪念币: {{list.point}}</view> -->
 						<view class="money">
 							<view v-if="list.type == 1" style="color: #DE2910;font-size: 14px;">{{list.oldPrice}}</view>
 							<view v-if="list.type == 2" style="color: #DE2910;font-size: 14px;">{{list.price}}</view>
-							<view v-if="list.type == 3" style="color: #DE2910;font-size: 14px;">积分:{{list.point}}</view>
+							<view v-if="list.type == 3" style="color: #DE2910;font-size: 14px;">纪念币:{{list.point}}</view>
 							<view>x{{list.qty}}</view>
 						</view>
 					</view>
@@ -70,7 +70,7 @@
 					<view v-if="list.type == 3">￥0</view>
 				</view>
 				<view class="order">
-					<view>消耗积分</view>
+					<view>消耗纪念币</view>
 					<view v-if="list.type == 1">0</view>
 					<view v-if="list.type == 2">{{list.point}}</view>
 					<view v-if="list.type == 3">{{list.point}}</view>
@@ -78,7 +78,7 @@
 				<view class="order">
 					<view>付款方式</view>
 					<view v-if="list.type == 1 || list.type == 2">微信支付</view>
-					<view v-if="list.type == 3">积分支付</view>
+					<view v-if="list.type == 3">纪念币支付</view>
 				</view>
 				<view class="order">
 					<view>订单状态</view>
@@ -135,7 +135,8 @@
 			</view>
 		</view>
 		<!-- <view class="buy" @tap="goPay" v-if="list.type == 1">去支付</view> -->
-		<view class="buy" @tap="goOrder" v-if="list.state == 2">确定收货</view>
+		<view class="buy" @tap="goOrder" v-if="list.state == 2">确认收货</view>
+		<view class="buy" @tap="goComment" v-if="list.state == 3 && list.comment == 0">去评价</view>
 		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
 			<van-loading type="spinner" />
 		</van-popup>
@@ -165,7 +166,7 @@
 			this.ids = option.id
 			let datas = {
 				uid: this.$store.state.uid,
-				orderId: option.id
+				orderId: this.ids
 			}
 			let data = {
 				url: '/api/gzh/productOrderDetail',
@@ -266,6 +267,11 @@
 			goCall() {
 				uni.makePhoneCall({
 					phoneNumber: this.$store.state.customer
+				})
+			},
+			goComment() {
+				uni.navigateTo({
+					url: '../comment/comment?list='+JSON.stringify(this.list)+'&id='+this.ids
 				})
 			}
 		}

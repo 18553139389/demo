@@ -108,7 +108,6 @@
 							self.imgs = res.data.images
 							self.listData = res.data
 							self.listData.address = self.unescape(self.listData.address)
-							console.log(self.listData.address)
 							self.serviceList = res.data.serviceList
 							if(res.data.serviceList.length > 0) {
 								self.texts = res.data.serviceList[0].content
@@ -146,9 +145,6 @@
 					url: '../assistant/assistant?list=' + JSON.stringify(this.assistantList)
 				})
 			},
-			paySuc() {
-				
-			},
 			goContent(name,con) {
 				this.texts = con
 			}
@@ -179,6 +175,7 @@
 	}
 	
 	.air-text {
+		padding-right: 20rpx;
 		display: flex;
 		flex-direction: column;
 	}

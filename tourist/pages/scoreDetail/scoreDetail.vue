@@ -3,7 +3,7 @@
 		<view class="fixed">
 			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
 				<block slot="backText"></block>
-				<block slot="content">积分规则</block>
+				<block slot="content">纪念币规则</block>
 			</cu-custom>
 		</view>
 		<view class="title">机票预订成功通知</view>

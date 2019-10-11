@@ -17,23 +17,23 @@
 				<image mode="scaleToFill" :src="icons[0]"></image>
 				<text>贵宾厅</text>
 			</view>
-			<view class="list_type" @tap="goNo('快速安全通道')">
+			<view class="list_type" @tap="goSafe('快速安检通道')">
 				<image mode="scaleToFill" :src="icons[1]"></image>
-				<text>快速安全通道</text>
+				<text>快速安检通道</text>
 			</view>
-			<view class="list_type" @tap="goNo('要客服务')">
+			<view class="list_type" @tap="goVery">
 				<image mode="scaleToFill" :src="icons[2]"></image>
 				<text>要客服务</text>
 			</view>
-			<view class="list_type" @tap="goNo('驿站名片')">
+			<view class="list_type" @tap="goCard">
 				<image mode="scaleToFill" :src="icons[3]"></image>
 				<text>驿站名片</text>
 			</view>
-			<view class="list_type" @tap="goNo('酒店')">
+			<view class="list_type" @tap="goHotel">
 				<image mode="scaleToFill" :src="icons[4]"></image>
 				<text>酒店</text>
 			</view>
-			<view class="list_type" @tap="goNo('火车票')">
+			<view class="list_type" @tap="goTrain">
 				<image mode="scaleToFill" :src="icons[5]"></image>
 				<text>火车票</text>
 			</view>
@@ -47,11 +47,11 @@
 			</view>
 		</view>
 		<view class="score">
-			<view class="score_list" @tap="goNo('积分商城')">
-				<image mode="scaleToFill" src="../../static/img/jifenshangchengtu.png"></image>
+			<view class="score_list" @tap="goShop">
+				<image mode="scaleToFill" :src="images[0]"></image>
 			</view>
 			<view class="score_list" @tap="goScore">
-				<image mode="scaleToFill" src="../../static/img/yaohaoyou.png"></image>
+				<image mode="scaleToFill" :src="images[1]"></image>
 			</view>
 		</view>
 		<view class="hot">
@@ -77,7 +77,7 @@
 			:confirmText="confirmText"
 			@confirm="confirm"
 			@cancel="cancel"
-			content="成为会员才能查看航班动态" 
+			:content="content" 
 			>
 			</model>
 		</view>
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+	import jweixin from '../../common/js/wexin.js'
 	import model from '../../components/model/model.vue'
 	import swipers from '../../components/swiper/swiper.vue'
 	import {ajax} from '../../common/js/util.js'
@@ -98,7 +99,9 @@
 				confirmText: '去开通',
 				activityList: [],
 				bannerList: [],
-				icons: []
+				icons: [],
+				content: '',
+				images: []
 			}
 		},
 		components: {
@@ -128,14 +131,61 @@
 			},
 			init() {
 				let self = this
+				let url = window.location.href.split('#')[0]
+				url = encodeURIComponent(url)
 				let datas = {
+					url: url
+				}
+				let data1 = {
+					url: '/api/gzh/auth',
+					data: datas,
+					success: function(res) {
+						if (res.data.result == 0) {
+							jweixin.config({
+								debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+								appId: res.data.appId, // 必填，公众号的唯一标识
+								timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+								nonceStr: res.data.noncestr, // 必填，生成签名的随机串
+								signature: res.data.signature, // 必填，签名，见附录1
+								jsApiList: ['checkJsApi', 'getLocation']
+							});
+							jweixin.error(function(res) {
+								//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+								console.log("错误说明" + res.errMsg)
+							});
+							jweixin.ready(function() {
+								jweixin.getLocation({
+									type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+									success: function(res) {
+										var latitude = parseFloat(res.latitude); // 纬度，浮点数，范围为90 ~ -90
+										var longitude = parseFloat(res.longitude); // 经度，浮点数，范围为180 ~ -180。
+										var gc = new BMap.Geocoder();
+										var pointAdd = new BMap.Point(longitude, latitude);
+										gc.getLocation(pointAdd, function(rs){
+										    // 百度地图解析城市名
+											let city = rs.addressComponents.city
+											if(city.indexOf('市') != -1){
+												city = city.substring(0,city.indexOf('市'))
+											}
+											self.$store.commit('changeCurrentLat', latitude)
+											self.$store.commit('changeCurrentLon', longitude)
+											self.$store.commit('changeCurrentCity', city)
+										})
+									}
+								})
+							})
+						}
+					}
+				}
+				ajax(data1)
+				
+				let da = {
 					uid: this.$store.state.uid
 				}
-				let data = {
+				let data2 = {
 					url: '/api/gzh/index',
-					data: datas,
+					data: da,
 					success: function(res){
-						console.log(res)
 						if(res.data.result == 0){
 							if(res.data.activityList.length <= 3){
 								self.activityList = res.data.activityList
@@ -146,16 +196,22 @@
 							}
 							self.bannerList = res.data.bannerList
 							self.icons = res.data.icons
+							self.images = res.data.images
 							self.$store.commit('changeVip', res.data.vipType)
 							self.$store.commit('changeCustomer', res.data.customer)
 						}
 					}
 				}
-				ajax(data)
+				ajax(data2)
 			},
 			goRoom() {
 				uni.navigateTo({
 					url: '../vipRoom/vipRoom'
+				})
+			},
+			goTrain() {
+				uni.navigateTo({
+					url: '../train/train'
 				})
 			},
 			goAir() {
@@ -165,6 +221,7 @@
 			},
 			goFlight() {
 				if(this.$store.state.vipType == 0){
+					this.content = '成为会员才能查看航班动态'
 					this.show = true
 					return
 				}
@@ -210,7 +267,37 @@
 			},
 			goNo(tit) {
 				uni.navigateTo({
-					url: '../noOpen/noOpen?title=' + tit
+					url: '../no/no?title=' + tit
+				})
+			},
+			goSafe(tit) {
+				uni.navigateTo({
+					url: '../stage/stage?title=' + tit
+				})
+			},
+			goVery() {
+				uni.navigateTo({
+					url: '../very/very'
+				})
+			},
+			goCard() {
+				if(this.$store.state.vipType == 0){
+					this.content = '成为会员才能查看驿站名片'
+					this.show = true
+					return
+				}
+				uni.navigateTo({
+					url: '../businessCard/businessCard'
+				})
+			},
+			goHotel() {
+				uni.navigateTo({
+					url: '../hotel/hotel'
+				})
+			},
+			goShop() {
+				uni.switchTab({
+					url: '../shop/shop'
 				})
 			}
 		}
@@ -237,7 +324,6 @@
 		align-items: center;
 		font-size: 14px;
 		color: #333;
-		/* padding: 30upx 30upx 0; */
 		box-sizing: border-box;
 		border-bottom: 12px solid #eee;
 	}
@@ -259,7 +345,6 @@
 		width: 66upx;
 		height: 66upx;
 		margin-bottom: 12upx;
-		border-radius: 50%;
 	}
 	
 	.score {
@@ -278,6 +363,7 @@
 	.score_list>image {
 		width: 100%;
 		height: 100%;
+		border-radius: 4px;
 	}
 	
 	.hot {

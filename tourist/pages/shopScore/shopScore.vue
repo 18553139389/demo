@@ -2,7 +2,7 @@
 	<view class="contain">
 		<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
 			<block slot="backText"></block>
-			<block slot="content">积分商城</block>
+			<block slot="content">纪念币商城</block>
 		</cu-custom>
 		<view class="topImg">
 			<img src="../../static/img/1.jpg" />
@@ -15,7 +15,7 @@
 					<view class="recommend_title">{{v.title}}</view>
 					<view class="recommend_price">
 						<block>
-							<view class="scores">积分：{{v.point}}</view>
+							<view class="scores">纪念币：{{v.point}}</view>
 						</block>
 					</view>
 				</view>

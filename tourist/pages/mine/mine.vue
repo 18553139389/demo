@@ -12,7 +12,7 @@
 		<view class="tabs">
 			<view class="tab" @tap="goScore">
 				<img src="../../static/img/jifen.png" alt="">
-				<view>我的积分</view>
+				<view>我的纪念币</view>
 			</view>
 			<view class="tab" @tap="goOrder">
 				<img src="../../static/img/dingdan.png" alt="">
@@ -24,14 +24,14 @@
 			</view>
 		</view>
 		<view class="list">
-			<view class="list-item" @tap="goNo('商务合作')">
+			<view class="list-item" @tap="goTogether">
 				<view class="list-left">
 					<img src="../../static/img/shangwuhezuo.png" alt="">
 					<view>商务合作</view>
 				</view>
 				<img style="height: 30upx;" src="../../static/img/right.png" alt="">
 			</view>
-			<view class="list-item" @tap="goNo('意见反馈')">
+			<view class="list-item" @tap="goSuggest">
 				<view class="list-left">
 					<img src="../../static/img/fankui.png" alt="">
 					<view>意见反馈</view>
@@ -98,7 +98,6 @@
 					url: '/api/gzh/userInfo',
 					data: datas,
 					success: function(res){
-						console.log(res)
 						if(res.data.result == 0) {
 							self.head = res.data.icon
 							self.name = res.data.username
@@ -168,6 +167,16 @@
 				let self = this
 				uni.makePhoneCall({
 					phoneNumber: self.call
+				})
+			},
+			goSuggest() {
+				uni.navigateTo({
+					url: '../suggest/suggest'
+				})
+			},
+			goTogether() {
+				uni.navigateTo({
+					url: '../together/together'
 				})
 			}
 		}

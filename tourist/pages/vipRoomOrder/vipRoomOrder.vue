@@ -114,9 +114,6 @@
 			this.id = option.id
 			this.init()
 		},
-		onReady() {
-
-		},
 		methods: {
 			getRequest(variable) {
 				var query = window.location.search.substring(1);

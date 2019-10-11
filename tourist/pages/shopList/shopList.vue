@@ -30,13 +30,13 @@
 						<img class="c_img" :src="v.image" alt="">
 						<view class="c_content">
 							<view class="order_cont">{{v.title}}</view>
-							<!-- <view v-if="v.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view> -->
-							<view v-if="v.type == 2" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view>
-							<!-- <view v-if="v.type == 3" style="color: #DE2910;font-size: 12px;">积分:{{v.point}}</view> -->
+							<!-- <view v-if="v.type == 1" style="color: #DE2910;font-size: 12px;">纪念币：0</view> -->
+							<view v-if="v.type == 2" style="color: #DE2910;font-size: 12px;">纪念币:{{v.point}}</view>
+							<!-- <view v-if="v.type == 3" style="color: #DE2910;font-size: 12px;">纪念币:{{v.point}}</view> -->
 							<view class="money">
 								<view v-if="v.type == 1" style="color: #DE2910;font-size: 14px;">{{v.oldPrice}}</view>
 								<view v-if="v.type == 2" style="color: #DE2910;font-size: 14px;">{{v.price}}</view>
-								<view v-if="v.type == 3" style="color: #DE2910;font-size: 14px;">积分:{{v.point}}</view>
+								<view v-if="v.type == 3" style="color: #DE2910;font-size: 14px;">纪念币:{{v.point}}</view>
 								<!-- <view v-if="v.type == 3" style="color: #DE2910;font-size: 16px;">￥0</view> -->
 								<view>x{{v.qty}}</view>
 							</view>
@@ -124,9 +124,10 @@
 			}
 		},
 		onShow() {
-			// this.upCallback(this.mescroll)
-			this.list = []
-			this.mescroll.resetUpScroll() // 刷新列表数据
+			if(this.mescroll){
+				this.list = []
+				this.mescroll.resetUpScroll() // 刷新列表数据
+			}
 		},
 		onUnload() {
 			this.mescroll = null;
@@ -161,7 +162,7 @@
 				// loadSwiper();
 				// 下拉刷新的回调,默认重置上拉加载列表为第一页 (自动执行 mescroll.num=1, 再触发upCallback方法 )
 				this.list = []
-				mescroll.resetUpScroll()
+				this.mescroll.resetUpScroll()
 			},
 			/*上拉加载的回调: mescroll携带page的参数, 其中num:当前页 从1开始, size:每页数据条数,默认10 */
 			upCallback(mescroll) {

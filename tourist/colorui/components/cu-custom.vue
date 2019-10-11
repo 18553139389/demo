@@ -32,8 +32,8 @@
 		name: 'cu-custom',
 		computed: {
 			style() {
-				var StatusBar= this.StatusBar;
-				var CustomBar= this.CustomBar;
+				var StatusBar = this.StatusBar;
+				var CustomBar = this.CustomBar;
 				var bgImage = this.bgImage;
 				var Color = this.Color
 				var backColor = this.backColor

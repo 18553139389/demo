@@ -17,7 +17,7 @@
 					<input type="text" placeholder="请输入" v-model="name">
 				</view>
 				<view class="head" @tap="changeSex">
-					<view>姓别：</view>
+					<view>性别：</view>
 					<view class="right">
 						<input type="text" placeholder="请选择" disabled v-model="sex">
 						<img src="../../static/img/right.png" alt="">
@@ -142,7 +142,13 @@
 						if(res.data.result == 0) {
 							self.head = res.data.icon
 							self.name = res.data.username
-							self.sex = res.data.sex
+							if(res.data.sex == 0){
+								self.sex = "女"
+							}else if(res.data.sex == 1){
+								self.sex = "男"
+							}else{
+								self.sex = "保密"
+							}
 							self.birth = res.data.birthday
 							self.work = res.data.position
 							self.hot = res.data.job
@@ -196,6 +202,7 @@
 				this.show1 = false
 			},
 			onConfirm(val) {
+				console.log(val)
 				this.show1 = false
 				this.sex = val
 			},
@@ -279,11 +286,19 @@
 				}
 				
 				let self = this
+				let sex = this.sex
+				if(this.sex == "女"){
+					sex = 0
+				}else if(this.sex == "男"){
+					sex = 1
+				}else{
+					sex = 2
+				}
 				let datas = {
 					uid: this.$store.state.uid,
 					icon: this.head,
 					username: this.name,
-					sex: this.sex,
+					sex: sex,
 					birthday: this.birth,
 					position: this.work,
 					job: this.hot,

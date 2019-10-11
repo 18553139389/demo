@@ -80,6 +80,13 @@
 					<img :src="v" alt="">
 				</view>
 			</view>
+			<view class="hot_wrapper">
+				<view class="hot_list" v-for="(v,k) in activityList" :key="k" @tap="goUrl(v.url)">
+					<view class="hot_img">
+						<img :src="v.image" alt="">
+					</view>
+				</view>
+			</view>
 		</view>
 		<van-popup v-model="show" position="bottom">
 			<van-picker show-toolbar :columns="columns" @cancel="onCancel" @confirm="onConfirm" />
@@ -120,7 +127,8 @@
 				singleStart: '',
 				singleEnd: '',
 				nowDate: '',
-				child: true
+				child: true,
+				activityList: []
 			}
 		},
 		computed: {
@@ -155,6 +163,8 @@
 				var uids = this.getRequest('uid')
 				this.$store.commit('changeUid', uids)
 			}
+			//初始化获取下面图片
+			this.init()
 		},
 		onReady() {
 			this.$store.commit('changeDate', this.dateFtt("MM-dd", new Date()))
@@ -194,6 +204,22 @@
 					}
 				}
 				return (false);
+			},
+			init() {
+				let self = this
+				let datas = {
+					type: 1
+				}
+				let data2 = {
+					url: '/api/gzh/searchPicture',
+					data: datas,
+					success: function(res){
+						if(res.data.result == 0){
+							self.activityList = res.data.dataList
+						}
+					}
+				}
+				ajax(data2)
 			},
 			loop() {
 				let name1 = this.name1
@@ -312,16 +338,19 @@
 				this.seat = val
 			},
 			goOrder() {
+				console.log(this.$store.state.searchState)
 				if(this.$store.state.searchState == 0 || this.$store.state.searchState == 2){
 					for (let i = 0; i < airport.RECORDS.length; i++) {
 						if (this.name1 == airport.RECORDS[i].cityname) {
 							this.singleStart = airport.RECORDS[i].citycode
 							this.$store.commit('changeStartCity', airport.RECORDS[i].citycode)
+							console.log(this.singleStart)
 						}
 
 						if (this.name2 == airport.RECORDS[i].cityname) {
 							this.singleEnd = airport.RECORDS[i].citycode
 							this.$store.commit('changeEndCity', airport.RECORDS[i].citycode)
+							console.log(this.singleEnd)
 						}
 					}
 				}
@@ -338,11 +367,13 @@
 						if (this.name1 == airport.RECORDS[i].cityname) {
 							this.singleStart = airport.RECORDS[i].citycode
 							this.$store.commit('changeStartCity', airport.RECORDS[i].citycode)
+							console.log(this.singleStart)
 						}
 					
 						if (this.name2 == airport.RECORDS[i].cityname) {
 							this.singleEnd = airport.RECORDS[i].citycode
 							this.$store.commit('changeEndCity', airport.RECORDS[i].citycode)
+							console.log(this.singleEnd)
 						}
 					}
 				}
@@ -362,6 +393,11 @@
 					this.child = true
 				}
 				this.$store.commit('changeSingle', e)
+			},
+			goUrl(url){
+				uni.navigateTo({
+					url: '../content/content?url=' + encodeURIComponent(url)
+				})
 			}
 		}
 	}
@@ -531,5 +567,28 @@
 		font-size: 12px;
 		color: #999;
 		margin-top: 16upx;
+	}
+	
+	.hot_wrapper {
+		width: 100%;
+		padding: 30upx 0;
+		box-sizing: border-box;
+	}
+	
+	.hot_list {
+		width: 100%;
+		border-radius: 6px;
+		overflow: hidden;
+		margin-bottom: 30upx;
+	}
+	
+	.hot_img {
+		width: 100%;
+		/* height: 260upx; */
+	}
+	
+	.hot_img>img {
+		width: 100%;
+		height: 100%;
 	}
 </style>

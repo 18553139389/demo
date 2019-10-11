@@ -21,9 +21,9 @@
 					<img class="c_img" :src="list.image" alt="">
 					<view class="c_content">
 						<view>{{list.title}}</view>
-						<view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">积分：0</view>
-						<view v-if="list.type == 2" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
-						<view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">积分: {{list.point}}</view>
+						<view v-if="list.type == 1" style="color: #DE2910;font-size: 12px;">纪念币：0</view>
+						<view v-if="list.type == 2" style="color: #DE2910;font-size: 12px;">纪念币: {{list.point}}</view>
+						<view v-if="list.type == 3" style="color: #DE2910;font-size: 12px;">纪念币: {{list.point}}</view>
 						<view class="money">
 							<view v-if="list.type == 1" style="color: #DE2910;font-size: 16px;">{{list.oldPrice}}</view>
 							<view v-if="list.type == 2" style="color: #DE2910;font-size: 16px;">{{list.price}}</view>

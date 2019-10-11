@@ -44,8 +44,9 @@
 							<view>{{v.scity_name}} {{v.sterminal}}</view>
 						</view>
 						<view class="start">
-							<!-- <view style="font-size: 12px;">约2小时20分</view> -->
+							<!-- <view style="font-size: 12px;">k107</view> -->
 							<img src="../../static/img/list.png" alt="">
+							<!-- <view style="font-size: 12px;">约2小时20分</view> -->
 						</view>
 						<view class="start">
 							<view class="time">{{v.arrive_time.substr(0,v.arrive_time.lastIndexOf(':'))}}</view>

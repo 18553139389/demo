@@ -12,7 +12,7 @@
 			</cu-custom>
 		</view>
 		<van-swipe :autoplay="5000" :height="150" indicator-color="#DE2910">
-			<van-swipe-item v-for="(v,k) in bannerList" :key="k">
+			<van-swipe-item v-for="(v,k) in bannerList" :key="k" @tap="goUrl(v.type,v.content)">
 				<img class="banner" :src="v.image" alt="">
 			</van-swipe-item>
 		</van-swipe>
@@ -37,15 +37,15 @@
 					<view class="recommend_price">
 						<block v-if="v.type == 1">
 							<view class="price">￥{{v.oldPrice}}</view>
-							<!-- <view class="scores">积分：0</view> -->
+							<!-- <view class="scores">纪念币：0</view> -->
 						</block>
 						<block v-if="v.type == 2">
 							<view class="price">￥{{v.price}}</view>
-							<view class="scores">积分：{{v.point}}</view>
+							<view class="scores">纪念币：{{v.point}}</view>
 						</block>
 						<block v-if="v.type == 3">
 							<!-- <view class="price">￥0</view> -->
-							<view class="scores">积分：{{v.point}}</view>
+							<view class="scores">纪念币：{{v.point}}</view>
 						</block>
 					</view>
 				</view>
@@ -55,7 +55,9 @@
 </template>
 
 <script>
-	import {ajax} from '../../common/js/util.js'
+	import {
+		ajax
+	} from '../../common/js/util.js'
 	export default {
 		data() {
 			return {
@@ -92,9 +94,9 @@
 				let data = {
 					url: '/api/gzh/shopIndex',
 					data: {},
-					success: function(res){
+					success: function(res) {
 						console.log(res)
-						if(res.data.result == 0){
+						if (res.data.result == 0) {
 							self.bannerList = res.data.bannerList
 							self.productList = res.data.productList
 						}
@@ -121,6 +123,21 @@
 				uni.navigateTo({
 					url: '../shopScore/shopScore'
 				})
+			},
+			goUrl(type,id) {
+				if(type == 1){
+					uni.navigateTo({
+						url: '../shopDetail/shopDetail?id='+id
+					})
+				}else if(type == 2){
+					uni.navigateTo({
+						url: '../shopType/shopType'
+					})
+				}else if(type == 3){
+					uni.navigateTo({
+						url: '../content/content?url=' + encodeURIComponent(id)
+					})
+				}
 			}
 		}
 	}

@@ -7,8 +7,7 @@
 			</cu-custom>
 		</view>
 		<!-- <reserve-date @changeDay='changeDay' :startDate="startDate" :disableBefore="false" /> -->
-		<Calendar :initMonthCount="12" :allAbled="false" :themeColor="'#DE2910'"
-		 @callback="setTime"></Calendar>
+		<Calendar :initMonthCount="12" :allAbled="false" :themeColor="'#DE2910'" @callback="setTime"></Calendar>
 	</view>
 </template>
 
@@ -35,7 +34,7 @@
 				this.$store.commit('changeUid', uids)
 			}
 			this.type = option.type
-			if(this.type == 1){
+			if (this.type == 1) {
 				this.startDate = this.$store.state.priceDate1
 				console.log(this.startDate)
 			}
@@ -62,7 +61,7 @@
 				str = str + s.substr(s.indexOf('-'))
 				console.log(str)
 				//把整个时间格式化提交给后台需要的格式
-				let year1 = this.dateFtt('yyyy/MM/dd',new Date(year))
+				let year1 = this.dateFtt('yyyy/MM/dd', new Date(year))
 				if (this.type == 0) {
 					this.$store.commit('changeDate', str)
 					this.$store.commit('changeDay', this.getDay(new Date(year).getDay()))
@@ -91,7 +90,7 @@
 			setTime(val) {
 				console.log(val)
 				let year = val.dateStr
-				let year1 = this.dateFtt('yyyy/MM/dd',new Date(year))
+				let year1 = this.dateFtt('yyyy/MM/dd', new Date(year))
 				let str = val.date.month + '-' + val.date.day
 				if (this.type == 0) {
 					this.$store.commit('changeDate', str)
@@ -111,6 +110,10 @@
 					this.$store.commit('changePrice', year)
 					this.$store.commit('changeDate', str)
 					this.$store.commit('changeDay', this.getDay(new Date(year).getDay()))
+				} else if (this.type == 2) {
+					this.$store.commit('changeTrainDate', str)
+					this.$store.commit('changeTrainDay', this.getDay(new Date(year).getDay()))
+					this.$store.commit('changeStartTrainDate', year1)
 				}
 				uni.navigateBack({
 					delta: 1,
@@ -174,7 +177,7 @@
 		height: 100%;
 		background: #FFFFFF;
 	}
-	
+
 	uni-page-body {
 		background: #FFFFFF;
 		overflow: auto !important;

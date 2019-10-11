@@ -14,14 +14,14 @@
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
-			<view class="item">
+			<view class="item" @tap="goTrain">
 				<view class="item-left">
 					<img src="../../static/img/huochepiao.png" alt="">
 					<view style="margin-left: 20upx;">火车票订单</view>
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
-			<view class="item">
+			<view class="item" @tap="goHotel">
 				<view class="item-left">
 					<img src="../../static/img/jiudiandingdan.png" alt="">
 					<view style="margin-left: 20upx;">酒店订单</view>
@@ -35,14 +35,14 @@
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
-			<view class="item">
+			<view class="item" @tap="goSafe">
 				<view class="item-left">
 					<img src="../../static/img/kuaisutongdao.png" alt="">
 					<view style="margin-left: 20upx;">快速安检通道订单</view>
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
-			<view class="item">
+			<view class="item" @tap="goVery">
 				<view class="item-left">
 					<img src="../../static/img/yaokefuwu.png" alt="">
 					<view style="margin-left: 20upx;">要客服务订单</view>
@@ -121,6 +121,29 @@
 			goShop() {
 				uni.navigateTo({
 					url: '../shopList/shopList'
+				})
+			},
+			goSafe() {
+				uni.navigateTo({
+					url: '../stageOrder/stageOrder'
+				})
+			},
+			goTrain() {
+				uni.navigateTo({
+					url: '../trainState/trainState'
+				})
+			},
+			goHotel() {
+				// uni.navigateTo({
+				// 	url: '../hotelOrder/hotelOrder'
+				// })
+				uni.navigateTo({
+					url: '../hotelOrder/hotelOrder'
+				})
+			},
+			goVery() {
+				uni.navigateTo({
+					url: '../veryOrder/veryOrder'
 				})
 			}
 		}

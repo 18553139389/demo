@@ -24,7 +24,7 @@
 					</view>
 				</view>
 				<view class="msg">
-					<view class="msg_title">使用积分：</view>
+					<view class="msg_title">纪念币：</view>
 					<view v-if="list.type == 1">0</view>
 					<view v-if="list.type == 2">{{list.point * values}}</view>
 					<view v-if="list.type == 3">{{list.point * values}}</view>
@@ -63,12 +63,15 @@
 		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
 			<van-loading type="spinner" />
 		</van-popup>
+		<best-payment-password :show="payFlag" :forget="true" :value="paymentPwd" digits="6" @submit="checkPwd" @cancel="togglePayment"></best-payment-password>
 	</view>
 </template>
 
 <script>
-	import {ajax} from '../../common/js/util.js'
-	import {Toast} from 'vant'
+	var md5 = require('js-md5')
+	import {ajax,ajaxs} from '../../common/js/util.js'
+	import {Toast,Dialog} from 'vant'
+	import bestPaymentPassword from '../../components/best-payment-password/best-payment-password.vue'
 	export default {
 		data() {
 			return {
@@ -81,35 +84,118 @@
 				total: 0,
 				text: '',
 				sub: false,
-				values: 0
+				values: 0,
+				payFlag: false,
+				paymentPwd: '',
+				passType: null
 			}
 		},
 		onLoad(option) {
 			this.list = JSON.parse(option.list)
+			console.log(this.list)
 			this.ids = option.id
 			this.total = option.total
 			this.listData = this.$store.state.saveAddress
 			this.text = option.text
 			this.values = option.values
+			this.init()
+		},
+		components: {
+			bestPaymentPassword,
+			Toast,
+			Dialog
 		},
 		methods: {
-			goSuc() {
+			init() {
 				let self = this
-				self.sub = true
+				let datas = {
+					uid: this.$store.state.uid
+				}
+				let data = {
+					url: '/api/gzh/userInfo',
+					data: datas,
+					success: function(res) {
+						console.log(res)
+						if (res.data.result == 0) {
+							self.passType = res.data.payPasswordState
+						}
+					}
+				}
+				ajaxs(data)
+			},
+			togglePayment() {
+				this.payFlag = !this.payFlag
+			},
+			checkPwd(e) {
+				let self = this
+				this.paymentPwd = e
 				let datas = {
 					uid: this.$store.state.uid,
 					productId: this.ids,
 					receiverId: this.listData.id,
 					qty: this.values,
-					remarks: this.text
+					remarks: this.text,
+					payPassword: md5.hex(this.paymentPwd)
 				}
+
 				let data = {
 					url: '/api/gzh/saveProductOrder',
 					data: datas,
 					success: function(res) {
+						console.log(res)
 						if (res.data.result == 0) {
-							console.log(res)
-							if(res.data.body.appId){
+							self.togglePayment()
+							setTimeout(function() {
+								uni.navigateTo({
+									url: '../shopSuc/shopSuc'
+								})
+							}, 300)
+						} else if (res.data.result == 1){
+							self.togglePayment()
+							self.paymentPwd = ''
+							Toast(res.data.resultNote)
+						}
+					}
+				}
+				ajaxs(data)
+			},
+			goSuc() {
+				let self = this
+				self.sub = true
+				if (this.list.type == 3) {
+					self.sub = false
+					if (self.passType == 0) {
+						Dialog.confirm({
+							title: '提示',
+							message: '你还没有设置新密码',
+							showConfirmButton: true,
+							showCancelButton: true,
+							confirmButtonText: "去设置",
+							confirmButtonColor: "#DE2910"
+						}).then(() => {
+							// on confirm
+							uni.navigateTo({
+								url: '/pages/setPass/setPass'
+							})
+						}).catch(() => {
+							// on cancel
+						});
+					} else {
+						self.togglePayment()
+					}
+				} else {
+					let datas = {
+						uid: this.$store.state.uid,
+						productId: this.ids,
+						receiverId: this.listData.id,
+						qty: this.values,
+						remarks: this.text
+					}
+					let data = {
+						url: '/api/gzh/saveProductOrder',
+						data: datas,
+						success: function(res) {
+							if (res.data.result == 0) {
 								let orderId = res.data.orderId
 								let appId = res.data.body.appId
 								let timeStamp = res.data.body.timeStamp
@@ -118,22 +204,14 @@
 								let signType = res.data.body.signType
 								let paySign = res.data.body.paySign
 								self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
-							}else{
+							} else {
+								Toast(res.data.resultNote)
 								self.sub = false
-								// Toast('支付成功')
-								setTimeout(function() {
-									uni.navigateTo({
-										url: '../shopSuc/shopSuc'
-									})
-								}, 300)
 							}
-						} else {
-							Toast(res.data.resultNote)
-							self.sub = false
 						}
 					}
+					ajaxs(data)
 				}
-				ajax(data)
 			},
 			onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign) {
 				let self = this
@@ -254,7 +332,7 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-	
+
 	.buy {
 		width: 100%;
 		height: 90upx;
@@ -268,8 +346,8 @@
 		bottom: 0;
 		z-index: 999;
 	}
-	
+
 	.msg_title {
-		width: 25%;
+		width: 28%;
 	}
 </style>

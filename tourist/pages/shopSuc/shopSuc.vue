@@ -20,10 +20,12 @@
 			return {
 				Color: '#DE2910',
 				value: '',
-				backColor: '#FFFFFF'
+				backColor: '#FFFFFF',
+				type: null
 			}
 		},
-		onLoad() {
+		onLoad(option) {
+			this.type = option.type
 			//刷新保留用户uid
 			if (this.getRequest('uid')) {
 				var uids = this.getRequest('uid')
@@ -48,9 +50,23 @@
 				})
 			},
 			look() {
-				uni.navigateTo({
-					url: '../shopList/shopList'
-				})
+				if (this.type == 1) {
+					uni.navigateTo({
+						url: '../stageOrder/stageOrder'
+					})
+				} else if(this.type == 2){
+					uni.navigateTo({
+						url: '../veryOrder/veryOrder'
+					})
+				} else if(this.type == 3) {
+					uni.navigateTo({
+						url: '../trainState/trainState'
+					})
+				} else {
+					uni.navigateTo({
+						url: '../shopList/shopList'
+					})
+				}
 			}
 		}
 	}
@@ -61,14 +77,14 @@
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.contain {
 		width: 100%;
 		height: 100%;
 		background: #F9F9F9;
 		position: relative;
 	}
-	
+
 	.list {
 		width: 100%;
 		height: 100%;
@@ -77,18 +93,18 @@
 		align-items: center;
 		justify-content: sapce-around;
 	}
-	
+
 	.list>img {
 		width: 260upx;
 		margin-top: 200upx;
 	}
-	
+
 	.suc {
 		font-size: 20px;
 		color: #DE2910;
 		margin-top: 100upx;
 	}
-	
+
 	.look {
 		width: 80%;
 		height: 90upx;

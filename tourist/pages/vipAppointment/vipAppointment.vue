@@ -183,15 +183,50 @@
 					data: datas,
 					success: function(res){
 						if(res.data.result == 0){
-							uni.navigateTo({
-								url: '../pay/pay?id=' + self.id + '&order=' + res.data.orderId
-							})
+							let orderId = res.data.orderId
+							let appId = res.data.body.appId
+							let timeStamp = res.data.body.timeStamp
+							let nonceStr = res.data.body.nonceStr
+							let packages = res.data.body.prepay
+							let signType = res.data.body.signType
+							let paySign = res.data.body.paySign
+							self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign, orderId)
 						}else{
 							Toast(res.data.resultNote)
 						}
 					}
 				}
 				ajax(data)
+			},
+			onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign,orderId) {
+				let self = this
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest', {
+						'appId': appId,
+						'timeStamp': timeStamp,
+						'nonceStr': nonceStr,
+						'package': packages,
+						'signType': signType,
+						'paySign': paySign
+					},
+					function(res) {
+						if (res.err_msg === 'get_brand_wcpay_request:ok') {
+							self.sub = false
+							Toast("您已成功预约贵宾厅")
+							setTimeout(function(){
+								uni.navigateTo({
+									url: '../vipOrder/vipOrder'
+								})
+							},500)
+						} else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
+							self.sub = false
+							Toast('用户取消支付')
+						} else if (res.err_msg === 'get_brand_wcpay_request:fail') {
+							self.sub = false
+							Toast('网络异常，请重试')
+						}
+					}
+				)
 			},
 			goOrder() {
 				if(this.time == '请选择到厅时间'){
@@ -227,9 +262,12 @@
 					data: datas,
 					success: function(res){
 						if(res.data.result == 0){
-							uni.navigateTo({
-								url: '../vipOrder/vipOrder'
-							})
+							Toast("您已成功预约贵宾厅")
+							setTimeout(function(){
+								uni.navigateTo({
+									url: '../vipOrder/vipOrder'
+								})
+							},500)
 						}else{
 							Toast(res.data.resultNote)
 						}

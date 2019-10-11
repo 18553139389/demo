@@ -24,10 +24,6 @@
 				<view class="title">证件号码</view>
 				<input placeholder="请输入身份证号" name="input" :disabled="type" v-model="card"></input>
 			</view>
-			<!-- <view class="cu-form-group" v-if="type">
-				<view class="title">收货地址</view>
-				<input placeholder="请选择省市县" name="input" :disabled="true" v-model="region"></input>
-			</view> -->
 			<view class="cu-form-group" v-if="type == 0" @tap="openPicker">
 				<view class="title">收货地址</view>
 				<input placeholder="请选择省市县" name="input" :disabled="true" v-model="region"></input>
@@ -74,9 +70,7 @@
 	} from '../../common/js/util.js'
 	import lotusAddress from "../../components/Winglau14-lotusAddress/Winglau14-lotusAddress.vue"
 	import jweixin from '../../common/js/wx.js'
-	import {
-		Toast
-	} from 'vant'
+	import {Toast} from 'vant'
 	export default {
 		data() {
 			return {
@@ -276,6 +270,7 @@
 				ajax(data)
 			},
 			onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign, orderId) {
+				let self = this
 				WeixinJSBridge.invoke(
 					'getBrandWCPayRequest', {
 						'appId': appId,
@@ -303,8 +298,13 @@
 											if (res.data.state == 1) {
 												uni.hideLoading()
 												clearInterval(timer)
+												let datas = {
+													type: parseInt(self.cards) + 1,
+													cardType: self.cardType,
+													time: res.data.endDate
+												}
 												uni.navigateTo({
-													url: '../sucResult/sucResult?type=' + res.data.cardType + '&time=' + res.data.endDate
+													url: '../sucResult/sucResult?list='+JSON.stringify(datas)
 												})
 											} 
 										}

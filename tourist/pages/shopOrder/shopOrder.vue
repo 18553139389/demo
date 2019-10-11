@@ -15,18 +15,18 @@
 			<img class="list_left" :src="list.image" alt="">
 			<view class="list_right">
 				<view class="name">{{list.title}}</view>
-				<view class="score" v-if="list.type == 2" style="margin-top: 20upx;font-size: 12px;">积分：{{list.point}}</view>
+				<view class="score" v-if="list.type == 2" style="margin-top: 20upx;font-size: 12px;">纪念币：{{list.point}}</view>
 				<view class="price">
 					<view class="newPrice" v-if="list.type == 1">￥{{list.oldPrice}}</view>
 					<view class="newPrice" v-if="list.type == 2">￥{{parseFloat(list.price)}}</view>
 					<view class="oldPrice" v-if="list.type == 2" style="margin-right: 60upx;">￥{{parseFloat(list.oldPrice)}}</view>
-					<view class="score" v-if="list.type == 3">积分：{{list.point}}</view>
+					<view class="score" v-if="list.type == 3">纪念币：{{list.point}}</view>
 					<van-stepper v-model="values" integer :min="1" disable-input input-width="24px" button-size="20px" />
 				</view>
 			</view>
 		</view>
 		<!-- <view class="count">
-			<view>积分余额</view>
+			<view>纪念币余额</view>
 			<view class="num">2000</view>
 		</view> -->
 		<view class="beizhu">
@@ -37,7 +37,7 @@
 			<view class="total">
 				实付款：
 				<text v-if="list.type != 3" style="color: #DE2910;">￥{{total}}</text>
-				<text v-if="list.type == 3" style="color: #DE2910;">{{scores}}积分</text>
+				<text v-if="list.type == 3" style="color: #DE2910;">{{scores}}纪念币</text>
 			</view>
 			<view class="submit" @tap="money">立即购买</view>
 		</view>

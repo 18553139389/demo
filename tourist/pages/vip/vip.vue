@@ -499,7 +499,7 @@
 		width: 66upx;
 		height: 66upx;
 		margin-bottom: 12upx;
-		border-radius: 50%;
+		/* border-radius: 50%; */
 	}
 
 	.btn {
