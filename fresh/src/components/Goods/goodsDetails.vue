@@ -385,12 +385,11 @@ export default {
           scene: ex
         }
       };
-      msg.href = "http://www.lixinapp.com/";
+      msg.href = "https://a.app.qq.com/o/simple.jsp?pkgname=lixin.com.xiangxianperject";
       msg.title = "山城乡鲜";
-      msg.content =
-        "山城乡鲜是一个专注于健康食品，包括水果、蔬菜、肉类、特产、海鲜、无公害及高品质的有机农产品等优质生鲜食材采购，并配套新鲜物流的服务平台。";
+      msg.content ="山城乡鲜是致力于打造绿色无污染农产品销售链的平台,让大家足不出户就可以吃遍中国原产地的特色美食。";
       if (~share.id.indexOf("weibo")) {
-        msg.content += "；体验地址：http://www.lixinapp.com/";
+        msg.content += "；体验地址：https://a.app.qq.com/o/simple.jsp?pkgname=lixin.com.xiangxianperject";
       }
       msg.thumbs = ["_www/images/logo.png"];
       share.send(

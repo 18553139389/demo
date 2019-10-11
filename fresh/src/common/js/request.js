@@ -14,71 +14,70 @@ axios.defaults.timeout = 10000
 
 // post请求
 function postRequest(data = {}, method = 'post') {
-	return new Promise((resolve, reject) => {
-		axios({
-			url: encodeURI('http://39.108.249.42/api/customer/services?json=' + JSON.stringify(data)),
-			method: method,
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(res => {
-				//成功
-				resolve(res)
-			})
-			.catch(res => {
-				//失败
-				reject(res)
-			})
-	})
+  return new Promise((resolve, reject) => {
+    axios({
+        url: encodeURI('http://39.108.249.42/api/customer/services?json=' + JSON.stringify(data)),
+        method: method,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        //成功
+        resolve(res)
+      })
+      .catch(res => {
+        //失败
+        reject(res)
+      })
+  })
 }
 
 function postCommon(data = {}, method = 'post') {
-	return new Promise((resolve, reject) => {
-		axios({
-			url: encodeURI('http://39.108.249.42/api/common/services?json=' + JSON.stringify(data)),
-			method: method,
-			headers: {
-				'Content-Type': 'text/plain'
-			}
-		})
-			.then(res => {
-				//成功
-				resolve(res)
-			})
-			.catch(res => {
-				//失败
-				reject(res)
-			})
-	})
+  return new Promise((resolve, reject) => {
+    axios({
+        url: encodeURI('http://39.108.249.42/api/common/services?json=' + JSON.stringify(data)),
+        method: method,
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      })
+      .then(res => {
+        //成功
+        resolve(res)
+      })
+      .catch(res => {
+        //失败
+        reject(res)
+      })
+  })
 }
 
 
 function postFile(data = {}, method = 'post') {
-	return new Promise((resolve, reject) => {
-		axios({
-			url: encodeURI('http://39.108.249.42/api/uploadFile'),
-			method: method,
-			data: data,
-			headers: {
-				'Content-Type': 'application/json'
-
-			}
-		})
-			.then(res => {
-				//成功
-				resolve(res)
-			})
-			.catch(res => {
-				//失败
-				reject(res)
-			})
-	})
+  return new Promise((resolve, reject) => {
+    axios({
+        url: encodeURI('http://39.108.249.42/api/uploadFile'),
+        method: method,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        //成功
+        resolve(res)
+      })
+      .catch(res => {
+        //失败
+        reject(res)
+      })
+  })
 }
 
 
 export default {
-	postRequest,
-	postCommon,
-	postFile
+  postRequest,
+  postCommon,
+  postFile
 }

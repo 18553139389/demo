@@ -129,12 +129,12 @@ export default {
       localStorage.removeItem("userzhu");
     },
     xie() {
-      this.$router.push("fei");
+      this.$router.push("/provisions");
       let userzhu = {
-        phone: this.tel,
-        password: this.password,
-        repeatPass: this.repeatPass,
-        code: this.code
+      	phone: this.tel,
+      	password: this.password,
+      	repeatPass: this.repeatPass,
+      	code: this.code
       };
       localStorage.setItem("userzhu", JSON.stringify(userzhu));
     },
