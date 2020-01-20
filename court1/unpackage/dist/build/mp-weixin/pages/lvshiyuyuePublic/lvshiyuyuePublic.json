@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "律师预约",
+  "usingComponents": {
+    "date-picker": "/components/dy-Date/dy-Date"
+  }
+}

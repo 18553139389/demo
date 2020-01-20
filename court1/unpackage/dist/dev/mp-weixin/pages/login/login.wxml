@@ -1,0 +1,1 @@
+<view class="contain"><view class="list"><button type="primary" open-type="getUserInfo" data-event-opts="{{[['getuserinfo',[['getuser',['$event']]]]]}}" bindgetuserinfo="__e">授权登陆</button></view></view>

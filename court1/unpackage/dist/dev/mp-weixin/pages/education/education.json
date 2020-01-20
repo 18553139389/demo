@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "自护教育",
+  "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
+}

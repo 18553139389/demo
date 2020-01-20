@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "代表委员建议",
+  "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
+}

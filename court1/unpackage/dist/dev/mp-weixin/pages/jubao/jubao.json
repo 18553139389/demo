@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "举报",
+  "usingComponents": {
+    "robby-image-upload": "/components/robby-image-upload/robby-image-upload"
+  }
+}

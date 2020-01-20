@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "件件有回复",
+  "usingComponents": {
+    "robby-image-upload": "/components/robby-image-upload/robby-image-upload"
+  }
+}

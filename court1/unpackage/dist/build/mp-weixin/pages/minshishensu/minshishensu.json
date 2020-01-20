@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "民事申诉",
+  "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
+}
