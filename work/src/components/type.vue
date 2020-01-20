@@ -59,13 +59,15 @@
 					Toast('服务器维护')
 					return
 				}
+        
+        this.$router.push('/business_one')
 				
-				if(this.num > 3) {
-					Toast('您已超过申请上限')
-					return
-				}else{
-					this.$router.push('/business_one')
-				}
+				// if(this.num > 3) {
+				// 	Toast('您已超过申请上限')
+				// 	return
+				// }else{
+				// 	this.$router.push('/business_one')
+				// }
 			},
 			goPerson() {
 				if(this.type == 2) {

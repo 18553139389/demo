@@ -1,5 +1,5 @@
 <template>
-	<div class="login">
+	<div class="login" ref="bodys">
 		<div class="head">切换交警</div>
 		<div class="welcome">
 			<div class="wel_img">
@@ -110,14 +110,14 @@
 		align-items: center;
 		margin-bottom: 0.5rem;
 	}
-	
+
 	.input_list input {
 		width: 80%;
 		height: 1rem;
 		border: none;
 		font-size: 15px;
 	}
-	
+
 	.modify {
 		width: 100%;
 		display: flex;
@@ -126,12 +126,12 @@
 		padding: 0 3px;
 		box-sizing: border-box;
 	}
-	
+
 	.modify span {
 		font-size: 15px;
 		color: #333;
 	}
-	
+
 	.submitBtn {
 		width: 100%;
 		height: 1.2rem;
@@ -141,7 +141,7 @@
 		color: #fff;
 		margin-top: 1rem;
 	}
-	
+
 	.submitBtn:hover {
 		background: rgb(23,172,230);
 	}
