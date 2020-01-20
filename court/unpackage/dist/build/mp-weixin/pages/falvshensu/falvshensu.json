@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "法律服务",
+  "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
+}

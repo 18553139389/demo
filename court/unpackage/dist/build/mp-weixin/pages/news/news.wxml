@@ -1,0 +1,1 @@
+<view class="contain"><view class="list"><view class="tit">{{list.title}}</view><view class="message" style="padding-top:30rpx;"><view>{{list.publisher}}</view><view>{{list.createDate}}</view></view><view class="content"><u-parse vue-id="1" content="{{article}}" bind:__l="__l"></u-parse></view></view></view>

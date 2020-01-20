@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "公益诉讼随手拍",
+  "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "公益诉讼随手拍",
+  "usingComponents": {
+    "robby-image-upload": "/components/robby-image-upload/robby-image-upload"
+  }
+}
