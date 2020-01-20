@@ -1,0 +1,80 @@
+<view class="box_lis">
+  <view class="lis">
+    <view class="name">设备：</view>
+    <view class="number">{{deviceNum}}</view>
+  </view>
+
+  <view class="lis">
+    <view class="name">医院：</view>
+    <view class="box_dv" bindtap='getBoxmsk'>{{yiyuanName}}</view>
+    <view class="box_dv_flag">
+      <image src='../../image/27.png'></image>
+    </view>
+  </view>
+
+  <view class="lis">
+    <view class="name">科室：</view>
+    <view class="box_dv" bindtap='getBoxKshi'>{{keshiName}}</view>
+    <view class="box_dv_flag">
+      <image src='../../image/27.png'></image>
+    </view>
+  </view>
+
+  <view class="lis">
+    <view class="name">房号：</view>
+    <view class="info">室</view>
+    <view class="box_dv2">
+      <view class="section">
+        <input class="ipt" bindinput='getfang' value='{{fanhao}}' />
+      </view>
+    </view>
+  </view>
+
+  <view class="lis">
+    <view class="name">床号：</view>
+    <view class="info">床</view>
+    <view class="box_dv2">
+      <view class="section">
+        <input class="ipt" bindinput='getchuang' value='{{chao}}'/>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view class="submitbtn" bindtap='submitbtn'>确认入库</view>
+
+
+<view class="boxyuan {{boxStatus ? '':'activeClass'}}">
+  <view class="boxbox">
+    <view class="title">切换医院</view>
+   <scroll-view scroll-y style='height:893rpx;overflow:scroll;-webkit-overflow-scrolling:touch;'>
+    <view wx:for="{{hospitalList}}" wx:key="item.id" class="lis" bindtap='clickYuan' data-yiname="{{item.hospitalName}}" data-yiid="{{item.id}}">
+      {{item.hospitalName}}
+      <view class="tux">
+        <image src='../../image/26.png'></image>
+      </view>
+      <view class="flagtu">></view>
+    </view>
+   </scroll-view>
+  </view>
+
+  <view class="clearX" bindtap='closeBox'>×</view>
+</view>
+
+<view class="boxyuan {{boxStatusKshi ? '':'activeClass'}}">
+  <view class="boxbox">
+    <view class="title">切换科室</view>
+   <scroll-view scroll-y style='height:893rpx;overflow:scroll;-webkit-overflow-scrolling:touch;'>
+    <view wx:for="{{departList}}" wx:key="item.id" class="lis" bindtap='clickshi' data-kename="{{item.departName}}" data-keid="{{item.id}}">
+      {{item.departName}}
+      <view class="tux">
+        <image src='../../image/26.png'></image>
+      </view>
+      <view class="flagtu">></view>
+    </view>
+  </scroll-view>
+  </view>
+
+  <view class="clearX" bindtap='closeBox'>×</view>
+</view>

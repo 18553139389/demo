@@ -1,0 +1,21 @@
+<view class="edit">
+  <view class="left">手机号码：</view>
+
+  <view class="section">
+    <input type="number" placeholder='请输入手机号码' bindinput='getphone' />
+  </view>
+
+</view>
+
+<view class="edit yan">
+  <view class="left">验证码：</view>
+
+  <view class="section">
+    <input type="number" placeholder='请输入验证码' bindinput='getyanma' />
+  </view>
+
+  <view class="getyan" bindtap='sendcode'>{{tips}}</view>
+
+</view>
+
+<view class="binding" bindtap='submit'>绑定</view>

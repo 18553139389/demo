@@ -1,0 +1,85 @@
+.title {
+  box-sizing: border-box;
+  width: 100%;
+  height: 78rpx;
+  font-size: 28rpx;
+  line-height: 78rpx;
+  padding: 0 70rpx;
+}
+
+.title .tit1 {
+  float: left;
+}
+
+.title .tit2 {
+  float: right;
+  color: #666666;
+}
+
+.content {
+  width: 90%;
+  height: 250rpx;
+  margin: 2rpx auto 0;
+  border: 1rpx solid #f0f0f0;
+  box-shadow: #f0f0f0 1rpx 1rpx 30rpx 2rpx;
+  font-size: 30rpx;
+}
+
+.content .title2 {
+  margin-top: 28rpx;
+  margin-left: 30rpx;
+}
+
+.content .iptdv {
+  font-size: 36rpx;
+  margin: 0 auto;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+  height: 90rpx;
+  width: 90%;
+  line-height: 89rpx;
+  position: relative;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.content .iptdv .ipt {
+  height: 80rpx;
+  width: 90%;
+  position: absolute;
+  top: 5rpx;
+  left: 30rpx;
+}
+
+.placeholder {
+  font-size: 30rpx;
+}
+
+.content .xiam {
+  font-size: 26rpx;
+}
+
+.content .xiam .xia1{
+  color: #666666;
+  float: left;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+
+.content .xiam .xia2{
+  color: #1197f6;
+  float: right;
+  margin-right: 30rpx;
+  margin-top: 20rpx;
+}
+
+.recharge {
+  width: 448rpx;
+  height: 70rpx;
+  background-color: #1197f6;
+  border-radius: 70rpx;
+  margin: 100rpx auto 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  line-height: 70rpx;
+}

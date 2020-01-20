@@ -1,0 +1,96 @@
+<view class="title">温馨提示：优惠卡必须在购卡医院使用</view>
+
+
+<view wx:for="{{list}}" wx:key="item.cardId" class="bjdv" style="background-image: url('{{pop}}');background-repeat:no-repeat; background-size: cover">
+
+  <!--      **type:""//卡类型：0-时段卡，1-小时卡,2-天卡
+            **timeType:""//时间类型：0-中午，1-晚上(时段卡时用)
+            **timeSlot:""//时段(时段卡时用)
+            **lastNum:""//时段卡时：剩余次数，小时卡时：剩余小时数,天卡：剩余天数
+            **hospitalName:""//医院名称
+            **orderNum:""//订单编号
+            **deviceNum:""//设备编号
+            yajin:""//设备押金（主要用于去支付页面） -->
+  <!-- 时段卡 -->
+  <block wx:if="{{item.type == '0'}}">
+    <view class="timetxt">时段卡</view>
+
+    <block wx:if="{{item.timeType == '0'}}">
+      <view class="timedv">中午 ({{item.timeSlot}})</view>
+    </block>
+    <block wx:if="{{item.timeType == '1'}}">
+      <view class="timedv">晚上 ({{item.timeSlot}})</view>
+    </block>
+
+    <view class="yiyuan">{{item.hospitalName}}</view>
+
+    <view class="num">{{item.lastNum}}</view>
+    <view class="numtxt">剩余次数</view>
+    <view class="numbtn" bindtap='openkaipay' data-flag='0' data-cardid='{{item.id}}' data-yajin="{{item.yajin}}">
+      <form class="form_item" bindsubmit='gorRunnerLobby' report-submit='true'>
+        <button class="btns" form-type='submit'>去使用</button>
+      </form>
+    </view>
+  </block>
+
+  <!-- 小时卡 -->
+  <block wx:if="{{item.type == '1'}}">
+    <view class="timetxt">小时卡</view>
+    <view class="timetxt2">订单号{{item.orderNum}}</view>
+    <view class="timedv">{{item.timeSlot}}小时</view>
+    <view class="yiyuanxiao">{{item.hospitalName}}</view>
+    <view class="jinx">仅限设备{{item.deviceNum}}使用</view>
+
+    <view class="num">{{item.lastNum}}h</view>
+    <view class="numtxt">剩余时间</view>
+    <view class="numbtn" bindtap='openkaipayor' data-flag='1' data-cardid='{{item.id}}' data-yajin="{{item.yajin}}" data-num='{{item.deviceNum}}'>
+      <form class="form_item" bindsubmit='gorRunnerLobby' report-submit='true'>
+        <button class="btns" form-type='submit'>去使用</button>
+      </form>
+    </view>
+    <view class='tuibtn' bindtap='tui' data-ordernum='{{item.orderNum}}'>退押金</view>
+  </block>
+
+  <!-- 天卡 -->
+  <block wx:if="{{item.type == '2'}}">
+    <view class="timetxt">天卡</view>
+    <view class="timetxt2">订单号{{item.orderNum}}</view>
+    <view class="timedv">到期时间：{{item.timeSlot}}</view>
+    <view class="yiyuanxiao">{{item.hospitalName}}</view>
+    <view class="jinx">仅限设备{{item.deviceNum}}使用</view>
+
+    <view class="numbtn" bindtap='openkaipayor' data-flag='2' data-cardid='{{item.id}}' data-yajin="{{item.yajin}}" data-num='{{item.deviceNum}}'>
+      <form class="form_item" bindsubmit='gorRunnerLobby' report-submit='true'>
+        <button class="btns" form-type='submit'>去使用</button>
+      </form>
+    </view>
+  </block>
+
+
+
+</view>
+
+<!-- 小时卡
+<view class="bjdv" style="background: url('../../image/29.png') no-repeat; background-size: cover">
+  <view class="timetxt">小时卡</view>
+  <view class="timetxt2">订单号123456789905</view>
+  <view class="timedv">3小时</view>
+  <view class="yiyuanxiao">郑州大学附属医院</view>
+  <view class="jinx">仅限设备175962使用</view>
+
+  <view class="num">8h</view>
+  <view class="numtxt">剩余时间</view>
+  <view class="numbtn">去使用</view>
+</view>
+ -->
+<!-- 天卡 
+<view class="bjdv" style="background: url('../../image/29.png') no-repeat; background-size: cover">
+  <view class="timetxt">天卡</view>
+  <view class="timetxt2">订单号123456789905</view>
+  <view class="timedv">到期时间：2018/05/25 15:00</view>
+  <view class="yiyuanxiao">郑州大学附属医院</view>
+  <view class="jinx">仅限设备175962使用</view>
+
+  <view class="numbtn">去使用</view>
+</view>
+-->

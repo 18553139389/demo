@@ -1,0 +1,45 @@
+<view class="header">
+  <view class="imgdv">
+    <image src='../../image/chenggong01.png'></image>
+  </view>
+
+  <text class="txt">支付成功！</text>
+</view>
+
+<view class="btnOrder" bindtap='openorder'>返回首页</view>
+
+<!-- 轮播图 -->
+<view class="carousel">
+  <swiper class="swiper" indicator-dots="true" autoplay="true" interval="6000" duration="1000" circular="true">
+
+    <block wx:for="{{movies}}" wx:for-index="index">
+      <swiper-item>
+        <image src="{{item.url}}" class="slide-image" data-cons="{{item.content}}" bindtap='openguideDetail' mode="aspectFill" />
+      </swiper-item>
+    </block>
+
+  </swiper>
+</view>
+
+<!-- 弹框背景广告 -->
+<view class="adbj" wx:if="{{closeBox}}">
+  <view class="adimg">
+    <image src='{{boxImg}}'></image>
+  </view>
+
+  <view class="yuan" bindtap='closeBox'>×</view>
+</view>
+
+ <view class="body-view">
+                <loading hidden="{{shows}}">
+                        正在开锁 请稍等
+                </loading>
+        </view>
+
+<view class='zzc' wx-if="{{shayy}}"></view>
+ <view class='tank'  wx-if="{{shayy}}">
+ <!-- {{sha}} -->
+    <view class='tank_tit'>开锁失败</view>
+    <view class="tank_cen">金额已原路退回，请退出小程序后扫码开锁</view>
+    <navigator open-type="exit" target="miniProgram">退出小程序</navigator><view class="tk_qx" bindtap='qx_tk'>取消</view>
+ </view>         

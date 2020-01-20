@@ -1,0 +1,9 @@
+<view class="content">
+  <view class="title">充值金额：</view>
+
+  <view class="iptdv">¥
+    <input class="ipt" type="text" placeholder='请输入金额' placeholder-class="placeholder" bindinput='getmoney' />
+  </view>
+</view>
+
+<view class="recharge" bindtap='clickrecharge'>立即充值</view>

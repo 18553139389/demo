@@ -1,0 +1,88 @@
+<view class="liss">
+  <view class="lis_cont">
+    <text class="lis_title">{{infodata.hospitalName}}</text>
+
+    <text class="lis_code">{{infodata.deviceNum}}</text>
+
+    <text class="lis_info">{{infodata.departName}} {{infodata.roomNo}}室 {{infodata.bedNo}}床</text>
+
+    <block wx:if="{{infodata.orderType == '0'}}">
+      <block wx:if="{{infodata.timeType == '0'}}">
+        <text class="lis_time">中午 {{infodata.timeSlot}}</text>
+      </block>
+
+      <block wx:if="{{infodata.timeType == '1'}}">
+        <text class="lis_time">晚上 {{infodata.timeSlot}}</text>
+      </block>
+    </block>
+
+    <block wx:if="{{infodata.orderType == '1'}}">
+      <text class="lis_time">{{infodata.timeSlot}}h</text>
+    </block>
+
+    <block wx:if="{{infodata.orderType == '2'}}">
+      <text class="lis_time">{{infodata.timeSlot}}天</text>
+    </block>
+
+    <view class="lis_flag">
+      <image src='../../image/12.png'></image>
+    </view>
+  </view>
+
+  <view class="box_info">
+    <!-- <view class="box_info_li">
+      <view class="box_info_li_left">到期时间</view>
+      <view class="box_info_li_right">{{infodata.endTime}}</view>
+    </view>
+
+    <view class="box_info_li">
+      <view class="box_info_li_left">逾期时间</view>
+      <view class="box_info_li_right">{{infodata.timeOut}}</view>
+    </view> -->
+
+    <view class="box_info_li">
+      <view class="box_info_li_left">用户名称</view>
+      <view class="box_info_li_right">{{infodata.nickName}}</view>
+    </view>
+
+    <view class="box_info_li">
+      <view class="box_info_li_left">联系电话</view>
+      <view class="box_info_li_right">{{infodata.phoneNum}}</view>
+    </view>
+
+    <view class="box_info_li">
+      <view class="box_info_li_left">订单总价</view>
+      <view class="box_info_li_right">¥ {{infodata.totalMoney}}</view>
+    </view>
+
+    <!-- 用户有  运维无 -->
+    <block wx:if="{{userType == '0'}}">
+      <view class="box_info_li">
+        <view class="box_info_li_left">积分抵现</view>
+        <view class="box_info_li_right">¥ {{infodata.cashMoney}}</view>
+      </view>
+    </block>
+
+  </view>
+</view>
+
+<view class="order_info">
+  <view class="title">订单信息</view>
+
+  <view class="order_info_li">
+    订单编号：{{infodata.orderNum}}
+  </view>
+
+  <view class="order_info_li">
+    创建时间：{{infodata.adtime}}
+  </view>
+
+  <view class="order_info_li">
+    开始时间：{{infodata.startTime}}
+  </view>
+
+  <view class="order_info_li">
+    归还时间：{{infodata.returnTime}}
+  </view>
+
+</view>

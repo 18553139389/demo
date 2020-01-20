@@ -1,0 +1,78 @@
+<view class="bjqiang">
+  <view class="avatar">
+    <image src='{{userinfo.userIcon}}'></image>
+  </view>
+  <text class="nametxt">{{userinfo.nickName}}</text>
+</view>
+
+<view class="uls">
+  <view class="lis">
+    <view class="lis_left">手机号</view>
+    <view class="lis_right">
+      <text class="txt_left">{{userinfo.phoneNum}}</text>
+      <text class="txt_right" bindtap='openeditPhone'>更改</text>
+    </view>
+  </view>
+
+  <view class="lis">
+    <view class="lis_left">性别</view>
+    <block wx:if="{{userinfo.gender.length <= 0}}">
+      <view class="lis_right">
+        <view class="section">
+          <input type="text" placeholder='请输入性别' bindinput='getgender' />
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{userinfo.gender.length != 0}}">
+      <block wx:if="{{userinfo.gender == '0'}}">
+        <view class="lis_right">未知</view>
+      </block>
+
+      <block wx:if="{{userinfo.gender == '1'}}">
+        <view class="lis_right">男</view>
+      </block>
+
+      <block wx:if="{{userinfo.gender == '2'}}">
+        <view class="lis_right">女</view>
+      </block>
+    </block>
+
+  </view>
+
+  <view class="lis">
+    <view class="lis_left">年龄</view>
+
+    <block wx:if="{{userinfo.age.length <= 0}}">
+      <view class="lis_right">
+        <view class="section">
+          <input type="number" placeholder='请输入年龄' bindinput='getage' />
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{userinfo.age.length != 0}}">
+      <view class="lis_right">
+        <view class="lis_right">{{userinfo.age}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="lis">
+    <view class="lis_left">居住地</view>
+
+    <block wx:if="{{userinfo.address.length <= 0}}">
+      <view class="lis_right">
+        <view class="section">
+          <input type="text" placeholder='请输入地址' bindinput='getaddress' />
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{userinfo.address.length != 0}}">
+      <view class="lis_right">{{userinfo.address}}</view>
+    </block>
+  </view>
+</view>
+
+<view class="savebtn" bindtap='submit'>保存</view>

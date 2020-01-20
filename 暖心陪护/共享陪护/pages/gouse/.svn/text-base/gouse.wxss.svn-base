@@ -1,0 +1,113 @@
+/* pages/gouse/gouse.wxss */
+.header {
+  width: 92%;
+  height: 162rpx;
+  margin: 20rpx auto 0;
+  border: 1px solid #f0f0f0;
+  box-shadow: #f0f0f0 1rpx 1rpx 10rpx 1rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 162rpx;
+  font-weight: 700;
+}
+
+.header .amount {
+  font-size: 32rpx;
+  color: #eb2932;
+}
+
+.payment {
+  margin: 20rpx auto 0;
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #1197f6;
+}
+
+.payment .pay_txt1, .pay_txt2 {
+  display: inline-block;
+  width: 96rpx;
+  height: 1rpx;
+  background-color: #1197f6;
+}
+
+.payment .pay_txt1 {
+  margin-right: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.payment .pay_txt2 {
+  margin-left: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.payment .pay_txt {
+  display: inline-block;
+  margin-top: 30rpx;
+}
+
+.paymentPay .heng {
+  width: 92%;
+  height: 120rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  margin: 20rpx auto 0;
+  font-size: 30rpx;
+  line-height: 120rpx;
+}
+
+.paymentPay .heng .radio {
+  width: 100%;
+  display: inline-block;
+}
+
+.paymentPay .heng .radio .imgs {
+  width: 62rpx;
+  height: 62rpx;
+  display: inline-block;
+  background-color: orange;
+  margin-bottom: -20rpx;
+  margin-right: 20rpx;
+}
+
+.paymentPay .heng .radio image {
+  width: 62rpx;
+  height: 62rpx;
+  display: inline-block;
+  margin-bottom: -20rpx;
+  margin-right: 20rpx;
+}
+
+.paymentPay .heng .radio .zfye {
+  color: #f18c16;
+  font-size: 26rpx;
+}
+
+.paymentPay .heng .radcont {
+  float: right;
+}
+
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 27rpx;
+  height: 27rpx;
+}
+
+/* radio .wx-radio-input.wx-radio-input-checked {
+   border: 1px solid #1197f6; *//* background-color: #1197f6; 
+} */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  background-color: #1197f6;
+}

@@ -1,0 +1,75 @@
+<view class='liststyle'>
+<view class="navBox clear">
+  <view class="tabar1 {{tab_index == 0?'activeTabar':''}}" bindtap='clickTabar' data-tab="0">使用中</view>
+  <view class="tabar2 {{tab_index == 1?'activeTabar':''}}" bindtap='clickTabar' data-tab="1">已完成</view>
+</view>
+
+
+<!-- <block wx:if="{{tab_index == 0}}"> -->
+<view class="liss" wx:for="{{list}}" wx:key="item.id" >
+  <view class="lis_cont" bindtap='openDetial' data-oid="{{item.id}}">
+    <text class="lis_title">{{item.hospitalName}}</text>
+
+    <text class="lis_code">{{item.deviceNum}}</text>
+
+    <text class="lis_info">{{item.departName}} {{item.roomNo}}室 {{item.bedNo}}床</text>
+
+
+    <!-- 订单类型：0-时段卡订单，1-小时卡订单,2-天卡订单 -->
+    <!-- 时段卡 -->
+    <block wx:if="{{item.orderType == '0'}}">
+      <block wx:if="{{item.timeType == '0'}}">
+        <text class="lis_time">中午 {{item.timeSlot}}</text>
+      </block>
+
+      <block wx:if="{{item.timeType == '1'}}">
+        <text class="lis_time">晚上 {{item.timeSlot}}</text>
+      </block>
+    </block>
+
+    <!-- 小时卡 -->
+    <block wx:if="{{item.orderType == '1'}}">
+      <text class="lis_time">{{item.timeSlot}}h</text>
+    </block>
+
+    <!-- 天卡 -->
+    <block wx:if="{{item.orderType == '2'}}">
+      <text class="lis_time">{{item.timeSlot}}天</text>
+    </block>
+
+
+    <view class="lis_flag">
+      <image src='../../image/12.png'></image>
+    </view>
+  </view>
+
+  <view class="lis_bottom">
+    <view class="lis_left">到期时间：{{item.endTime}}</view>
+    <!-- 天卡 -->
+    <!-- <block wx:if="{{item.orderType == '2'}}"></block> -->
+      <!-- 设备状态：0-关，1-开 -->
+      <!-- <block wx:if="{{item.deviceStatus == '1'}}">
+        <view class="lis_guan" bindtap='opensaoma'>关锁</view>
+      </block> -->
+
+      <block wx:if="{{item.timeOut.length > 0}}">
+        <view class="chaoshidv">
+          <image src='../../image/chaoshi.png'></image>
+        </view>
+        <view class="naoz">{{item.timeOut}}</view>
+      </block>
+
+    
+    
+  </view>
+</view>
+</view>
+<!-- </block> -->
+
+<view class="searchbtn">
+  <view class="section">
+    <input class="input" bindinput='getInput' placeholder="请输入科室名称/房号/设备号" />
+  </view>
+
+  <view class="searbtn" bindtap='searchBtn'>搜索</view>
+</view>

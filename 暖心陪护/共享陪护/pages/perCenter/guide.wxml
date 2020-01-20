@@ -1,0 +1,5 @@
+<view class="uls">
+  <view wx:for="{{info}}" wx:key="item.id" class="lis" bindtap='openguideDetail' data-cons="{{item.content}}">{{item.title}}
+    <view class="flag">＞</view>
+  </view>
+</view>

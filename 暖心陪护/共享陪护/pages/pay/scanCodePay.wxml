@@ -1,0 +1,128 @@
+<view class="cont">
+  <view>医院：
+    <text>{{payList.hospitalName}}</text>
+  </view>
+
+  <view>科室：
+    <text>{{payList.departName}}</text>
+  </view>
+
+  <view>房号：
+    <text>{{payList.roomNo}}室</text>
+  </view>
+
+  <view>床号：
+    <text>{{payList.bedNo}}床</text>
+  </view>
+
+  <view>设备：
+    <text>{{payList.deviceNum}}</text>
+  </view>
+</view>
+
+<view class="time clear">
+  <view class="title clear">时间：</view>
+
+  <view class="content clear">
+
+    <!-- 计费类型：0-时段计费，1-小时计费，2-按天计费 -->
+    <!-- 时段卡 -->
+    <block wx:if="{{payList.type == '0'}}">
+      <radio-group class="radio-group" bindchange="radioChange">
+
+        <view class="time-cont" id='timeDv'>
+          <view class="time-title">时段1 ({{payList.zwTimeSlot}})</view>
+
+          <view class="heng" wx:for="{{payList.zwList}}" wx:key="items.id" wx:for-item="items" bindtap='clickLabel' data-money="{{items.money}}">
+            <label class="radio">
+              <radio class="radcont" value="{{items.id}}" />
+              <view class="txt1">{{items.count}}次 ¥{{items.money}}</view>
+            </label>
+          </view>
+        </view>
+       <block wx-if="{{payList.wsTimeSlot}}">
+        <view class="time-cont" id='timeDv' wx-if="{{payList.zwTimeSlot!=payList.wsTimeSlot}}">
+          <view class="time-title">时段2 ({{payList.wsTimeSlot}})</view>
+
+          <view class="heng" wx:for="{{payList.wsList}}" wx:key="items.id" wx:for-item="items" bindtap='clickLabel' data-money="{{items.money}}">
+            <label class="radio">
+              <radio class="radcont" value="{{items.id}}" />
+              <view class="txt1">{{items.count}}次 ¥{{items.money}}</view>
+            </label>
+          </view>
+        </view>
+       </block>
+      </radio-group>
+    </block>
+
+    <!-- 小时卡 -->
+    <block wx:if="{{payList.type == '1'}}">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <view class="time-cont" id='timeDv'>
+          <view class="heng" wx:for="{{payList.hfList}}" wx:key="items.id" wx:for-item="items" bindtap='clickLabel' data-money="{{items.money}}">
+            <label class="radio">
+              <radio class="radcont" value="{{items.id}}" />
+              <view class="txt1">{{items.count}}小时 ¥{{items.money}}</view>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+    </block>
+
+    <!-- 天卡 -->
+    <block wx:if="{{payList.type == '2'}}">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <view class="time-cont" id='timeDv'>
+          <view class="heng" wx:for="{{payList.hfList}}" wx:key="items.id" wx:for-item="items" bindtap='clickLabel' data-money="{{items.money}}">
+            <label class="radio">
+              <radio class="radcont" value="{{items.id}}" />
+              <view class="txt1">{{items.count}}天 ¥{{items.money}}</view>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+    </block>
+
+  </view>
+
+</view>
+
+
+<view class="integral clear">
+  <!-- 是否首次下单：0-否，1-是 -->
+  <block wx:if="{{payList.isFirst == '1' && typeSataus==0}}">
+    <view class="left">新用户8折优惠</view>
+  </block>
+
+  <!-- 抵现状态：0-关 ，1-开（关的时候不显示） -->
+  <block wx:if="{{dxStatus == '1' && typeSataus==0}}" >
+    <checkbox-group class="right" bindchange="checkboxChange">
+      <label class="checkbox">
+        <checkbox value="{{payList.dxStatus}}" checked='{{checkboxStatus}}' />
+
+        <view class="textinfo">
+          是否使用
+          <text style='color:#ef0000'>{{payList.integral}}</text>分抵扣
+          <text style='color:#ef0000'>{{payList.cashMoney}}</text> 元
+        </view>
+
+      </label>
+    </checkbox-group>
+  </block>
+</view>
+
+<view class="integral2 clear" wx-if="{{typeSataus==0}}">
+  <text class="left">设备押金</text>
+  <text class="right">¥{{payList.yajin}}</text>
+  <text class="pst">按时归还设备立返押金</text>
+</view>
+
+
+<view class="footer">
+  <view class="left">总计：
+    <text style='color:#ef0000'>¥{{amount_count}}</text>
+  </view>
+<view class="right" bindtap='openpaymentPay'>
+  <form class="form_item" bindsubmit='gorRunnerLobby' report-submit='true'>
+    <button class="btns" form-type='submit'>立即支付</button></form></view>
+</view>

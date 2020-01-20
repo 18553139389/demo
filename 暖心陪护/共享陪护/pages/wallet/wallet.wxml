@@ -1,0 +1,9 @@
+<view class="content clear">
+  <view class="title">当前余额(元)</view>
+  <view class="detail" bindtap='opendetails'>交易明细</view>
+  <view class="amount">¥ {{balance}}</view>
+</view>
+
+<view class="recharge" bindtap='openrecharge'>充值</view>
+
+<view class="withdraw" bindtap='openwithdraw'>提现 ＞</view>

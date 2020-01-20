@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "统计报表",
+  "usingComponents": {
+    "date-picker": "../../components/date-picker/date-picker"
+  }
+}

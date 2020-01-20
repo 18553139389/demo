@@ -1,0 +1,40 @@
+<view class="header">
+  支付金额：
+  <text class="amount">¥{{payMoney}}</text>
+</view>
+
+<view class="payment">
+  <text class="pay_txt1"></text>
+  <text class="pay_txt">选择支付方式</text>
+  <text class="pay_txt2"></text>
+</view>
+
+<view class="paymentPay">
+  <radio-group class="radio-group" bindchange="radioChange">
+
+    <view class="heng">
+      <label class="radio">
+        <image src='../../image/zhifu01.png'></image>微信支付
+        <radio class="radcont" value="1" />
+      </label>
+    </view>
+
+    <view class="heng" wx-if="{{typeSataus==0}}">
+      <label class="radio">
+        <image src='../../image/zhifu02.png'></image>余额支付
+        <text class="zfye">(余额 {{balance}})</text>
+        <radio class="radcont" value="0" />
+      </label>
+    </view>
+
+  </radio-group>
+</view>
+
+<view class="footer">
+  <view class="btn" bindtap='opencompay'>
+  <form class="form_item" bindsubmit='gorRunnerLobby' report-submit='true'>
+    <button class="btn" form-type='submit'>
+  立即支付
+  </button></form>
+  </view>
+</view>

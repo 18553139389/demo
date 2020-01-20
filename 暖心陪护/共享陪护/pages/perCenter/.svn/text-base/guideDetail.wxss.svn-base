@@ -1,0 +1,13 @@
+.infotxt .title{
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+}
+
+.infotxt .txt{
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}

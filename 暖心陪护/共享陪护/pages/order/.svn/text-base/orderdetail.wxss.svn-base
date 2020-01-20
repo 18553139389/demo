@@ -1,0 +1,101 @@
+.liss {
+  width: 90%;
+  margin: 28rpx auto 0;
+  box-shadow: #f0f0f0 1rpx 1rpx 30rpx 5rpx;
+  overflow: hidden;
+}
+
+.liss .lis_cont {
+  height: 165rpx;
+  width: 100%;
+  border-bottom: 1rpx solid #f0f0f0;
+  font-size: 30rpx;
+  position: relative;
+}
+
+.liss .lis_cont .lis_title {
+  position: absolute;
+  top: 35rpx;
+  left: 30rpx;
+}
+
+.liss .lis_cont .lis_code {
+  position: absolute;
+  bottom: 20rpx;
+  left: 80rpx;
+  font-size: 28rpx;
+}
+
+.liss .lis_cont .lis_info {
+  color: #666;
+  position: absolute;
+  bottom: 20rpx;
+  right: 40rpx;
+}
+
+.liss .lis_cont .lis_time {
+  position: absolute;
+  top: 40rpx;
+  right: 40rpx;
+  font-size: 26rpx;
+}
+
+.liss .lis_cont .lis_flag {
+  width: 38rpx;
+  height: 38rpx;
+  position: absolute;
+  bottom: 20rpx;
+  left: 38rpx;
+}
+
+.liss .lis_cont .lis_flag image {
+  width: 100%;
+  height: 100%;
+}
+
+.liss .box_info {
+  font-size: 30rpx;
+  color: #666;
+  margin-top: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.liss .box_info .box_info_li {
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.liss .box_info .box_info_li_left {
+  float: left;
+}
+
+.liss .box_info .box_info_li_right {
+  float: right;
+}
+
+.order_info {
+  width: 90%;
+  box-shadow: #f0f0f0 1rpx 1rpx 30rpx 5rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  margin: 20rpx auto 0;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  overflow: hidden;
+  padding-bottom: 30rpx;
+}
+
+.order_info .title {
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-top: 20rpx;
+}
+
+.order_info .order_info_li {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #666;
+}

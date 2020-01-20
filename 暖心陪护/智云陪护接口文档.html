@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <style>
+        h1,h2,h3,h4,h5,h6,p,
+        blockquote {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+            font-size: 13px;
+            line-height: 18px;
+            color: #737373;
+            background-color: white;
+            margin: 10px 13px 10px 13px;
+        }
+        table {
+            margin: 10px 0 15px 0;
+            border-collapse: collapse;
+        }
+        td,th {
+            border: 1px solid #ddd;
+            padding: 3px 10px;
+        }
+        th {
+            padding: 5px 10px;
+        }
+
+        a {
+            color: #0069d6;
+        }
+        a:hover {
+            color: #0050a3;
+            text-decoration: none;
+        }
+        a img {
+            border: none;
+        }
+        p {
+            margin-bottom: 9px;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #404040;
+            line-height: 36px;
+        }
+        h1 {
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+        h2 {
+            font-size: 24px;
+        }
+        h3 {
+            font-size: 18px;
+        }
+        h4 {
+            font-size: 16px;
+        }
+        h5 {
+            font-size: 14px;
+        }
+        h6 {
+            font-size: 13px;
+        }
+        hr {
+            margin: 0 0 19px;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+        }
+        blockquote {
+            padding: 13px 13px 21px 15px;
+            margin-bottom: 18px;
+            font-family:georgia,serif;
+            font-style: italic;
+        }
+        blockquote:before {
+            content:"\201C";
+            font-size:40px;
+            margin-left:-10px;
+            font-family:georgia,serif;
+            color:#eee;
+        }
+        blockquote p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 18px;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        code, pre {
+            font-family: Monaco, Andale Mono, Courier New, monospace;
+        }
+        code {
+            background-color: #fee9cc;
+            color: rgba(0, 0, 0, 0.75);
+            padding: 1px 3px;
+            font-size: 12px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+        pre {
+            display: block;
+            padding: 14px;
+            margin: 0 0 18px;
+            line-height: 16px;
+            font-size: 11px;
+            border: 1px solid #d9d9d9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        pre code {
+            background-color: #fff;
+            color:#737373;
+            font-size: 11px;
+            padding: 0;
+        }
+        sup {
+            font-size: 0.83em;
+            vertical-align: super;
+            line-height: 0;
+        }
+        * {
+            -webkit-print-color-adjust: exact;
+        }
+        @media screen and (min-width: 914px) {
+            body {
+                width: 1000px;
+                margin:10px auto;
+            }
+        }
+        @media print {
+            body,code,pre code,h1,h2,h3,h4,h5,h6 {
+                color: black;
+            }
+            table, pre {
+                page-break-inside: avoid;
+            }
+        }
+
+ .first {
+            width: 300px;
+            float:left;
+            height:100%;
+            position:fixed;
+            overflow-y:scroll;
+            color:rgba(0,0,0,.87);
+            background-color:rgba(239, 239, 239, .5);
+            /* padding-left:-40px; */
+
+        }
+.second {
+            width: 65%;
+            float:right;i
+            height: 100px;
+        }
+
+        #goToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+   }
+#goToTop a {
+     background: none repeat scroll 0 0 #336699;
+     border: 1px solid #CCCCCC;
+     border-radius: 3px;
+     -webkit-border-radius: 3px;
+     color: #FF9966;
+     font-size: 14px;
+     padding: 5px;
+     text-decoration: none;
+     text-shadow: 0 1px 0 #999;
+     -webkit-text-shadow: 0 1px 0 #999;            
+     }
+
+    </style>
+
+
+<div id="goToTop"><a href="#">返回顶部</a></div>
+
+<div class="first"> 
+
+<li>
+    <a href="#1">1 用户授权登录（商户端）</a>
+    <ul>
+        <li><a href="#10">1.0  用户授权登录</a></li>
+        <li><a href="#11">1.1  绑定手机号（包括修改绑定手机号）</a></li>
+        <li><a href="#12">1.2  发送短信验证码</a></li>
+    </ul>
+</li>
+
+<li>
+    <a href="#2">2 首页</a>
+    <ul>
+        <li><a href="#20">2.0 首页</a></li>
+        <li><a href="#21">2.1 关锁页面</a></li>
+        <li><a href="#22">2.2 确认关锁</a></li>
+        <li><a href="#23">2.3 扫码支付页面信息</a></li>
+        <li><a href="#24">2.4 立即下单</a></li>
+        <li><a href="#240">2.4.0 立即支付(在时段内用)</a></li>
+        <li><a href="#241">2.4.1 立即支付(不在时段购卡时用)</a></li>
+        <li><a href="#25">2.5 支付成功页面信息</a></li>
+    </ul>
+</li>
+
+<li>
+    <a href="#3">3 个人中心</a>
+    <ul>
+        <li><a href="#30">3.0 个人中心信息</a></li>
+        <li><a href="#31">3.1 个人信息</a></li>
+        <li><a href="#32">3.2 保存个人信息</a></li>
+        <li><a href="#33">3.3 我的积分(积分明细)</a></li>
+        <li><a href="#34">3.4 故障申报页面信息</a></li>
+        <li><a href="#35">3.5 保存故障申报</a></li>
+        <li><a href="#36">3.6 用户指南</a></li>
+        <li><a href="#37">3.7 实名认证</a></li>
+    </ul>
+</li>
+
+<li>
+    <a href="#4">4 我的卡包</a>
+    <ul>
+        <li><a href="#40">4.0 我的卡包</a></li>
+        <li><a href="#41">4.1 去使用</a></li>
+    </ul>
+</li>
+
+<li>
+    <a href="#5">5 我的订单</a>
+    <ul>
+        <li><a href="#50">5.0 订单列表</a></li>
+        <li><a href="#51">5.1 订单详情</a></li>
+    </ul>
+</li>
+
+<li>
+    <a href="#6">6 我的钱包</a>
+    <ul>
+        <li><a href="#60">6.0 我的钱包</a></li>
+        <li><a href="#61">6.1 充值</a></li>
+        <li><a href="#62">6.2 申请提现</a></li>
+        <li><a href="#63">6.3 交易明细（包含运维中的交易流水）</a></li>
+    </ul>
+</li>
+    
+<li>
+    <a href="#7">7 运维管理</a>
+    <ul>
+        <li><a href="#70">7.0 运维管理首页</a></li>
+        <li><a href="#71">7.1 医院列表</a></li>
+        <li><a href="#72">7.2 故障申报列表</a></li>
+        <li><a href="#73">7.3 故障申报详情</a></li>
+        <li><a href="#74">7.4 提交结果（申报维修）</a></li>
+        <li><a href="#75">7.5 故障记录列表</a></li>
+        <li><a href="#76">7.6 统计报表</a></li>
+        <li><a href="#77">7.7 设备统计</a></li>
+        <li><a href="#78">7.8 科室列表</a></li>
+        <li><a href="#79">7.9 开锁</a></li>
+        <li><a href="#710">7.10 设备录入</a></li>
+        <li><a href="#711">7.11 调试记录</a></li>
+        <li><a href="#712">7.12 单张图片上传</a></li>
+        <li><a href="#713">7.13 扫码开锁或关锁</a></li>
+        <li><a href="#714">7.14 微信蓝牙加密接口</a></li>
+        <li><a href="#715">7.15 微信蓝牙解密接口</a></li>
+        <li><a href="#716">7.16 根据设备编号获取设备信息（包含运维中的调试维修页面，设备录入页面）</a></li>
+        <li><a href="#717">7.17 订单退款</a></li>
+        <li><a href="#718">7.18 调试维修关锁</a></li>
+    </ul>
+</li>
+</div>
+
+<div class="second"> 
+<title>智云陪护接口文档</title>
+</head>
+
+<body>
+<h2>智云陪护接口文档</h2>
+
+<h4 id="1">1 用户授权登录</h4>
+
+<h5 id="10">1.0 用户授权登录</h5>
+
+<pre><code>请求格式
+{
+    cmd:"loginByWeixin"
+    code:""//调用微信接口获取登录凭证（code）进而换取用户登录态信息
+    userInfo:""//用户微信信息
+    pid:""//上级用户ID（邀请时必传）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        uid:""   //用户ID
+        isNew:""//0-新用户，1-老用户
+        isYunwei:""//是否运维:0-否，1-是
+        status:""//用户状态：0-禁用  1-可用
+    }
+}
+</code></pre>
+
+<h5 id="11">1.1 绑定手机号（包括修改绑定手机号）</h5>
+
+<pre><code>请求格式
+{
+    cmd:"bindPhoneNumber"
+    uid:""//商户ID
+    phoneNum:"18023344" //用户手机号
+    code:""//验证码
+    type:"0"//类型（0-绑定手机号，1-修改绑定手机号）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="12">1.2 发送短信验证码</h5>
+
+<pre><code>请求格式
+{
+    cmd:"sendSmsCode"
+    phoneNum:"18023344" //用户手机号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        code:""//验证码
+    }
+}
+</code></pre>
+
+<h4 id="2">2 首页</h4>
+<h5 id="20">2.0 首页</h5>
+<pre><code>
+请求格式
+{
+    cmd:"index"
+    uid:""//用户ID
+    lngAndLat:""//用户当前经纬度（用逗号隔开）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        icon:""//医院图标
+        hospitalName:""//医院名称
+        kefuTel:""//医院客服电话
+        bannerList:[{//平台轮播图列表
+            image:""//图片
+            contentUrl:""//链接
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="21">2.1 关锁页面</h5>
+<pre><code>
+请求格式
+{
+    cmd:"closeLockInfo"
+    deviceNum:""//设备编号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        hospitalName:""//医院名称
+        departName:""//科室名称
+        roomNo:""//房号
+        bedNo:""//床号
+        deviceNum:""//设备编号
+        openLockTime:""//本次开锁时长
+    }
+}
+</code></pre>
+
+<h5 id="22">2.2 确认关锁</h5>
+<pre><code>
+请求格式
+{
+    cmd:"saveCloseLock"
+    uid:""//用户ID
+    deviceNum:""//设备编号
+    laveEle:""//剩余电量
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="23">2.3 扫码支付页面信息</h5>
+<pre><code>
+请求格式
+{
+    cmd:"payInfoPage"
+    uid:""//用户ID
+    deviceNum:""//设备编号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        type:""//计费类型：0-时段计费，1-小时计费，2-按天计费
+        hospitalName:""//医院名称
+        departName:""//科室名称
+        roomNo:""//房号
+        bedNo:""//床号
+        deviceNum:""//设备编号
+        zwTimeSlot:""//中午时段（时段卡时用）
+        wsTimeSlot:""//晚上时段（时段卡时用）
+        zwList:[{//时间列表（时段卡时使用:中午）
+            id:""//医院费用设置ID
+            count:""//次数
+            money:""//金额
+        }]
+        wsList:[{//时间列表（时段卡时使用:晚上）
+            id:""//医院费用设置ID
+            count:""//次数
+            money:""//金额
+        }]
+        hfList:[{//时间列表（时卡和天卡时使用）
+            id:""//医院费用设置ID
+            count:""//次数
+            money:""//金额
+        }]
+        isFirst:""//是否首次下单：0-否，1-是
+        rebate:""//折扣
+        dxStatus:""//抵现状态：0-关 ，1-开（关的时候不显示）
+        integral:""//使用积分
+        cashMoney:""//抵现金额
+        yajin:""//设备押金
+        balance:""//账户余额（支付方式选择页面用）
+        currentTime:""//当前系统时间
+    }
+}
+</code></pre>
+
+<h5 id="24">2.4 立即下单</h5>
+<pre><code>
+请求格式
+{
+    cmd:"submitOrder"
+    uid:""//用户ID
+    deviceNum:""//设备编号
+    hfId:""//医院费用设置ID
+    isUse:""//是否使用积分抵现金额：0-否，1-是
+    integral:""//使用积分
+    cashMoney:""//抵现金额
+    yajin:""//设备押金
+    payMoney:""//实付金额
+    isYunwei:""//是否运维:0-否，1-是
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        orderId:""//订单ID
+        balance:""//账户余额
+        isSuffice:""//是否在时段内:0-否，1-是(时卡和天卡的时候直接传1就行)
+    }
+}
+</code></pre>
+
+<h5 id="240">2.4.0 立即支付（在时段内用）</h5>
+<pre><code>
+请求格式
+{
+    cmd:"orderPay"
+    uid:""//用户ID
+    orderId:""//订单ID
+    payMoney:""//实付金额
+    payMethod:""//支付方式：0-余额支付，1-微信支付
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        macAddr:""//设备MAC地址
+        orderId:""//订单ID
+        hospitalId:""//医院ID
+        departId:""//科室ID
+        payImage:""//弹窗广告
+        nonceStr:""//（微信支付时返）
+        package:""//（微信支付时返）
+        timeStamp:""//（微信支付时返）
+        paySign:""//（微信支付时返）
+        appId:""//（微信支付时返）
+        signType:""//（微信支付时返）
+    }
+}
+</code></pre>
+
+<h5 id="241">2.4.1 立即支付(不在时段购卡时用)</h5>
+<pre><code>
+请求格式
+{
+    cmd:"buyCardPay"
+    uid:""//用户ID
+    orderId:""//订单ID
+    payMoney:""//实付金额
+    payMethod:""//支付方式：0-余额支付，1-微信支付
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        orderId:""//订单ID
+        hospitalId:""//医院ID
+        departId:""//科室ID
+        payImage:""//弹窗广告
+        nonceStr:""//（微信支付时返）
+        package:""//（微信支付时返）
+        timeStamp:""//（微信支付时返）
+        paySign:""//（微信支付时返）
+        appId:""//（微信支付时返）
+        signType:""//（微信支付时返）
+    }
+}
+</code></pre>
+
+
+<h5 id="25">2.5 支付成功页面信息</h5>
+<pre><code>
+请求格式
+{
+    cmd:"paySuccessPageInfo"
+    departId:""//科室ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        payImage:""//弹窗广告
+        bannerList:[{//医院轮播图列表
+            image:""//图片
+            contentUrl:""//链接
+        }]
+    }
+}
+</code></pre>
+
+<h4 id="3">3 个人中心</h4>
+<h5 id="30">3.0 个人中心信息</h5>
+<pre><code>
+请求格式
+{
+    cmd:"personalCenter"
+    uid:""//用户ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        nickName:""//用户昵称（邀请好友也用）
+        userIcon:""//用户头像（邀请好友也用）
+        kefuTel:""//平台客服电话
+        integral:""//积分（我的积分中用）
+        qrcode:""//小程序二维码路径（邀请好友中用）
+        isAuth:""//是否认证:0-否，1-是
+    }
+}
+</code></pre>
+
+<h5 id="31">3.1 个人信息</h5>
+<pre><code>
+请求格式
+{
+    cmd:"http://114.116.17.218/zhiyunpeihu/service/userInfo"
+    uid:""//用户ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        nickName:""//用户昵称
+        userIcon:""//用户头像
+        phoneNum:""//手机号码
+        gender:""//性别 0：未知、1：男、2：女
+        age:""//年龄
+        address:""//居住地
+    }
+}
+</code></pre>
+
+<h5 id="32">3.2 保存个人信息</h5>
+<pre><code>
+请求格式
+{
+    cmd:"saveUserInfo"
+    uid:""//用户ID
+    gender:""//性别 0：未知、1：男、2：女
+    age:""//年龄
+    address:""//居住地
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="33">3.3 我的积分(积分明细)</h5>
+<pre><code>
+请求格式
+{
+    cmd:"integralMingxi"
+    uid:""//用户ID
+    nowPage:"1" //当前页数（10个每页）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        integralMingxiList:[{//积分明细列表
+            type:""//类型：0-注册，1-实名认证，2-消费获取，3-故障报修，4-消费抵现
+            szType:""//收支类型：0-收入，1-支出
+            integral:""//收支积分
+            adtime:""//创建时间
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="34">3.4 故障申报页面信息</h5>
+<pre><code>
+请求格式
+{
+    cmd:"errorApply"
+    uid:""//用户ID
+    deviceId:"" //设备ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        macAddr:""//MAC地址
+        deviceNum:""//设备编号
+        laveEle:""//剩余电量
+    }
+}
+</code></pre>
+
+<h5 id="35">3.5 保存故障申报</h5>
+<pre><code>
+请求格式
+{
+    cmd:"saveErrorApply"
+    uid:""//用户ID
+    deviceId:"" //设备ID
+    content:""//申报内容
+    sbImages:""//申报图片（多个用"|"隔开）
+    laveEle:""//设备电量
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="36">3.6 用户指南</h5>
+<pre><code>
+请求格式
+{
+    cmd:"userGuideList"
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        userGuideList:[{//指南列表
+            title:""//标题
+            contentUrl:""//链接
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="37">3.7 实名认证</h5>
+<pre><code>
+请求格式
+{
+    cmd:"realNameVerified"
+    uid:""//用户ID
+    realName:""//真实姓名
+    idCard:""//身份证号码
+    paperworkImage:""//身份证正面照
+    paperworkImageb:""//身份证背面照  
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h4 id="4">4 我的卡包</h4>
+<h5 id="40">4.0 我的卡包</h5>
+<pre><code>
+请求格式
+{
+    cmd:"cardList"
+    uid:""//用户ID
+    isYunwei:""//是否运维：0-否，1-是
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        cardList:[{//卡列表
+            cardId:""//卡ID
+            type:""//卡类型：0-时段卡，1-小时卡,2-天卡
+            timeType:""//时间类型：0-中午，1-晚上(时段卡时用)
+            timeSlot:""//时段(时段卡时用)
+            lastNum:""//时段卡时：剩余次数，小时卡时：剩余小时数,天卡：剩余天数
+            hospitalName:""//医院名称
+            orderNum:""//订单编号
+            deviceNum:""//设备编号
+            yajin:""//设备押金（主要用于去支付页面）
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="41">4.1 去使用</h5>
+<pre><code>
+请求格式
+{
+    cmd:"goUse"
+    uid:""//用户ID
+    cid:""//卡ID
+    yajin:""//设备押金
+    payMethod:""//支付方式：0-余额支付，1-微信支付
+    deviceNum:""//设备编号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        orderId:""//订单ID
+        hospital:""//医院ID
+        payImage:""//弹窗广告
+        nonceStr:""//（微信支付时返）
+        package:""//（微信支付时返）
+        timeStamp:""//（微信支付时返）
+        paySign:""//（微信支付时返）
+        appId:""//（微信支付时返）
+        signType:""//（微信支付时返）
+    }
+}
+</code></pre>
+
+<h4 id="5">5 我的订单</h4>
+<h5 id="50">5.0 订单列表</h5>
+<pre><code>
+请求格式
+{
+    cmd:"orderList"
+    uid:""//用户ID
+    type:""//类型：0-使用中，1-已完成
+    keyword:""//关键词（搜索订单时用）
+    nowPage:"1" //当前页数（10个每页）
+    isYunwei:""//是否运维：0-否，1-是
+    hospitalId:""//医院ID（是运维时必传）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        orderList:[{//订单列表
+            id:""//订单ID
+            hospitalName:""//医院名称
+            orderType:""//订单类型：0-时段卡订单，1-小时卡订单,2-天卡订单
+            timeType:""//时间类型：0-中午，1-晚上（时段计费时使用）
+            timeSlot:""//时段
+            count:""//时段计费时：次数，小时计费时：小时数，按天计费时：天数
+            deviceNum:""//设备编号
+            departName:""//科室名称
+            roomNo:""//房号
+            bedNo:""//床号
+            endTime:""//到期时间
+            deviceStatus:""//设备状态：0-关，1-开
+            timeOut:""//超时时间
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="51">5.1 订单详情</h5>
+<pre><code>
+请求格式
+{
+    cmd:"orderDetail"
+    oid:""//订单ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        order:{
+            hospitalName:""//医院名称
+            orderType:""//订单类型：0-时段卡订单，1-小时卡订单,2-天卡订单
+            timeType:""//时间类型：0-中午，1-晚上（时段计费时使用）
+            timeSlot:""//时段
+            count:""//时段计费时：次数，小时计费时：小时数，按天计费时：天数
+            deviceNum:""//设备编号
+            departName:""//科室名称
+            roomNo:""//房号
+            bedNo:""//床号
+            endTime:""//到期时间
+            timeOut:""//超时时间 (为空说明没有超期)
+            nickName:""//用户昵称
+            phoneNum:""//联系电话
+            totalMoney:""//订单总价
+            cashMoney:""//积分抵现
+            orderNum:""//订单编号
+            adtime:""//创建时间
+            startTime:""//开始时间
+            returnTime:""//归还时间
+        }
+    }
+}
+</code></pre>
+
+<h4 id="6">6 我的钱包</h4>
+<h5 id="60">6.0 我的钱包</h5>
+<pre><code>
+请求格式
+{
+    cmd:"myWallet"
+    uid:""//用户ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        balance:""//账户余额
+    }
+}
+</code></pre>
+
+<h5 id="61">6.1 充值</h5>
+<pre><code>
+请求格式
+{
+    cmd:"recharge"
+    uid:""//用户ID
+    money:"" //充值金额
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        nonceStr:""
+        package:""
+        timeStamp:""
+        paySign:""
+        appId:""
+        signType:""
+    }
+}
+</code></pre>
+
+<h5 id="62">6.2 申请提现</h5>
+<pre><code>
+请求格式
+{
+    cmd:"applyWithdraw"
+    uid:""//用户ID
+    money:"" //提现金额
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="63">6.3 交易明细（包含运维中的交易流水）</h5>
+<pre><code>
+请求格式
+{
+    cmd:"moneyMingxiList"
+    uid:""//用户ID
+    isYunwei:""是否运维：0-否，1-是
+    nowPage:"1" //当前页数（10个每页）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        moneyMingxiList:[{//交易明细列表
+            type:""//类型：0-充值，1-消费，2-申请提现，3-提现退还，4-缴纳押金，5-退还押金
+            szType:""//收支类型：0-收入，1-支出
+            money:""//收支金额
+            deviceNum:""//设备编号
+            adtime:""//创建时间
+        }]
+    }
+}
+</code></pre>
+
+<h4 id="7">7 运维管理</h4>
+<h5 id="70">7.0 运维管理首页</h5>
+<pre><code>
+请求格式
+{
+    cmd:"yunweiIndex"
+    uid:""//用户ID
+    hospitalId:""//医院ID（没有时传空）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        hospitalId:""//医院ID
+        userIcon:""//用户头像
+        nickName:""//用户昵称
+        hospitalName:""//医院名称
+        errorApplyCount:""//故障申报数量
+    }
+}
+</code></pre>
+
+<h5 id="71">7.1 医院列表</h5>
+<pre><code>
+请求格式
+{
+    cmd:"hospitalList"
+    uid:""//用户ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        hospitalList:[{//医院列表
+            id:""//医院ID
+            hospitalName:""//医院名称
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="72">7.2 故障申报列表</h5>
+<pre><code>
+请求格式
+{
+    cmd:"errorApplyList"
+    uid:""//用户ID
+    hospitalId:""//医院ID
+    nowPage:"1" //当前页数（10个每页）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        errorApplyList:[{//故障申报列表
+            id:""//故障申报ID
+            hospitalName:""//医院名称
+            adtime:""//申报时间
+            wxResult:""//维修结果：0-未解决，1-未修好，2-已修好
+            deviceNum:""//设备编号
+            departName:""//科室名称
+            roomNo:""//房号
+            bedNo:""//床号
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="73">7.3 故障申报详情</h5>
+<pre><code>
+请求格式
+{
+    cmd:"errorApplyDetail"
+    errorApplyId:""//故障申报ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        id:""//故障申报ID
+        hospitalName:""//医院名称
+        adtime:""//申报时间
+        wxResult:""//维修结果：0-未解决，1-未修好，2-已修好
+        deviceNum:""//设备编号
+        departName:""//科室名称
+        roomNo:""//房号
+        bedNo:""//床号
+        macAddr:""//MAC地址
+        laveEle:""//剩余电量
+        content:""//故障信息
+        sbImages:[{ //申报图片
+            images:""//图片
+        }]
+        weixiuRecordList:[{ //维修记录列表
+            wxClosetime:""//维修结束时间
+            wxInfo:""//维修信息
+            wxImageList:[{ //维修图片列表
+                images:""//维修图片
+            }]
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="74">7.4 提交结果（申报维修）</h5>
+<pre><code>
+请求格式
+{
+    cmd:"submitResult"
+    uid:""//用户ID
+    errorApplyId:""//故障申报ID
+    jcResult:""//检查结果：0-故障，1-正常 (如果是未修好的就不用传了)
+    wxResult:""//维修结果：1-未修好，2-已修好
+    wxInfo:""//维修信息
+    wxImages:""//维修图片（多个用"|"隔开）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="75">7.5 故障记录列表</h5>
+<pre><code>
+请求格式
+{
+    cmd:"errorApplyRecord"
+    uid:""//用户ID
+    hospitalId:""//医院ID
+    startDate:""//开始日期
+    endDate:""//结束日期
+    keyword:""//关键词（搜索时必传）
+    nowPage:"1" //当前页数（10个每页） 
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        errorApplyList:[{//故障申报列表
+            id:""//故障申报ID
+            hospitalName:""//医院名称
+            adtime:""//申报时间
+            deviceNum:""//设备编号
+            departName:""//科室名称
+            roomNo:""//房号
+            bedNo:""//床号
+            macAddr:""//mac地址
+            laveEle:""//设备电量
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="76">7.6 统计报表</h5>
+<pre><code>
+请求格式
+{
+    cmd:"tongjiTable"
+    uid:""//用户ID
+    hospitalId:""//医院ID 
+    startDate:""//开始日期
+    endDate:""//结束日期
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        useDeviceCount:""//使用设备数量
+        totalDeviceCount:""//总设备数量
+        totalOrderMoney:""//订单总额
+        orderCount:""//订单数量
+        zhongwuMoney:""//中午总额       （中午晚上统计的是：时段收费医院）
+        zhongwuCount:""//中午订单数量   （中午晚上统计的是：时段收费医院）
+        wanshangMoney:""//晚上总额      （中午晚上统计的是：时段收费医院）
+        wanshangCount:""//晚上订单数量  （中午晚上统计的是：时段收费医院）
+    }
+}
+</code></pre>
+
+<h5 id="77">7.7 设备统计</h5>
+<pre><code>
+请求格式
+{
+    cmd:"deviceTongji"
+    uid:""//用户ID
+    hospitalId:""//医院ID 
+    departId:""//科室ID
+    nowPage:"1" //当前页数（10个每页） 
+    keyword:""//关键词（搜索时必传）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        departSyl:""//当前科室设备使用率
+        deviceList:[{//设备列表
+            deviceNum:""//设备编号
+            status:""//设备状态：0-空闲，1-使用中
+            laveEle:""//剩余电量
+            departName:""//科室名称
+            roomNo:""//房号
+            bedNo:""//床号
+            useCount:""//使用次数
+            failCount:""//失败次数
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="78">7.8 科室列表</h5>
+<pre><code>
+请求格式
+{
+    cmd:"departList"
+    hospitalId:""//医院ID 
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        departList:[{//科室列表
+            id:""//科室ID
+            departName:""//科室名称
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="79">7.9 调试维修开锁</h5>
+<pre><code>
+请求格式
+{
+    cmd:"saveOpenLock"
+    uid:""//用户ID
+    deviceNum:""//编号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="710">7.10 设备录入</h5>
+<pre><code>
+请求格式
+{
+    cmd:"deviceEntry"
+    uid:""//用户ID
+    deviceNum:""//设备编号
+    hospitalId:""//医院ID
+    departId:""//科室ID
+    roomNo:""//房号
+    bedNo:""//床号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="711">7.11 调试记录</h5>
+<pre><code>
+请求格式
+{
+    cmd:"debugRecordList"
+    uid:""//用户ID
+    hospitalId:""//医院ID
+    nowPage:"1" //当前页数（10个每页）
+    keyword:""//关键词（搜索时必传）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        totalPage:5//总页数
+        debugRecordList:[{//调试记录列表
+            deviceNum:""//设备编号
+            status:""//设备状态：0-已关闭，1-开启中
+            laveEle:""//剩余电量
+            hospitalName:""//医院名称
+            departName:""//科室名称
+            roomNo:""//房号
+            bedNo:""//
+        }]
+    }
+}
+</code></pre>
+
+<h5 id="712">7.12 单张图片上传</h5>
+<pre><code>
+请求格式
+{
+    cmd:"uploadImage" 
+    file:""//file文件
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        url:""//图片名称  
+    }
+}
+</code></pre>
+
+<h5 id="713">7.13 扫码开锁或关锁</h5>
+<pre><code>
+请求格式
+{
+    cmd:"scanCode" 
+    uid:""//用户ID
+    deviceNum:""//设备编号
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        status:""//设备状态：0-关，1-开
+        isCurrentUse:""//关锁时判断是否当前用户使用：0-否，1-是
+        isOpen:""//开锁时判断该锁是否在使用中：0-否，1-是
+    }
+}
+</code></pre>
+
+<h5 id="714">7.14 微信蓝牙加密接口</h5>
+<pre><code>
+请求格式
+{
+    cmd:"getEncrypt" 
+    hexString:""//加密字符串
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        encrypt:""//加密后数据
+    }
+}
+
+<h5 id="715">7.15 微信蓝牙解密接口</h5>
+<pre><code>
+请求格式
+{
+    cmd:"getDecrypt" 
+    hexString:""//加密字符串
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        decrypt:""//解密后数据
+    }
+}
+</code></pre>
+
+<h5 id="716">7.16 根据设备编号获取设备信息（包含运维中的调试维修页面，设备录入页面）</h5>
+<pre><code>
+请求格式
+{
+    cmd:"deviceInfo"
+    deviceNum:""//设备编号
+    type:""类型（0-调试维修页面，1-设备录入页面）
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+    body:{
+        hospitalName:""//医院名称
+        departName:""//科室名称
+        roomNo:""//房号
+        bedNo:""//床号
+        deviceNum:""//设备编号
+        macAddr:"" //mac地址
+        tsStatus:""//是否开着：0-是，1-否
+    }
+}
+</code></pre>
+
+<h5 id="717">7.17 订单退款</h5>
+<pre><code>
+请求格式
+{
+    cmd:"checkRefund"
+    orderId:""//订单ID
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+
+<h5 id="718">7.18 调试维修关锁</h5>
+<pre><code>
+请求格式
+{
+    cmd:"tsCloseLock"
+    uid:""//用户ID
+    deviceNum:""//设备编号
+    laveEle:""//设备电量
+}
+返回格式
+{
+    errorCode:"0" //0成功1失败
+    msg:"失败原因"
+}
+</code></pre>
+</div>
+</body>
+</html>

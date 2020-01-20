@@ -1,0 +1,15 @@
+<!--pages/home/scanUnlock.wxml-->
+<view class="top">
+
+  <view class="section">
+    <input type="number" class="ipt" placeholder='请输入陪护椅编码解锁' bindinput='getinput' />
+  </view>
+
+  <view class="btn" bindtap='submit'>下一步</view>
+</view>
+
+<view class="cont">
+  <text class="txt1">友情提示</text>
+  <text class="txt2">陪护椅编码位于二维码下方</text>
+  <text class="txt3">一个账户可以同时开多把锁</text>
+</view>

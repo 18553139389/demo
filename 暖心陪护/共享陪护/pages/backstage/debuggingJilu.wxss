@@ -1,0 +1,144 @@
+.info_dv {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  box-shadow: #f0f0f0 1rpx 1rpx 30rpx 5rpx;
+  position: relative;
+}
+
+.info_dv .info_title {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  position: relative;
+}
+
+.info_dv .info_title .float_left {
+  float: left;
+  margin-left: 90rpx;
+}
+
+.info_dv .info_title .float_right {
+  float: right;
+  margin-right: 25rpx;
+  color: #999;
+}
+
+.info_dv .info_title .imgdv {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 10rpx;
+  left: 40rpx;
+}
+
+.info_dv .info_title .imgdv image {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.info_dv .info_cont {
+  width: 100%;
+  height: 200rpx;
+  overflow: hidden;
+}
+
+.info_dv .info_cont .info_top {
+  margin-top: 20rpx;
+}
+
+.info_dv .info_cont .info_top .left {
+  float: left;
+  width: 160rpx;
+  margin-left: 30rpx;
+  color: #666;
+}
+
+.info_dv .info_cont .info_top .right {
+  float: left;
+}
+
+.info_dv .info_cont .info_bottom {
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+}
+
+.info_dv .info_cont .left2 {
+  float: left;
+  color: #666;
+}
+
+.info_dv .info_cont .right2 {
+  float: left;
+  margin-left: 20rpx;
+  width: 120rpx;
+  height: 40rpx;
+  background-color: #fef3e7;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 40rpx;
+  color: #f18c16;
+  margin-top: 2rpx;
+}
+
+.info_dv .info_cont .dear {
+  color: #999;
+  background-color: #fff;
+}
+
+.info_dv .flagdv {
+  width: 126rpx;
+  height: 45rpx;
+  position: absolute;
+  right: 40rpx;
+  bottom: 25rpx;
+  color: #1197f6;
+  border: 1rpx solid #1197f6;
+  text-align: center;
+  border-radius: 45rpx;
+  font-size: 28rpx;
+  line-height: 45rpx;
+}
+
+.searchbtn {
+  width: 100%;
+  height: 100rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  box-shadow: #f0f0f0 0rpx -6rpx 10rpx 3rpx;
+  font-size: 26rpx;
+}
+
+.searchbtn .section {
+  height: 72rpx;
+  line-height: 72rpx;
+  width: 70%;
+  border: 1rpx solid #f0f0f0;
+  margin-top: 12rpx;
+  margin-left: 60rpx;
+}
+
+.searchbtn .section .input {
+  text-align: center;
+  line-height: 72rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.searchbtn .searbtn {
+  width: 120rpx;
+  height: 74rpx;
+  background-color: #1197f6;
+  text-align: center;
+  line-height: 74rpx;
+  border-radius: 8rpx;
+  position: absolute;
+  top: 12rpx;
+  right: 35rpx;
+  color: #fff;
+}

@@ -1,0 +1,61 @@
+<view class="bjqiang">
+  <view class="avatar">
+    <!-- <image src='../../image/touxiang02.png'></image> -->
+    <image src='{{userinfo.userIcon}}'></image>
+  </view>
+  <text class="nametxt">{{userinfo.nickName}}</text>
+</view>
+
+<view class="laber">
+  <view>
+    <view class="laber_dv" bindtap='openreninfo'>
+      <view class="laber_img">
+        <image src='../../image/13.png'></image>
+
+      </view>
+      <text class="laber_txt">个人信息</text>
+    </view>
+
+    <view class="laber_dv zhez" bindtap='openintegral'>
+      <view class="laber_img">
+        <image src='../../image/14.png'></image>
+      </view>
+      <text class="laber_txt">我的积分</text>
+    </view>
+
+    <view class="laber_dv zher" bindtap='openmalfunction'>
+      <view class="laber_img">
+        <image src='../../image/15.png'></image>
+      </view>
+      <text class="laber_txt">故障申报</text>
+    </view>
+  </view>
+
+  <view class="dv2">
+    <view class="laber_dv" bindtap='openguide'>
+      <view class="laber_img">
+        <image src='../../image/16.png'></image>
+      </view>
+      <text class="laber_txt">用户指南</text>
+    </view>
+
+    <view class="laber_dv zhez" bindtap='openinvite'>
+      <view class="laber_img">
+        <image src='../../image/17.png'></image>
+      </view>
+      <text class="laber_txt">邀请好友</text>
+    </view>
+
+    <view class="laber_dv zher" bindtap='opencerti' wx-if="{{userinfo.isAuth==0}}">
+      <view class="laber_img">
+        <image src='../../image/18.png'></image>
+      </view>
+      <text class="laber_txt">实名认证</text>
+    </view>
+  </view>
+
+</view>
+
+<view class="margin_dv">客服电话：
+  <text class="margin_txt">{{userinfo.kefuTel}}</text>
+</view>

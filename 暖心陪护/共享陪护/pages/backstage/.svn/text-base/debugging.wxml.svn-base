@@ -1,0 +1,33 @@
+<view class="cont">
+
+  <text class="txt1">
+    医院：  <text class="txt2">{{datas.hospitalName}}</text>
+  </text>
+
+  <text class="txt1">
+    科室：  <text class="txt2">{{datas.departName}}</text>
+  </text>
+
+  <text class="txt1">
+    房号：  <text class="txt2">{{datas.roomNo}}室</text>
+  </text>
+
+  <text class="txt1">
+    床号：  <text class="txt2">{{datas.bedNo}}床</text>
+  </text>
+
+  <text class="txt1">
+    设备：  <text class="txt2">{{datas.deviceNum}}</text>
+  </text>
+
+</view>
+
+
+<view class="onbtn" bindtap='openkaione' wx-if="{{kaiorg==0}}">开锁</view>
+<view class="onbtn" bindtap='openkaig' wx-if="{{kaiorg==1}}">关锁</view>
+ <view class="body-view">
+                <loading hidden="{{shows}}">
+                      <block wx-if="{{kaiorg==0}}">正在开锁 请稍等</block>  
+                      <block wx-if="{{kaiorg==1}}">正在关锁 请稍等</block>  
+                </loading>
+        </view>

@@ -1,0 +1,39 @@
+<view class="info_dv" wx:for="{{list}}" wx:key="item.deviceNum">
+  <view class="info_title">
+    <view class="float_left">{{item.deviceNum}}</view>
+    <view class="float_right">剩余电量：{{item.laveEle}}%</view>
+    <view class="imgdv">
+      <image src='../../image/12.png'></image>
+    </view>
+  </view>
+
+  <view class="info_cont">
+    <view class="info_top clear">
+      <view class="left">放置位置：</view>
+      <view class="right">
+        <view>{{item.hospitalName}}</view>
+        <view>{{item.departName}} {{item.roomNo}}室 {{item.bedNo}}床</view>
+      </view>
+    </view>
+
+    <view class="info_bottom">
+      <view class="left2">当前状态：</view>
+      <block wx:if="{{item.status == '1'}}">
+        <view class="right2">已开启</view>
+      </block>
+      <block wx:if="{{item.status == '0'}}">
+        <view class="right2 dear">已关闭</view>
+      </block>
+    </view>
+  </view>
+<!-- 
+  <view class="flagdv">关锁</view> -->
+</view>
+
+<view class="searchbtn">
+  <view class="section">
+    <input class="input" bindinput='getInput' placeholder="请输入科室名称/房号/设备号" />
+  </view>
+
+  <view class="searbtn" bindtap='searchbtn'>搜索</view>
+</view>
