@@ -72,7 +72,7 @@
 				this.activeInput = this.value.length;
 			},
 			forgetPwd: function() {
-				console.log('跳转到忘记密码')
+				this.$emit('forgetPwd');
 			},
 			cancel: function() {
 				this.$emit('cancel');

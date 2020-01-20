@@ -22,6 +22,10 @@
 						<view style="color: #DE2910;margin-left: -6upx;" v-if="list.type == 2">￥{{list.price}}</view>
 						<view style="color: #DE2910;margin-left: -6upx;" v-if="list.type == 3">￥0</view>
 					</view>
+					<view class="msg">
+						<view class="msg_title">运送费：</view>
+						<view style="color: #DE2910;margin-left: -6upx;">￥{{list.fee}}</view>
+					</view>
 				</view>
 				<view class="msg">
 					<view class="msg_title">纪念币：</view>
@@ -63,7 +67,7 @@
 		<van-popup v-model="sub" :close-on-click-overlay="false" style="background: none !important;">
 			<van-loading type="spinner" />
 		</van-popup>
-		<best-payment-password :show="payFlag" :forget="true" :value="paymentPwd" digits="6" @submit="checkPwd" @cancel="togglePayment"></best-payment-password>
+		<best-payment-password :show="payFlag" :forget="true" :value="paymentPwd" digits="6" @forgetPwd="forgetPwd" @submit="checkPwd" @cancel="togglePayment"></best-payment-password>
 	</view>
 </template>
 
@@ -162,56 +166,84 @@
 			goSuc() {
 				let self = this
 				self.sub = true
-				if (this.list.type == 3) {
-					self.sub = false
-					if (self.passType == 0) {
-						Dialog.confirm({
-							title: '提示',
-							message: '你还没有设置新密码',
-							showConfirmButton: true,
-							showCancelButton: true,
-							confirmButtonText: "去设置",
-							confirmButtonColor: "#DE2910"
-						}).then(() => {
-							// on confirm
-							uni.navigateTo({
-								url: '/pages/setPass/setPass'
-							})
-						}).catch(() => {
-							// on cancel
-						});
-					} else {
-						self.togglePayment()
-					}
-				} else {
-					let datas = {
-						uid: this.$store.state.uid,
-						productId: this.ids,
-						receiverId: this.listData.id,
-						qty: this.values,
-						remarks: this.text
-					}
-					let data = {
-						url: '/api/gzh/saveProductOrder',
-						data: datas,
-						success: function(res) {
-							if (res.data.result == 0) {
-								let orderId = res.data.orderId
-								let appId = res.data.body.appId
-								let timeStamp = res.data.body.timeStamp
-								let nonceStr = res.data.body.nonceStr
-								let packages = res.data.body.prepay
-								let signType = res.data.body.signType
-								let paySign = res.data.body.paySign
-								self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
-							} else {
-								Toast(res.data.resultNote)
-								self.sub = false
-							}
+				// if (this.list.type == 3) {
+				// 	self.sub = false
+				// 	if (self.passType == 0) {
+				// 		Dialog.confirm({
+				// 			title: '提示',
+				// 			message: '你还没有设置新密码',
+				// 			showConfirmButton: true,
+				// 			showCancelButton: true,
+				// 			confirmButtonText: "去设置",
+				// 			confirmButtonColor: "#DE2910"
+				// 		}).then(() => {
+				// 			// on confirm
+				// 			uni.navigateTo({
+				// 				url: '/pages/setPass/setPass'
+				// 			})
+				// 		}).catch(() => {
+				// 			// on cancel
+				// 		});
+				// 	} else {
+				// 		self.togglePayment()
+				// 	}
+				// } else {
+				// 	let datas = {
+				// 		uid: this.$store.state.uid,
+				// 		productId: this.ids,
+				// 		receiverId: this.listData.id,
+				// 		qty: this.values,
+				// 		remarks: this.text
+				// 	}
+				// 	let data = {
+				// 		url: '/api/gzh/saveProductOrder',
+				// 		data: datas,
+				// 		success: function(res) {
+				// 			if (res.data.result == 0) {
+				// 				let orderId = res.data.orderId
+				// 				let appId = res.data.body.appId
+				// 				let timeStamp = res.data.body.timeStamp
+				// 				let nonceStr = res.data.body.nonceStr
+				// 				let packages = res.data.body.prepay
+				// 				let signType = res.data.body.signType
+				// 				let paySign = res.data.body.paySign
+				// 				self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
+				// 			} else {
+				// 				Toast(res.data.resultNote)
+				// 				self.sub = false
+				// 			}
+				// 		}
+				// 	}
+				// 	ajaxs(data)
+				// }
+				
+				let datas = {
+					uid: this.$store.state.uid,
+					productId: this.ids,
+					receiverId: this.listData.id,
+					qty: this.values,
+					remarks: this.text
+				}
+				let data = {
+					url: '/api/gzh/saveProductOrder',
+					data: datas,
+					success: function(res) {
+						if (res.data.result == 0) {
+							let orderId = res.data.orderId
+							let appId = res.data.body.appId
+							let timeStamp = res.data.body.timeStamp
+							let nonceStr = res.data.body.nonceStr
+							let packages = res.data.body.prepay
+							let signType = res.data.body.signType
+							let paySign = res.data.body.paySign
+							self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
+						} else {
+							Toast(res.data.resultNote)
+							self.sub = false
 						}
 					}
-					ajaxs(data)
 				}
+				ajaxs(data)
 			},
 			onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign) {
 				let self = this
@@ -242,6 +274,11 @@
 						}
 					}
 				)
+			},
+			forgetPwd() {
+				uni.navigateTo({
+					url: '../setPass/setPass'
+				})
 			}
 		}
 	}
@@ -348,6 +385,6 @@
 	}
 
 	.msg_title {
-		width: 28%;
+		width: 27%;
 	}
 </style>

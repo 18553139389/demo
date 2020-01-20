@@ -17,7 +17,7 @@
 						<text>{{v.title}}</text>
 						<view class="item-location">
 							<img src="../../static/img/location.png" alt="">
-							<text style="margin-left: 10upx;">{{v.subtitle}}</text>
+							<text style="margin-left: 20upx;">{{v.subtitle}}</text>
 						</view>
 					</view>
 					<img src="../../static/img/right.png" alt="">
@@ -61,7 +61,7 @@
 					isBoth: true, // 上拉加载时,如果滑动到列表顶部是否可以同时触发下拉刷新;默认true,两者可同时触发;
 					page: {
 						num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-						size: 10, // 每页数据的数量
+						size: 12, // 每页数据的数量
 						time: null // 加载第一页数据服务器返回的时间; 防止用户翻页时,后台新增了数据从而导致下一页数据重复;
 					},
 					noMoreSize: 6, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
@@ -131,7 +131,7 @@
 			/*上拉加载的回调: mescroll携带page的参数, 其中num:当前页 从1开始, size:每页数据条数,默认10 */
 			upCallback(mescroll) {
 				let pageNum = mescroll.num // 页码, 默认从1开始
-				let pageSize = mescroll.size // 页长, 默认每页10条
+				let pageSize = mescroll.size // 页长, 默认每页12条
 				let self = this
 				if (this.tabType === 0) {
 					let data = {
@@ -194,8 +194,8 @@
 				console.log('点击了回到顶部按钮');
 			},
 			goBack() {
-				uni.navigateBack({
-					delta: 1
+				uni.switchTab({
+					url: '/pages/index/index'
 				})
 			},
 			goDetail(id) {
@@ -266,7 +266,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 20upx 30upx;
+		padding: 16upx 30upx;
 		box-sizing: border-box;
 		border-bottom: 1px solid #eee;
 	}
@@ -288,7 +288,7 @@
 		align-items: center;
 		font-size: 12px;
 		color: #333;
-		margin-top: 16upx;
+		margin: 20upx 0 0;
 	}
 
 	.item-location>img {

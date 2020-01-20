@@ -23,7 +23,7 @@
 				<view>邀请好友</view>
 			</view>
 		</view>
-		<view class="list">
+		<view class="list" style="padding-bottom: 20upx;">
 			<view class="list-item" @tap="goTogether">
 				<view class="list-left">
 					<img src="../../static/img/shangwuhezuo.png" alt="">
@@ -46,8 +46,8 @@
 				<img style="height: 30upx;" src="../../static/img/right.png" alt="">
 			</view>
 		</view>
-		<view class="call" style="font-size:15px;" @tap="goCall">客服电话:{{call}}</view>
-		<view class="call" style="font-size:15px;margin-top: 0;" @tap="goCall">投诉电话:{{call}}</view>
+		<view class="call" style="font-size:15px;" @tap="goCall">客服电话: {{call}}</view>
+		<view class="calls" @tap="goCall">投诉电话: {{call}}</view>
 	</view>
 </template>
 
@@ -63,12 +63,6 @@
 				scores: 0
 			}
 		},
-		onLoad() {
-			this.call = this.$store.state.customer
-		},
-		onReady() {
-		
-		},
 		onShow() {
 			//刷新保留用户uid
 			if (this.getRequest('uid')) {
@@ -79,15 +73,15 @@
 		},
 		methods: {
 			getRequest(variable) {
-				var query = window.location.search.substring(1);
-				var vars = query.split("&");
+				var query = window.location.search.substring(1)
+				var vars = query.split("&")
 				for (var i = 0; i < vars.length; i++) {
-					var pair = vars[i].split("=");
+					var pair = vars[i].split("=")
 					if (pair[0] == variable) {
-						return pair[1];
+						return pair[1]
 					}
 				}
-				return (false);
+				return (false)
 			},
 			init() {
 				let self = this
@@ -107,6 +101,24 @@
 					}
 				}
 				ajax(data)
+				
+				if(!this.$store.state.customer){
+					let da = {
+						uid: this.$store.state.uid
+					}
+					let data2 = {
+						url: '/api/gzh/index',
+						data: da,
+						success: function(res){
+							if(res.data.result == 0){
+								self.call = res.data.customer
+							}
+						}
+					}
+					ajax(data2)
+				}else{
+					self.call = self.$store.state.customer
+				}
 			},
 			goScore() {
 				uni.navigateTo({
@@ -123,26 +135,6 @@
 					url: '../editor/editor'
 				})
 			},
-			choose() {
-				uni.chooseImage({
-					success: (chooseImageRes) => {
-						const tempFilePaths = chooseImageRes.tempFilePaths;
-						this.url = tempFilePaths[0]
-						console.log(tempFilePaths[0])
-						// uni.uploadFile({
-						// 	url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
-						// 	filePath: tempFilePaths[0],
-						// 	name: 'file',
-						// 	formData: {
-						// 		'user': 'test'
-						// 	},
-						// 	success: (uploadFileRes) => {
-						// 		console.log(uploadFileRes.data);
-						// 	}
-						// });
-					}
-				});
-			},
 			goFriends() {
 				uni.navigateTo({
 					url: '../friends/friends'
@@ -155,7 +147,7 @@
 			},
 			goUs() {
 				uni.navigateTo({
-					url: '../content/content?url=' + encodeURIComponent('http://m.xgcyz1978.com/display/agreement?id=1')
+					url: '../content/content?url=' + encodeURIComponent('https://m.xgcyz1978.com/display/agreement?id=1')
 				})
 			},
 			goNo(tit) {
@@ -187,6 +179,9 @@
 	page {
 		width: 100%;
 		height: 100%;
+		background: #FFFFFF;
+		display: flex;
+		flex-direction: column;
 	}
 	
 	.contain {
@@ -305,9 +300,13 @@
 	
 	.call {
 		width: 100%;
-		height: 70upx;
-		line-height: 70upx;
 		text-align: center;
-		margin-top: 60upx;
+	}
+	
+	.calls {
+		width: 100%;
+		padding: 20upx 0;
+		text-align: center;
+		font-size: 15px;
 	}
 </style>

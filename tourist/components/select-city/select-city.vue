@@ -7,7 +7,7 @@
 			</view>
 			<scroll-view :scroll-into-view="scrollIntoId" :scroll-y="true" :scroll-with-animation="true" style="height:calc(100vh - 162upx)">
 				<view class="content">
-					<view class="section" id="current">
+					<view class="section" id="current" @click="goCurrent">
 						<view class="city-title">当前城市</view>
 						<view class="city-list">
 							<view class="city-item">{{current}}</view>
@@ -53,8 +53,12 @@
 			return {
 				citys: [],
 				windowHeight: '',
-				scrollIntoId: '',
-				current: this.value
+				scrollIntoId: ''
+			}
+		},
+		computed:{
+			current() {
+				return this.value
 			}
 		},
 		mounted() {
@@ -66,6 +70,8 @@
 						Citys[i].list.push(airport.RECORDS[j].cityname)
 					}
 				}
+				//数组城市名称去重
+				Citys[i].list = Array.from(new Set(Citys[i].list))
 			}
 			this.citys = Citys
 		},
@@ -79,14 +85,15 @@
 			scrollTo(letter) {
 				this.scrollIntoId = letter === '#' ? 'current' : letter
 			},
+			goCurrent() {
+				this.$emit('on-current', this.value)
+			},
 			onSelect(city) {
-				this.current = city.cityname
 				this.$emit('input', city)
 				this.$emit('on-select', city)
 			},
 			onSelect1(city) {
 				console.log(city)
-				this.current = city.cityname
 				this.$emit('input', city)
 				this.$emit('on-select1', city)
 			}

@@ -33,7 +33,7 @@
 		<lotus-address @choseVal="choseValue" :lotusAddressData="lotusAddressData"></lotus-address>
 		<van-dialog v-model="show" title="补卡费用" show-cancel-button show-confirm-button confirm-button-text="支付" confirm-button-color="red" @confirm="confirm">
 			<view class="price">￥{{amount}}元</view>
-			<view class="explain">补卡说明：支付成功后，请耐心等待工作人员审核！</view>
+			<view class="explain">支付成功后，请耐心等待工作人员审核！</view>
 		</van-dialog>
 	</view>
 </template>
@@ -172,12 +172,14 @@
 						console.log(res)
 						if (res.data.result == 0) {
 							self.amount = res.data.amount
-							self.appId = res.data.body.appId
-							self.timeStamp = res.data.body.timeStamp
-							self.nonceStr = res.data.body.nonceStr
-							self.packages = res.data.body.prepay
-							self.signType = res.data.body.signType
-							self.paySign = res.data.body.paySign
+							if(parseInt(self.amount) > 0){
+								self.appId = res.data.body.appId
+								self.timeStamp = res.data.body.timeStamp
+								self.nonceStr = res.data.body.nonceStr
+								self.packages = res.data.body.prepay
+								self.signType = res.data.body.signType
+								self.paySign = res.data.body.paySign
+							}
 							self.show = true
 						} else {
 							Toast(res.data.resultNote)
@@ -188,7 +190,16 @@
 			},
 			confirm() {
 				let self = this
-				self.onBridgeReady(self.appId, self.timeStamp, self.nonceStr, self.packages, self.signType, self.paySign)
+				if(self.appId){
+					self.onBridgeReady(self.appId, self.timeStamp, self.nonceStr, self.packages, self.signType, self.paySign)
+				}else{
+					Toast('补卡成功')
+					setTimeout(function() {
+						uni.navigateBack({
+							delta: 1
+						})
+					}, 300)
+				}
 			},
 			onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign) {
 				let self = this
@@ -204,9 +215,12 @@
 					function(res) {
 						if (res.err_msg === 'get_brand_wcpay_request:ok') {
 							self.show = false
-							uni.navigateBack({
-								delta: 1
-							})
+							Toast('补卡成功')
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: 1
+								})
+							}, 300)
 						} else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
 							Toast('用户取消支付')
 						} else if (res.err_msg === 'get_brand_wcpay_request:fail') {
@@ -214,7 +228,12 @@
 						}
 					}
 				)
-			}
+			},
+			goScore() {
+				uni.navigateTo({
+					url: '../content/content?url=' + encodeURIComponent('https://m.xgcyz1978.com/display/agreement?id=7')
+				})
+			},
 		}
 	}
 </script>
@@ -386,5 +405,6 @@
 		font-size: 28upx;
 		color: #333;
 		margin-bottom: 30upx;
+		text-align: center;
 	}
 </style>

@@ -1,13 +1,13 @@
 {
 	"pages": [
 		{
-			"path": "pages/login/login",
+			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": ""
 			}
@@ -18,7 +18,7 @@
 				"navigationBarTitleText": ""
 			}
 		},
-		{
+		{ 
 			"path": "pages/vip/vip",
 			"style": {
 				"navigationBarTitleText": ""
@@ -805,18 +805,34 @@
 				"animationType": "slide-in-right",
 				"animationDuration": 500
 			}
+		},
+		{
+			"path": "pages/bill/bill",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/billDetail/billDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",
-		"navigationBarTextStyle": "white"
+		"navigationBarTextStyle": "white",
+		"usingComponents": true
 	},
 	"permission": {
 		"scope.userLocation": {
-			"desc": "你的位置信息将用于小程序位置接口的效果展示"
+			"desc": "你的位置信息将用于定位"
 		}
 	},
-	"usingComponents": true,
 	"tabBar": {
 		"color": "#666666",
 		"selectedColor": "#E42417",
@@ -831,7 +847,7 @@
 			"pagePath": "pages/shop/shop",
 			"iconPath": "static/bar/icon2_select.png",
 			"selectedIconPath": "static/bar/icon2.png",
-			"text": "会员商城"
+			"text": "纪念币商城"
 		}, {
 			"pagePath": "pages/vip/vip",
 			"iconPath": "static/bar/icon3_select.png",

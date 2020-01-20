@@ -124,16 +124,10 @@
 				this.$store.commit('changeUid', uids)
 			}
 			this.date2 = this.dateFtt("yyyy-MM-dd", new Date())
-			// let month = (new Date().getMonth() + 3) > 9 ? (new Date().getMonth() + 3) : '0' + (new Date().getMonth() + 3)
-			// let date = new Date().getDate() > 9 ? new Date().getDate() : '0' + new Date().getDate()
-			// this.date2 = new Date().getFullYear() + '-' + month + '-' + date
-			// this.initDate = new Date(new Date().setMonth(new Date().getMonth()+2))
 			this.scores = option.scores
 			let date1 = new Date()
-			let year1=date1.getFullYear();
-			date1.setMonth(date1.getMonth()-2)
-			let month1 = date1.getMonth()+1 > 9 ? date1.getMonth()+1 : '0' + (date1.getMonth()+1)
-			this.date1 = this.dateFtt("yyyy-MM-dd", new Date(year1.toString() + '-' + month1.toString() + '-01'))
+			date1.setMonth(date1.getMonth()-3)
+			this.date1 = this.dateFtt("yyyy-MM-dd", date1)
 			this.currentTime1 = this.date1
 			this.initDate = new Date(this.date1)
 		},
@@ -210,8 +204,11 @@
 				// this.initDate = val
 			},
 			goScore() {
+				// uni.navigateTo({
+				// 	url: '../scoreDetail/scoreDetail'
+				// })
 				uni.navigateTo({
-					url: '../scoreDetail/scoreDetail'
+					url: '../content/content?url=' + encodeURIComponent('https://m.xgcyz1978.com/display/agreement?id=6')
 				})
 			},
 			// mescroll组件初始化的回调,可获取到mescroll对象
@@ -319,13 +316,12 @@
 <style>
 	page {
 		width: 100%;
-		height: 100%;
-		background: #FFFFFF;
 	}
 	
 	.contain {
 		width: 100%;
 		height: 100%;
+		background: #FFFFFF;
 	}
 	
 	.top {

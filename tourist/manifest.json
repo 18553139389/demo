@@ -1,4 +1,4 @@
-{
+/*  */{
     "name" : "tourist",
     "appid" : "__UNI__0E00707",
     "description" : "",
@@ -71,6 +71,15 @@
             "base" : "/h5/"
         },
         "title" : "小岗村",
+		"async" : {
+			"delay": 300,
+			"timeout": 10000
+		},
+		"optimization": {
+			"treeShaking": {
+				"enable": true
+			}
+		},
         "template" : "index.html"
     }
 }

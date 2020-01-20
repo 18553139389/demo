@@ -185,6 +185,7 @@
 			init() {
 				let self = this
 				this.show = true
+				self.showAir = false
 				let datas = {
 					DepartCityCode: this.singleStart,
 					ArriveCityCode: this.singleEnd,
@@ -376,15 +377,11 @@
 					val.Choice = false
 				})
 				this.swiperData.dateDay[k].Choice = true
-				this.sendDate = this.swiperData.year + '/' + this.swiperData.month + '/' + this.swiperData.dateDay[k].date + ' ' +
-					this.swiperData.dateDay[k].week
-				this.$store.commit('changeSingleStart', this.swiperData.year + '/' + this.swiperData.month + '/' + this.swiperData.dateDay[
-					k].date)
+				this.sendDate = this.swiperData.year + '/' + this.swiperData.month + '/' + this.swiperData.dateDay[k].date + ' ' + this.swiperData.dateDay[k].week
+				this.$store.commit('changeSingleStart', this.swiperData.year + '/' + this.swiperData.month + '/' + this.swiperData.dateDay[k].date)
 				this.$store.commit('changeDate', this.swiperData.month + '-' + this.swiperData.dateDay[k].date)
-				this.$store.commit('changeInit', this.swiperData.year + '-' + this.swiperData.month + '-' + this.swiperData.dateDay[
-					k].date)
-				this.$store.commit('changePrice', this.swiperData.year + '-' + this.swiperData.month + '-' + this.swiperData.dateDay[
-					k].date)
+				this.$store.commit('changeInit', this.swiperData.year + '-' + this.swiperData.month + '-' + this.swiperData.dateDay[k].date)
+				this.$store.commit('changePrice', this.swiperData.year + '-' + this.swiperData.month + '-' + this.swiperData.dateDay[k].date)
 				this.$store.commit('changeDay', this.swiperData.dateDay[k].week)
 				this.init()
 			},

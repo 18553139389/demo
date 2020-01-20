@@ -22,7 +22,7 @@
 							<view class="scores">纪念币：0</view>
 						</block>
 						<block v-if="v.type == 2">
-							<view class="price">￥{{v.oldPrice}}</view>
+							<view class="price">￥{{v.price}}</view>
 							<view class="scores">纪念币：{{v.point}}</view>
 						</block>
 						<block v-if="v.type == 3">
@@ -271,7 +271,7 @@
 
 	.recommend_img {
 		width: 100%;
-		height: 200upx;
+		/* height: 200upx; */
 	}
 
 	.recommend_title {

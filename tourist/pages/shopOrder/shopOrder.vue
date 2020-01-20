@@ -15,7 +15,12 @@
 			<img class="list_left" :src="list.image" alt="">
 			<view class="list_right">
 				<view class="name">{{list.title}}</view>
+				<!-- <view class="price">
+					<view class="score" v-if="list.type == 2" style="margin-top: 20upx;font-size: 12px;">纪念币：{{list.point}}</view>
+					<view class="score" style="margin-top: 20upx;font-size: 12px;">运费：￥10.00</view>
+				</view> -->
 				<view class="score" v-if="list.type == 2" style="margin-top: 20upx;font-size: 12px;">纪念币：{{list.point}}</view>
+				<view class="score" style="margin-top: 14upx;font-size: 12px;">运送费：￥{{list.fee}}</view>
 				<view class="price">
 					<view class="newPrice" v-if="list.type == 1">￥{{list.oldPrice}}</view>
 					<view class="newPrice" v-if="list.type == 2">￥{{parseFloat(list.price)}}</view>
@@ -83,12 +88,16 @@
 			},
 			total() {
 				let total = 0
+				let self = this
+				if(this.list.fee == undefined || !this.list.fee){
+					self.list.fee = 0
+				}
 				if (this.list.type == 1) {
-					total = parseFloat(this.list.oldPrice) * this.values
+					total = parseFloat(this.list.oldPrice) * this.values + parseFloat(this.list.fee)
 				} else if (this.list.type == 2) {
-					total = parseFloat(this.list.price) * this.values
+					total = parseFloat(this.list.price) * this.values + parseFloat(this.list.fee)
 				} else if (this.list.type == 3) {
-					total = 0
+					total = 0 + parseFloat(this.list.fee)
 				}
 				return total
 			},

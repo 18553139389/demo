@@ -57,8 +57,8 @@
 				</view>
 				<view class="msg">
 					<view>会员卡类型</view>
-					<view style="margin-left: 30upx;" v-if="listData.type == 1">黄金</view>
-					<view style="margin-left: 30upx;" v-if="listData.type == 2">钻石</view>
+					<view style="margin-left: 30upx;" v-if="listData.type == 1">银版纪念册</view>
+					<view style="margin-left: 30upx;" v-if="listData.type == 2">金版纪念册</view>
 				</view>
 				<view class="msg">
 					<view>年费</view>

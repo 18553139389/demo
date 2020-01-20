@@ -3,7 +3,7 @@
 		<view class="back" @tap="back">
 			<img class="backs" src="../../static/img/backs.png" alt="">
 		</view>
-		<van-swipe :autoplay="5000" :height="200" indicator-color="#DE2910">
+		<van-swipe :autoplay="5000" indicator-color="#DE2910">
 			<van-swipe-item v-for="(v,k) in bannerList" :key="k">
 				<img class="banner" :src="v" alt="">
 			</van-swipe-item>
@@ -24,6 +24,7 @@
 					<view class="score">纪念币：{{list.point}}</view>
 				</block>
 			</view>
+			<view class="other">运送费：￥{{list.fee}}</view>
 			<view class="name">{{list.title}}</view>
 		</view>
 		<view class="detail">
@@ -32,8 +33,8 @@
 					<view v-for="(v,k) in tabs" :key="k" :class="itemIndex == k ? 'activity active' : 'activity'" @tap="changeTab(k)">{{v}}</view>
 				</view>
 			</view>
-			<view style="width:100%;height:calc(100vh - 200px - 166upx - 76upx - 130upx)" v-if="list && itemIndex == 0">
-				<webView :url="list.url"></webView>
+			<view style="width: 100%;padding-bottom: 100upx;overflow: hidden;" v-if="list && itemIndex == 0">
+				<u-parse :content="list.content" class="parse"></u-parse>
 			</view>
 			<view class="comment" v-if="itemIndex == 1">
 				<mescroll-uni :down="downOption" @down="downCallback" :up="upOption" @up="upCallback" @init="mescrollInit"
@@ -59,6 +60,7 @@
 	import {ajax,ajaxs} from '../../common/js/util.js'
 	import MescrollUni from "../../components/mescroll-uni/mescroll-uni.vue"
 	import webView from '../../components/conText/conText.vue'
+	import uParse from '../../components/u-parse/u-parse.vue'
 	export default {
 		data() {
 			return {
@@ -121,7 +123,8 @@
 		},
 		components: {
 			webView,
-			MescrollUni
+			MescrollUni,
+			uParse
 		},
 		onLoad(option) {
 			let self = this
@@ -159,7 +162,10 @@
 				})
 			},
 			goOrder() {
-				let list = JSON.stringify(this.list)
+				//对象深拷贝
+				let list = Object.assign({}, this.list)
+				list.content = ''
+				list = JSON.stringify(list)
 				uni.navigateTo({
 					url: '../shopOrder/shopOrder?list=' + list + '&id=' + this.ids
 				})
@@ -192,7 +198,7 @@
 				let data = {
 					url: '/api/gzh/commentList',
 					data: datas,
-					success: function(res){
+					success: function(res) {
 						console.log(res)
 						if (res.data.result == 0) {
 							for (var j = 0; j < res.data.dataList.length; j++) {
@@ -286,7 +292,7 @@
 	}
 
 	.name {
-		margin-top: 20upx;
+		margin-top: 14upx;
 	}
 
 	.detail {
@@ -392,5 +398,11 @@
 		width: 100%;
 		text-align: justify;
 		color: #666;
+	}
+	
+	.other {
+		margin-top: 14upx;
+		font-size: 14px;
+		color: #DE2910;
 	}
 </style>

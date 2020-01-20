@@ -72,14 +72,7 @@
 					</view>
 				</view>
 			</view>
-			<model 
-			:show="show" 
-			:confirmText="confirmText"
-			@confirm="confirm"
-			@cancel="cancel"
-			:content="content" 
-			>
-			</model>
+			<model :show="show" :confirmText="confirmText" @confirm="confirm" @cancel="cancel" :content="content"></model>
 		</view>
 	</view>
 </template>
@@ -161,11 +154,11 @@
 										var longitude = parseFloat(res.longitude); // 经度，浮点数，范围为180 ~ -180。
 										var gc = new BMap.Geocoder();
 										var pointAdd = new BMap.Point(longitude, latitude);
-										gc.getLocation(pointAdd, function(rs){
-										    // 百度地图解析城市名
+										gc.getLocation(pointAdd, function(rs) {
+											// 百度地图解析城市名
 											let city = rs.addressComponents.city
-											if(city.indexOf('市') != -1){
-												city = city.substring(0,city.indexOf('市'))
+											if (city.indexOf('市') != -1) {
+												city = city.substring(0, city.indexOf('市'))
 											}
 											self.$store.commit('changeCurrentLat', latitude)
 											self.$store.commit('changeCurrentLon', longitude)
@@ -178,19 +171,19 @@
 					}
 				}
 				ajax(data1)
-				
+
 				let da = {
 					uid: this.$store.state.uid
 				}
 				let data2 = {
 					url: '/api/gzh/index',
 					data: da,
-					success: function(res){
-						if(res.data.result == 0){
-							if(res.data.activityList.length <= 3){
+					success: function(res) {
+						if (res.data.result == 0) {
+							if (res.data.activityList.length <= 3) {
 								self.activityList = res.data.activityList
-							}else{
-								for(let i=0;i<3;i++){
+							} else {
+								for (let i = 0; i < 3; i++) {
 									self.activityList.push(res.data.activityList[i])
 								}
 							}
@@ -220,7 +213,7 @@
 				})
 			},
 			goFlight() {
-				if(this.$store.state.vipType == 0){
+				if (this.$store.state.vipType == 0) {
 					this.content = '成为会员才能查看航班动态'
 					this.show = true
 					return
@@ -249,7 +242,7 @@
 				})
 			},
 			goImg(argument) {
-				if(argument[0] == 3) {
+				if (argument[0] == 3) {
 					uni.navigateTo({
 						url: '../content/content?url=' + encodeURIComponent(argument[1])
 					})
@@ -281,7 +274,7 @@
 				})
 			},
 			goCard() {
-				if(this.$store.state.vipType == 0){
+				if (this.$store.state.vipType == 0) {
 					this.content = '成为会员才能查看驿站名片'
 					this.show = true
 					return
@@ -310,13 +303,13 @@
 		height: 100%;
 		background: #FFFFFF;
 	}
-	
+
 	.msg {
 		margin-right: 30upx;
 		width: 38upx;
 		height: 38upx;
 	}
-	
+
 	.classify_list {
 		width: 100%;
 		display: flex;
@@ -327,7 +320,7 @@
 		box-sizing: border-box;
 		border-bottom: 12px solid #eee;
 	}
-	
+
 	.list_type {
 		width: 25%;
 		display: flex;
@@ -335,18 +328,18 @@
 		align-items: center;
 		margin-bottom: 30upx;
 	}
-	
+
 	.list_type text {
 		font-size: 12px;
 		color: #333;
 	}
-	
+
 	.list_type>image {
 		width: 66upx;
 		height: 66upx;
 		margin-bottom: 12upx;
 	}
-	
+
 	.score {
 		width: 100%;
 		padding: 30upx;
@@ -354,24 +347,24 @@
 		display: flex;
 		justify-content: space-between;
 	}
-	
+
 	.score_list {
 		width: 48%;
 		height: 180upx;
 	}
-	
+
 	.score_list>image {
 		width: 100%;
 		height: 100%;
 		border-radius: 4px;
 	}
-	
+
 	.hot {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 	}
-	
+
 	.hot_title {
 		width: 100%;
 		height: 80upx;
@@ -383,24 +376,24 @@
 		font-size: 12px;
 		color: #333;
 	}
-	
+
 	.hot_left {
 		display: flex;
 		align-items: center;
 	}
-	
+
 	.hot_left>img {
 		height: 30upx;
 		margin-left: 20upx;
 	}
-	
+
 	.activity {
 		border-left: 2px solid #DE2910;
 		padding-left: 20upx;
 		font-size: 14px;
 		color: #DE2910;
 	}
-	
+
 	.more {
 		display: flex;
 		height: 80upx;
@@ -409,36 +402,36 @@
 		font-size: 12px;
 		color: #DE2910;
 	}
-	
+
 	.more>img {
 		width: 14upx;
 		height: 24upx;
 		margin-left: 12upx;
 	}
-	
+
 	.hot_wrapper {
 		width: 100%;
 		padding: 30upx;
 		box-sizing: border-box;
 	}
-	
+
 	.hot_list {
 		width: 100%;
 		border-radius: 6px;
 		overflow: hidden;
 		margin-bottom: 30upx;
 	}
-	
+
 	.hot_img {
 		width: 100%;
 		/* height: 260upx; */
 	}
-	
+
 	.hot_img>img {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.hot_tit {
 		display: flex;
 		justify-content: center;

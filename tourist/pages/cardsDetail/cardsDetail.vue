@@ -19,7 +19,7 @@
 				</view>
 				<view class="items">
 					<view>公司名称：</view>
-					<input type="text" v-model="company" placeholder="请输入公司名称" placeholder-class="place" disabled>
+					<input style="width: 70%;" type="text" v-model="company" placeholder="请输入公司名称" placeholder-class="place" disabled>
 				</view>
 				<view class="items">
 					<view>联系方式：</view>

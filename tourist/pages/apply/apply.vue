@@ -37,8 +37,8 @@
 			<view class="user_msg">开卡信息</view>
 			<view class="cu-form-group">
 				<view class="title">会员卡类型</view>
-				<view style="color: #DE2910;" v-if="cardType == 1">黄金会员</view>
-				<view style="color: #DE2910;" v-if="cardType == 2">钻石会员</view>
+				<view style="color: #DE2910;" v-if="cardType == 1">银版纪念册会员</view>
+				<view style="color: #DE2910;" v-if="cardType == 2">金版纪念册会员</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">年费</view>
@@ -184,7 +184,7 @@
 			},
 			goIdea() {
 				uni.navigateTo({
-					url: '../content/content?url=' + encodeURIComponent('http://m.xgcyz1978.com/display/agreement?id=5')
+					url: '../content/content?url=' + encodeURIComponent('https://m.xgcyz1978.com/display/agreement?id=5')
 				})
 			},
 			onUnload() {
@@ -244,7 +244,6 @@
 					address: this.address,
 					amount: this.total
 				}
-				console.log(datas)
 				let data = {
 					url: '/api/gzh/addVip',
 					data: datas,

@@ -41,8 +41,13 @@
 					})
 				}
 			}else if(option.type == 1){
-				this.latitude = this.$store.state.hotelLat
-				this.longitude = this.$store.state.hotelLng
+				if(this.$store.state.hotelLat == '' || this.$store.state.hotelLng == ''){
+					this.latitude = this.$store.state.currentLat
+					this.longitude = this.$store.state.currentLon
+				}else{
+					this.latitude = this.$store.state.hotelLat
+					this.longitude = this.$store.state.hotelLng
+				}
 				let list = JSON.parse(option.list)
 				for(let i=0;i<list.length;i++){
 					this.covers.push({

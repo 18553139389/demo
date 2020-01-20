@@ -52,7 +52,7 @@
 			<view class="item" @tap="goShop">
 				<view class="item-left">
 					<img src="../../static/img/huiyuanshangchengdingdan.png" alt="">
-					<view style="margin-left: 20upx;">会员商城订单</view>
+					<view style="margin-left: 20upx;">纪念币商城订单</view>
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>

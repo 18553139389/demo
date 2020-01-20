@@ -1,7 +1,7 @@
 <template>
 	<view class="contain">
 		<view class="fixed">
-			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
+			<cu-custom :isBacks="true" :Color="Color" :backColor="backColor" :isIcons="true" bgColor="bg-shadeTop text-white" @Back="Back">
 				<block slot="backText"></block>
 				<block slot="content">酒店</block>
 			</cu-custom>
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+	import jweixin from '../../common/js/wexin.js'
 	import {ajaxs} from '../../common/js/util.js'
 	export default {
 		data() {
@@ -91,7 +92,7 @@
 				columns2: ['不限', '五星级/豪华', '四星级/高档', '三星级/舒适', '二星级及以下'],
 				minPrice: '',
 				maxPrice: '',
-				currentCity: '郑州',
+				currentCity: '',
 				lon: '',
 				lat: '',
 				activityList: []
@@ -130,6 +131,57 @@
 		methods: {
 			init() {
 				let self = this
+				if(this.$store.state.currentCity == ''){
+					let url = window.location.href.split('#')[0]
+					url = encodeURIComponent(url)
+					let data3 = {
+						url: url
+					}
+					let data1 = {
+						url: '/api/gzh/auth',
+						data: data3,
+						success: function(res) {
+							if (res.data.result == 0) {
+								jweixin.config({
+									debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+									appId: res.data.appId, // 必填，公众号的唯一标识
+									timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+									nonceStr: res.data.noncestr, // 必填，生成签名的随机串
+									signature: res.data.signature, // 必填，签名，见附录1
+									jsApiList: ['checkJsApi', 'getLocation']
+								});
+								jweixin.error(function(res) {
+									//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+									alert("错误说明" + res.errMsg)
+								});
+								jweixin.ready(function() {
+									jweixin.getLocation({
+										type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+										success: function(res) {
+											var latitude = parseFloat(res.latitude); // 纬度，浮点数，范围为90 ~ -90
+											var longitude = parseFloat(res.longitude); // 经度，浮点数，范围为180 ~ -180。
+											var gc = new BMap.Geocoder();
+											var pointAdd = new BMap.Point(longitude, latitude);
+											gc.getLocation(pointAdd, function(rs){
+											    // 百度地图解析城市名
+												let city = rs.addressComponents.city
+												if(city.indexOf('市') != -1){
+													city = city.substring(0,city.indexOf('市'))
+												}
+												self.$store.commit('changeCurrentLat', latitude)
+												self.$store.commit('changeCurrentLon', longitude)
+												self.$store.commit('changeCurrentCity', city)
+												self.value = self.$store.state.currentCity
+											})
+										}
+									})
+								})
+							}
+						}
+					}
+					ajaxs(data1)
+				}
+				
 				let datas = {
 					type: 3
 				}
@@ -143,6 +195,11 @@
 					}
 				}
 				ajaxs(data2)
+			},
+			Back() {
+				uni.switchTab({
+					url: '../index/index'
+				})
 			},
 			getRequest(variable) {
 				var query = window.location.search.substring(1);

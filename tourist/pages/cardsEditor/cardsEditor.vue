@@ -160,14 +160,19 @@
 			upload() {
 				uni.chooseImage({
 					success: (chooseImageRes) => {
+						console.log(chooseImageRes)
+						if(chooseImageRes.tempFiles[0].size > 2097152) {
+							Toast('上传头像大小不能超过2M')
+							return
+						}
 						const tempFilePaths = chooseImageRes.tempFilePaths
 						uni.uploadFile({
-							url: 'http://m.xgcyz1978.com/api/uploadFile',
+							url: 'https://m.xgcyz1978.com/api/uploadFile',
 							filePath: tempFilePaths[0],
 							name: 'file',
 							success: (uploadFileRes) => {
 								let data = JSON.parse(uploadFileRes.data)
-								this.head = 'http://m.xgcyz1978.com' + data.url
+								this.head = 'https://m.xgcyz1978.com' + data.url
 								// this.head = data.url
 								console.log(this.head)
 							}

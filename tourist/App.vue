@@ -10,7 +10,7 @@
 						Vue.prototype.CustomBar = e.statusBarHeight + 50;
 					} else {
 						Vue.prototype.CustomBar = e.statusBarHeight + 45;
-					};
+					}
 					// #endif
 					// #ifdef MP-WEIXIN
 					Vue.prototype.StatusBar = e.statusBarHeight;
@@ -46,6 +46,5 @@
 	
 	iframe {
 		left: 30upx;
-		/* margin-top: 80upx; */
 	}
 </style>

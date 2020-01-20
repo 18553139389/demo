@@ -5,7 +5,7 @@
 				<block slot="backText">
 					<img class="msg" src="../../static/img/look1.png" @tap.stop="goSearch" alt="">
 				</block>
-				<block slot="content">会员商城</block>
+				<block slot="content">纪念币商城</block>
 				<block slot="right">
 					<img class="msg" src="../../static/img/type1.png" @tap="goType" alt="">
 				</block>
@@ -73,6 +73,22 @@
 			if (this.getRequest('uid')) {
 				var uids = this.getRequest('uid')
 				this.$store.commit('changeUid', uids)
+				let self = this
+				let datas = {
+					uid: this.$store.state.uid
+				}
+				let data = {
+					url: '/api/gzh/index',
+					data: datas,
+					success: function(res){
+						console.log(res)
+						if(res.data.result == 0){
+							self.$store.commit('changeVip', res.data.vipType)
+							self.$store.commit('changeCustomer', res.data.customer)
+						}
+					}
+				}
+				ajax(data)
 			}
 			//初始化执行
 			this.init()
@@ -226,7 +242,7 @@
 
 	.recommend_img {
 		width: 100%;
-		height: 200upx;
+		/* height: 200upx; */
 	}
 
 	.recommend_title {

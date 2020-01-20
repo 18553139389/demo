@@ -90,12 +90,8 @@
 
 <script>
 	import model from '../../components/model/model.vue'
-	import {
-		ajax
-	} from '../../common/js/util.js'
-	import {
-		Toast
-	} from 'vant'
+	import {ajax} from '../../common/js/util.js'
+	import {Toast} from 'vant'
 	export default {
 		data() {
 			return {
@@ -145,7 +141,6 @@
 					url: '/api/gzh/importantOrderDetail',
 					data: datas,
 					success: function(res) {
-						console.log(res)
 						if (res.data.result == 0) {
 							self.dataList = res.data
 							self.dataList.introduction = self.unescape(self.dataList.introduction)
@@ -153,7 +148,7 @@
 							self.refundList = res.data.refund
 						}
 					}
-				}
+				}		
 				ajax(data)
 			},
 			unescape(html) {
@@ -180,7 +175,6 @@
 					url: '/api/gzh/cancelImportantOrder',
 					data: datas,
 					success: function(res) {
-						console.log(res)
 						if (res.data.result == 0) {
 							Toast('取消成功')
 							setTimeout(() => {

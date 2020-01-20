@@ -1,8 +1,7 @@
 <template>
 	<view class="contain">
 		<view class="fixed">
-			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white"
-			 @Back="BackPage">
+			<cu-custom :isBacks="true" :Color="Color" :backColor="backColor" :isIcons="true" bgColor="bg-shadeTop text-white" @Back="Back">
 				<block slot="backText"></block>
 				<block slot="content">{{title}}</block>
 			</cu-custom>
@@ -118,6 +117,11 @@
 					}
 				}
 				return (false);
+			},
+			Back() {
+				uni.switchTab({
+					url: '../index/index'
+				})
 			},
 			// mescroll组件初始化的回调,可获取到mescroll对象
 			mescrollInit(mescroll) {

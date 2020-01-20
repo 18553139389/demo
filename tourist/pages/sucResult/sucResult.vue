@@ -11,36 +11,36 @@
 		<view class="box">
 			<view class="wrapper" v-if="type == 1 && cardType == 1">
 				<img src="../../static/img/huiyuanchengong.png" alt="">
-				<text>恭喜您开通黄金会员成功</text>
-				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站黄金会员</text>
+				<text>恭喜您开通银版纪念册会员成功</text>
+				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站银版纪念册会员</text>
 				<text style="color: #999;font-size: 12px;">会员到期时间：{{time}}</text>
 				<view class="btn" @tap="goVip">查看会员特权</view>
 			</view>
 			<view class="wrapper" v-if="type == 1 && cardType == 2">
 				<img src="../../static/img/huiyuanchengong.png" alt="">
-				<text>恭喜您开通钻石会员成功</text>
-				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站钻石会员</text>
+				<text>恭喜您开通金版纪念册会员成功</text>
+				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站金版纪念册会员</text>
 				<text style="color: #999;font-size: 12px;">会员到期时间：{{time}}</text>
 				<view class="btn" @tap="goVip">查看会员特权</view>
 			</view>
 			<view class="wrapper" v-if="type == 2 && cardType == 1">
 				<img src="../../static/img/huiyuanchengong.png" alt="">
-				<text>恭喜您续费黄金会员成功</text>
-				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站黄金会员</text>
+				<text>恭喜您续费银版纪念册会员成功</text>
+				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站银版纪念册会员</text>
 				<text style="color: #999;font-size: 12px;">会员到期时间：{{time}}</text>
 				<view class="btn" @tap="goVip">查看会员特权</view>
 			</view>
 			<view class="wrapper" v-if="type == 2 && cardType == 2">
 				<img src="../../static/img/huiyuanchengong.png" alt="">
-				<text>恭喜您续费钻石会员成功</text>
-				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站钻石会员</text>
+				<text>恭喜您续费金版纪念册会员成功</text>
+				<text style="color: #999;font-size: 12px;">开卡类型：小岗村驿站金版纪念册会员</text>
 				<text style="color: #999;font-size: 12px;">会员到期时间：{{time}}</text>
 				<view class="btn" @tap="goVip">查看会员特权</view>
 			</view>
 			<view class="wrapper" v-if="type == 3 && cardType == 2">
 				<img src="../../static/img/huiyuanchengong.png" alt="">
 				<text>恭喜您升级会员成功</text>
-				<text style="color: #999;font-size: 12px;">开卡类型：黄金会员升级为钻石会员</text>
+				<text style="color: #999;font-size: 12px;">开卡类型：银版纪念册会员升级为金版纪念册会员</text>
 				<text style="color: #999;font-size: 12px;">会员到期时间：{{time}}</text>
 				<view class="btn" @tap="goVip">查看会员特权</view>
 			</view>

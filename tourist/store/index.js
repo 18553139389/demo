@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-// 3d627fab60ad41d1852550d201e65ee2
+// 45b45486a00e461caf5f5625c1cf693d
 const store = new Vuex.Store({
 	state: {
-		uid: 'aebb5db6a9e04121b4e4ebb0252d8d6d',
+		uid: '45b45486a00e461caf5f5625c1cf693d',
 		city1: '郑州',
 		city2: '北京',
 		city3: '选择出发城市',
@@ -40,6 +40,9 @@ const store = new Vuex.Store({
 		searchState: 0,
 		saveAddress: null,
 		saveAddressId: '',
+		billRemark: '',
+		billLocation: '',
+		billOrder: '',
 		train1: '郑州',
 		train2: '北京',
 		trainDate: '',
@@ -215,6 +218,15 @@ const store = new Vuex.Store({
 		changeCurrentCity(state, item) {
 			state.currentCity = item
 		},
+		changeBillRemark(state,item) {
+			state.billRemark = item
+		},
+		changeBillLocation(state,item) {
+			state.billLocation = item
+		},
+		changeBillOrder(state,item) {
+			state.billOrder = item
+		}
 	}
 })
 

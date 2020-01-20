@@ -1,9 +1,10 @@
 <template>
 	<view class="contain">
 		<view class="fixed">
-			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
+			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white" @goRight="goRight">
 				<block slot="backText"></block>
 				<block slot="content">订单详情</block>
+				<block slot="right" v-if="list.invoice == 0 && list.state == 6">开发票</block>
 			</cu-custom>
 		</view>
 		<view class="lists">
@@ -115,13 +116,8 @@
 </template>
 
 <script>
-	import {
-		Toast,
-		Dialog
-	} from 'vant'
-	import {
-		ajax
-	} from '../../common/js/util.js'
+	import {Toast,Dialog} from 'vant'
+	import {ajax} from '../../common/js/util.js'
 	export default {
 		data() {
 			return {
@@ -313,6 +309,11 @@
 						}
 					}
 				)
+			},
+			goRight() {
+				uni.navigateTo({
+					url: '../bill/bill?amount=' + this.list.totalAmount + '&orderId=' + this.orderId
+				})
 			}
 		}
 	}

@@ -165,8 +165,8 @@
 				console.log('点击了回到顶部按钮');
 			},
 			goBack() {
-				uni.navigateBack({
-					delta: 1
+				uni.switchTab({
+					url: '/pages/index/index'
 				})
 			},
 			goDetail(id) {

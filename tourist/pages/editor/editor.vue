@@ -162,21 +162,64 @@
 				ajax(data)
 			},
 			changHead() {
+				let _this = this
 				uni.chooseImage({
+					sizeType: ['compressed'],
 					success: (chooseImageRes) => {
 						const tempFilePaths = chooseImageRes.tempFilePaths
+						// _this.getImageInfo(tempFilePaths[0])
 						uni.uploadFile({
-							url: 'http://m.xgcyz1978.com/api/uploadFile', 
+							url: 'https://m.xgcyz1978.com/api/uploadFile', 
 							filePath: tempFilePaths[0],
 							name: 'file',
 							success: (uploadFileRes) => {
 								let data = JSON.parse(uploadFileRes.data)
-								this.head = 'http://m.xgcyz1978.com' + data.url
-								console.log(this.head)
+								this.head = 'https://m.xgcyz1978.com' + data.url
 							}
-						});
+						})
 					}
 				});
+			},
+			getImageInfo(src) {
+				let _this = this
+				uni.getImageInfo({
+					src,
+					success(res) {
+						console.log('压缩前', res)
+						let canvasWidth = res.width //图片原始长宽
+						let canvasHeight = res.height
+						let img = new Image()
+						img.src = res.path
+						let canvas = document.createElement('canvas');
+						let ctx = canvas.getContext('2d')
+						canvas.width = canvasWidth / 2
+						canvas.height = canvasHeight / 2
+						ctx.drawImage(img, 0, 0, canvasWidth / 2, canvasHeight / 2)
+						canvas.toBlob(function(fileSrc) {
+							let imgSrc = window.URL.createObjectURL(fileSrc)
+							console.log('压缩后', imgSrc)
+							_this.uploadFile(imgSrc)
+						})
+					}
+				})
+			},
+			uploadFile(filePath) {
+				let _this = this
+				uni.uploadFile({
+					url: 'https://m.xgcyz1978.com/api/uploadFile',
+					name: 'file',
+					filePath,
+					success: (res) => {
+						let { data } = JSON.parse(res.data)
+						_this.head = 'https://m.xgcyz1978.com' + data.url
+					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.errMsg,
+							icon: 'none'
+						})
+					}
+				})
 			},
 			changeSex() {
 				this.show1 = true

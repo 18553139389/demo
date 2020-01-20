@@ -1,7 +1,7 @@
 <template>
 	<view class="contain">
 		<view class="fixed">
-			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
+			<cu-custom :isBacks="true" :Color="Color" :backColor="backColor" :isIcons="true" bgColor="bg-shadeTop text-white" @Back="Back">
 				<block slot="backText"></block>
 				<block slot="content">火车票</block>
 			</cu-custom>
@@ -84,6 +84,11 @@
 					}
 				}
 				return (false);
+			},
+			Back() {
+				uni.switchTab({
+					url: '../index/index'
+				})
 			},
 			init() {
 				let self = this

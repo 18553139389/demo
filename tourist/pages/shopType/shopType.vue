@@ -3,18 +3,18 @@
 		<view class="fixed">
 			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white">
 				<block slot="backText"></block>
-				<block slot="content">会员商城</block>
+				<block slot="content">纪念币商城</block>
 			</cu-custom>
 		</view>
 		<view class="VerticalBox" style="margin-top: 50px;">
 			<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation :scroll-top="verticalNavTop" style="height:calc(100vh - 50px)">
-				<view class="cu-item" :class="index==tabCur?'cur':''" v-for="(item,index) in list" :key="index" @tap="TabSelect" :data-id="index">
+				<view class="cu-item" :class="index==tabCur?'cur':''" v-for="(item,index) in list" :key="index" @tap="TabSelect($event,index)" :data-id="index">
 					{{item.name}}
 				</view>
 			</scroll-view>
 			<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 50px)" :scroll-into-view="'main-'+mainCur"
 			 @scroll="VerticalMain">
-				<view class="lr" v-for="(item,index) in list" :key="index" :id="'main-'+index">
+				<view class="lr" v-for="(item,index) in list" :key="index" :id="'main-'+index" v-if="currentItem == index">
 					<view class="cu-bar bg-white">
 						<img class="top_img" :src="item.icon" alt="">
 					</view>
@@ -47,6 +47,7 @@
 				tabCur: 0,
 				mainCur: 0,
 				verticalNavTop: 0,
+				currentItem: 0,
 				load: true,
 				sub: false
 			}
@@ -74,39 +75,40 @@
 			ajax(data)
 		},
 		methods: {
-			TabSelect(e) {
+			TabSelect(e,item) {
 				this.tabCur = e.currentTarget.dataset.id;
-				this.mainCur = e.currentTarget.dataset.id;
-				this.verticalNavTop = (e.currentTarget.dataset.id - 1) * 50
+				// this.mainCur = e.currentTarget.dataset.id;
+				// this.verticalNavTop = (e.currentTarget.dataset.id - 1) * 50
+				this.currentItem = item
 			},
 			VerticalMain(e) {
-				// #ifdef MP-ALIPAY
-				return false //支付宝小程序暂时不支持双向联动 
-				// #endif
-				let that = this;
-				let tabHeight = 0;
-				if (this.load) {
-					for (let i = 0; i < this.list.length; i++) {
-						let view = uni.createSelectorQuery().select("#main-" + this.list[i].ids);
-						view.fields({
-							size: true
-						}, data => {
-							this.list[i].top = tabHeight;
-							tabHeight = tabHeight + data.height;
-							this.list[i].bottom = tabHeight;
-						}).exec();
-					}
-					this.load = false
-				}
-				let scrollTop = e.detail.scrollTop + 10;
-				for (let i = 0; i < this.list.length; i++) {
-					if (scrollTop > this.list[i].top && scrollTop < this.list[i].bottom) {
-						this.verticalNavTop = (this.list[i].id - 1) * 50
-						this.tabCur = this.list[i].ids
-						// console.log(scrollTop)
-						return false
-					}
-				}
+				// // #ifdef MP-ALIPAY
+				// return false //支付宝小程序暂时不支持双向联动 
+				// // #endif
+				// let that = this;
+				// let tabHeight = 0;
+				// if (this.load) {
+				// 	for (let i = 0; i < this.list.length; i++) {
+				// 		let view = uni.createSelectorQuery().select("#main-" + this.list[i].ids);
+				// 		view.fields({
+				// 			size: true
+				// 		}, data => {
+				// 			this.list[i].top = tabHeight;
+				// 			tabHeight = tabHeight + data.height;
+				// 			this.list[i].bottom = tabHeight;
+				// 		}).exec();
+				// 	}
+				// 	this.load = false
+				// }
+				// let scrollTop = e.detail.scrollTop + 10;
+				// for (let i = 0; i < this.list.length; i++) {
+				// 	if (scrollTop > this.list[i].top && scrollTop < this.list[i].bottom) {
+				// 		this.verticalNavTop = (this.list[i].id - 1) * 50
+				// 		this.tabCur = this.list[i].ids
+				// 		// console.log(scrollTop)
+				// 		return false
+				// 	}
+				// }
 			},
 			goList(id) {
 				uni.navigateTo({

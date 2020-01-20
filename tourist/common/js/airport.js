@@ -2460,7 +2460,7 @@ const airport = {
 			"countrycode": "CN",
 			"continent": 1,
 			"sort": 99999999,
-			"ishot": "1",
+			"ishot": "0",
 			"isinternal": "1",
 			"continentenum": null,
 			"tag": null

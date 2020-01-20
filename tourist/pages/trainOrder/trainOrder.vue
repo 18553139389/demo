@@ -61,14 +61,6 @@
 									</template>
 									<van-radio slot="right-icon" :name="'二等座&'+list.EdzPrice+'&'+list.EdzNum" checked-color="#E02B11" icon-size="16px" />
 								</van-cell>
-								<!-- <van-cell clickable @click="radio = '无座&'+list.WzPrice+'&'+list.WzNum" v-if="list.WzNum != 0">
-									<template slot="title">
-										<text style="font-size: 12px;color: #333;margin-right: 20upx;">无座</text>
-										<text style="font-size: 12px;color: #E02B11;margin-right: 20upx;display: inline-block;width: 80upx;">￥{{list.WzPrice}}</text>
-										<text style="font-size: 12px;color: #666;">余票{{list.WzNum}}张</text>
-									</template>
-									<van-radio slot="right-icon" :name="'无座&'+list.WzPrice+'&'+list.WzNum" checked-color="#E02B11" icon-size="16px" />
-								</van-cell> -->
 							</block>
 							<block v-if="list.TrainType == 1">
 								<van-cell clickable @click="radio = '一等座&'+list.YdzPrice+'&'+list.YdzNum" v-if="list.YdzNum != 0">
@@ -382,7 +374,7 @@
 				radios: '',
 				linker: '',
 				phone: '',
-				checked1: false,
+				checked1: true,
 				product: {},
 				safePrice: 0,
 				show1: false,

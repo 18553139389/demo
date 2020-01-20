@@ -59,6 +59,34 @@
 						uni.switchTab({
 							url: '/pages/shop/shop'
 						})
+					}else if (bind == 1 && type == 3) {
+						uni.navigateTo({
+							url: '/pages/vipRoom/vipRoom'
+						})
+					}else if (bind == 1 && type == 4) {
+						uni.navigateTo({
+							url: '/pages/very/very'
+						})
+					}else if (bind == 1 && type == 5) {
+						uni.navigateTo({
+							url: '/pages/stage/stage?title=快速安检通道'
+						})
+					}else if (bind == 1 && type == 6) {
+						uni.navigateTo({
+							url: '/pages/airTicket/airTicket'
+						})
+					}else if (bind == 1 && type == 7) {
+						uni.navigateTo({
+							url: '/pages/train/train'
+						})
+					}else if (bind == 1 && type == 8) {
+						uni.navigateTo({
+							url: '/pages/hotel/hotel'
+						})
+					}else if (bind == 1 && type == 9) {
+						uni.switchTab({
+							url: '/pages/index/index'
+						})
 					}
 				}
 			}
@@ -81,7 +109,6 @@
 				let datas = {
 					url: url
 				}
-				alert(url)
 				let data = {
 					url: '/api/gzh/auth',
 					data: datas,

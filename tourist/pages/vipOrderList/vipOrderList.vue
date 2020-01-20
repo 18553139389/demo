@@ -23,7 +23,7 @@
 					<view class="list-all">
 						<view class="list-location">
 							<view>
-								{{v.type == 1 ? '黄金' : '钻石'}}会员
+								{{v.type == 1 ? '银版纪念册' : '金版纪念册'}}会员
 								<text v-if="v.category == 1">开卡</text>
 								<text v-if="v.category == 2">续费</text>
 								<text v-if="v.category == 3">升级</text>

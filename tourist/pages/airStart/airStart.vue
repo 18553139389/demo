@@ -183,8 +183,8 @@
 			},
 			init() {
 				let self = this
-
 				this.show = true
+				self.showAir = false
 				let start = this.$store.state.doubleStart
 				start = start.split('-').join('/')
 				let datas = {

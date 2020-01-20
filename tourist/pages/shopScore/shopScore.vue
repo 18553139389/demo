@@ -73,7 +73,7 @@
 					empty: {
 						use: true, // 是否显示空布局
 						icon: "http://www.mescroll.com/img/mescroll-empty.png", // 图标路径
-						tip: '暂无订单数据', // 提示
+						tip: '还没有数据', // 提示
 						// btnText: '去逛逛 >' // 按钮
 					}
 				}
@@ -138,7 +138,8 @@
 			init(mescroll) {
 				let self = this
 				let datas = {
-					type: 1
+					type: 1,
+					pageNo: mescroll.num
 				}
 				let data = {
 					url: '/api/gzh/productList',
@@ -215,7 +216,7 @@
 
 	.recommend_img {
 		width: 100%;
-		height: 200upx;
+		/* height: 200upx; */
 	}
 
 	.recommend_title {

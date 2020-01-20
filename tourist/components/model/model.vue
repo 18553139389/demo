@@ -1,5 +1,5 @@
 <template>
-    <view class="neil-modal" @touchmove.stop.prevent="bindTouchmove" :class="{'neil-modal--show':isOpen}">
+    <view class="neil-modal" :class="{'neil-modal--show':isOpen}">
         <view class="neil-modal__mask"></view>
         <view class="neil-modal__container">
             <view class="neil-modal__header" v-if="title.length > 0">{{title}}</view>
@@ -11,13 +11,12 @@
                     <slot />
                 </template>
             </view>
-            <view class="neil-modal__footer">
-                <view v-if="showCancel" class="neil-modal__footer-left" @click="clickLeft" :style="{color:cancelColor}"
+            <view class="neil-modal__footer" @click.stop="clickRight">
+                <!-- <view v-if="showCancel" class="neil-modal__footer-left" @click="clickLeft" :style="{color:cancelColor}"
                     hover-class="neil-modal__footer-hover" :hover-start-time="20" :hover-stay-time="70">
                     {{cancelText}}
-                </view>
-                <view class="neil-modal__footer-right" @click="clickRight" :style="{color:confirmColor}" hover-class="neil-modal__footer-hover"
-                    :hover-start-time="20" :hover-stay-time="70">
+                </view> -->
+                <view class="neil-modal__footer-right" :style="{color:confirmColor}" hover-class="neil-modal__footer-hover">
                     {{confirmText}}
                 </view>
             </view>
@@ -81,7 +80,6 @@
         	this.isOpen = this.show
         },
         methods: {
-            bindTouchmove() {},
             clickLeft() {
                 setTimeout(() => {
                 	this.$emit('cancel')

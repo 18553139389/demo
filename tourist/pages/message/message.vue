@@ -10,13 +10,13 @@
 		 @emptyclick="emptyClick" @topclick="topClick">
 			<view class="wrapper">
 				<van-swipe-cell :right-width="60" :left-width="0" v-for="(v,k) in list" :key="k">
-					<van-cell :border="true" :value="v.createDate">
+					<van-cell :border="true" :value="v.createDate" @tap="goDetail(v.title,v.content)">
 						<template slot="title">
 							<img src="../../static/img/tongzhi.png" alt="">
-							<text class="custom-text" @tap="goDetail(v.title,v.content)">{{v.title}}</text>
+							<text class="custom-text">{{v.title}}</text>
 						</template>
 					</van-cell>
-					<van-button square slot="right" type="danger" text="删除" @tap="onClose(k)" />
+					<van-button square slot="right" type="danger" text="删除" @tap.stop="onClose(k)" />
 				</van-swipe-cell>
 			</view>
 		</mescroll-uni>
@@ -288,5 +288,9 @@
 
 	.custom-text {
 		margin-left: 20upx;
+	}
+	
+	.van-cell:not(:last-child)::after {
+		left: 0 !important;
 	}
 </style>

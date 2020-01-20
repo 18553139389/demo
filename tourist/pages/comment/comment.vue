@@ -51,12 +51,12 @@
 		},
 		methods: {
 			goSubmit() {
-				if(val == ''){
+				if(this.val == ''){
 					Toast('评价内容不能为空')
 					return
 				}
 				
-				if(val.length >= 200){
+				if(this.val.length >= 200){
 					Toast('评价内容不能超过200字')
 					return
 				}

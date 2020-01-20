@@ -19,25 +19,7 @@
 			}
 		},
 		onLoad(option) {
-			//刷新保留用户uid
-			if (this.getRequest('uid')) {
-				var uids = this.getRequest('uid')
-				this.$store.commit('changeUid', uids)
-			}
 			this.url = decodeURIComponent(option.url)
-		},
-		methods: {
-			getRequest(variable) {
-				var query = window.location.search.substring(1);
-				var vars = query.split("&");
-				for (var i = 0; i < vars.length; i++) {
-					var pair = vars[i].split("=");
-					if (pair[0] == variable) {
-						return pair[1];
-					}
-				}
-				return (false);
-			}
 		}
 	}
 </script>

@@ -16,7 +16,7 @@
 				</view>
 				<view class="items">
 					<view>公司名称：</view>
-					<input type="text" v-model="company" placeholder="请输入公司名称" placeholder-class="place">
+					<input style="width: 70%;" type="text" v-model="company" placeholder="请输入公司名称" placeholder-class="place">
 				</view>
 				<view class="items">
 					<view>联系方式：</view>
@@ -125,13 +125,17 @@
 				uni.chooseImage({
 					success: (chooseImageRes) => {
 						const tempFilePaths = chooseImageRes.tempFilePaths
+						if(chooseImageRes.tempFiles[0].size > 2097152) {
+							Toast('上传头像大小不能超过2M')
+							return
+						}
 						uni.uploadFile({
-							url: 'http://m.xgcyz1978.com/api/uploadFile',
+							url: 'https://m.xgcyz1978.com/api/uploadFile',
 							filePath: tempFilePaths[0],
 							name: 'file',
 							success: (uploadFileRes) => {
 								let data = JSON.parse(uploadFileRes.data)
-								this.head = 'http://m.xgcyz1978.com' + data.url
+								this.head = 'https://m.xgcyz1978.com' + data.url
 								// this.head = data.url
 								console.log(this.head)
 							}

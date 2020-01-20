@@ -8,7 +8,7 @@
 						<image class="itemImg" :class="currentIndex == index ? 'swiperactive': ''" :src="item.image" lazy-load mode="scaleToFill"></image>
 						<view class="top" v-if="show">
 							<!-- <slot name="content">
-								<view class="card">{{item.cardType == 1 ? '黄金会员' : '钻石会员'}}</view>
+								<view class="card">{{item.cardType == 1 ? '银版纪念册会员' : '金版纪念册会员'}}</view>
 								<view class="date">有效期1年</view>
 								<view class="price">￥{{item.price}}</view>
 							</slot> -->

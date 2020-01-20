@@ -9,7 +9,7 @@
 			<view :class="{active:tabType==0}" @click="changeTab(0)">国内城市</view>
 			<!-- <view :class="{active:tabType==1}" @click="changeTab(1)">国际城市/港澳台</view> -->
 		</view>
-		<ss-select-city :hotCitys="hotCity" :value="value" @on-select="onSelect" @on-select1="onSelect1" />
+		<ss-select-city :hotCitys="hotCity" :value="value" @on-select="onSelect" @on-select1="onSelect1" @on-current="onCurrent" />
 		<van-popup v-model="show" position="bottom">
 			<view class="result">
 				<view class="wrapper" v-for="(v,k) in newJson" :key="k">
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+	import jweixin from '../../common/js/wexin.js'
+	import {ajaxs} from '../../common/js/util.js'
 	import mSearch from '../../components/search/search.vue'
 	import ssSelectCity from '../../components/select-city/select-city.vue'
 	import {airport} from '../../common/js/airport.js'
@@ -38,7 +40,7 @@
 			return {
 				tabType: 0, // 菜单
 				hotCity: [],
-				value: '郑州',
+				value: '',
 				type: 0,
 				show: false,
 				cityList: [],
@@ -52,15 +54,7 @@
 				this.$store.commit('changeUid', uids)
 			}
 			this.type = option.type
-			let self = this
-			//获取当前城市定位
-			uni.getLocation({
-				type: 'wgs84',
-				success: function(res) {
-					console.log('当前位置的经度：' + res.address.city)
-					self.value = res.address.city
-				}
-			})
+			this.init()
 			//获取热门城市列表
 			for (let i = 0; i < airport.RECORDS.length; i++) {
 				if (airport.RECORDS[i].ishot == 1 && airport.RECORDS[i].isinternal == 1) {
@@ -83,6 +77,61 @@
 					}
 				}
 				return (false);
+			},
+			init() {
+				let self = this
+				if(this.$store.state.currentCity == ''){
+					let url = window.location.href.split('#')[0]
+					url = encodeURIComponent(url)
+					let data3 = {
+						url: url
+					}
+					let data1 = {
+						url: '/api/gzh/auth',
+						data: data3,
+						success: function(res) {
+							if (res.data.result == 0) {
+								jweixin.config({
+									debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+									appId: res.data.appId, // 必填，公众号的唯一标识
+									timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+									nonceStr: res.data.noncestr, // 必填，生成签名的随机串
+									signature: res.data.signature, // 必填，签名，见附录1
+									jsApiList: ['checkJsApi', 'getLocation']
+								});
+								jweixin.error(function(res) {
+									//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+									alert("错误说明" + res.errMsg)
+								});
+								jweixin.ready(function() {
+									jweixin.getLocation({
+										type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+										success: function(res) {
+											var latitude = parseFloat(res.latitude); // 纬度，浮点数，范围为90 ~ -90
+											var longitude = parseFloat(res.longitude); // 经度，浮点数，范围为180 ~ -180。
+											var gc = new BMap.Geocoder();
+											var pointAdd = new BMap.Point(longitude, latitude);
+											gc.getLocation(pointAdd, function(rs){
+											    // 百度地图解析城市名
+												let city = rs.addressComponents.city
+												if(city.indexOf('市') != -1){
+													city = city.substring(0,city.indexOf('市'))
+												}
+												self.$store.commit('changeCurrentLat', latitude)
+												self.$store.commit('changeCurrentLon', longitude)
+												self.$store.commit('changeCurrentCity', city)
+												self.value = self.$store.state.currentCity
+											})
+										}
+									})
+								})
+							}
+						}
+					}
+					ajaxs(data1)
+				}else{
+					this.value = this.$store.state.currentCity
+				}
 			},
 			goBack() {
 				uni.navigateBack({
@@ -113,7 +162,6 @@
 						}]
 					})
 				}
-				console.log(arr)
 				var item1, item2
 				let newJson = [] //盛放去重后数据的新数组
 				for (item1 of arr) { //循环json数组对象的内容
@@ -128,7 +176,6 @@
 						newJson.push(item1)
 					}
 				}
-				console.log(newJson)
 				this.newJson = newJson
 			},
 			// 切换菜单
@@ -136,6 +183,21 @@
 				if (this.tabType !== type) {
 					this.tabType = type
 				}
+			},
+			onCurrent(val) {
+				this.$store.commit('changeSearchState', 2)
+				if (this.type == 1) {
+					this.$store.commit('changeCity1', val)
+				} else if (this.type == 2) {
+					this.$store.commit('changeCity2', val)
+				} else if (this.type == 3) {
+					this.$store.commit('changeCity3', val)
+				} else if (this.type == 4) {
+					this.$store.commit('changeCity4', val)
+				} 
+				uni.navigateBack({
+					delta: 1
+				})
 			},
 			onSelect(city) {
 				this.$store.commit('changeSearchState', 0)
@@ -151,9 +213,7 @@
 					this.$store.commit('changeEndCity1', city.citycode)
 				}
 				uni.navigateBack({
-					delta: 1,
-					animationType: 'slide-in-right',
-					animationDuration: 500
+					delta: 1
 				})
 			},
 			onSelect1(city) {
@@ -168,13 +228,11 @@
 					this.$store.commit('changeCity4', city)
 				}
 				uni.navigateBack({
-					delta: 1,
-					animationType: 'slide-in-right',
-					animationDuration: 500
+					delta: 1
 				})
 			},
 			onSearch1(name,code) {
-				// this.$store.commit('changeSearchState', 1)
+				this.$store.commit('changeSearchState', 1)
 				if (this.type == 1) {
 					this.$store.commit('changeCity1', name)
 					this.$store.commit('changeStartCity', code)
@@ -189,9 +247,7 @@
 					this.$store.commit('changeEndCity1', code)
 				}
 				uni.navigateBack({
-					delta: 1,
-					animationType: 'slide-in-right',
-					animationDuration: 500
+					delta: 1
 				})
 			}
 		}

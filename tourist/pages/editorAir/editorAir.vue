@@ -4,7 +4,7 @@
 			<cu-custom :isBack="true" :Color="Color" :backColor="backColor" :isIcon="true" bgColor="bg-shadeTop text-white" @goRight="goRight">
 				<block slot="backText"></block>
 				<block slot="content">{{text}}</block>
-				<block slot="right">删除</block>
+				<block slot="right" v-if="type == 1">删除</block>
 			</cu-custom>
 		</view>
 		<view class="lists">
@@ -119,8 +119,8 @@
 				this.$store.commit('changeUid', uids)
 			}
 			let self = this
+			this.type = option.type
 			if (option.type == 1) {
-				this.type = option.type
 				this.userId = option.id
 				let id = option.id
 				this.text = '编辑乘机人'

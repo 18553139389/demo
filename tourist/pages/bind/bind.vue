@@ -28,19 +28,14 @@
 		<view class="bind_card">
 			<view class="card_btn" @tap="bindCard">绑定会员卡</view>
 		</view>
-		<model :show="show" @confirm="confirm" title="邦卡成功" content="可在线上享受会员卡同等特权" :show-cancel="false">
-		</model>
+		<model :show="show" @confirm="close" title="绑卡成功" content="可在线上享受会员卡同等特权" :show-cancel="false"></model>
 	</view>
 </template>
 
 <script>
 	import model from '../../components/model/model.vue'
-	import {
-		ajax
-	} from '../../common/js/util.js'
-	import {
-		Toast
-	} from 'vant'
+	import {ajax} from '../../common/js/util.js'
+	import {Toast} from 'vant'
 	export default {
 		data() {
 			return {
@@ -63,9 +58,6 @@
 				var uids = this.getRequest('uid')
 				this.$store.commit('changeUid', uids)
 			}
-		},
-		onReady() {
-
 		},
 		methods: {
 			getRequest(variable) {
@@ -124,8 +116,10 @@
 				}
 				ajax(datas)
 			},
-			confirm() {
-				this.show = false
+			close() {
+				uni.navigateBack({
+				    delta: 1
+				})
 			}
 		}
 	}

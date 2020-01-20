@@ -19,7 +19,7 @@
 				</view>
 				<img src="../../static/img/right.png" alt="">
 			</view>
-			<view class="item" @tap="goModify">
+			<!-- <view class="item" @tap="goModify">
 				<view class="item-left">
 					<view>交易密码设置</view>
 				</view>
@@ -30,7 +30,7 @@
 					<view>交易密码修改</view>
 				</view>
 				<img src="../../static/img/right.png" alt="">
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -68,12 +68,12 @@
 			},
 			goService() {
 				uni.navigateTo({
-					url: '../content/content?url=' + encodeURIComponent('http://m.xgcyz1978.com/display/agreement?id=2')
+					url: '../content/content?url=' + encodeURIComponent('https://m.xgcyz1978.com/display/agreement?id=2')
 				})
 			},
 			goQuestion() {
 				uni.navigateTo({
-					url: '../content/content?url=' + encodeURIComponent('http://m.xgcyz1978.com/display/agreement?id=3')
+					url: '../content/content?url=' + encodeURIComponent('https://m.xgcyz1978.com/display/agreement?id=3')
 				})
 			},
 			goModify() {

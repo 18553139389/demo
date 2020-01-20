@@ -95,12 +95,10 @@
 				this.$emit('on-current', this.value)
 			},
 			onSelect(city) {
-				// this.current = city.cityname
 				this.$emit('input', city)
 				this.$emit('on-select', city)
 			},
 			onSelect1(city) {
-				// this.current = city.cityname
 				this.$emit('input', city)
 				this.$emit('on-select1', city)
 			}

@@ -18,15 +18,12 @@
 		</view>
 		<view style="background-color: #F8F8F8;padding: 30upx 0;" v-if="type == 1 || type == 2">
 			<view class="vips">
-				<!-- <view class="cards">{{type == 1 ? '黄金会员' : '钻石会员'}}</view>
-				<view class="author">会员权益</view>
-				<view class="content">持卡人可无限次使用驿站会员</view> -->
 				<img :src="imgs" alt="">
 			</view>
 		</view>
 		<view class="bind_produce" v-if="type == 0">
 			<view class="cardsList">
-				<view class="cards">{{cardType == 1 ? '黄金会员' : '钻石会员'}}</view>
+				<view class="cards">{{cardType == 1 ? '银版纪念册会员' : '金版纪念册会员'}}</view>
 				<view style="font-size: 36upx;color: #DE2910;">￥{{price}}</view>
 			</view>
 			<view style="font-size: 12px;color: #999;margin: 20upx 0;">有效期1年</view>
@@ -34,7 +31,7 @@
 		</view>
 		<view class="control" v-if="type == 1 || type == 2">
 			<view class="cardsList">
-				<view class="cards">{{type == 1 ? '黄金会员' : '钻石会员'}}</view>
+				<view class="cards">{{type == 1 ? '银版纪念册会员' : '金版纪念册会员'}}</view>
 				<view>到期时间： {{endDate}}</view>
 			</view>
 			<view class="vipNum">会员卡号：{{card}}</view>
