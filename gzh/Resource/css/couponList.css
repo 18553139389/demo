@@ -32,7 +32,7 @@ body {
 }
 
 .list_content {
-	width: 65%;
+	width: 60%;
 	height: 1.6rem;
 	padding: 0.1rem 0;
 	box-sizing: border-box;
@@ -88,20 +88,21 @@ body {
 }
 
 .voucher {
-	font-size: 28px;
-	color: #FA9441;
-	padding: 0 0.15rem;
-	text-align: center;
-	border: 1px solid #FA9441;
+	width: 100%;
+	padding: 4px 0;
+	background: #FF9800;
 	border-radius: 4px;
+	font-size: 24px;
+	color: #fff;
+	text-align: center;
 }
 
 [data-dpr="1"] .voucher {
-	font-size: 14px;
+	font-size: 12px;
 }
 
 [data-dpr="3"] .voucher {
-	font-size: 42px;
+	font-size: 36px;
 }
 
 [v-cloak] {
@@ -133,7 +134,7 @@ body {
 }
 
 .guide {
-	height: 1.6rem;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

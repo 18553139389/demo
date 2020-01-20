@@ -39,7 +39,8 @@
 				height: 1.6rem;
 				display: flex;
 				flex-direction: column;
-				justify-content: space-around;
+				justify-content: center;
+				align-items: center;
 			}
 			
 			[v-cloak] {
@@ -53,7 +54,7 @@
 			<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 				<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
 					<div class="list">
-						<div class="list_item" v-for="v in list">
+						<div class="list_item" v-for="v in list" @click="goEnter(v.shopId)">
 							<div class="list_img">
 								<img :src="v.shopIcon" alt="" />
 							</div>
@@ -64,9 +65,12 @@
 									<span>{{v.address}}</span>
 								</div>
 							</div>
-							<div class="guide">
-								<div class="voucher" @click="coupon(v.shopId)">领券</div>
+							<!-- <div class="guide">
+								<div class="voucher" @click="coupon(v.couponId)">领券</div>
 								<div class="voucher" @click="goMap(v.lat,v.lon,v.shopName)">导航</div>
+							</div> -->
+							<div class="guide">
+								<div class="voucher">进店领券</div>
 							</div>
 						</div>
 					</div>
@@ -258,6 +262,9 @@
 						} else {
 							this.$toast(res.resultNote)
 						}
+					},
+					goEnter: function(id) {
+						window.location.href = "./couponList.html?id=" + id
 					}
 				}
 			})

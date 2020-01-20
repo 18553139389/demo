@@ -89,11 +89,12 @@ body {
 
 .voucher {
 	font-size: 28px;
-	color: #FA9441;
-	padding: 0 0.15rem;
+	color: #FFFFFF;
+	padding: 4px 0.2rem;
 	text-align: center;
-	border: 1px solid #FA9441;
+	/* border: 1px solid #FA9441; */
 	border-radius: 4px;
+	background: #FA9441;
 }
 
 [data-dpr="1"] .voucher {

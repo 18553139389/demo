@@ -24,20 +24,29 @@ function directScanQRCode(appId, timestamp, nonceStr, signature) {
 			needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
 			scanType: ["qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
 			success: function(r) {
-				var datas = {
-					shopId: r.resultStr
-				}
-				queryData('/shopDetail',datas,function(res){
-					if(res.result == 0) {
-						window.location.href = "./business_pay.html?id=" + r.resultStr; //因为我这边是扫描后有个链接，然后跳转到该页面
-					}else{
-						$('.warn').show();
-						$('.warn').html('附近的店铺不存在');
-						setTimeout(function(){
-							$('.warn').hide();
-						},1500)
+				let arr = r.resultStr.split(',')
+				if(arr[1] == 2){
+					var datas = {
+						shopId: arr[0]
 					}
-				})
+					queryData('/shopDetail',datas,function(res){
+						if(res.result == 0) {
+							window.location.href = "./business_pay.html?id=" + arr[0]; //因为我这边是扫描后有个链接，然后跳转到该页面
+						}else{
+							$('.warn').show();
+							$('.warn').html('附近的店铺不存在');
+							setTimeout(function(){
+								$('.warn').hide();
+							},1500)
+						}
+					})
+				}else{
+					$('.warn').show();
+					$('.warn').html('扫码错误');
+					setTimeout(function(){
+						$('.warn').hide();
+					},1500)
+				}
 			},
 			fail: function(res) {
 				alert("扫码出错了2：" + res.errMsg)
@@ -72,20 +81,29 @@ function directScanQRCodeCount(appId, timestamp, nonceStr, signature) {
 			needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
 			scanType: ["qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
 			success: function(r) {
-				var datas = {
-					shopId: r.resultStr
-				}
-				queryData('/shopDetail',datas,function(res){
-					if(res.result == 0) {
-						window.location.href = "./near_shopcoupon.html?id=" + r.resultStr; //因为我这边是扫描后有个链接，然后跳转到该页面
-					}else{
-						$('.warn').show();
-						$('.warn').html('附近的店铺不存在');
-						setTimeout(function(){
-							$('.warn').hide();
-						},1500)
+				let arr = r.resultStr.split(',')
+				if(arr[1] == 1){
+					var datas = {
+						shopId: arr[0]
 					}
-				})
+					queryData('/shopDetail',datas,function(res){
+						if(res.result == 0) {
+							window.location.href = "./near_shopcoupon.html?id=" + arr[0]; //因为我这边是扫描后有个链接，然后跳转到该页面
+						}else{
+							$('.warn').show();
+							$('.warn').html('附近的店铺不存在');
+							setTimeout(function(){
+								$('.warn').hide();
+							},1500)
+						}
+					})
+				}else{
+					$('.warn').show();
+					$('.warn').html('扫码错误');
+					setTimeout(function(){
+						$('.warn').hide();
+					},1500)
+				}
 			},
 			fail: function(res) {
 				alert("扫码出错了2：" + res.errMsg)

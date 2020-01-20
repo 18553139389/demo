@@ -7,9 +7,45 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/vant.css">
 		<link rel="stylesheet" href="Resource/css/person_center.css" />
 		<link rel="stylesheet" href="Resource/css/swiper.css" />
 		<title>个人中心</title>
+		<style>
+			.bg {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, .6);
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 9999;
+			}
+			
+			.wx-tip {
+				width: 60px;
+				position: absolute;
+				top: 10px;
+				right: 10px;
+			}
+			
+			.share_text {
+				width: 60%;
+				position: absolute;
+				left: 50%;
+				top: 100px;
+				margin-left: -30%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			.share_text p {
+				color: #fff;
+				font-size: 14px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -17,15 +53,15 @@
 			<div class="list">
 				<div class="message">
 					<div class="msg_img">
-						<img :src="datas.icon" alt="" v-if="datas.icon"/>
-						<img src="Resource/images/1.jpg" alt="" v-else/>
+						<img :src="datas.icon" alt="" v-if="datas.icon" />
+						<img src="Resource/images/1.jpg" alt="" v-else />
 					</div>
 					<span>{{datas.username}}</span>
 				</div>
-				<div class="top_img">
+				<div class="top_img" @click.stop="share">
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
-						<!-- {{imgList}} -->
+							<!-- {{imgList}} -->
 							<div class="swiper-slide" v-for="v in imgList">
 								<img :src="v" alt="" />
 							</div>
@@ -91,8 +127,8 @@
 						</div>
 					</a>
 				</li>
-				<li class="list_item">
-					<a href="./partner_apply.html">
+				<li class="list_item company" @click="goCompany">
+					<a href="javascript:;">
 						<div class="nav_left">
 							<img src="Resource/images/partner.png" alt="" />
 							<span>合伙人申请</span>
@@ -118,7 +154,7 @@
 					<a href="./about.html">
 						<div class="nav_left">
 							<img src="Resource/images/about.png" alt="" />
-							<span>关于我们</span>
+							<span>联系我们</span>
 						</div>
 						<div class="nav_right">
 							<img src="Resource/images/icon_right.png" alt="" />
@@ -127,21 +163,31 @@
 				</li>
 			</ul>
 		</div>
+		<div class="bg" style="display: none;">
+			<img class="wx-tip" src="Resource/images/weixin-tip.png" alt="">
+			<div class="share_text">
+				<p>请点击右上角</p>
+				<p>选择分享</p>
+			</div>
+		</div>
 
 		<script src="Resource/js/flexible.js"></script>
 		<script src="Resource/js/vue.min.js"></script>
+		<script src="Resource/js/vant.js"></script>
 		<script src="Resource/js/jquery.min.js"></script>
+		<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 		<script src="Resource/js/swiper.js"></script>
 		<script src="Resource/js/common.js"></script>
 		<script>
-		console.log(uid)
+			// $('.bg').hide();
 			var person = new Vue({
 				el: "#app",
 				data: {
 					imgList: [],
 					orderBind: '',
 					company: '',
-					datas:{},
+					datas: {},
+					apply: null
 				},
 				mounted: function() {
 					this.onLoad()
@@ -156,7 +202,8 @@
 					successLoad: function(res) {
 						console.log(res)
 						if (res.result == 0) {
-                           this.datas=res;
+							this.datas = res;
+							this.apply = res.apply;
 							this.imgList = res.dataList;
 							if (res.bind == 0) {
 								this.orderBind = '未绑定'
@@ -182,9 +229,149 @@
 								})
 							}, 200);
 						}
+					},
+					share: function() {
+						$('.bg').show();
+					},
+					goCompany() {
+						if(this.apply == 1){
+							this.$toast('您的申请正在审核中');
+						}else if(this.apply == 2){
+							this.$toast('您已成为合伙人');
+						}else{
+							window.location.href = './partner_apply.html'
+						}
 					}
 				}
 			})
+
+			$('.bg').click(function() {
+				hide();
+			});
+
+			function hide() {
+				$('.bg').hide();
+			}
+
+			//分享给朋友
+			var url = location.href.split('#')[0];
+			$.ajax({
+				url: publicUrl + '/scan',
+				method: "post",
+				dataType: "json",
+				data: {
+					url: url
+				},
+				success: function(res) {
+					// alert(JSON.stringify(res))
+					if (res.result == '0') {
+						var appId = res.appId;
+						var timestamp = res.timestamp;
+						var nonceStr = res.noncestr;
+						var signature = res.signature;
+						shareFriend(appId, timestamp, nonceStr, signature);
+					}
+				}
+			});
+
+			//分享到朋友圈
+			$.ajax({
+				url: publicUrl + '/scan',
+				method: "post",
+				dataType: "json",
+				data: {
+					url: url
+				},
+				success: function(res) {
+					console.log(res)
+					if (res.result == '0') {
+						var appId = res.appId;
+						var timestamp = res.timestamp;
+						var nonceStr = res.noncestr;
+						var signature = res.signature;
+						shareMenu(appId, timestamp, nonceStr, signature);
+					}
+				}
+			});
+
+			function shareFriend(appId, timestamp, nonceStr, signature) {
+				wx.config({
+					// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					debug: false,
+					// 必填，公众号的唯一标识
+					appId: appId,
+					// 必填，生成签名的时间戳
+					timestamp: timestamp,
+					// 必填，生成签名的随机串
+					nonceStr: nonceStr,
+					// 必填，签名，见附录1
+					signature: signature,
+					// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+					jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage']
+				});
+				wx.error(function(res) {
+					//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+					alert("扫码出错了1：" + res.errMsg)
+				});
+				wx.ready(function() {
+					wx.onMenuShareAppMessage({
+						title: '领了吗', // 分享标题
+						desc: '领取优惠券有优惠哦~~', // 分享描述
+						link: 'https://gongxiang.thekingbull.com/gzh/no.html?inviteId=' + uid,
+						imgUrl: 'https://gongxiang.thekingbull.com/gzh/Resource/images/logo.png', // 分享图标
+						type: 'link', // 分享类型,music、video或link，不填默认为link
+						dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+						success: function() {
+							$('.bg').hide();
+							alert('分享成功');
+							// 用户确认分享后执行的回调函数
+						},
+						cancel: function() {
+							$('.bg').hide();
+							alert('分享失败');
+							// 用户取消分享后执行的回调函数
+						}
+					});
+				});
+			}
+
+			function shareMenu(appId, timestamp, nonceStr, signature) {
+				wx.config({
+					// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					debug: false,
+					// 必填，公众号的唯一标识
+					appId: appId,
+					// 必填，生成签名的时间戳
+					timestamp: timestamp,
+					// 必填，生成签名的随机串
+					nonceStr: nonceStr,
+					// 必填，签名，见附录1
+					signature: signature,
+					// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+					jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage']
+				});
+				wx.error(function(res) {
+					//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+					alert("扫码出错了1：" + res.errMsg)
+				});
+				wx.ready(function() {
+					wx.onMenuShareTimeline({
+						title: '领了吗', // 分享标题
+						link: 'https://gongxiang.thekingbull.com/gzh/no.html?inviteId=' + uid,
+						imgUrl: 'https://gongxiang.thekingbull.com/gzh/Resource/images/logo.png', // 分享图标
+						success: function() {
+							$('.bg').hide();
+							alert('分享成功');
+							// 用户确认分享后执行的回调函数
+						},
+						cancel: function() {
+							$('.bg').hide();
+							alert('分享失败');
+							// 用户取消分享后执行的回调函数
+						}
+					});
+				});
+			}
 		</script>
 	</body>
 

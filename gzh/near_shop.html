@@ -57,7 +57,7 @@
 			<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 				<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
 					<div class="list">
-						<div class="list_item" v-for="v in list" @click="goEnter(v.shopId)">
+						<div class="list_item" v-for="v in list" @click="goEnter(v.shopId,v.lat,v.lon)">
 							<div class="list_img">
 								<img :src="v.shopIcon" alt="" />
 							</div>
@@ -176,7 +176,7 @@
 									keyword: self.value,
 									page: this.page
 								}
-								queryData('nearbyShop', datas, this.successLoad);
+								queryData('/nearbyShop', datas, this.successLoad);
 							} else {
 								this.pos()
 							}
@@ -260,8 +260,8 @@
 							})
 						});
 					},
-					goEnter: function(id) {
-						window.location.href = "./couponList.html?id=" + id
+					goEnter: function(id,lat,lon) {
+						window.location.href = "./couponList.html?id=" + id + '&lat=' + lat + '&lon=' + lon
 					}
 					// coupon: function(id) {
 					// 	datas = {

@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="Resource/css/partner_apply.css" />
 		<title>合伙人申请</title>
 		<script src="Resource/js/flexible.js"></script>
+		<script src="Resource/js/md5.js"></script>
 		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=953b0c33eebadeb84681e6e9d2d14031"></script>
 		<script src="Resource/js/vue.min.js"></script>
 		<script src="Resource/js/vant.js"></script>
@@ -31,6 +32,10 @@
 			<div class="list_item">
 				<label for="shop_tel">手机号</label>
 				<input v-model="phone" id="shop_tel" type="text" placeholder="请输入手机号" />
+			</div>
+			<div class="list_item">
+				<label for="shop_tel">设置密码</label>
+				<input v-model="pass" id="pass_tel" type="text" placeholder="请输入密码" />
 			</div>
 			<button class="submit" type="button" @click="submit">提交申请</button>
 			<p>注：建议使用常用微信进行申请</p>
@@ -66,7 +71,8 @@
 						lng: lon,
 						address: xz_address,
 						user: user,
-						phone: ''
+						phone: '',
+						pass: ''
 					},
 					methods: {
 						goMap: function() {
@@ -144,6 +150,16 @@
 								this.$toast('请选择店铺位置');
 								return;
 							}
+							
+							if(this.pass == ''){
+								this.$toast('密码不能为空');
+								return;
+							}
+							
+							if(this.pass.length < 6){
+								this.$toast('密码不能低于6位');
+								return;
+							}
 
 							datas = {
 								shopName: this.user
@@ -159,7 +175,8 @@
 									lon: this.lng,
 									lat: this.lat,
 									address: this.address,
-									phone: this.phone
+									phone: this.phone,
+									password: hex_md5(this.pass)
 								}
 								console.log(datas);
 								queryData('/joinShop', datas, this.successApply);

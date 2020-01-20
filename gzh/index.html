@@ -60,6 +60,11 @@
 		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=953b0c33eebadeb84681e6e9d2d14031"></script>
 		<script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
 		<script>
+			localStorage.removeItem("id");
+			localStorage.removeItem("amount");
+			localStorage.removeItem("price");
+			localStorage.removeItem("types");
+			localStorage.removeItem("cash");
 			var lat, lon;
 			if (sessionStorage.getItem('lat') && sessionStorage.getItem('lon')) {
 				var map = new AMap.Map("container", {

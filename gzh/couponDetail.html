@@ -57,7 +57,7 @@
 					<li class="type-list">
 						<div class="item1">
 							<div class="first" style="font-size: 18px;color: red;" v-if="list.type == 1">￥{{list.amount}}</div>
-							<div class="first" style="font-size: 18px;color: red;" v-if="list.type == 2">{{list.amount}}折</div>
+							<div class="first" style="font-size: 18px;color: red;" v-if="list.type == 2">{{list.amount * 100}}折</div>
 							<span v-if="list.type == 1">满{{list.price}}元可用</span>
 							<span v-if="list.type == 2">满{{list.price}}元可用</span>
 						</div>

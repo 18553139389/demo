@@ -30,13 +30,14 @@
 				<div class="money_list" @click="yhj()">
 					<span>使用优惠券</span>
 					<div class="money_right">
-						<span style="color: #FF2828;">{{money1}} ¥</span>
+						<span style="color: #FF2828;" v-if="types == 1">¥ {{amount}}</span>
+						<span style="color: #FF2828;" v-if="types == 2">{{amount * 100}}折</span>
 						<img src="Resource/images/icon_right.png" alt="" />
 					</div>
 				</div>
 				<div class="money_list">
 					<span>实付金额</span>
-					<span style="color: #FF2828;">{{money2}} ¥</span>
+					<span style="color: #FF2828;">¥ {{money2}}</span>
 				</div>
 				<button class="submit" type="button" @click="qr()">和店员已确认，立即买单</button>
 				<p>买单仅限于到店支付，请确认金额后提交</p>
@@ -47,27 +48,40 @@
 			var app = new Vue({
 				el: "#app",
 				data: {
-					money: ''
+					money: '',
+					money1: 0,
+					amount: 0,
+					types: 1
 				},
-				mounted: function() {
+				created: function() {
+					if (localStorage.getItem('types')) {
+						this.types = localStorage.getItem('types');
+					} 
+					if (localStorage.getItem('amount')) {
+						this.amount = localStorage.getItem('amount');
+					} 
 					this.onLoad();
 				},
 				computed: {
-					money1: function() {
-						if (sessionStorage.getItem('amount')) {
-							return sessionStorage.getItem('amount');
-						} else {
-							return 0;
-						}
-					},
 					money2: function() {
-						var num = parseFloat(this.money) - parseFloat(this.money1);
-						if (isNaN(num)) {
-							return 0
-						} else if (num <= 0) {
-							return 0
-						} else {
-							return num.toFixed(2)
+						if(this.types == 1){
+							var num = parseFloat(this.money) - parseFloat(this.amount);
+							if (isNaN(num)) {
+								return 0
+							} else if (num <= 0) {
+								return 0
+							} else {
+								return num.toFixed(2)
+							}
+						}else if(this.types == 2){
+							var nums = parseFloat(this.money) * parseFloat(this.amount);
+							if (isNaN(nums)) {
+								return 0
+							} else if (nums <= 0) {
+								return 0
+							} else {
+								return nums.toFixed(2)
+							}
 						}
 					}
 				},
@@ -81,8 +95,8 @@
 							queryData('/shopDetail', datas, this.success)
 						}
 						
-						if (sessionStorage.getItem('cash')) {
-							this.money = sessionStorage.getItem('cash');
+						if (localStorage.getItem('cash')) {
+							this.money = localStorage.getItem('cash');
 						} else {
 							return '';
 						}
@@ -94,16 +108,20 @@
 					},
 					//跳转到优惠劵页面
 					yhj: function() {
-						sessionStorage.clear();
+						localStorage.removeItem("id");
+						localStorage.removeItem("amount");
+						localStorage.removeItem("price");
+						localStorage.removeItem("types");
+						localStorage.removeItem("cash");
 						var shopId = GetQueryString('id');
 						var cash = this.money;
-						sessionStorage.setItem('cash',cash);
+						localStorage.setItem('cash',cash);
 						window.location.href = "./coupon.html?shopId=" + shopId;
 					},
 					//点击付钱
 					qr: function() {
-						var price = sessionStorage.getItem('price');
-						if (parseFloat(this.money) <= parseFloat(price)) {
+						var price = localStorage.getItem('price');
+						if (parseFloat(this.money) < parseFloat(price)) {
 							this.$toast('优惠券不满足满减条件');
 							return
 						}
@@ -113,7 +131,7 @@
 							return
 						}
 						var shop = GetQueryString('id');
-						var couponId = sessionStorage.getItem('id')
+						var couponId = localStorage.getItem('id')
 						var datas = {
 							uid: uid,
 							shopId: shop,
@@ -123,6 +141,7 @@
 						queryData('/addOrder', datas, this.order)
 					},
 					order: function(res) {
+						var self = this
 						if (res.result == 0) {
 							var body = res.body;
 							var appId = body.appId;
@@ -131,16 +150,17 @@
 							var packages = body.prepay;
 							var signType = body.signType;
 							var paySign = body.paySign;
-							if (typeof WeixinJSBridge == "undefined") {
-								if (document.addEventListener) {
-									document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-								} else if (document.attachEvent) {
-									document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-									document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-								}
-							} else {
-								this.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
-							}
+							self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
+							// if (typeof WeixinJSBridge == "undefined") {
+							// 	if (document.addEventListener) {
+							// 		document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+							// 	} else if (document.attachEvent) {
+							// 		document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+							// 		document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+							// 	}
+							// } else {
+							// 	self.onBridgeReady(appId, timeStamp, nonceStr, packages, signType, paySign)
+							// }
 						}
 					},
 					onBridgeReady: function(appId, timeStamp, nonceStr, package, signType, paySign) {
@@ -159,6 +179,11 @@
 									console.log('微信支付成功')
 									//  Toast('微信支付成功')
 									//  this.$router.push('/MineOrder')
+									localStorage.removeItem("id");
+									localStorage.removeItem("amount");
+									localStorage.removeItem("price");
+									localStorage.removeItem("types");
+									localStorage.removeItem("cash");
 									window.location.href = "./pay_success.html";
 								} else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
 									console.log('用户取消支付')
@@ -168,7 +193,6 @@
 									console.log('网络异常，请重试')
 									//    Toast('网络异常，请重试')
 								}
-
 							}
 						)
 					}

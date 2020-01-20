@@ -26,7 +26,7 @@ body {
 }
 
 .list_left {
-	width: 30%;
+	width: 25%;
 	height: 1.5rem;
 	border-right: 1px dashed #eee;
 	display: flex;
@@ -37,29 +37,29 @@ body {
 }
 
 .money {
-	font-size: 40px;
+	font-size: 30px;
 	color: red;
 }
 
 [data-dpr="1"] .money {
-	font-size: 20px;
+	font-size: 15px;
 }
 
 [data-dpr="3"] .money {
-	font-size: 60px;
+	font-size: 45px;
 }
 
 .use {
-	font-size: 26px;
+	font-size: 24px;
 	color: #666;
 }
 
 [data-dpr="1"] .use {
-	font-size: 13px;
+	font-size: 12px;
 }
 
 [data-dpr="3"] .use {
-	font-size: 39px;
+	font-size: 36px;
 }
 
 .list_right {
@@ -107,10 +107,13 @@ body {
 }
 
 .nav_guide {
+	width: 100%;
 	display: inline-block;
-	padding: 1px 4px;
-	border: 1px solid rgb(243,152,1);
+	padding: 4px 0;
+	/* border: 1px solid rgb(243,152,1); */
 	border-radius: 6px;
 	font-size: 12px;
-	color: rgb(243,152,1);
+	color: #fff;
+	background: #FF9800;
+	text-align: center;
 }

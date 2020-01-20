@@ -1,15 +1,15 @@
 //var publicUrl = "http://116.255.239.151:9080/api/gzh" // 每个请求地址相同的部分
-var publicUrl = "http://gongxiang.thekingbull.com/api/gzh"
+var publicUrl = "/api/gzh"
 //http://gongxiang.thekingbull.com
 //http://116.255.239.151:9080/api/gzh
 var uid;
 var couponIds = ''
 var local = window.localStorage;
 if (window.location.search.indexOf("uid") > -1) {
-	var uids = window.location.search.split("uid=")[1];
+	var uids = GetQueryString('uid');
 	local.setItem("uids", uids);
 	uid = uids;
-	console.log("有uid" + window.location.search)
+	console("有uid" + window.location.search)
 } else {
 	uid = local.getItem("uids");
 	console.log("没有uid" + uid)
@@ -29,7 +29,7 @@ function queryData(url, params, success,error) {
 			success(res)
 		},
 		error: function(res) {
-			console.log(res)
+			alert(res)
 		}
 	})
 }

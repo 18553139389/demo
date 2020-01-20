@@ -21,6 +21,15 @@
 			<div class="money">
 				<input v-model="value" type="text" placeholder="请输入提现金额" />
 			</div>
+			<div class="money">
+				<input v-model="user" type="text" placeholder="请输入开户姓名" />
+			</div>
+			<div class="money">
+				<input v-model="bank" type="text" placeholder="请输入开户银行" />
+			</div>
+			<div class="money">
+				<input v-model="bankCard" type="number" placeholder="请输入银行卡号" />
+			</div>
 			<div class="residue">
 				可提现余额：
 				<span style="color: #0ABB08;font-weight: 600;">{{money}}</span>
@@ -38,7 +47,10 @@
 				el: "#app",
 				data: {
 					money: '',
-					value: ''
+					value: '',
+					user: '',
+					bank: '',
+					bankCard: ''
 				},
 				mounted: function() {
 					this.onLoad();
@@ -57,15 +69,31 @@
 							this.$toast('提现金额不能超过余额');
 							return;
 						}
+
+						if (this.user == '') {
+							this.$toast('请输入开户姓名');
+							return;
+						}
+
+						if (this.bank == '') {
+							this.$toast('请输入开户银行');
+							return;
+						}
+
+						if (this.bankCard == '') {
+							this.$toast('请输入银行卡号');
+							return;
+						}
 						datas = {
 							uid: uid,
-							amount: this.value
+							amount: this.value,
+							username: this.user,
+							bank: this.bank,
+							cardNo: this.bankCard
 						}
-						console.log(datas);
-					 queryData('/addCashOrder', datas, this.successLoad);
+						queryData('/addCashOrder', datas, this.successLoad);
 					},
 					successLoad: function(res) {
-						console.log(res)
 						if (res.result == 0) {
 							this.$toast('提交成功');
 						}
