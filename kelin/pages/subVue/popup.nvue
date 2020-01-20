@@ -1,0 +1,22 @@
+<template>
+	<div>
+		<view class="share">
+			<view>分享</view>
+			<view>收藏</view>
+			<view>反馈</view>
+		</view>
+	</div>
+</template>
+
+<script>
+	export default {
+		
+	}
+</script>
+
+<style>
+	.share {
+		font-size: 14px;
+		color: #007AFF;
+	}
+</style>

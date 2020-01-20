@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "an-notice-bar": "/components/an-notice-bar/an-notice-bar"
+  }
+}

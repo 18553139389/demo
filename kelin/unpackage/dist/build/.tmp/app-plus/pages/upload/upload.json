@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "上传",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "uni-popup": "/components/popup/uni-popup"
+  }
+}

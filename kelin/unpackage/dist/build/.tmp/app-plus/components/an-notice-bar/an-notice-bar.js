@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/an-notice-bar/an-notice-bar"],{"0788":function(t,n,e){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default=void 0;var u=function(){return Promise.all([e.e("common/vendor"),e.e("components/uni-icons/uni-icons")]).then(e.bind(null,"5d62"))},o={components:{uniIcons:u},props:{text:{type:"",default:"暂无消息"},color:{type:String,default:""},bgColor:{type:String,default:""},switchTime:{type:Number,default:5},showSerial:{type:Boolean,default:!0}},data:function(){return{number:0}},created:function(){this.startMove()},computed:{list:function(){return this.text.split("|")}},methods:{startMove:function(){var t=this;setTimeout(function(){t.number===t.list.length-1?t.number=0:t.number+=1,t.startMove()},1e3*this.switchTime)},more:function(){this.$emit("more")}}};n.default=o},"13d5":function(t,n,e){"use strict";var u=e("9583"),o=e.n(u);o.a},"4ca1":function(t,n,e){"use strict";e.r(n);var u=e("0788"),o=e.n(u);for(var r in u)"default"!==r&&function(t){e.d(n,t,function(){return u[t]})}(r);n["default"]=o.a},9583:function(t,n,e){},b2d2:function(t,n,e){"use strict";e.r(n);var u=e("d7a6"),o=e("4ca1");for(var r in o)"default"!==r&&function(t){e.d(n,t,function(){return o[t]})}(r);e("13d5");var i,c=e("f0c5"),a=Object(c["a"])(o["default"],u["b"],u["c"],!1,null,null,null,!1,u["a"],i);n["default"]=a.exports},d7a6:function(t,n,e){"use strict";var u,o=function(){var t=this,n=t.$createElement;t._self._c},r=[];e.d(n,"b",function(){return o}),e.d(n,"c",function(){return r}),e.d(n,"a",function(){return u})}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/an-notice-bar/an-notice-bar-create-component',
+    {
+        'components/an-notice-bar/an-notice-bar-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('6e42')['createComponent'](__webpack_require__("b2d2"))
+        })
+    },
+    [['components/an-notice-bar/an-notice-bar-create-component']]
+]);

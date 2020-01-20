@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "找回密码",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  }
+}

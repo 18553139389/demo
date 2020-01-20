@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "品牌",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
+}

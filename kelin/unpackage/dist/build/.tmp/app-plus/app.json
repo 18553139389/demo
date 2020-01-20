@@ -1,0 +1,94 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/forget/forget",
+    "pages/product/product",
+    "pages/upload/upload",
+    "pages/brand/brand",
+    "pages/mine/mine",
+    "pages/search/search",
+    "pages/searchDetail/searchDetail",
+    "pages/detail/detail",
+    "pages/trend/trend",
+    "pages/notice/notice",
+    "pages/album/album",
+    "pages/productImg/productImg",
+    "pages/video/video",
+    "pages/videoDetail/videoDetail",
+    "pages/360/360",
+    "pages/popup/popup",
+    "pages/allProduct/allProduct",
+    "pages/speak/speak",
+    "pages/speakDetail/speakDetail",
+    "pages/editor/editor",
+    "pages/store/store",
+    "pages/history/history",
+    "pages/pdf/pdf",
+    "pages/bill/bill",
+    "pages/webview/webview",
+    "pages/train/train",
+    "pages/example/example",
+    "pages/exampleDetail/exampleDetail",
+    "pages/suggest/suggest",
+    "pages/set/set",
+    "pages/about/about",
+    "pages/resetPass/resetPass",
+    "pages/imgText/imgText",
+    "pages/nearLook/nearLook",
+    "pages/parse/parse"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#2076FF",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/dibu_shouye.png",
+        "selectedIconPath": "static/images/dibu_shouye2.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/allProduct/allProduct",
+        "iconPath": "static/images/dibu_chanpin.png",
+        "selectedIconPath": "static/images/dibu_chanpin2.png",
+        "text": "产品"
+      },
+      {
+        "pagePath": "pages/upload/upload",
+        "iconPath": "static/images/dibu_shangchuan.png",
+        "selectedIconPath": "static/images/dibu_shangchuan2.png",
+        "text": "上传"
+      },
+      {
+        "pagePath": "pages/brand/brand",
+        "iconPath": "static/images/dibu_pinpai.png",
+        "selectedIconPath": "static/images/dibu_pinpai2.png",
+        "text": "品牌"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/images/dibu_wode.png",
+        "selectedIconPath": "static/images/dibu_wode2.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "nvueCompiler": "uni-app",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "科林销售工具",
+  "compilerVersion": "2.5.1",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  }
+}

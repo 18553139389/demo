@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8" />
+        <script>
+            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+                CSS.supports('top: constant(a)'))
+            document.write(
+                '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+                (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+        </script>
+        <title>View</title>
+        <style>
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            input[type="search"]::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
+        <script>
+            var __wxConfig = {"debug":false,"appname":"科林销售工具","entryPagePath":"pages/login/login.html","page":{"pages/login/login.html":{"window":{"navigationBarTitleText":"","usingComponents":{}}},"pages/index/index.html":{"window":{"navigationBarTitleText":"","usingComponents":{"an-notice-bar":"/components/an-notice-bar/an-notice-bar"}}},"pages/forget/forget.html":{"window":{"navigationBarTitleText":"找回密码","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/product/product.html":{"window":{"navigationBarTitleText":"产品","usingComponents":{"mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/upload/upload.html":{"window":{"navigationBarTitleText":"上传","usingComponents":{"cu-custom":"/colorui/components/cu-custom","uni-popup":"/components/popup/uni-popup"}}},"pages/brand/brand.html":{"window":{"navigationBarTitleText":"品牌","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/mine/mine.html":{"window":{"navigationBarTitleText":"我的","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/search/search.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/searchDetail/searchDetail.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/detail/detail.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/trend/trend.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/notice/notice.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/album/album.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/productImg/productImg.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","img-over":"/components/img-over/img-over"}}},"pages/video/video.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/videoDetail/videoDetail.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/360/360.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/popup/popup.html":{"window":{"navigationStyle":"custom","animationType":"fade-in","background":"transparent","backgroundColor":"rgba(0,0,0,0)","popGesture":"none","usingComponents":{}}},"pages/allProduct/allProduct.html":{"window":{"navigationBarTitleText":"","usingComponents":{}}},"pages/speak/speak.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/speakDetail/speakDetail.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/editor/editor.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/store/store.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","uni-swipe-action":"/components/uni-swipe-action/uni-swipe-action","uni-swipe-action-item":"/components/uni-swipe-action-item/uni-swipe-action-item","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/history/history.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/pdf/pdf.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/bill/bill.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/webview/webview.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/train/train.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/example/example.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/exampleDetail/exampleDetail.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/suggest/suggest.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/set/set.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/about/about.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/resetPass/resetPass.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/imgText/imgText.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}},"pages/nearLook/nearLook.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom","mescroll-uni":"/components/mescroll-uni/mescroll-uni"}}},"pages/parse/parse.html":{"window":{"navigationBarTitleText":"","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}}},"global":{"window":{"navigationStyle":"custom","navigationBarTextStyle":"black"}},"tabBar":{"color":"#666666","selectedColor":"#2076FF","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/index/index.html","iconPath":"static/images/dibu_shouye.png","selectedIconPath":"static/images/dibu_shouye2.png","text":"首页"},{"pagePath":"pages/allProduct/allProduct.html","iconPath":"static/images/dibu_chanpin.png","selectedIconPath":"static/images/dibu_chanpin2.png","text":"产品"},{"pagePath":"pages/upload/upload.html","iconPath":"static/images/dibu_shangchuan.png","selectedIconPath":"static/images/dibu_shangchuan2.png","text":"上传"},{"pagePath":"pages/brand/brand.html","iconPath":"static/images/dibu_pinpai.png","selectedIconPath":"static/images/dibu_pinpai2.png","text":"品牌"},{"pagePath":"pages/mine/mine.html","iconPath":"static/images/dibu_wode.png","selectedIconPath":"static/images/dibu_wode2.png","text":"我的"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/login/login","pages/index/index","pages/forget/forget","pages/product/product","pages/upload/upload","pages/brand/brand","pages/mine/mine","pages/search/search","pages/searchDetail/searchDetail","pages/detail/detail","pages/trend/trend","pages/notice/notice","pages/album/album","pages/productImg/productImg","pages/video/video","pages/videoDetail/videoDetail","pages/360/360","pages/popup/popup","pages/allProduct/allProduct","pages/speak/speak","pages/speakDetail/speakDetail","pages/editor/editor","pages/store/store","pages/history/history","pages/pdf/pdf","pages/bill/bill","pages/webview/webview","pages/train/train","pages/example/example","pages/exampleDetail/exampleDetail","pages/suggest/suggest","pages/set/set","pages/about/about","pages/resetPass/resetPass","pages/imgText/imgText","pages/nearLook/nearLook","pages/parse/parse"],"nvueCompiler":"uni-app","renderer":"auto","splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"2.5.1","usingComponents":{"cu-custom":"/colorui/components/cu-custom"}}
+        </script>
+        <script>
+            var __id__ = '';
+            window.__dispatchGenerateFunc__ = function(page) {
+                __id__ = page;
+                document.title = page;
+                // window.history.pushState('', '', page);
+                var wxss = page.replace('.html', '.wxss')
+                if (
+                    typeof __wxAppCode__ !== 'undefined' &&
+                    __wxAppCode__.hasOwnProperty(wxss)
+                ) {
+                    var setCssToHead = __wxAppCode__[wxss]
+                    typeof setCssToHead === 'function' && setCssToHead()
+                    document.dispatchEvent(new CustomEvent("generateFuncReady", {
+                        detail: {
+                            generateFunc: $gwx(page.replace('.html', '.wxml'))
+                        }
+                    }));
+                } else {
+                    plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+                }
+            };
+        </script>
+        <script src="__uniappes6.js"></script>
+        <script src="uniapp://ready"></script>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+
+</html>

@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "animationType": "fade-in",
+  "background": "transparent",
+  "backgroundColor": "rgba(0,0,0,0)",
+  "popGesture": "none",
+  "usingComponents": {}
+}

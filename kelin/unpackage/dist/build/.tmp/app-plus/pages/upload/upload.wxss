@@ -1,0 +1,231 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.contain.data-v-df628fdc {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  overflow: hidden;
+}
+.contain .fixed.data-v-df628fdc {
+    width: 100%;
+}
+.contain .wrapper.data-v-df628fdc {
+    width: 100%;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+}
+.contain .wrapper .titles.data-v-df628fdc {
+      width: 100%;
+      font-size: 14px;
+      color: #666;
+}
+.contain .wrapper .types.data-v-df628fdc {
+      width: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+              align-items: center;
+      margin: 24rpx 0;
+}
+.contain .wrapper .types .uni-list-cell-db.data-v-df628fdc {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+                align-items: center;
+}
+.contain .wrapper .types ._span.data-v-df628fdc {
+        font-size: 14px;
+        color: #333;
+}
+.contain .wrapper .types ._img.data-v-df628fdc {
+        width: 22rpx;
+        height: 15rpx;
+        margin-left: 16rpx;
+}
+.contain .wrapper .files.data-v-df628fdc {
+      width: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+              flex-direction: column;
+      padding: 24rpx;
+      box-sizing: border-box;
+      background: #FAFAFA;
+}
+.contain .wrapper .files .content.data-v-df628fdc {
+        width: 100%;
+        height: 200rpx;
+        margin-bottom: 40rpx;
+}
+.contain .wrapper .files .content textarea.data-v-df628fdc {
+          width: 100%;
+          height: 100%;
+          font-size: 12px;
+}
+.contain .wrapper .files .upload.data-v-df628fdc {
+        width: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+                flex-wrap: wrap;
+}
+.contain .wrapper .files .upload ._li.data-v-df628fdc {
+          width: 22%;
+          float: left;
+          margin-right: 3%;
+          margin-bottom: 3%;
+}
+.contain .wrapper .files .upload .picture.data-v-df628fdc {
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: column;
+                  flex-direction: column;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+                  align-items: center;
+          font-size: 12px;
+          color: #666;
+          position: relative;
+}
+.contain .wrapper .files .upload .picture ._span.data-v-df628fdc {
+            text-align: center;
+}
+.contain .wrapper .files .upload .picture ._img.data-v-df628fdc {
+            width: 130rpx;
+            height: 130rpx;
+            margin-bottom: 20rpx;
+}
+.contain .wrapper .files .upload .picture .del.data-v-df628fdc {
+            width: 30rpx;
+            height: 30rpx;
+            position: absolute;
+            top: -10rpx;
+            right: -10rpx;
+}
+.contain .wrapper .files .upload .picture video.data-v-df628fdc {
+            width: 120rpx;
+            height: 120rpx;
+}
+.contain .wrapper .warn.data-v-df628fdc {
+      width: 100%;
+      font-size: 14px;
+      color: #999;
+}
+.contain .wrapper .warn ._p.data-v-df628fdc {
+        margin: 30rpx 0;
+        font-size: 12px;
+}
+.contain .wrapper .warn .upload.data-v-df628fdc {
+        width: 90%;
+        margin: 50rpx auto 30rpx;
+        height: 80rpx;
+        line-height: 80rpx;
+        text-align: center;
+        font-size: 15px;
+        color: #FFFFFF;
+        border-radius: 30px;
+        background: #0081FF;
+}
+.contain .wrapper .warn .history.data-v-df628fdc {
+        width: 100%;
+        height: 100rpx;
+        line-height: 100rpx;
+        text-align: center;
+        font-size: 15px;
+        color: #333;
+        text-align: center;
+}
+.contain .bottom.data-v-df628fdc {
+    width: 100%;
+    background: #FFFFFF;
+}
+.contain .bottom ._li.data-v-df628fdc {
+      width: 100%;
+      height: 90rpx;
+      line-height: 90rpx;
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+}
+.contain .play.data-v-df628fdc {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #000000;
+}
+.contain .play .video-title.data-v-df628fdc {
+      width: 100%;
+      height: 90rpx;
+      line-height: 90rpx;
+      background: #FFFFFF;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      z-index: 999999;
+      margin-top: 60rpx;
+}
+.contain .play video.data-v-df628fdc {
+      width: 100%;
+      height: calc(100vh - 150rpx - var(--window-bottom));
+}
+
