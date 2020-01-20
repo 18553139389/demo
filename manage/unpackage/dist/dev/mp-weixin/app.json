@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/user/user",
+    "pages/message/message",
+    "pages/product/product",
+    "pages/report/report",
+    "pages/set/set",
+    "pages/modify/modify",
+    "pages/look/look"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": true
+}

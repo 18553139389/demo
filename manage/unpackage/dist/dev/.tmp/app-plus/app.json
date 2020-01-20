@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/user/user",
+    "pages/message/message",
+    "pages/product/product",
+    "pages/report/report",
+    "pages/set/set",
+    "pages/modify/modify",
+    "pages/look/look",
+    "pages/read/read",
+    "pages/addUser/addUser",
+    "pages/reset/reset",
+    "pages/carsCount/carsCount",
+    "pages/editor/editor",
+    "pages/text/text"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "nvueCompiler": "weex",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": false,
+    "autoclose": true
+  },
+  "appname": "企业绩效管理",
+  "compilerVersion": "2.3.7",
+  "usingComponents": true
+}
