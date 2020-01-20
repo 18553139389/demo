@@ -492,7 +492,7 @@
 										<input id="upload_input" name="url" type="file" class="upload_input" @change="getFile" />
 									</li>
 									<li v-for="(v,k) in src">
-										<img :src="'http://116.255.239.151:9080' + v.url" alt="" />
+										<img :src="'http://gongxiang.thekingbull.com' + v.url" alt="" />
 										<img class="del_icon" src="Resource/image/shoucang.png" @click="delImg(k)" />
 									</li>
 								</ul>
@@ -1030,8 +1030,12 @@
 						file: '',
 						shopUser: '',
 						shopImg: '',
-						selected: []
+						selected: [],
+						uids: ''
 					}
+				},
+				created: function() {
+					this.uids = sessionStorage.getItem("uid")
 				},
 				computed: {
 					selectCity: function() {
@@ -1096,7 +1100,7 @@
 						}
 						formdata.append('image', file);
 						$.ajax({
-							url: 'http://116.255.239.151:9080/api/uploadImage',
+							url: 'http://gongxiang.thekingbull.com/api/uploadImage',
 							type: "POST",
 							data: formdata,
 							cache: false,
@@ -1228,7 +1232,7 @@
 						var formdata = new FormData();
 						formdata.append('image', files);
 						$.ajax({
-							url: 'http://116.255.239.151:9080/api/uploadImage',
+							url: 'http://gongxiang.thekingbull.com/api/uploadImage',
 							type: "POST",
 							data: formdata,
 							cache: false,
@@ -1243,6 +1247,7 @@
 					},
 					commentFile: function(res) {
 						if(res.result == 0){
+							console.log(res)
 							var paths = {
 								url: res.url
 							}
@@ -1274,7 +1279,7 @@
 						$.ajax({
 							data:formdata,
 							method: "POST",
-							url: "http://116.255.239.151:9080/api/uploadImage",
+							url: "http://gongxiang.thekingbull.com/api/uploadImage",
 							cache: false,
 							contentType: false,
 							processData: false,
@@ -1282,15 +1287,15 @@
 							success: function(res){
 								console.log(res)
 								sessionStorage.removeItem("icon")
-								sessionStorage.setItem("icon","http://116.255.239.151:9080" + res.url)
+								sessionStorage.setItem("icon","http://gongxiang.thekingbull.com" + res.url)
 								this.userPic = res.url
 								sessionStorage.setItem("userPic",res.url)
-								this.urlSplit = "http://116.255.239.151:9080" + res.url
+								this.urlSplit = "http://gongxiang.thekingbull.com" + res.url
 								console.log(this.userPic);
 								img = document.getElementById("img");
-								img.src = "http://116.255.239.151:9080" + res.url
+								img.src = "http://gongxiang.thekingbull.com" + res.url
 								userPhoto = document.getElementById('userPhoto');
-								userPhoto.src = "http://116.255.239.151:9080" + res.url
+								userPhoto.src = "http://gongxiang.thekingbull.com" + res.url
 								
 							}
 						});
@@ -1410,6 +1415,7 @@
 						var self = this
 						this.$refs[name].validate(function(valid) {
 							if (valid) {
+								console.log('222')
 								if (self.url_1 !== '') {
 									self.formItem.imgUrl.push(self.url_1)
 								}
@@ -1421,21 +1427,20 @@
 								if (self.url_3 !== '') {
 									self.formItem.imgUrl.push(self.url_3)
 								}
-
 								var data = {
-									uid:uids,
-									type: self.formItem.type,
+									uid: self.uids,
+									type: parseInt(self.formItem.type)-1 + '',
 									categoryId: self.formItem.choice,
 									provinceId:self.proName,
 									cityId:self.cityName,
 									townId:self.townName,
 									address: self.formItem.address,
-									nickName: self.formItem.three,
+									shopName: self.formItem.three,
 									realName: self.formItem.linker,
 									images: self.formItem.imgUrl
 								}
-								if (data.imgUrl.length < 3) {
-									console.log("走这了")
+								console.log(data)
+								if (data.images.length < 3) {
 									self.$Message.error('请上传图片');
 									return
 								} else {
@@ -1449,7 +1454,12 @@
 					},
 					getJoin: function(res) {
 						console.log(res);
-						//this.$Message.success('申请服务商成功');
+						var self = this
+						if (res.result == 0) {
+							self.$Message.success('申请服务商成功');
+						} else {
+							self.$Message.error('申请服务商失败,' + res.resultNote);
+						}
 					},
 					getPass: function(res) {
 						

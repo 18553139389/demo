@@ -12,19 +12,19 @@ Vue.component('bottom',{
 			 '<div class="know_m">'+
 			 '<h3>关注公众号（河南华悦科技）</h3>'+
 			 '<div class="saoma">'+
-			 '<img src="Resource/image/saoma.png" alt="" />'+
+			 '<img src="Resource/image/share.png" alt="" />'+
 			 '</div>'+
 			 '</div>'+
 			 '<div class="know_net">'+
 			 '<div class="know__net_btn">网络咨询</div>'+
-			 '<h3>400-****-****</h3>'+
+			 '<h3>0371-63320603</h3>'+
 			 '<p>服务时间：8:30-18:00（周一至周六）</p>'+
 			 '</div>'+
 			 '<div class="back-top" @click="back">'+
 			 '<img src="Resource/image/back.png" alt="" />'+
 			 '</div>'+
 		     '</div>'+
-			 '<h3 class="own">Copyright 2018－2025 thekingbull.com 版权所有 网站备案号 河南华悦网络科技有限公司 </h3>'+
+			 '<h3 class="own">Copyright 2018－2025 thekingbull.com 版权所有 网站备案号 豫ICP备18039770号-1 </h3>'+
 			 '</div>',
 	methods:{
 		back:function(){
@@ -47,15 +47,15 @@ Vue.component('bottomList',{
 			 '<div class="know_m">'+
 			 '<h3>关注公众号（河南华悦科技）</h3>'+
 			 '<div class="saoma">'+
-			 '<img src="Resource/image/saoma.png" alt="" />'+
+			 '<img src="Resource/image/share.png" alt="" />'+
 			 '</div>'+
 			 '</div>'+
 			 '<div class="know_net">'+
 			 '<div class="know__net_btn">网络咨询</div>'+
-			 '<h3>400-****-****</h3>'+
+			 '<h3>0371-63320603</h3>'+
 			 '<p>服务时间：8:30-18:00（周一至周六）</p>'+
 			 '</div>'+
 		     '</div>'+
-			 '<h3 class="own">Copyright 2018－2025 thekingbull.com 版权所有 网站备案号 河南华悦网络科技有限公司 </h3>'+
+			 '<h3 class="own">Copyright 2018－2025 thekingbull.com 版权所有 网站备案号 豫ICP备18039770号-1 </h3>'+
 			 '</div>',
 });

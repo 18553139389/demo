@@ -1,0 +1,148 @@
+{
+	"pages": [{
+			"path": "pages/oauth/oauth",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/shopping/shopping",
+			"style": {
+				"navigationBarTitleText": "代理商"
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/result/result",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/type/type",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/productDetail/productDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/money/money",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/canUse/canUse",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/bind/bind",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/notice/notice",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/textDetail/textDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/service/service",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/content/content",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"usingComponents": true
+	},
+	"tabBar": {
+		"color": "#939393",
+		"selectedColor": "#111111",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/images/shouye_hui@2x.png",
+			"selectedIconPath": "static/images/shouye_se@2x.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/order/order",
+			"iconPath": "static/images/dingdan_hui@2x.png",
+			"selectedIconPath": "static/images/dingdan_se@2x.png",
+			"text": "订单"
+		}, {
+			"pagePath": "pages/shopping/shopping",
+			"iconPath": "static/images/fenxiaoshang_hui@2x.png",
+			"selectedIconPath": "static/images/fenxiaoshang_se@2x.png",
+			"text": "代理商"
+		}, {
+			"pagePath": "pages/my/my",
+			"iconPath": "static/images/wode_hui@2x.png",
+			"selectedIconPath": "static/images/wode_se@2x.png",
+			"text": "我的"
+		}]
+	}
+}

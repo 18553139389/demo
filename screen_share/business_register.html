@@ -222,6 +222,7 @@
 		<script src="Resource/js/list_province.js"></script>
 		<script src="Resource/js/list_city.js"></script>
 		<script src="Resource/js/list_town.js"></script>
+		<script src="Resource/js/md5.js"></script>
 		<script type="text/javascript">
 			new Vue({
 				el: "#app",
@@ -460,17 +461,17 @@
 								}
 
 								var data = {
-									type: self.formItem.type,
+									type: parseInt(self.formItem.type)-1 + '',
 									categoryId: self.formItem.choice,
 									provinceId: self.proName,
 									cityId: self.cityName,
 									townId: self.townName,
 									address: self.formItem.address,
-									nickName: self.formItem.three,
+									shopName: self.formItem.three,
 									realName: self.formItem.linker,
 									phone: self.formItem.phone,
 									validate: self.formItem.num,
-									password: self.formItem.passwd,
+									password: hex_md5(self.formItem.passwd),
 									images: self.formItem.imgUrl
 								}
 								console.log(data)
@@ -557,7 +558,7 @@
 						reader.onloadend = function() {
 							_this.url_1 = this.result
 						}
-					},
+					}
 				}
 			})
 		</script>

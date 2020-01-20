@@ -155,7 +155,10 @@
 							correctLevel: QRCode.CorrectLevel.H
 						})
 						self.timer = setInterval(function() {
-							self.cf()
+							var num = {
+								orderId: self.orderId
+							}
+							queryData('/getOrderStatus', num, self.paySuc)
 						}, 2000)
 					},
 					paySuc: function(res) {
@@ -169,7 +172,7 @@
 						}
 					},
 					zfbpayRES: function(res) {
-						window.open("http://116.255.239.151:9080/api/beecloudPay?orderId=" + this.orderId + '&payType=ALI_WEB');
+						window.open("http://gongxiang.thekingbull.com/api/beecloudPay?orderId=" + this.orderId + '&payType=ALI_WEB');
 					}
 				}
 			})
