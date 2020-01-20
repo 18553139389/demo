@@ -432,9 +432,9 @@ export default {
 
   .lists {
     width: 100%;
-    padding-top: 72px;
+    padding: 72px 0 100px;
     display: flex;
-    height: 100%;
+    // height: 100%;
     flex-direction: column;
 
     .kongbai {
