@@ -25,8 +25,8 @@
       <van-field value="{{ mes.phone }}" label="电话" input-align="right" readonly="{{true}}" placeholder="请输入电话" icon="arrow" bindinput="setmes" data-name="phone" />
     </view>
     <van-field value="{{ mes.age }}" label="年龄" bindinput="setmes" input-align="right" placeholder="请输入年龄" bind:click-icon="onClickIcon" data-name="age" type="number" />
-    <van-cell title="行业" value="{{mes.lableName?mes.lableName:'暂无'}}" bind:click="getList"></van-cell>
-    <van-field value="{{ mes.parentPhone }}" label="邀请码" bindinput="settel" input-align="right" placeholder="暂无邀请码" bind:click-icon="onClickIcon" data-name="parentPhone" type="number" disabled="true" />
+    <!-- <van-cell title="行业" value="{{mes.lableName?mes.lableName:'暂无'}}" bind:click="getList"></van-cell> -->
+    <!-- <van-field value="{{ mes.parentPhone }}" label="邀请码" bindinput="settel" input-align="right" placeholder="暂无邀请码" bind:click-icon="onClickIcon" data-name="parentPhone" type="number" disabled="true" /> -->
   </van-cell-group>
   <van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
   <view class="s_10"></view>

@@ -6,7 +6,6 @@ const http = new HTTP();
 let gd = getApp().globalData;
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -33,14 +32,19 @@ Page({
     // 记录当前索引
     ind: 0,
     // 总页码
-    totalPage: []
+    totalPage: [],
+    text1: 0,
+    text2: 0,
+    text3: 0,
+    text4: 0,
+    text5: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this._loadData(0)
   },
 
   /**
@@ -49,13 +53,15 @@ Page({
    */
   changeList(event) {
     const cid = this.data.topList[event.detail.index - 0].id;
-    console.log(cid)
+    gd.state = event.detail.index - 0
     this.setData({
       ind: event.detail.index - 0
     })
-    if (this.data.contentList[this.data.ind]) {
-      return;
-    }
+    console.log(this.data.contentList[this.data.ind])
+    // if (this.data.contentList[this.data.ind]) {
+    //   return;
+    // }
+    console.log(event.detail.index)
     this._loadData(event.detail.index - 0)
   },
   /**
@@ -73,12 +79,30 @@ Page({
     }
 
     http.showLoading().postD(data).then((res) => {
+      console.log(res)
+      this.setData({
+        text1: res.data.number2,
+        text2: res.data.number1,
+        text3: res.data.number3,
+        text4: res.data.number4,
+        text5: res.data.number5,
+      })
       let setData = "contentList[" + ind + "]";
       let pages = "page[" + ind + "]";
       let totalp = "totalPage[" + ind + "]";
-      // let totalPage
       if (res.data.result == 0) {
-        console.log(res.data)
+        //订单添加角标数量
+        // if (res.data.number == 0) {
+        //   wx.removeTabBarBadge({
+        //     index: 1
+        //   })
+        // } else {
+        //   gd.num = res.data.number
+        //   wx.setTabBarBadge({
+        //     index: 1,
+        //     text: gd.num
+        //   })
+        // }
         if (callback) {
           callback(res)
           wx.hideLoading();
@@ -97,7 +121,6 @@ Page({
             [totalp]: res.data.totalPage
           })
         }
-
         wx.hideLoading();
       }
 
@@ -262,18 +285,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (gd.ispay) {
-      this.data.contentList[0] = null;
-      this.data.contentList[3] = null;
-      gd.ispay = false;
-      this._loadData(3)
-    } else if (gd.ispj) {
-      this.data.contentList[0] = null;
-      this.data.contentList[4] = null;
-      gd.ispj = false;
-      this._loadData(4)
-    } else {
+    // if (gd.ispay) {
+    //   this.data.contentList[0] = null;
+    //   this.data.contentList[3] = null;
+    //   gd.ispay = false;
+    //   this._loadData(3)
+    // } else if (gd.ispj) {
+    //   this.data.contentList[0] = null;
+    //   this.data.contentList[4] = null;
+    //   gd.ispj = false;
+    //   this._loadData(4)
+    // } else {
+    //   this._loadData(0)
+    // }
+
+    if (gd.state == null) {
+      console.log(gd.state)
       this._loadData(0)
+    } else {
+      console.log(gd.state)
+      this._loadData(gd.state)
     }
   },
   /**

@@ -6,5 +6,5 @@
     "van-popup": "/path/to/vant-weapp/dist/popup/index",
     "van-area": "/path/to/vant-weapp/dist/area/index"
   },
-  "navigationBarTitleText":"环渡"
+  "navigationBarTitleText":"环渡旅行"
 }

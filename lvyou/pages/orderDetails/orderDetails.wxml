@@ -1,0 +1,85 @@
+<view class="contain">
+  <view class="top">
+    <view class="top-hotel">
+      <view class="titles">{{list.hotelName}}</view>
+      <!-- <view class="details">
+        <view>酒店详情</view>
+        <image src="../../images/order.png"></image>
+      </view> -->
+    </view>
+    <view class="address">{{list.address}}</view>
+  </view>
+  <view class="tab">
+    <view class="tab-item" bindtap="goMap">
+      <image src="../../images/hotel1.png"></image>
+      <view>地图/导航</view>
+    </view>
+    <view class="tab-item" bindtap="goCall">
+      <image src="../../images/hotel2.png"></image>
+      <view>联系商家</view>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="sku">
+    <view class="titles">{{list.roomName}}</view>
+    <view wx:for="{{list.list}}" wx:key="index">
+      <text wx:if="{{list.type == 1}}" style="margin-right:10rpx;">含早</text>
+      <text wx:if="{{list.type != 1}}" style="margin-right:10rpx;">不含早</text>
+      <text>{{item}}</text>
+    </view>
+    <view style="border-bottom:none">{{list.startDate}}至{{list.endDate}} 共{{list.number1}}晚</view>
+  </view>
+  <view class="line"></view>
+  <view class="sku">
+    <view class="sku-item">
+      <view class="all">入住人</view>
+      <view class="common">{{list.name}}</view>
+    </view>
+    <view class="sku-item">
+      <view class="all">联系电话</view>
+      <view class="common">{{list.phone}}</view>
+    </view>
+    <view class="sku-item">
+      <view class="all">预计到达时间</view>
+      <view class="common">{{list.arriveDate}}</view>
+    </view>
+    <view class="sku-item" wx:if="{{list.remarks != ''}}">
+      <view class="all">床型偏好</view>
+      <view class="common">{{list.remarks}}</view>
+    </view>
+    <view class="sku-item" style="border-bottom:none" wx:if="{{list.carTimes != ''}}">
+      <view class="all">航班号/动车车次</view>
+      <view class="common">{{list.carTimes}}</view>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="detail">
+    <view class="produce">
+      <view class="sku-item" style="border-bottom:none">
+        <view class="produce-title">预订须知</view>
+      </view>
+      <view class="sku-item">
+        <view class="all">订单状态</view>
+        <view class="common" wx:if="{{list.status != 3 && list.status != 4}}">未入住</view>
+        <view class="common" wx:if="{{list.status == 3}}">已入住</view>
+        <view class="common" wx:if="{{list.status == 4}}">已退款</view>
+      </view>
+      <view class="sku-item">
+        <view class="all">订单号</view>
+        <view class="common">{{list.orderNum}}</view>
+      </view>
+      <view class="sku-item">
+        <view class="all">下单时间</view>
+        <view class="common">{{list.time}}</view>
+      </view>
+      <view class="sku-item">
+        <view class="all">房费</view>
+        <view class="commons">￥{{list.orderMoney}}</view>
+      </view>
+      <view class="sku-item" wx:if="{{list.money}}">
+        <view class="all">优惠</view>
+        <view class="commons">￥{{list.money}}</view>
+      </view>
+    </view>
+  </view>
+</view>

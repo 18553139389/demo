@@ -1,6 +1,15 @@
 {
   "pages": [
+    "pages/first/first",
     "pages/index/index",
+    "pages/buy/buy",
+    "pages/send/send",
+    "pages/couponList/couponList",
+    "pages/coupon/coupon",
+    "pages/orderDetails/orderDetails",
+    "pages/hotelPay/hotelPay",
+    "pages/hotel/hotel",
+    "pages/hotelDetail/hotelDetail",
     "pages/user/user",
     "pages/login/login",
     "pages/zhuce/zhuce",
@@ -20,17 +29,21 @@
     "pages/gerenzhiliao/gerenzhiliao",
     "pages/jiaoyimingxi/jiaoyimingxi",
     "pages/qian/qian",
+    "pages/qupiaoren/qupiaoren",
     "pages/wodeqianbao/wodeqianbao",
     "pages/qupiaorenlist/qupiaorenlist",
     "pages/my/my",
     "pages/kaipiaoxinxi/kaipiaoxinxi",
     "pages/tuikuanyuanyin/tuikuanyuanyin",
     "pages/success/success",
-    "pages/qupiaoren/qupiaoren",
     "pages/xuanzemenpiao/xuanzemenpiao",
     "pages/xiangmuliebiao/xiangmuliebiao",
     "pages/sousuo/sousuo",
-    "pages/text/text"
+    "pages/text/text",
+    "pages/editor/editor",
+    "pages/date/date",
+    "pages/hotelSuc/hotelSuc",
+    "pages/hotelOrder/hotelOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -42,30 +55,38 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "tabBar":{
-    "color":"#999999",
-    "selectedColor":"#BE7E50",
-    "list":[{
-      "pagePath":"pages/index/index",
-      "text":"我的门票",
-      "iconPath":"images/n1.png",
-      "selectedIconPath":"images/s1.png"
-    },{
-      "pagePath":"pages/dingdanlist/dingdanlist",
-      "text":"订单",
-      "iconPath":"images/n2.png",
-      "selectedIconPath":"images/s2.png"
-    },{
-      "pagePath":"pages/gouwuche/gouwuche",
-      "text":"购物车",
-      "iconPath":"images/n3.png",
-      "selectedIconPath":"images/s3.png"
-    },{
-      "pagePath":"pages/my/my",
-      "text":"我的",
-      "iconPath":"images/n4.png",
-      "selectedIconPath":"images/s4.png"
-    }]
+  "networkTimeout": {
+    "request": 20000
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#BE7E50",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "学生专属",
+        "iconPath": "images/n1.png",
+        "selectedIconPath": "images/s1.png"
+      },
+      {
+        "pagePath": "pages/dingdanlist/dingdanlist",
+        "text": "门票订单",
+        "iconPath": "images/n2.png",
+        "selectedIconPath": "images/s2.png"
+      },
+      {
+        "pagePath": "pages/gouwuche/gouwuche",
+        "text": "购物车",
+        "iconPath": "images/n3.png",
+        "selectedIconPath": "images/s3.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "images/n4.png",
+        "selectedIconPath": "images/s4.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "plugins": {

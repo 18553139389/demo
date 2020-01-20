@@ -1,14 +1,19 @@
 <view class="dd_2">
   <van-tabs active="{{ active }}" bind:change="changeList" swipe-threshold="6" color="#BE7E50" border="false" tab-active-class="dd_3">
     <block wx:for='{{topList}}' wx:key="{{item}}">
+      <view class="icon {{'ind'+(index+1)}}" data-id="index" wx:if="{{index == 0 && text1 !=0}}">{{text1}}</view>
+      <view class="icon {{'ind'+(index+1)}}" data-id="index" wx:if="{{index == 1 && text2 !=0}}">{{text2}}</view>
+      <view class="icon {{'ind'+(index+1)}}" data-id="index" wx:if="{{index == 2 && text3 !=0}}">{{text3}}</view>
+      <view class="icon {{'ind'+(index+1)}}" data-id="index" wx:if="{{index == 3 && text4 !=0}}">{{text4}}</view>
+      <view class="icon {{'ind'+(index+1)}}" data-id="index" wx:if="{{index == 4 && text5 !=0}}">{{text5}}</view>
       <van-tab title="{{item.name}}">
         <scroll-view class="tab_content" scroll-y="{{true}}" bindscrolltolower="scrollBootom">
           <view class='no' wx-if="{{contentList[index].length==0}}">
             <image src="../../images/no.png"></image>
-            <text>暂无订单</text>
+            <text>还没有您的订单哦~~</text>
           </view>
           <block wx:for="{{contentList[index]}}" wx:for-item="items" wx:for-index="indexs" wx:key="{{items}}">
-            <view style="margin:30rpx auto 0;background:#fff;width:92%;border-radius:8rpx;">
+            <view class="{{items.isRead == 1 ? 'bgs' : ''}}" style="margin:30rpx auto 0;background:#fff;width:92%;border-radius:8rpx;">
               <view bindtap="godetail" data-cid="{{items.id}}" data-money="{{items.orderMoney}}" class="" hover-class="none" hover-stop-propagation="false">
                 <view class="dd_6">
                   <van-row>

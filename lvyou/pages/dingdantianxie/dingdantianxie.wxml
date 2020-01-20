@@ -1,35 +1,43 @@
 <view>
   <view class="title_box">
     <text class="title">取票人信息</text>
-    <text class="dd_17" wx:if="{{!people[0]}}">暂无取票人，请添加</text>
-    <block wx:for="{{people}}" wx:key="{{index}}">
-      <van-row>
-        <van-col span="5">
-          <text class="dd_1">{{item.name}}</text>
-        </van-col>
-        <van-col span="9">
-          <text class="dd_1">{{item.phone}}</text>
-        </van-col>
-        <van-col span="8">
-          <text class="dd_1">{{item.idCard}}</text>
-        </van-col>
-      </van-row>
-    </block>
+    <view class="dd_17" wx:if="{{!people[0]}}">还没有取票人哦~~，快去添加吧</view>
+    <view style="margin-top:20rpx;">
+      <block wx:for="{{people}}" wx:key="{{index}}">
+        <van-row>
+          <van-col span="5">
+            <text class="dd_1">{{item.name}}</text>
+          </van-col>
+          <van-col span="9">
+            <text class="dd_1">{{item.phone}}</text>
+          </van-col>
+          <van-col span="8">
+            <text class="dd_1">{{item.idCard}}</text>
+          </van-col>
+        </van-row>
+      </block>
+    </view>
   </view>
   <view class="s_2" style="background-color:#F8F8F8"></view>
   <van-cell-group>
-    <van-field value="{{username}}" name="people" clearable label="联系人：" right-icon="question-o" placeholder="请填写订单联系人姓名" bind:input="getmes" data-i="1" type="text"/>
-    <van-field value="{{phone}}" name="phone" clearable type="number" maxlength="11" label="手机号：" placeholder="便于接收订单信息" bind:input="getmes" data-i="2"/>
-    <van-field value="{{icd}}" name="icd" clearable type="text" label="身份证号：" placeholder="请填写真实证件号码" bind:input="getmes" data-i="3"/>
+    <van-field value="{{username}}" name="people" clearable label="联系人：" right-icon="question-o" placeholder="请填写订单联系人姓名" bind:input="getmes" data-i="1" type="text" />
+    <van-field value="{{phone}}" name="phone" clearable type="number" maxlength="11" label="手机号：" placeholder="便于接收订单信息" bind:input="getmes" data-i="2" />
+    <van-field value="{{icd}}" name="icd" clearable type="text" label="身份证号：" placeholder="请填写真实证件号码" bind:input="getmes" data-i="3" />
   </van-cell-group>
-  <view class="s_2" hover-class="none" hover-stop-propagation="false"> 
+  <view class="s_2" hover-class="none" hover-stop-propagation="false">
   </view>
-    
   <view class="btn b_btn" hover-class="none" hover-stop-propagation="false" bindtap="add">
-    <text>添加取票人</text>
+    <text>添加常用旅客</text>
   </view>
   <view class="s_2" hover-class="none" hover-stop-propagation="false">
-    
+  </view>
+  <view class="s_2" style="background-color:#F8F8F8"></view>
+  <view class="car">
+    <view>是否乘坐免费大巴车</view>
+    <van-radio-group value="{{ radio }}" bind:change="changes">
+      <van-radio checked-color="#be7e50" name="1">是</van-radio>
+      <van-radio checked-color="#be7e50" name="2">否</van-radio>
+    </van-radio-group>
   </view>
   <view class="s_2" style="background-color:#F8F8F8"></view>
   <van-cell is-link>
@@ -37,19 +45,19 @@
       <van-icon name="plus" size="40rpx" color="#BF931C" />
     </view>
     <view slot="title" style="margin-left:16rpx;">
-      <view class="van-cell-text" bindtap="golist">添加历史取票人</view>
+      <view class="van-cell-text" bindtap="golist">常用旅客</view>
     </view>
   </van-cell>
-  <view class="s_2" style="background-color:#F8F8F8"></view>
+  <!-- <view class="s_2" style="background-color:#F8F8F8"></view>
   <view class="title_box">
     <text class="title">粘贴板</text>
     <view class="s_2"></view>
     <van-row>
       <van-col span="23">
-        <textarea placeholder="在此粘贴取票人信息" placeholder-class="dd_2" class="dd_3"></textarea>
+        <textarea placeholder="在此粘贴取票人信息" placeholder-class="dd_2" class="dd_3" cursor-spacing='100'></textarea>
       </van-col>
     </van-row>
-  </view>
+  </view> -->
   <view class="s_2" style="background-color:#F8F8F8"></view>
   <view class="title_box">
     <text class="title">购买数量</text>
@@ -68,7 +76,7 @@
       </van-col>
       <van-col span="7" offset="4">
         <view class="s_2"></view>
-        <van-stepper value="{{0}}" min="0" bind:change="onChange" data-ind="{{index-0}}"/>
+        <van-stepper value="{{1}}" min="0" bind:change="onChange" data-ind="{{index-0}}" />
       </van-col>
     </van-row>
   </view>

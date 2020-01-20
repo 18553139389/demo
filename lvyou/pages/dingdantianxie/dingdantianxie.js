@@ -21,15 +21,14 @@ Page({
     total: "",
     id: '',
     price: '',
-    tip: ''
+    tip: '',
+    radio: '2'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    console.log(gd.tao)
     for (let i = 0; i < gd.tao.length; i++) {
       if (gd.tao[i].cateName == '儿童票') {
         this.setData({
@@ -37,6 +36,10 @@ Page({
         })
       }
     }
+    for(let i=0;i<gd.tao.length;i++){
+      gd.tao[i]['num'] = 1
+    }
+    console.log(gd.tao)
     this.setData({
       tao: gd.tao,
       id: options.id,
@@ -57,6 +60,12 @@ Page({
         }
       }
     })
+  },
+  changes(event) {
+    console.log(event.detail)
+    this.setData({
+      radio: event.detail
+    });
   },
   onClose() {
     this.setData({
@@ -126,12 +135,13 @@ Page({
       phone: this.data.phone,
       idCard: this.data.icd
     }
+
     http.showLoading().postD({
       cmd: "addCollector",
-      uid: gd.userId || "de8a58b195c5413e9792b41295c3e43c",
-      name: this.data.username, //
-      phone: this.data.phone, //
-      idCard: this.data.icd //
+      uid: gd.userId,
+      name: this.data.username, 
+      phone: this.data.phone, 
+      idCard: this.data.icd 
     }).then(res => {
       if (res.data.result == 0) {
         wx.hideLoading();
@@ -148,10 +158,11 @@ Page({
           icd: ""
         })
         this._getTotal()
+      }else{
+        wx.hideLoading();
+        http.showToast(res.data.resultNote);
       }
-
     })
-
   },
   golist() {
     wx.navigateTo({
@@ -177,29 +188,35 @@ Page({
 
     let piao = [];
     this.data.tao.forEach((item, index) => {
-      let m = {
-        skuCateId: item.id,
-        number: item.num ? item.num : 0
+      if (item.num != 0 && item.num != undefined) {
+        let m = {
+          skuCateId: item.id,
+          number: item.num
+        }
+        piao.push(m)
       }
-      piao.push(m)
     })
     for (var i = 0; i < piao.length; i++) {
       if (piao[i].number == 0) {
         piao.splice(i, 1)
       }
     }
+    let that = this;
     http.showLoading("提交数据中").postD({
       cmd: "editCart",
       uid: gd.userId || "de8a58b195c5413e9792b41295c3e43c", //
       cartList: piao,
       collectorIds: qupiaoid, //
-      time: gd.time + " 00:00:00" //yyyy-MM-dd HH:mm:ss
+      time: gd.time + " 00:00:00",
+      flag: that.data.radio
     }).then(res => {
       if (res.data.result == 0) {
         wx.hideLoading();
         http.showToast("加入购物车成功");
+      }else{
+        wx.hideLoading();
+        http.showToast(res.data.resultNote);
       }
-      console.log(res)
     })
   },
   buy() {
@@ -214,24 +231,28 @@ Page({
     }
     let piao = [];
     this.data.tao.forEach((item, index) => {
-      let m = {
-        skuCateId: item.id,
-        number: item.num ? item.num : 0
+      if(item.num != 0 && item.num != undefined){
+        let m = {
+          skuCateId: item.id,
+          number: item.num 
+        }
+        piao.push(m)
       }
-      piao.push(m)
     })
     for (var i = 0; i < piao.length; i++) {
       if (piao[i].number == 0) {
         piao.splice(i, 1)
       }
     }
+    let that = this;
     http.showLoading("提交数据中").postD({
       cmd: "saveOrder",
       uid: gd.userId || "de8a58b195c5413e9792b41295c3e43c", //
       skuCateList: piao,
       collectorIds: qupiaoid,
       orderMoney: this.data.total,
-      endTime: gd.time + " 00:00:00" //yyyy-MM-dd HH:mm:ss
+      endTime: gd.time + " 00:00:00",
+      flag: that.data.radio
     }).then(res => {
       console.log(res)
       if (res.data.result == 0) {
@@ -247,6 +268,7 @@ Page({
           url: "/pages/zhifufangshi/zhifufangshi?id=" + res.data.orderId + "&price=" + this.data.total
         })
       } else {
+        wx.hideLoading()
         http.showToast(res.data.resultNote);
       }
     })
@@ -263,10 +285,10 @@ Page({
    */
   onShow: function () {
     console.log(gd.piao)
-    if (gd.piao) {
+    if (wx.getStorageSync('piao')) {
       this.data.people = [];
       let people = this.data.people;
-      people = gd.piao
+      people = wx.getStorageSync('piao')
       console.log(people)
       for (var i = 0; i < people.length; i++) {
         people[i].idCard = people[i].idCard.substr(0, 10) + "****" + people[i].idCard.substr(14)

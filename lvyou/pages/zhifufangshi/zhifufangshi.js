@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    radio: "1",
+    radio: "2",
     id: "",
     price: "",
     type: 0
@@ -92,7 +92,7 @@ Page({
           wx.getSetting({
             success: (res2) => {
               console.log(res2)
-              if (res2.authSetting['scope.userLocation']) {
+              if (res2.authSetting['scope.userInfo']) {
                 // 已经授权，可以直接调用 getUserInfo 获取头像昵称
                 wx.getUserInfo({
                   success: (res1) => {
@@ -138,7 +138,12 @@ Page({
                           }
                         })
                       } else {
-                        console.log(res)
+                        wx.hideLoading()
+                        wx.showToast({
+                          title: response.data.resultNote,
+                          icon: 'none',
+                          duration: 2000
+                        })
                       }
                     })
                   }

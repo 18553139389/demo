@@ -13,12 +13,12 @@
   <view class="s_2" style="background-color:#F8F8F8"></view>
   <van-radio-group value="{{ radio }}" bind:change="onChange">
     <van-cell-group>
-      <van-cell title="余额支付" clickable data-name="1" bind:click="onClick">
+      <!-- <van-cell title="余额支付" clickable data-name="1" bind:click="onClick">
         <view slot="icon">
           <image mode="widthFix" class="zf_11" src="../../images/15.png"></image>
         </view>
         <van-radio name="1" checked-color="#BF931C" />
-      </van-cell>
+      </van-cell> -->
       <van-cell title="微信支付" clickable data-name="2" bind:click="onClick">
         <view slot="icon">
           <image mode="widthFix" class="zf_11" src="../../images/16.png"></image>

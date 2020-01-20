@@ -30,13 +30,28 @@ Page({
     }).then(res=>{
       if(res.data.result==0){
         wx.hideLoading();
-        console.log(res)
+        res.data.url1 = this.replaceSpecialChar(res.data.url1)
+        res.data.url2 = this.replaceSpecialChar(res.data.url2)
         this.setData({
           dataList:res.data,
           image: res.data.image
         })
       }
     })
+  },
+  replaceSpecialChar(url) {
+    url = url.replace(/&quot;/g, '"');
+    url = url.replace(/&amp;/g, '&');
+    url = url.replace(/&lt;/g, '<');
+    url = url.replace(/&gt;/g, '>');
+    url = url.replace(/&nbsp;/g, ' ');
+    url = url.replace(/&middot;/g, '·');
+    url = url.replace(/&ldquo;/g, '“');
+    url = url.replace(/&rdquo;/g, '”');
+    url = url.replace(/&deg;/g, '°');
+    url = url.replace(/&mdash;/g, '~');
+    console.log("转义字符", url);
+    return url;
   },
   swiperChange(e){
     this.setData({
@@ -46,6 +61,7 @@ Page({
   golist(e){
     console.log(e)
     gd.tao=this.data.dataList.skuList[e.currentTarget.dataset.ind-0].skuCateList;
+    console.log(gd.tao)
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
       url:"/pages/xuanzemenpiao/xuanzemenpiao?img=" + this.data.image + '&name=' + name

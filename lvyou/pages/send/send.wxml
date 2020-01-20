@@ -1,0 +1,30 @@
+<view class="contain">
+  <image class="bg" src="https://oss.huandugj.com/20190826152724Q64y.jpg"></image>
+  <view class="forms">
+    <view class="items">
+      <view class="titles">姓名：</view>
+      <input placeholder="请输入您的姓名" placeholder-class="place" value="{{user}}" bindinput="goUser" />
+    </view>
+    <view class="items">
+      <view class="titles">电话：</view>
+      <input placeholder="请输入您的手机号" placeholder-class="place" value="{{phone}}" bindinput="goPhone" />
+    </view>
+    <view class="items">
+      <view class="titles">身份证号：</view>
+      <input placeholder="请输入您的身份证" placeholder-class="place" value="{{num}}" bindinput="goCar" />
+    </view>
+    <!-- <view class="items">
+      <view class="titles">乘车人数：</view>
+      <input type="number" placeholder="请输入乘车人数" placeholder-class="place" value="{{nums}}" bindinput="goNum" />
+    </view> -->
+    <view class="items" style="border-bottom:none;" bindtap="goDate">
+      <view class="titles">乘车日期：</view>
+      <input placeholder="请选择日期" placeholder-class="place" value="{{date}}" disabled />
+    </view>
+  </view>
+  <view class="submit" bindtap="goSubmit">我要报名</view>
+  <view class="according">上午9:00发车，返回13:00 下午14:00发车，返回16:00</view>
+  <van-popup show="{{ show }}" position="bottom">
+    <van-datetime-picker type="datetime" value="{{ currentDate }}" min-date="{{ minDate }}" bind:confirm="onInput" bind:cancel="onCancel" />
+  </van-popup>
+</view>

@@ -28,6 +28,7 @@
   color: rgba(124, 124, 124, 1);
   line-height: 80rpx;
   display: block;
+  text-align: center;
 }
 
 .dd_6 {

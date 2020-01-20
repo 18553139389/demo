@@ -7,7 +7,9 @@
     "van-cell-group": "/path/to/vant-weapp/dist/cell-group/index",
     "van-icon": "/path/to/vant-weapp/dist/icon/index",
     "van-stepper": "/path/to/vant-weapp/dist/stepper/index",
-    "van-popup": "/path/to/vant-weapp/dist/popup/index"
+    "van-popup": "/path/to/vant-weapp/dist/popup/index",
+    "van-radio": "/path/to/vant-weapp/dist/radio/index",
+    "van-radio-group": "/path/to/vant-weapp/dist/radio-group/index"
   },
   "navigationBarTitleText":"订单填写"
 }

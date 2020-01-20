@@ -11,12 +11,15 @@
   border-radius: 10rpx;
   font-size: 28rpx;
   color: rgba(17, 17, 17, 1);
-  border: 1px solid #bf931c;
+  /* border: 1px solid #bf931c; */
   box-sizing: border-box;
-  width: 144rpx;
+  width: 600rpx;
   height: 72rpx;
   text-align: center;
   line-height: 72rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .radiono {
@@ -32,8 +35,11 @@
   color: rgba(17, 17, 17, 1);
   border: 1px solid rgba(248, 248, 248, 1);
   box-sizing: border-box;
-  width: 144rpx;
+  width: 600rpx;
   height: 72rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .radio {
@@ -42,24 +48,24 @@
 
 .radioBox {
   display: block;
-  width: 144rpx;
+  width: 600rpx;
   height: 72rpx;
   position: relative;
-  margin-right: 20rpx;
+  margin: 0 auto;
 }
 
 .radioImg {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 600rpx;
+  height: 72rpx;
   z-index: 100;
 }
 
-.radiocontent {
+/* .radiocontent {
   display: flex;
-}
+} */
 
 .xz_1 {
   width: 238rpx;
@@ -93,6 +99,7 @@
   font-size: 30rpx;
   color: rgba(190, 126, 80, 1);
   border-top: 1px solid #ebebeb;
+  background: #fff;
 }
 
 .calendar-board {

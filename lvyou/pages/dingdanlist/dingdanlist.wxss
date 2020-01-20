@@ -108,9 +108,8 @@
   width: 100%;
   height: calc(100vh - 88rpx);
   box-sizing: border-box;
-  /* padding-top: 20rpx; */
   background-color: #f2f2f2;
-  /* padding-bottom:100rpx; */
+  padding-bottom:30rpx;
 }
 
 .no {
@@ -127,4 +126,43 @@
 .no>image {
   width: 300rpx;
   height: 300rpx;
+}
+
+.icon {
+  width: 24rpx;
+  height: 24rpx;
+  padding: 2px;
+  line-height: 24rpx;
+  border-radius: 50%;
+  background: red;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  position: fixed;
+  top: 24rpx;
+  z-index: 999;
+}
+
+.ind1 {
+  left: 110rpx;
+}
+
+.ind2 {
+  left: 240rpx;
+}
+
+.ind3 {
+  left: 376rpx;
+}
+
+.ind4 {
+  left: 490rpx;
+}
+
+.ind5 {
+  left: 624rpx;
+}
+
+.bgs {
+  background: #ededed !important;
 }

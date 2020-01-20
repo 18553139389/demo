@@ -1,24 +1,32 @@
-<view>
-  <van-row>
-    <van-col span="4" offset="1">
-      <text class="qp_1">姓名</text>
-    </van-col>
-    <van-col span="8">
-      <text class="qp_1">电话</text>
-    </van-col>
-    <van-col span="10">
-      <text class="qp_1">身份证号</text>
-    </van-col>
-  </van-row>
-  <van-row wx:for="{{list}}" wx:key="{{item}}">
-    <van-col span="4" offset="1">
-      <text class="qp_2">{{item.name}}</text>
-    </van-col>
-    <van-col span="8">
-      <text class="qp_2">{{item.phone}}</text>
-    </van-col>
-    <van-col span="10">
-      <text class="qp_2">{{item.idCard}}</text>
-    </van-col>
-  </van-row>
+<view class="" hover-class="none" hover-stop-propagation="false">
+  <view class="wrapper">
+    <view class="users">
+      <view class="list">
+        <view class="alls user">姓名</view>
+        <view class="alls phone">电话</view>
+        <view class="alls card">身份证号</view>
+        <view class="all del">编辑</view>
+        <view class="all del">删除</view>
+      </view>
+    </view>
+    <!-- <view class="s_1"></view> -->
+    <view class="users" wx:for="{{people}}" wx:key="{{index}}">
+      <view style="{{item.txtStyle}}" class="list" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}">
+        <view class="all user">{{item.name}}</view>
+        <view class="all phone">{{item.phone}}</view>
+        <view class="all card" catchtap="slide" data-ind="{{index}}" data-state="{{item.state}}">
+            <view>{{item.idCard}}</view>
+            <image src="../../images/slide.png"></image>
+          </view>
+        <view class="all editor" catchtap="editor" data-id="{{item.id}}" data-ind="{{index}}">编辑</view>
+        <view class="all del" catchtap="del" data-id="{{item.id}}" data-ind="{{index}}">删除</view>
+      </view>
+    </view>
+  </view>
+  <view class="no" wx:if="{{show}}">还没有取票人哦~~</view>
+  <view class="s_10"></view>
+  <view class="add" bindtap="add">新增旅客</view>
+  <!-- <view class="btn b_btn" hover-class="none" hover-stop-propagation="false" bindtap="ok" wx:if="{{people.length > 0}}">
+    <text>确定</text>
+  </view> -->
 </view>

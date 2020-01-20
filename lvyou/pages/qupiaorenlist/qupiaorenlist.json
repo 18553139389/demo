@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "van-row": "/path/to/vant-weapp/dist/row/index",
-    "van-col": "/path/to/vant-weapp/dist/col/index"
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "van-swipe-cell": "/path/to/vant-weapp/dist/swipe-cell/index",
+    "van-cell-group": "/path/to/vant-weapp/dist/cell-group/index"
   },
-  "navigationBarTitleText":"取票人列表"
+  "navigationBarTitleText":"常用旅客列表"
 }

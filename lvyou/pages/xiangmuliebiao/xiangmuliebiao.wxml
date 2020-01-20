@@ -1,10 +1,12 @@
-<srcoll-view srcoll-y="{{true}}" bindscrolltolower="tolower">
-  <!-- <van-search value="" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" bind:change="setSearch" shape="round">
+<view class="contain">
+  <scroll-view class="lists" scroll-y bindscrolltolower="tolower" wx-if="{{show}}">
+    <!-- <van-search value="" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" bind:change="setSearch" shape="round">
     <view slot="action" bind:tap="onSearch">搜索</view>
   </van-search> -->
-  <list list="{{list}}" bindclick="gotoList"></list>
-</srcoll-view>
-<view class='no' wx-if="{{list.length==0}}">
-  <image src="../../images/no.png"></image>
-  <text>未搜到对应项目</text>
+    <list list="{{list}}" bindclick="gotoList"></list>
+  </scroll-view>
+  <view class='no' wx-if="{{!show}}">
+    <image src="../../images/no.png"></image>
+    <text>未搜到对应项目</text>
+  </view>
 </view>

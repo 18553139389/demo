@@ -1,0 +1,33 @@
+.contain {
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #eee;
+}
+
+.su_1 {
+  width: 302rpx;
+  height: 302rpx;
+  margin: 40rpx auto 20rpx;
+  display: block;
+}
+
+.su_2 {
+  display: block;
+  text-align: center;
+  font-size: 30rpx;
+  color: rgba(17, 17, 17, 1);
+}
+
+.su_3 {
+  display: block;
+  text-align: center;
+}
+
+.su_4 {
+  display: block;
+  text-align: center;
+}
+
+.b_btn {
+  margin-top: 80rpx;
+}

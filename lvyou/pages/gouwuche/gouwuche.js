@@ -172,17 +172,29 @@ Page({
     }).then(res => {
       if (res.data.result == 0) {
         wx.hideLoading();
-        this.setData({
-          test: res.data.dataList ? res.data.dataList : []
-        })
-        console.log(this.data.test)
-        this.data.test.forEach((item, index) => {
-          let k = `checklist[${index}]`
+        if (res.data.dataList){
           this.setData({
-            [k]: false
+            test: res.data.dataList,
+            cart: false
           })
-        })
-        console.log(this.data.test)
+          console.log(this.data.test)
+          this.data.test.forEach((item, index) => {
+            let k = `checklist[${index}]`
+            this.setData({
+              [k]: false
+            })
+          })
+          this._getTotal()
+        }else{
+          this.setData({
+            test: [],
+            cart: true
+          })
+          this._getTotal()
+        }
+      }else{
+        wx.hideLoading();
+        console.log(res)
       }
     })
   },

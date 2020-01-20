@@ -1,0 +1,20 @@
+<view class="contain">
+  <view class="use" bindtap="no" wx-if="{{show}}">不使用优惠券</view>
+  <view class="list" wx-if="{{show}}">
+    <view class="list-item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-price="{{item.money}}" bindtap="use">
+      <image class="bg" src="../../images/coupon1.png"></image>
+      <view class="wrapper">
+        <view class="price">￥{{item.money}}</view>
+        <view class="content">
+          <view class="tit">{{item.name}}</view>
+          <view class="date">有效期：{{item.time}}</view>
+          <view class="date">仅限{{item.name}}使用</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='no' wx-if="{{!show}}">
+    <image src="../../images/no.png"></image>
+    <text>您还没有优惠券哦~</text>
+  </view>
+</view>

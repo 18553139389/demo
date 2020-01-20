@@ -1,16 +1,16 @@
 <!--pages/my/my.wxml-->
 <view class="my_1">
   <view class="my_2">
-    <image class="my_3" src="../../images/7.png" mode="widthFix" ></image>
+    <image class="my_3" src="../../images/08.png" mode="widthFix"></image>
     <view class="my_4">
       <image class="my_5" mode="aspectFill" src="{{list.icon}}" bindtap="goset"></image>
       <view class="my_6">
         <text class="my_7">{{list.nickName}}</text>
         <text class="my_8">{{list.vipName?list.vipName:"普通用户"}}</text>
-        <text class="my_9">{{list.lableName?list.lableName:"暂无"}}</text>
+        <!-- <text class="my_9">{{list.lableName?list.lableName:"暂无"}}</text> -->
       </view>
     </view>
-    <view class="my_10">
+    <!-- <view class="my_10">
       <view class="my_11">
         <text class="my_12">{{list.lableName?list.lableName:"暂无"}}</text>
         <text class="my_13">行业</text>
@@ -19,25 +19,28 @@
         <text class="my_12">{{list.point}}</text>
         <text class="my_13">积分</text>
       </view>
-    </view>
+    </view> -->
   </view>
-  <view class="s_10"></view>
+  <!-- <view class="s_10"></view> -->
   <view class="s_6"></view>
   <van-cell-group>
-    <van-cell title="历史取票人"  is-link bind:click="goqupiao">
-      <image class="my_14" src="../../images/8.png" slot="icon" mode="widthFix"></image>
+    <!-- <van-cell title="酒店订单" is-link bind:click="gohotel">
+      <image style="margin-right:30rpx;" class="my_14" src="../../images/jiudian.png" slot="icon" mode="widthFix"></image>
+    </van-cell> -->
+    <van-cell title="常用旅客" is-link bind:click="goqupiao">
+      <image style="margin-right:30rpx;" class="my_14" src="../../images/8.png" slot="icon" mode="widthFix"></image>
     </van-cell>
-    <van-cell title="钱包"  is-link bind:click="goqian">
+    <!-- <van-cell title="钱包"  is-link bind:click="goqian">
       <image class="my_14" src="../../images/9.png" slot="icon" mode="widthFix"></image>
-    </van-cell>
-    <van-cell title="修改密码"  is-link bind:click="goxiugai">
+    </van-cell> -->
+    <!-- <van-cell title="修改密码"  is-link bind:click="goxiugai">
       <image class="my_14" src="../../images/10.png" slot="icon" mode="widthFix"></image>
+    </van-cell> -->
+    <van-cell title="联系客服" is-link bind:click="getPhone">
+      <image style="margin-right:30rpx;" class="my_14" src="../../images/11.png" slot="icon" mode="widthFix"></image>
     </van-cell>
-    <van-cell title="联系客服"  is-link bind:click="getPhone">
-      <image class="my_14" src="../../images/11.png" slot="icon" mode="widthFix"></image>
-    </van-cell>
-    <van-cell title="意见反馈"  is-link bind:click="goyjfk">
-      <image class="my_14" src="../../images/13.png" slot="icon" mode="widthFix"></image>
+    <van-cell title="意见反馈" is-link bind:click="goyjfk">
+      <image style="margin-right:30rpx;" class="my_14" src="../../images/13.png" slot="icon" mode="widthFix"></image>
     </van-cell>
   </van-cell-group>
   <view class="s_8"></view>

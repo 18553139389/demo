@@ -1,7 +1,7 @@
 const config = require("../config.js");
 
 const tips = {
-  1: '抱歉，出现了一个错误',
+  1: '网络问题，请重试',
   2: '请先登录'
 }
 

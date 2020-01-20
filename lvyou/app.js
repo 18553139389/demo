@@ -32,12 +32,28 @@ App({
     // 是否选取新的取票人
     qupiao:null,
     // 城市信息
-    city:"",
+    city:"三亚",
     // 旅游套餐票
     tao:"",
     // 记录取票人
     piao:"",
     // 选票时间
-    time:""
+    time:"",
+    //记录切换状态
+    state: null,
+    //记录订单角标
+    num: null,
+    //选择开始日期
+    startDate: '',
+    //选择结束日期
+    endDate: '',
+    //入住的总天数
+    total: 0,
+    //记录菜单栏
+    items: 0,
+    status: 0,
+    couponId: '',
+    amount: 0,
+    notice: 0
   }
 })

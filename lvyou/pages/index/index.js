@@ -29,7 +29,11 @@ Page({
     uid: '',
     loading: false,
     page: 1,
-    totalPage: 1
+    totalPage: 1,
+    hotel: [],
+    cate: [],
+    notice: 0,
+    itemId: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,6 +49,7 @@ Page({
           // 查看是否授权
           wx.getSetting({
             success: (res2) => {
+              console.log(res2)
               if (res2.authSetting['scope.userInfo']) {
                 // 已经授权，可以直接调用 getUserInfo 获取头像昵称
                 wx.getUserInfo({
@@ -63,7 +68,7 @@ Page({
                           data: response.data.uid
                         })
                         self._getind()
-                      } else if (response.data.result == 2){
+                      } else if (response.data.result == 2) {
                         http.showToast(res.data.resultNote);
                         wx.reLaunch({
                           url: "/pages/user/user"
@@ -77,7 +82,7 @@ Page({
           })
         }
       })
-    }else{
+    } else {
       if (wx.getStorageSync('uid')) {
         gd.userId = wx.getStorageSync('uid')
         this._getind()
@@ -127,20 +132,17 @@ Page({
     })
   },
   goText(e) {
-    // wx.navigateTo({
-    //   url: "/pages/text/text"
-    // })
     let item = e.currentTarget.dataset.item
     let id = e.currentTarget.dataset.id
     let url = e.currentTarget.dataset.url
-    if (item == 1) {
-      console.log(id)
+    let index = e.currentTarget.dataset.index
+    if (index == 1) {
       wx.navigateTo({
         url: "/pages/jingqudetail/jingqudetail?id=" + url
       })
-    } else if (item == 2) {
+    } else if (index == 2){
       wx.navigateTo({
-        url: "/pages/text/text?url=" + url
+        url: "/pages/buy/buy"
       })
     }
   },
@@ -150,16 +152,47 @@ Page({
     })
   },
   _getind() {
-    http.showLoading().postD({
+    http.postD({
       cmd: "getHomeData",
       uid: gd.userId || "de8a58b195c5413e9792b41295c3e43c",
     }).then(res => {
       if (res.data.result == 0) {
-        wx.hideLoading()
+        for (let i = 0; i < res.data.cateGoryList;i++){
+          if (res.data.cateGoryList[i] == "景区门票"){
+            this.setData({
+              itemId: res.data.cateGoryList[i].id
+            })
+          }
+        }
         this.setData({
           adList: res.data.adList,
           cateGoryList: res.data.cateGoryList
         })
+        console.log(this.data.adList)
+      }
+    });
+    let that = this
+    http.showLoading().postD({
+      cmd: "getHotelHomeData",
+    }).then(res1 => {
+      if (res1.data.result == 0) {
+        if (res1.data.dataList[0].hotelList.length >= 6) {
+          let obj = []
+          for (let i = 0; i < 6; i++) {
+            obj.push(res1.data.dataList[0].hotelList[i])
+          }
+          res1.data.dataList[0].hotelList = obj
+          this.setData({
+            hotel: res1.data.dataList
+          })
+          console.log(this.data.hotel)
+        } else {
+          console.log(this.data.hotel)
+          this.setData({
+            hotel: res1.data.dataList
+          })
+        }
+        wx.hideLoading()
       }
     })
   },
@@ -172,45 +205,45 @@ Page({
       name: ""
     })
   },
-  tolower(e) {
-    this.setData({
-      loading: true
-    })
-    var page = this.data.page;
-    var totalPage = this.data.totalPage
-    page++
-    this.setData({			
-      page: page
-    })
-    console.log(totalPage)
-    console.log(page)
-    //加载分页数据
-    if(page<=totalPage){
-      http.postD({
-        cmd: "getGoodsList",
-        uid: gd.userId,
-        cityId: this.data.address, //城市id
-        nowPage: page, //
-      }).then(res => {
-        console.log(res)
-        if (res.data.result == 0) {
-          var allArr = [];
-          var initArr = this.data.list ? this.data.list : [];
-          var newArr = res.data.dataList
-          allArr = initArr.concat(newArr);
-          this.setData({
-            loading: false,
-            list: allArr
-          })
-        }
-      })
-    }else{
-      console.log('没有数据了')
-      this.setData({
-        loading: false
-      })
-    }
-  },
+  // tolower(e) {
+  //   this.setData({
+  //     loading: true
+  //   })
+  //   var page = this.data.page;
+  //   var totalPage = this.data.totalPage
+  //   page++
+  //   this.setData({
+  //     page: page
+  //   })
+  //   console.log(totalPage)
+  //   console.log(page)
+  //   //加载分页数据
+  //   if (page <= totalPage) {
+  //     http.postD({
+  //       cmd: "getGoodsList",
+  //       uid: gd.userId,
+  //       cityId: this.data.address, //城市id
+  //       nowPage: page, //
+  //     }).then(res => {
+  //       console.log(res)
+  //       if (res.data.result == 0) {
+  //         var allArr = [];
+  //         var initArr = this.data.list ? this.data.list : [];
+  //         var newArr = res.data.dataList
+  //         allArr = initArr.concat(newArr);
+  //         this.setData({
+  //           loading: false,
+  //           list: allArr
+  //         })
+  //       }
+  //     })
+  //   } else {
+  //     console.log('没有数据了')
+  //     this.setData({
+  //       loading: false
+  //     })
+  //   }
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -222,12 +255,30 @@ Page({
       show: true
     })
   },
+  goDetail(e) {
+    let id = e.currentTarget.dataset.id;
+    let tit = e.currentTarget.dataset.tit;
+    wx.navigateTo({
+      url: '/pages/hotelDetail/hotelDetail?id=' + id + '&tit=' + tit
+    })
+  },
+  goNotice() {
+    gd.notice = 1
+    this.setData({
+      notice: 1
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this._getind()
-    console.log(gd.city)
+    if (gd.notice == 1) {
+      let notice = gd.notice
+      this.setData({
+        notice: notice
+      })
+    }
+    // this._getind()
     if (gd.city == "") {
       wx.getLocation({
         success: (res) => {
@@ -248,8 +299,11 @@ Page({
                 wx.hideLoading();
                 this.setData({
                   list: res.data.dataList ? res.data.dataList : [],
-                  totalPage: res.data.totalPage
+                  totalPage: res.data.totalPage,
+                  page: 1
                 })
+              } else {
+                wx.hideLoading();
               }
             })
           })
@@ -267,27 +321,72 @@ Page({
       }).then(res => {
         console.log(res)
         if (res.data.result == 0) {
+          if (res.data.dataList.length >= 6) {
+            let obj = []
+            for (let i = 0; i < 4; i++) {
+              obj.push(res.data.dataList[i])
+            }
+            this.setData({
+              list: obj,
+              totalPage: res.data.totalPage,
+              page: 1
+            })
+          } else {
+            this.setData({
+              list: res.data.dataList ? res.data.dataList : [],
+              totalPage: res.data.totalPage,
+              page: 1
+            })
+          }
           wx.hideLoading();
-          this.setData({
-            list: res.data.dataList ? res.data.dataList : [],
-            totalPage: res.data.totalPage
-          })
         }
       })
     }
   },
   golist(e) {
     console.log(e);
-    // return;
+    let index = e.currentTarget.dataset.ind;
+    if (index == 0) {
+      wx.navigateTo({
+        url: "/pages/hotel/hotel"
+      })
+    } else if (index == 1) {
+      wx.navigateTo({
+        url: "/pages/xiangmuliebiao/xiangmuliebiao?id=" + e.currentTarget.dataset.id + "&type=1" + "&name=" + this.data.address
+      })
+      // http.showToast("新生专享即将开放");
+    } else if (index == 2) {
+      wx.navigateTo({
+        url: "/pages/xiangmuliebiao/xiangmuliebiao?id=" + e.currentTarget.dataset.id + "&type=1" + "&name=" + this.data.address
+      })
+      // http.showToast("新生专享即将开放");
+    } else if (index == 3) {
+      wx.navigateTo({
+        url: "/pages/send/send"
+      })
+      // http.showToast("新生专享即将开放");
+    } else if (index == 4) {
+      wx.navigateTo({
+        url: "/pages/buy/buy"
+      })
+      // http.showToast("新生专享即将开放");
+    }
+  },
+  goTourist() {
     wx.navigateTo({
-      url: "/pages/xiangmuliebiao/xiangmuliebiao?id=" + e.currentTarget.dataset.id + "&type=1" + "&name=" + this.data.address
+      url: "/pages/xiangmuliebiao/xiangmuliebiao?id=" + this.data.itemId + "&type=1" + "&name=" + this.data.address
     })
   },
   gotoList(e) {
-    console.log(id)
     let id = e.detail;
+    console.log(id)
     wx.navigateTo({
       url: "/pages/jingqudetail/jingqudetail?id=" + id
+    })
+  },
+  goHotel() {
+    wx.navigateTo({
+      url: "/pages/hotel/hotel"
     })
   },
   /**

@@ -1,0 +1,3 @@
+<view class="contain">
+  <map id="map" longitude="{{lon}}" latitude="{{lat}}" markers="{{markers}}" scale="14"></map>
+</view>

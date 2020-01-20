@@ -33,19 +33,22 @@
                 </van-row>
                 <view class="s_2" hover-class="none" hover-stop-propagation="false"></view>
                 <van-row>
-                  <van-col span="9" offset="1">
+                  <van-col span="13" offset="1">
                     <text class="gw_5">门票种类:{{item1.cateName}}</text>
                   </van-col>
-                  <van-col span="8">
+                  <van-col span="6">
                     <text class="gw_5">取票人:{{item1.collectorName}}</text>
                   </van-col>
                 </van-row>
                 <van-row>
-                  <van-col span="15" offset="1">
+                  <van-col span="13" offset="1">
                     <text class="gw_5">出行日期：{{item1.time}}</text>
                   </van-col>
-                  <van-col span="8">
+                  <van-col span="6">
                     <text class="gw_5">数量：{{item1.number}}</text>
+                  </van-col>
+                  <van-col span="4">
+                    <image class="right" src="../../images/slide.png"></image>
                   </van-col>
                 </van-row>
                 <view class="s_1" hover-class="none" hover-stop-propagation="false"></view>

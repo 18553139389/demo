@@ -1,0 +1,63 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="contain">
+  <view class='top'>
+    <image src="{{list.img}}"></image>
+    <view class='list'>
+      <view class='titles'>{{list.hotel}}</view>
+      <view class='sku'>{{list.fang}}</view>
+      <view class='choice'>
+        {{list.startDate}}至{{list.endDate}} 共{{list.all}}晚
+        <text wx:if="{{list.type == 0}}">不含早</text>
+        <text wx:if="{{list.type == 1}}">含早</text>
+      </view>
+    </view>
+  </view>
+  <view class='line'></view>
+  <view class='forms'>
+    <view class='all'>
+      <view class='forms-item'>入住人</view>
+      <input placeholder="入住人姓名" placeholder-class="place" value="{{user}}" bindinput="goUser" />
+    </view>
+    <view class='all'>
+      <view class='forms-item'>联系电话</view>
+      <input placeholder="用以接收通知短信" placeholder-class="place" value="{{phone}}" bindinput="goPhone" />
+    </view>
+    <view class='all' bindtap="goTime">
+      <view class='forms-item'>便于接送</view>
+      <input placeholder="请选择时间" placeholder-class="place" value="{{time}}" disabled />
+    </view>
+    <view class='all'>
+      <view class='forms-item'>床型偏好</view>
+      <input placeholder="大床/双床" placeholder-class="place" value="{{bed}}" bindinput="goBed" />
+    </view>
+    <view class='all' style='border-bottom:none;'>
+      <view class='forms-item'>航班号/动车车次</view>
+      <input placeholder="选填项" placeholder-class="place" value="{{num}}" bindinput="goCar" />
+    </view>
+  </view>
+  <view class='line'></view>
+  <view class='forms' bindtap="goCoupon">
+    <view class='all' style='border-bottom:none;'>
+      <view class='forms-item'>优惠券</view>
+      <input style="color:red;" placeholder="请选择优惠券" placeholder-class="place" value="{{coupon}}" disabled />
+    </view>
+  </view>
+  <view class='line'></view>
+  <view class="detail">
+    <view class="produce">
+      <view class="produce-title">预订须知</view>
+      <!-- <view class='content'>{{content}}</view> -->
+      <!-- <rich-text class='content' nodes="{{content}}"></rich-text> -->
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </view>
+  <view class='pay'>
+    <view class='total'>总价：
+      <text>￥{{total}}</text>
+    </view>
+    <view class='btns' bindtap="goSuc">微信支付</view>
+  </view>
+  <van-popup show="{{ show }}" position="bottom">
+    <van-datetime-picker type="datetime" value="{{ currentDate }}" min-date="{{ minDate }}" bind:confirm="onInput" bind:cancel="onCancel" />
+  </van-popup>
+</view>

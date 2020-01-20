@@ -1,0 +1,119 @@
+<view class="contain">
+  <view class="swiper-contain">
+    <swiper autoplay="true" circular="true" bindchange="swiperChange">
+      <swiper-item wx:for="{{list.images}}" wx:key="{{index}}">
+        <image src="{{item}}"></image>
+      </swiper-item>
+    </swiper>
+    <view class="swiper-num">
+      <text>{{current}}/</text>
+      <text>{{list.images.length}}</text>
+    </view>
+  </view>
+  <view class="wrapper">
+    <view class="titles">{{list.name}}</view>
+    <view class="address">
+      <view class="left" bindtap="goMap">
+        <image src="../../images/hotel3.png"></image>
+        <view class="content">{{list.address}}</view>
+      </view>
+      <view class="right" bindtap="goCall">
+        <image src="../../images/hotel4.jpg"></image>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="tab">
+      <block wx:for="{{tabs}}" wx:key="{{index}}">
+        <view class="{{index == itemIndex ? 'tab-item active' : 'tab-item'}}" data-index="{{index}}" bindtap='change'>{{item}}</view>
+      </block>
+    </view>
+    <view class="tab-items" wx:if="{{itemIndex == 0}}">
+      <view class="dates">
+        <view class="start" bindtap="goDate">
+          <view class="state">入住</view>
+          <view>{{day1 == '' ? '请选择时间' : day1}}</view>
+        </view>
+        <view class="days">{{total == 0 ? '共几' : total}}晚</view>
+        <view class="start" bindtap="goDate">
+          <view class="state">离店</view>
+          <view>{{day2 == '' ? '请选择时间' : day2}}</view>
+        </view>
+      </view>
+      <van-collapse value="{{ activeNames }}" bind:change="onChange" accordion wx:if="{{list.length != 0}}">
+        <block wx:for="{{lists}}" wx:key="index">
+          <van-collapse-item name="{{index + 1}}">
+            <view slot="title">
+              <view class="list">
+                <view class="list-left">
+                  <image src="{{item.image}}"></image>
+                  <view class="list-box">
+                    <view class="list-title">{{item.name}}</view>
+                    <view class="list-sku" wx:for="{{item.lables}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+                      <text>{{itemName.name}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="list-right">
+                  <view class="price">
+                    <text>￥{{item.price}}</text>起
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="list-content">
+              <view class="contents" wx:for="{{item.details}}" wx:for-index="idx1" wx:for-item="itemName1" wx:key="idx1">
+                <view class="list-type">
+                  <view class="list-name">
+                    <view>{{item.name}}</view>
+                    <view class="have" wx:if="{{itemName1.type == 1}}">含早餐</view>
+                    <view class="have" wx:if="{{itemName1.type == 2}}">不含早餐</view>
+                  </view>
+                  <view class="list-price">￥{{itemName1.price}}</view>
+                </view>
+                <view class="btns" bindtap="goOrder" data-fang="{{item.name}}" data-type="{{itemName1.type}}" data-img="{{item.image}}" data-total="{{itemName1.price}}" data-id="{{itemName1.id}}">预定</view>
+              </view>
+            </view>
+          </van-collapse-item>
+        </block>
+      </van-collapse>
+      <view class="no" wx:if="{{list.length == 0}}">亲，没有搜索到符合条件的房型</view>
+    </view>
+    <view class="tab-items" wx:if="{{itemIndex == 1}}">
+      <view class="detail">
+        <view class="produce">
+          <view class="produce-title">酒店介绍</view>
+          <view class="produce-text">
+            <view class="phone">
+              <view class="mask">酒店电话：</view>
+              <view class="mask-text" style="color:#2A93DD">{{list.phone}}</view>
+            </view>
+            <view class="phone">
+              <view class="mask">开业时间：</view>
+              <view class="mask-text" style="color:#333">{{list.openTime}}</view>
+            </view>
+            <view class="phone">
+              <view class="mask">酒店简介：</view>
+              <view class="mask-text news-box" style="color:#333">
+                <view class="news" style="text-align:justify;">{{str1}}</view>
+                <view wx:if="{{str.length>30}}" class="control" bindtap="controls">{{btns}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="detail">
+        <view class="produce">
+          <view class="produce-title">订房必读</view>
+          <view class="produce-text">
+            <view class="phone" style="text-align:justify;">
+              <!-- <view class="mask">入离时间：</view> -->
+              <!-- <view class="mask-text" style="color:#333;width: 100%;">{{content}}</view> -->
+              <rich-text nodes="{{content}}"></rich-text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
