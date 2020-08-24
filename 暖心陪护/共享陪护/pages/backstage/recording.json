@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "故障记录",
-  "usingComponents": {
-    "date-picker": "../../components/date-picker/date-picker"
-  }
-}
