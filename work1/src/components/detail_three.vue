@@ -192,9 +192,9 @@
 					</div>
 				</li>
 			</ul>
-			<div class="btn" v-if="hide">
+			<!-- <div class="btn" v-if="hide">
 				<div class="btn2" data-html2canvas-ignore @click="goImg">打印通行证</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="loading" v-if="loading">
 			<van-loading type="spinner" />

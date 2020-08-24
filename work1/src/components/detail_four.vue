@@ -194,7 +194,7 @@
 			</ul>
 			<div class="btn" v-if="hide">
 				<div class="btn1" @click="changeMsg">变更信息</div>
-				<div class="btn2" data-html2canvas-ignore @click="goImg">打印通行证</div>
+				<!-- <div class="btn2" data-html2canvas-ignore @click="goImg">打印通行证</div> -->
 			</div>
 		</div>
 		<div class="loading" v-if="loading">
