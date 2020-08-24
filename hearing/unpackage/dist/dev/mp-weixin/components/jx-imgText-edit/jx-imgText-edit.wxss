@@ -1,0 +1,57 @@
+.jx-imgText-edit.data-v-e4610c66 {
+  width: 100%;
+  min-height: 80vh;
+  padding: 0;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+  background: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.jx-imgText-edit .content.data-v-e4610c66 {
+  width: 100%;
+  min-height: 80vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.jx-imgText-edit .content .textarea_com.data-v-e4610c66 {
+  padding: 20rpx 0;
+  width: 100%;
+  font-size: 32rpx;
+  background: #fff;
+  line-height: 1.5;
+}
+.jx-imgText-edit .content .view_com.data-v-e4610c66 {
+  width: 100%;
+  position: relative;
+  margin-top: 30rpx;
+}
+.jx-imgText-edit .content .view_com .img_com.data-v-e4610c66 {
+  width: 100%;
+}
+.jx-imgText-edit .content .view_com .mask.data-v-e4610c66 {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.jx-imgText-edit .content .view_com .del.data-v-e4610c66 {
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  bottom: 30rpx;
+  right: 20rpx;
+}
+

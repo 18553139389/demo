@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "k-x-date-time": "/components/kx-datetime/kx-datetime"
+  }
+}

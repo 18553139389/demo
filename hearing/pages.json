@@ -1,0 +1,283 @@
+{
+	"pages": [{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, 
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/forget/forget",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/long/long",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/hear/hear",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/searchDetail/searchDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/shop/shop",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/coupon/coupon",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/couponDetail/couponDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/submitOrder/submitOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/result/result",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/expert/expert",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/public/public",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/publicResult/publicResult",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/comment/comment",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/nick/nick",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/bind/bind",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/messageDetail/messageDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/cancel/cancel",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/backMoney/backMoney",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/orderDetail/orderDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/myComment/myComment",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/myStore/myStore",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/sayShop/sayShop",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/moneyReason/moneyReason",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/myContent/myContent",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style" : {
+				"enablePullDownRefresh": true,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "专家"
+			}
+		},
+		{
+			"path": "pages/question/question",
+			"style" : {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/web/web",
+			"style" : {
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/rich/rich",
+			"style" : {
+				"navigationStyle": "default",
+				"navigationBarTitleText": "发布图文"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"usingComponents": true
+	},
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#06A5C4",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/images/one.png",
+			"selectedIconPath": "static/images/one-select.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/long/long",
+			"iconPath": "static/images/two.png",
+			"selectedIconPath": "static/images/two-select.png",
+			"text": "远程专家"
+		}, {
+			"pagePath": "pages/hear/hear",
+			"iconPath": "static/images/three.png",
+			"selectedIconPath": "static/images/three-select.png",
+			"text": "听力地球"
+		}, {
+			"pagePath": "pages/my/my",
+			"iconPath": "static/images/four.png",
+			"selectedIconPath": "static/images/four-select.png",
+			"text": "个人中心"
+		}]
+	}
+}

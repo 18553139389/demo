@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "uni-popup": "/components/popup/uni-popup"
+  }
+}

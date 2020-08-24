@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "default",
+  "usingComponents": {
+    "u-parse": "/components/feng-parse/parse"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "jiuai-checkbox": "/components/jiuai-checkbox/jiuai-checkbox"
+  }
+}

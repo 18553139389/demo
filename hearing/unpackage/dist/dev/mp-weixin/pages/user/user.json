@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "uni-popup": "/components/popup/uni-popup",
+    "k-x-date-time": "/components/kx-datetime/kx-datetime"
+  }
+}

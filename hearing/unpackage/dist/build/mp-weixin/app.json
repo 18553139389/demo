@@ -1,0 +1,88 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/register/register",
+    "pages/forget/forget",
+    "pages/long/long",
+    "pages/hear/hear",
+    "pages/my/my",
+    "pages/search/search",
+    "pages/searchDetail/searchDetail",
+    "pages/shop/shop",
+    "pages/coupon/coupon",
+    "pages/couponDetail/couponDetail",
+    "pages/submitOrder/submitOrder",
+    "pages/result/result",
+    "pages/expert/expert",
+    "pages/public/public",
+    "pages/publicResult/publicResult",
+    "pages/comment/comment",
+    "pages/user/user",
+    "pages/nick/nick",
+    "pages/bind/bind",
+    "pages/message/message",
+    "pages/messageDetail/messageDetail",
+    "pages/order/order",
+    "pages/cancel/cancel",
+    "pages/backMoney/backMoney",
+    "pages/orderDetail/orderDetail",
+    "pages/myComment/myComment",
+    "pages/myStore/myStore",
+    "pages/sayShop/sayShop",
+    "pages/detail/detail",
+    "pages/moneyReason/moneyReason",
+    "pages/myContent/myContent",
+    "pages/chat/chat",
+    "pages/question/question",
+    "pages/web/web",
+    "pages/rich/rich"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#06A5C4",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/one.png",
+        "selectedIconPath": "static/images/one-select.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/long/long",
+        "iconPath": "static/images/two.png",
+        "selectedIconPath": "static/images/two-select.png",
+        "text": "远程专家"
+      },
+      {
+        "pagePath": "pages/hear/hear",
+        "iconPath": "static/images/three.png",
+        "selectedIconPath": "static/images/three-select.png",
+        "text": "听力地球"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/images/four.png",
+        "selectedIconPath": "static/images/four-select.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于定位"
+    }
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

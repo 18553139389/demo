@@ -1,0 +1,1 @@
+.wrapper{width:100%;padding:28rpx;box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;flex-direction:column}
