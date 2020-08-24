@@ -1,0 +1,308 @@
+{
+	"pages": [{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/team/team",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/help/help",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/person/person",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/forget/forget",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/searchDetail/searchDetail",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/type/type",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/submitOrder/submitOrder",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/shop/shop",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/result/result",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/editorAddress/editorAddress",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/notice/notice",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamOrder/teamOrder",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/money/money",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/moneyResult/moneyResult",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamDetail/teamDetail",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamMoney/teamMoney",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamCenter/teamCenter",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamCode/teamCode",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamCount/teamCount",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/teamSort/teamSort",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/bind/bind",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/exampleOrder/exampeOrder",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/orderDetail/orderDetail",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/suggest/suggest",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/bindMessage/bindMessage",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/reset/reset",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/personSuggest/personSuggest",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/personMessage/personMessage",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/noticeDetail/noticeDetail",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/agree/agree",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/userOrder/userOrder",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/produce/produce",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationBarTitleText": "支付"
+			}
+		},
+		{
+			"path": "pages/payCode/payCode",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/logistics/logistics",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		},
+		{
+			"path": "pages/produce1/produce1",
+			"style": {
+				"navigationBarTitleText": "易淘商城"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"usingComponents": true
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#FF6600",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/shouye1.png",
+				"selectedIconPath": "static/images/shouye2.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/team/team",
+				"iconPath": "static/images/tuandui1.png",
+				"selectedIconPath": "static/images/tuandui2.png",
+				"text": "团队中心"
+			},
+			{
+				"pagePath": "pages/help/help",
+				"iconPath": "static/images/bangzhu1.png",
+				"selectedIconPath": "static/images/bangzhu2.png",
+				"text": "帮助说明"
+			}, {
+				"pagePath": "pages/person/person",
+				"iconPath": "static/images/geren1.png",
+				"selectedIconPath": "static/images/geren2.png",
+				"text": "个人中心"
+			}
+		]
+	}
+}
