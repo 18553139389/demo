@@ -1,0 +1,22 @@
+
+.action {
+	width: 90%;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.search {
+	width: 75%;
+}
+.right {
+	width: 160rpx;
+	margin-right: 30rpx;
+	font-size: 15px;
+	z-index: 999;
+	text-align: right;
+}
+.head {
+	width: 42rpx;
+	height: 42rpx;
+}
+

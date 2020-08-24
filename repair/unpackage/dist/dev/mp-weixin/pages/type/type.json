@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "j-picker": "/components/J-Picker/jPicker",
+    "jiuai-checkbox": "/components/jiuai-checkbox/jiuai-checkbox"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/enter/enter",
+    "pages/agree/agree",
+    "pages/register/register",
+    "pages/type/type",
+    "pages/address/address",
+    "pages/editorAddress/editorAddress",
+    "pages/person/person",
+    "pages/link/link",
+    "pages/location/location",
+    "pages/type1/type1",
+    "pages/type2/type2",
+    "pages/type3/type3",
+    "pages/type4/type4",
+    "pages/type5/type5",
+    "pages/set/set",
+    "pages/user/user",
+    "pages/bind/bind",
+    "pages/modify/modify",
+    "pages/order/order",
+    "pages/question/question",
+    "pages/result/result",
+    "pages/map/map"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

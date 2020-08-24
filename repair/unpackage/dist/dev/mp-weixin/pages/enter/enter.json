@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "ld-select": "/components/ld-select/ld-select",
+    "pick-regions": "/components/pick-regions/pick-regions",
+    "jiuai-checkbox": "/components/jiuai-checkbox/jiuai-checkbox"
+  }
+}
