@@ -1,0 +1,90 @@
+.contain{
+	width: 100%;
+	background: #fafafa;
+	overflow: hidden;
+}
+
+.top_list{
+	width: 100%;
+	height: 100px;
+	background: #FFF;
+	position: fixed;
+	top: 46px;
+	left: 0;
+	z-index: 20;
+}
+
+.register_top{
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 20px 0;
+	box-sizing: border-box;
+}
+
+.logo {
+	float: left;
+	width: 15%;
+	height: 60px;
+}
+
+.logo>img {
+	width: 70px;
+	height: 70px;
+}
+
+.back-header{
+	display: flex;
+	align-items:center;
+	float: right;
+	height: 60px;
+}
+
+.back-header a{
+	font-size: 14px;
+	color: #FF9000;
+	margin-left: 12px;
+}
+
+.register_main{
+	width: 100%;
+	height: 500px;
+	background: url(../image/denglutu.png) no-repeat;
+	background-size: 100% 100%;
+	padding: 60px 0;
+	box-sizing: border-box;
+	margin-top: 146px;
+}
+
+.form_box{
+	width: 500px;
+	height: 380px;
+	background: #fff;
+	border-radius: 6px;
+	margin: 0 auto;
+	padding: 20px 70px;
+	box-sizing: border-box;
+}
+
+.form_box h3{
+	width: 100%;
+	height: 30px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 22px;
+	color: #333;
+}
+
+.form_list{
+	width: 100%;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+.ivu-btn-large span{
+	font-size: 18px !important;
+}
+
+[v-cloak] {
+    display: none !important;
+}

@@ -1,0 +1,280 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title>支付</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/shop.css">
+  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/area.js"></script>
+  <script type="text/javascript" src="js/data.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+<style type="text/css">
+  .zzc {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 99;
+    background: rgba(0,0,0,0.6);display: none;
+}
+#qrcode {
+    width: 182px;
+    height: 182px;
+    position: fixed;
+    top: 50%;
+    margin-top: -91px;
+    left: 50%;
+    margin-left: -91px;
+    z-index: 100;
+    background: #fff;display: none;
+}  
+#qrcode  img{margin-top:15px;margin-left: 15px;}
+
+
+</style>
+
+</head>
+<body>
+  <header class="head_big">
+  	<div class="top_big">
+  		<div class="top_small">
+  			<div class="quxian">选择区县</div>
+  			<ul class="clearfix">
+          <li class="top_ul"><a>你好，请登录</a><em></em><span class="geren">个人中心</span><span class="tui_login">退出登录</span></li>
+          <li class="top_er"><a href="javascript:;">我的订单</a><em></em></li>
+          <li class="gou_car"><a href="javascript:;">我的购物车</a><em></em></li>
+          <li class="souc"><a href="javascript:;">收藏夹</a><em></em></li>
+          <li style="border:0px;"><a href="contact_us.html">联系我们</a><em></em></li>
+  			</ul>
+  		</div>
+  	</div>
+    <div class="logo_big clearfix">
+      <a href="index.html"></a><img src="img/logo.png" /></a>
+      <span>本平台所有商品均由商家配送</span>
+    </div> 
+  </header>
+  <div class="content_big clearfix">
+    <div class="pay_fs">
+      <span class="pay_wx">
+        <img src="img/weixinzhifu.png">
+        <p>微信支付</p>
+      </span>
+      <span class="pay_zfb">
+        <a href="http://zhuangjialian.com/jiazhuanglian/api/startAliPay">
+        <img src="img/zhifubaozhifu.png">
+        <p>支付宝支付</p>
+        </a>
+      </span>
+      </div>
+      
+  </div>
+    <div id="qrcode"></div>
+    <div class="zzc"></div>
+  <footer class="foots_big">
+     <div class="foot_small">
+         <ul>
+ 
+         </ul>
+         <ol>
+           
+         </ol>
+     </div>
+
+
+  </footer>
+
+<script type="text/javascript">
+ var local=window.localStorage;
+var goSu;
+var orderid=getParmVal("orderid");
+var price=getParmVal("price");
+   $(".pay_zfb a").attr("href","https://zhuangjialian.com/jiazhuanglian/api/startAliPay?orderSn="+orderid)
+if(uid){
+      var top_phone=local.getItem("top_phone");
+        top_phone=top_phone.substr(0, 3) + '****' + top_phone.substr(7);  
+       $('.top_ul a').css('color','#FF5050');
+       $('.top_ul a').html(top_phone);
+          $('.top_ul').hover(function(){
+            $('.top_ul a').css('color','#FF5050');
+            $('.top_ul a').css('background','#ffffff');
+            $('.top_ul span').css('display','block')
+            $('.tui_login').click(function(){
+               local.removeItem("uid");
+               location.reload();
+            })
+            $('.geren').click(function(){
+              window.location.href="my.html"
+            })
+          },function(){
+             $('.top_ul span').css('display','none');
+             $('.top_ul a').css('color','#666666');
+            $('.top_ul a').css('background','#E3E4E5');
+          })
+    }else{
+      console.log("这个是啥else")
+       $('.top_ul a').html("你好，请登录");
+       $('.top_ul a').attr("href","login.html")
+    }
+ //获取省市区
+     
+      var citydata=JSON.parse(local.getItem("data"));
+      var lon,lat,city,area,province;
+      city=citydata.city || "1";
+      area=citydata.area || "1";
+      province=citydata.province || "1";
+      var dataLista=[];
+      var dataListb=[];
+     //这块也是首页公用的地址
+                       //这块是地址
+                       $(".quxian").text(area);
+                     // 点击选择城市的跳转
+                    $(".quxian").click(function() {
+                      window.location="area/cityposition.html?city="+city;
+                    });
+                    //这块是地址
+           
+
+             //微信支付     "http://zhuangjialian.com/jiazhuanglian/api/startWxPay"
+           $('.pay_wx').click(function(){
+               $.ajax({
+                url: basepath + '/startWxPay' ,
+                method: "post",
+                data:{orderSn:orderid},
+                cache: !0,
+                async: true,
+                success: function(data) {
+                  console.log(data)
+                 $('#qrcode').show();
+                 $(".zzc").show();
+                  var qrcode = new QRCode('qrcode', {
+                    text: data,
+                    width: 152,
+                    height: 152,
+                    colorDark : '#000000',
+                    colorLight : '#ffffff',
+                    correctLevel : QRCode.CorrectLevel.H
+                  });
+                //   t = setInterval(showAuto, 1000); 
+                   // setTimeout(function() {
+                   //   cf();
+                   //  }, 3000);
+                  goSu=window.setInterval(function(){
+                         cf();
+                      },2000); 
+                }
+
+              })
+           })
+   // cf();
+           //看订单是否支付成功
+          function cf(){
+              $.ajax({
+              url: "http://zhuangjialian.com/jiazhuanglian/api/orderState",
+              method: "post",
+              data:{orderSn:orderid},
+              cache: !0,
+              async: true,
+              success: function(data) {
+                 console.log(data)
+                if(data.result == "0") {
+                   if(data.state==0){
+                    window.location.href="index.html"
+                   }
+
+                }
+              }
+
+            })
+          }
+
+
+
+// $.ajax({
+//         url: "${base}/order/startWxPay",
+//         type: "GET",
+//         data: {orderSn:$("#ono").val()},
+//         dataType: "json",
+//         traditional: true,
+//         cache: false,
+//         success: function(data) {
+//           var qrcode = new QRCode("code", {
+//               text: data,
+//               width: 152,
+//               height: 152,
+//               colorDark : "#000000",
+//               colorLight : "#ffffff",
+//               correctLevel : QRCode.CorrectLevel.H
+//           });
+//           $dialogOverlay.show();
+//           $("#dialog_wx").show();
+//           goSu=window.setInterval(function(){
+//                         getOrderStates();
+//                       },1000); 
+//         },
+//         error: function(){
+//           setTimeout(function() {
+//             location.reload(true);
+//           }, 3000);
+//         }
+//       });
+
+
+
+
+
+
+         //支付宝支付  basepath + '/startAliPay'
+         // $('.pay_zfb').click(function(){
+         //     $.ajax({
+         //        url: "http://zhuangjialian.com/jiazhuanglian/api/startAliPay",
+         //        method: "post",
+         //        data:{orderSn:orderid},
+         //        cache: !0,
+         //        async: true,
+         //        success: function(data) {
+               
+         //           console.log(data)
+         //          if(data.result == "0") {
+                     
+       
+         //          }
+         //        }
+
+         //      })
+         // })
+
+
+  $(function(){
+    //底部数据 
+           $.ajax({
+          url: base_path + '?json={"cmd":"contactUs"}',
+          method: "post",
+          dataType: "json",
+          cache: !0,
+          async: true,
+          success: function(data) {
+         
+             console.log(data)
+            if(data.result == "0") {
+                  $('.foot_small ul').append('<li><i>企业官网：</i><em>'+data.official+'</em></li><li><i>公司地址：</i><em>'+data.address+'</em></li><li>技术支持：郑州立信科技技术支持</li>');
+              $('.foot_small ol').append('<li><i>平台电话：</i><em>'+data.phone+'</em></li><li><i>微信客服：</i><em>'+data.weixin+'</em></li><li><i>QQ客服：</i><em>'+data.qq+'</em></li>');
+ 
+            }
+          }
+
+        })
+  })
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

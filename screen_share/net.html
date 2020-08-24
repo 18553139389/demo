@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="Resource/css/demo.css" />
+		<link rel="stylesheet" href="Resource/css/net.css" />
+		<link rel="stylesheet" href="Resource/css/find.css" />
+		<link rel="stylesheet" href="Resource/css/header.css" />
+		<link rel="stylesheet" href="Resource/css/nav.css" />
+		<link rel="stylesheet" href="Resource/css/swiper.css" />
+		<link rel="stylesheet" href="Resource/css/bottom.css" />
+		<link rel="stylesheet" href="Resource/css/list.css" />
+		<link rel="stylesheet" href="Resource/css/search.css" />
+		<title>网络广告首页</title>
+	</head>
+
+	<body>
+		<div class="container" id="app" v-cloak>
+			<header-show></header-show>
+			<div class="search_wrapper">
+				<div class="search_box">
+					<div class="location" @click="goLocation">
+						<span>{{location}}</span>
+					</div>
+					<search :select-title="selectTitle" :search-data="selectData" :select-index="selectIndex" :show="show" :pro-id="val"
+					 @change="changes" @set="sets" @hide="hides" @search="searchs" @protext="protext">
+					</search>
+				</div>
+			</div>
+			<nav-search :set-data="navList" :item-index="itemIndex" @choice="choice"></nav-search>
+			<div class="banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="v in swiperPic">
+							<img :id="v.bannerId" :src="v.image" alt="" />
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<div class="list_all">
+				<div class="floor_wrapper">
+					<div class="floor">
+						<a :href="'#floor'+v.id" :class="{'bg_ul':bgIndex == k}" class="floor_list" v-for="(v,k) in floorList" @click="changBg(k)">
+							<h3 :class="{'bg':bgIndex == k}">{{v.id}}F {{v.categoryName}}</h3>
+							<ul class="floor_box">
+								<li :class="{'text':bgIndex == k}" v-for="item in v.childList">{{item.childName}}</li>
+							</ul>
+						</a>
+					</div>
+				</div>
+				<div class="list_top" :id="'floor'+v.id" v-for="(v,index) in floorList">
+					<div class="net_wrapper">
+						<div class="list_produce">
+							<ul class="common">
+								<li :class="{'font':wxIndex == 0}" @click="getQuanbu(v.categoryId,index)">全部</li>
+								<li v-for="(item,k) in v.childList" @click="getNet(item.childId,index)">{{item.childName}}</li>
+							</ul>
+							<a :href="'./net_detail.html?categoryId='+v.categoryId+'&keyword='+v.childList[0].childId+'&key='+index" class="list_more">
+								<span>更多</span>
+								<div class="icon_more">
+									<img src="Resource/image/gengduo.png" alt="" />
+								</div>
+							</a>
+						</div>
+						<work-list :net-data="setNet[index]" @workurl="workurl"></work-list>
+					</div>
+				</div>
+			</div>
+			<bottom @back="back"></bottom>
+		</div>
+
+		<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.12/vue.min.js"></script>
+		<script src="Resource/js/swiper.js"></script>
+		<script src="Resource/js/header.js"></script>
+		<script src="Resource/js/nav.js"></script>
+		<script src="Resource/js/common.js"></script>
+		<script src="Resource/js/list.js"></script>
+		<script src="Resource/js/bottom.js"></script>
+		<script src="Resource/js/search.js"></script>
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					swiperPic: [],
+					itemIndex: 2,
+					wxIndex: 0,
+					weiboIndex: 0,
+					audioIndex: 0,
+					mediaIndex: 0,
+					softIndex: 0,
+					networkIndex: 0,
+					bgIndex: 0,
+					navList: [{
+							title: "首页",
+							url: "./index.html"
+						},
+						{
+							title: "线下广告",
+							url: "./watch.html"
+						},
+						{
+							title: "网络广告",
+							url: "./net.html"
+						},
+						{
+							title: "素材设计",
+							url: "./source.html"
+						}
+					],
+					selectData: [{
+							type: 1,
+							title: "线下广告"
+						},
+						{
+							type: 2,
+							title: "网络广告"
+						},
+						{
+							type: 3,
+							title: "素材设计"
+						}
+					],
+					selectTitle: "线下广告",
+					selectIndex: 0,
+					val: '',
+					show: false,
+					location: '搜索定位',
+					type: 1,
+					netData: [],
+					floorList: [],
+					twofloorList: []
+				},
+				mounted: function() {
+					loginUser()
+					//初始化分类列表
+					var typeData = {
+						type: 2
+					}
+					queryData('/shopCategoryList', typeData, this.typeData)
+
+					//轮播图接口加载图片
+					queryData('/indexBanner', {}, this.swiperImg)
+
+				},
+				computed: {
+					setNet: function() {
+						return this.netData
+					}
+				},
+				methods: {
+					goLocation: function() {
+						window.location.href = './location.html?' + 'type=1'
+					},
+					hides: function() {
+						this.show = !this.show
+					},
+					
+					changes: function(item) {
+						this.selectIndex = item
+					},
+					sets: function(item, html, type) {
+						console.log(item, html, type)
+						this.selectIndex = item
+						this.selectTitle = html
+						this.type = type
+					},
+					searchs: function() {
+						if (this.type == 1) {
+							window.location.href = './find.html?townId=' + local.getItem("townId") + '&lon=' + local.getItem("lon") + '&lat=' + local.getItem("lat") + '&keyword=' + encodeURIComponent(this.val) + '&type=1'
+						} else if (this.type == 2) {
+							window.location.href = './find.html?keyword=' + encodeURIComponent(this.val) + '&type=2'
+						} else if (this.type == 3) {
+							window.location.href = './find.html?keyword=' + encodeURIComponent(this.val) + '&type=3'
+						}
+					},
+					protext: function(val) {
+						this.val = val
+					},
+					swiperImg: function(res) {
+						this.swiperPic = res.dataList
+						//轮播图初始化对象
+						setTimeout(function() {
+							var swiper = new Swiper('.swiper-container', {
+								pagination: {
+									el: '.swiper-pagination',
+									clickable: true,
+								},
+								loop: true,
+								autoplay: true
+							});
+						}, 400)
+					},
+					choice: function(item) {
+						this.itemIndex = item;
+					},
+					getWx: function(id, key) {
+						$('.list_top .common li').each(function(i, ele) {
+							var self = $(this)
+							$(this).click(function() {
+								self.addClass('font').siblings('li').removeClass('font')
+							})
+						})
+					},
+					changBg: function(item) {
+						this.bgIndex = item
+					},
+					typeData: function(res) {
+						this.floorList = res.dataList
+						var self = this
+						var arr = []
+						for(var i = 0; i < this.floorList.length; i++) {
+							this.floorList[i].id = i + 1
+							var params = {
+								categoryId: this.floorList[i].categoryId,
+								page: 1
+							}
+							queryData('/internetList', params, function(eve){
+								arr.push(eve.dataList)
+							})
+						}
+						this.netData = arr
+						console.log(this.netData,'9999')
+					},
+					back: function() {
+						timer = setInterval(function() {
+							let osTop = document.documentElement.scrollTop || document.body.scrollTop
+							let ispeed = Math.floor(-osTop / 5)
+							document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+							this.isTop = true
+							if(osTop === 0) {
+								clearInterval(timer)
+							}
+						}, 30)
+					},
+					workurl: function(id) {
+						window.location.href = './net_list.html?shopId=' + id + '&type=2'
+					},
+					getQuanbu: function(id,key) {
+						var self = this
+						var params = {
+							categoryId: id,
+							page: 1
+						}
+						console.log(id)
+						queryData('/internetList', params, function(res){
+							self.netData[key] = []
+							// self.$set(netData[key],,netData[key])
+							if(res.dataList !== undefined) {
+								for(var i=0;i<res.dataList.length;i++){
+									self.netData[key].push(res.dataList[i])
+								}
+							}
+							self.$forceUpdate()
+						})
+					},
+					allData: function(id,key) {
+						console.log(this.floorList)
+						var params = {
+							categoryId: id,
+							page: 1
+						}
+						console.log(id)
+						queryData('/internetList', params, function(res){
+							self.netData[key] = []
+							// self.$set(netData[key],,netData[key])
+							if(res.dataList !== undefined) {
+								for(var i=0;i<res.dataList.length;i++){
+									self.netData[key].push(res.dataList[i])
+								}
+							}
+							self.$forceUpdate()
+						})
+					},
+					getActiveData: function(res,key) {
+						console.log(res.dataList)
+						this.netData[key] = []
+						this.netData[key].push(res.dataList)
+					},
+					getNet: function(id, key) {
+						console.log(key)
+						var self = this
+						$('.list_top .common').delegate('li', 'click', function() {
+							var self = $(this)
+							// $('.list_top .common li').removeClass('font')
+							self.addClass('font').siblings('li').removeClass('font')
+						})
+						$('.floor .floor_box').delegate('li', 'click', function() {
+							var self = $(this)
+							$('.floor .floor_box li').removeClass('floor-font')
+							self.addClass('floor-font')
+						})
+						var params = {
+							categoryId: id,
+							page: 1
+						}
+						queryData('/internetList', params, function(res){
+							self.netData[key] = []
+							// self.$set(netData[key],,netData[key])
+							if(res.dataList !== undefined) {
+								for(var i=0;i<res.dataList.length;i++){
+									self.netData[key].push(res.dataList[i])
+								}
+							}
+							self.$forceUpdate()
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

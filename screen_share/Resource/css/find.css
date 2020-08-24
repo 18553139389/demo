@@ -1,0 +1,80 @@
+body {
+	font-family: "微软雅黑";
+}
+
+.container {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+html,
+body {
+	position: relative;
+	height: 100%;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.swiper-slide>img{
+	width: 100%;
+	height: 100%;
+}
+
+.banner{
+	width: 100%;
+	height: 300px;
+	position: relative;
+	margin-top: 146px;
+}
+
+.ivu-page{
+	display: flex;
+	justify-content:center;
+	margin-bottom: 80px;
+	margin-top: 20px;
+}
+
+.ivu-page-item-active a, .ivu-page-item-active:hover a{
+	color: #ff9000 !important;
+}
+
+.ivu-page-item-active{
+	border-color: #ff9000 !important;
+}
+
+.ivu-page li:hover{
+	border-color: #ff9000 !important;
+}
+
+.ivu-page li:hover a{
+	color: #ff9000 !important;
+}
+
+[v-cloak] {
+    display: none !important;
+}
+
+

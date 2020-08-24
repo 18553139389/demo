@@ -1,0 +1,158 @@
+header {
+	width: 100%;
+	height: 46px;
+	background: #e3e4e5;
+	cursor: pointer;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20;
+}
+
+.h_contain {
+	width: 1200px;
+	height: 46px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 999;
+}
+
+.h_left {
+	height: 46px;
+	line-height: 46px;
+	float: left;
+	font-size: 14px;
+	color: rgba(16, 16, 16, 1);
+	padding: 0 12px;
+}
+
+.h_right {
+	float: right;
+	height: 46px;
+	display: block;
+}
+
+.h_right>img {
+	width: 12px;
+	height: 10px;
+	margin-top: -2px;
+	margin-right: 2px;
+}
+
+.h_right>span {
+	display: inline-block;
+	height: 46px;
+	line-height: 46px;
+	font-size: 14px;
+	color: rgba(16, 16, 16, 1);
+}
+
+.map_city {
+	width: 620px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.map_location {
+	width: 840px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.map_city li,.map_location li {
+	width: 20%;
+	text-align: left;
+	padding: 6px;
+	font-size: 14px;
+	color: #333;
+	box-sizing: border-box;
+	
+}
+
+.province_choice {
+	min-width: 620px;
+	max-width: 840px;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	position: absolute;
+	top: 46px;
+	left: 0;
+	z-index: 9999;
+	padding: 16px;
+	border: 1px solid #eee;
+	border-top: none;
+}
+
+.province_name,.city_name {
+	width: 20%;
+	padding: 6px;
+	color: #999;
+}
+
+.mapbg {
+	background: #fff !important;
+	border-left: 1px solid #eee;
+}
+
+.nav_right {
+	float: right;
+	width: 120px;
+	display: flex;
+	flex-direction: row-reverse;
+	position: relative;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+.nav_right>span {
+	float: right;
+	display: inline-block;
+	width: auto;
+	height: 46px;
+	line-height: 46px;
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	float: right;
+}
+
+.nav_right>img {
+	float: right;
+	width: 22px;
+	height: 22px;
+	margin-top: 12px;
+	margin-right: 8px;
+	float: right;
+}
+
+.h_box {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.back {
+	position: absolute;
+	right: -1px;
+	top: 46px;
+	font-size: 14px;
+	color: #333;
+	background: #fff;
+	padding: 4px 8px;
+	width: 120px;
+	text-align: center;
+	border: 1px solid #eee;
+	border-top: none;
+	box-sizing: border-box;
+}
+
+.back:hover {
+	background: #007AFF;
+	color: #fff;
+}
+
+.bg {
+	background: #fff !important;
+	border: 1px solid #eee
+}
