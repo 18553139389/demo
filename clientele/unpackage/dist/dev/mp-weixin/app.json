@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/first/first",
+    "pages/index/index",
+    "pages/order/order",
+    "pages/my/my",
+    "pages/buy/buy",
+    "pages/buyDetail/buyDetail",
+    "pages/goOrder/goOrder",
+    "pages/result/result",
+    "pages/Accreditation/Accreditation",
+    "pages/getPrice/getPrice",
+    "pages/sell/sell",
+    "pages/deposit/deposit",
+    "pages/add/add",
+    "pages/orderDetail/orderDetail",
+    "pages/question/question",
+    "pages/suggest/suggest",
+    "pages/myPublic/myPublic",
+    "pages/store/store",
+    "pages/invite/invite",
+    "pages/ask/ask",
+    "pages/search/search",
+    "pages/web/web",
+    "pages/allOrder/allOrder",
+    "pages/web1/web1",
+    "pages/friendOrder/friendOrder",
+    "pages/video/video",
+    "pages/public/public",
+    "pages/call/call",
+    "pages/other/other",
+    "pages/messageList/messageList",
+    "pages/hotMore/hotMore"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#00C800",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/img/2.png",
+        "selectedIconPath": "static/img/1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/img/3.png",
+        "selectedIconPath": "static/img/4.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/img/5.png",
+        "selectedIconPath": "static/img/6.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap27.json"
+}
