@@ -1,0 +1,6 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationStyle": "default",
+  "navigationBarTitleText": "专家",
+  "usingComponents": {}
+}

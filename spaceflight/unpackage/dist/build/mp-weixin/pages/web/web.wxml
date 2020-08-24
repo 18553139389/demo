@@ -1,0 +1,1 @@
+<view class="contain data-v-0ec4dff2"><view class="wrapper data-v-0ec4dff2"><web-view webview-styles="{{webviewStyles}}" src="{{'https://zhr.lexishangcheng.com/index/?url='+content}}" class="data-v-0ec4dff2"></web-view></view></view>

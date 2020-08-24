@@ -1,0 +1,200 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/login/login",
+		"style": {
+			"navigationBarTitleText": "",
+			"navigationBarTextStyle": "white"
+		}
+	}, {
+		"path": "pages/need/need",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/vip/vip",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/manage/manage",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/my/my",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/expert/expert",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/person/person",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/message/message",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/messageDetail/messageDetail",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/openVip/openVip",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/myPublic/myPublic",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/needDetail/needDetail",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/user/user",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/public/public",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/listDetail/listDetail",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/search/search",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/searchList/searchList",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/history/history",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/myShop/myShop",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/company/company",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/foot/foot",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/preview/preview",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/about/about",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/question/question",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/myFriend/myFriend",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/myZan/myZan",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/chat/chat",
+		"style": {
+			"enablePullDownRefresh": true,
+			"navigationStyle": "default",
+			"navigationBarTitleText": "专家"
+		}
+	}, {
+		"path": "pages/result/result",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/web/web",
+		"style": {
+			"navigationStyle": "default",
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/pruduce/produce",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"usingComponents": true
+	},
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#06A5C4",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/img/one.png",
+			"selectedIconPath": "static/img/one-select.png",
+			"text": "新闻资讯"
+		}, {
+			"pagePath": "pages/need/need",
+			"iconPath": "static/img/two.png",
+			"selectedIconPath": "static/img/two-select.png",
+			"text": "供需对接"
+		}, {
+			"pagePath": "pages/manage/manage",
+			"iconPath": "static/img/three.png",
+			"selectedIconPath": "static/img/three-select.png",
+			"text": "合同管理"
+		}, {
+			"pagePath": "pages/vip/vip",
+			"iconPath": "static/img/four.png",
+			"selectedIconPath": "static/img/four-select.png",
+			"text": "VIP服务"
+		}, {
+			"pagePath": "pages/my/my",
+			"iconPath": "static/img/five.png",
+			"selectedIconPath": "static/img/five-select.png",
+			"text": "我的"
+		}]
+	}
+}

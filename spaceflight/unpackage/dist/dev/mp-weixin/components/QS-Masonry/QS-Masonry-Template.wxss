@@ -1,0 +1,39 @@
+view.data-v-3974e373,
+scroll-view.data-v-3974e373,
+swiper.data-v-3974e373,
+swiper-item.data-v-3974e373,
+cover-view.data-v-3974e373,
+cover-image.data-v-3974e373,
+icon.data-v-3974e373,
+text.data-v-3974e373,
+rich-text.data-v-3974e373,
+progress.data-v-3974e373,
+button.data-v-3974e373,
+checkbox.data-v-3974e373,
+form.data-v-3974e373,
+input.data-v-3974e373,
+label.data-v-3974e373,
+radio.data-v-3974e373,
+slider.data-v-3974e373,
+switch.data-v-3974e373,
+textarea.data-v-3974e373,
+navigator.data-v-3974e373,
+audio.data-v-3974e373,
+camera.data-v-3974e373,
+image.data-v-3974e373,
+video.data-v-3974e373,
+picker-view.data-v-3974e373,
+picker-view-column.data-v-3974e373 {
+	box-sizing: border-box;
+}
+.QS-Masonry-Template.data-v-3974e373{
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+

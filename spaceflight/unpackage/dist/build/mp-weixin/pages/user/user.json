@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
+    "q-s-masonry": "/components/QS-Masonry/QS-Masonry"
+  }
+}

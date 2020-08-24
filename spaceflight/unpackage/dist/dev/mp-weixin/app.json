@@ -1,0 +1,83 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/need/need",
+    "pages/vip/vip",
+    "pages/manage/manage",
+    "pages/my/my",
+    "pages/expert/expert",
+    "pages/person/person",
+    "pages/message/message",
+    "pages/messageDetail/messageDetail",
+    "pages/openVip/openVip",
+    "pages/myPublic/myPublic",
+    "pages/needDetail/needDetail",
+    "pages/user/user",
+    "pages/public/public",
+    "pages/listDetail/listDetail",
+    "pages/search/search",
+    "pages/searchList/searchList",
+    "pages/history/history",
+    "pages/myShop/myShop",
+    "pages/company/company",
+    "pages/foot/foot",
+    "pages/preview/preview",
+    "pages/about/about",
+    "pages/question/question",
+    "pages/myFriend/myFriend",
+    "pages/myZan/myZan",
+    "pages/chat/chat",
+    "pages/result/result",
+    "pages/web/web",
+    "pages/pruduce/produce"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#06A5C4",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/img/one.png",
+        "selectedIconPath": "static/img/one-select.png",
+        "text": "新闻资讯"
+      },
+      {
+        "pagePath": "pages/need/need",
+        "iconPath": "static/img/two.png",
+        "selectedIconPath": "static/img/two-select.png",
+        "text": "供需对接"
+      },
+      {
+        "pagePath": "pages/manage/manage",
+        "iconPath": "static/img/three.png",
+        "selectedIconPath": "static/img/three-select.png",
+        "text": "合同管理"
+      },
+      {
+        "pagePath": "pages/vip/vip",
+        "iconPath": "static/img/four.png",
+        "selectedIconPath": "static/img/four-select.png",
+        "text": "VIP服务"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/img/five.png",
+        "selectedIconPath": "static/img/five-select.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap20.json"
+}
