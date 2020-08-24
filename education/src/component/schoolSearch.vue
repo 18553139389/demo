@@ -130,6 +130,7 @@
         }
 
         Request.postRequest('jinxiuqiancheng/api/schoolDetail', datas).then(res => {
+          console.log(res)
           if (res.data.result == 0) {
             let list = res.data
             this.$router.push({
@@ -148,7 +149,7 @@
       pos() {
         let bodyHeight = document.documentElement.offsetHeight || document.body.offsetHeight //获取当前body高度
         let winHeight = document.documentElement.clientHeight || document.body.clientHeight //获取当前页面高度
-        if (bodyHeight + 166 - winHeight > 0) {
+        if (bodyHeight - winHeight > 0) {
           this.control = true
         } else {
           this.control = false
@@ -159,7 +160,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .search {
       width: 40%;
       height: 200px;
@@ -171,7 +172,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .search {
       width: 65%;
       height: 200px;
@@ -190,7 +191,7 @@
 
   .bg {
     width: 100%;
-    height: 400px;
+    height: 500px;
     background: url(../../static/images/2.jpg) no-repeat;
     background-size: 100% 100%;
     display: flex;

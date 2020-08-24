@@ -276,6 +276,8 @@
         this.show = true
       },
       close() {
+        this.score = ''
+        this.rank = ''
         this.show = false
       },
       goHobby() {
@@ -311,9 +313,10 @@
           return
         }
 
+        console.log(this.classType)
         let datas = {
           uid: sessionStorage.getItem("uid"),
-          wlType: this.classify,
+          wlType: this.classType,
           score: this.score
         }
 
@@ -384,7 +387,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .login {
       width: 1200px;
       overflow: hidden;
@@ -410,7 +413,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .login {
       width: 100%;
       overflow: hidden;
@@ -517,6 +520,7 @@
     font-size: 14px;
     color: #FFFFFF;
     margin-top: 40px;
+    cursor: pointer;
   }
 
   .look {

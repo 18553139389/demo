@@ -173,7 +173,8 @@
           phoneNum: this.call,
           code: this.code,
           password: md5(this.password),
-          qrPassword: md5(this.repeat)
+          qrPassword: md5(this.repeat),
+		      mingwen:this.password
         }
 
         Request.postRequest('jinxiuqiancheng/api/findUserPassword', datas).then(res => {
@@ -196,7 +197,7 @@
 </script>
 
 <style>
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .wrapper {
       width: 100%;
       height: 100%;
@@ -209,7 +210,7 @@
     }
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     .wrapper {
       width: 100%;
       height: 100%;

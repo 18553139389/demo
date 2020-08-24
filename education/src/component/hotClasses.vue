@@ -129,7 +129,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       margin: 16px auto 40px;
@@ -138,7 +138,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       margin: 16px 0 40px;

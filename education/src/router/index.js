@@ -73,10 +73,20 @@ export default new Router({
     {
       path: '/minSchool',
       name: 'minSchool',
+      redirect: '/list',
       meta: {
-        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+        requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
       },
       component: resolve => require(['../component/minSchool.vue'], resolve)
+    },
+    {
+      path: '/list',
+      name: 'list',
+      meta: {
+        requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+        keepAlive: true
+      },
+      component: resolve => require(['../component/list.vue'], resolve)
     },
     {
       path: '/schoolDetail',
@@ -87,7 +97,8 @@ export default new Router({
       path: '/minClasses',
       name: 'minClasses',
       meta: {
-        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+        requireAuth: true ,// 添加该字段，表示进入这个路由是需要登录的
+        keepAlive: true
       },
       component: resolve => require(['../component/minClasses.vue'], resolve)
     },
@@ -189,10 +200,7 @@ export default new Router({
     {
       path: '/person',
       name: 'person',
-      component: resolve => require(['../component/person.vue'], resolve),
-      meta: {
-        keepAlive: true // 不需要被缓存
-      }
+      component: resolve => require(['../component/person.vue'], resolve)
     },
     {
       path: '/editor',
@@ -224,6 +232,36 @@ export default new Router({
       path: '/call',
       name: 'call',
       component: resolve => require(['../component/call.vue'], resolve)
+    },
+    {
+      path: '/fun',
+      name: 'fun',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      },
+      component: resolve => require(['../component/fun.vue'], resolve)
+    },
+    {
+      path: '/result',
+      name: 'result',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      },
+      component: resolve => require(['../component/result.vue'], resolve)
+    },
+    {
+      path: '/work',
+      name: 'work',
+      meta: {
+        requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+        keepAlive: true
+      },
+      component: resolve => require(['../component/work.vue'], resolve)
+    },
+    {
+      path: '/workDetail',
+      name: 'workDetail',
+      component: resolve => require(['../component/workDetail.vue'], resolve)
     }
   ]
 })

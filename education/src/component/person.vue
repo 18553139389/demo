@@ -2,159 +2,167 @@
   <div class="wrapper">
     <headers></headers>
     <navs :itemIndex="itemIndex" @change="change" @changeNav="changeNav"></navs>
-    <keep-alive>
-      <div class="list">
-        <div class="list-item">
-          <div class="titles">
-            <div>个人资料</div>
-            <div class="log" @click="editor">编辑</div>
+    <div class="list">
+      <div class="list-item">
+        <div class="titles">
+          <div>个人资料</div>
+          <div class="log" @click="editor">编辑</div>
+        </div>
+        <div class="message">
+          <img :src="userList.userIcon" alt="">
+          <div class="message-list">
+            <ul class="item">
+              <li>
+                <img src="../../static/images/denglu_zhanghao.png" alt="">
+                <div style="margin-left: 8px;">姓名：<span style="color: #999;">{{userList.name}}</span></div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengxianbao_xingbie.png" alt="">
+                <div style="margin-left: 8px;">性别：<span v-if="userList.sex == 0" style="color: #999;">男</span><span
+                    v-if="userList.sex == 1" style="color: #999;">女</span></div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengxianbao_xueke.png" alt="">
+                <div style="margin-left: 8px;">
+                  文理科：
+                  <span v-if="userList.wlType == 0" style="color: #999;">文科</span>
+                  <span v-if="userList.wlType == 1" style="color: #999;">理科</span>
+                  <span v-if="userList.wlType == 2" style="color: #999;">不限</span>
+                </div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengtianbao_dizhi.png" alt="">
+                <div style="margin-left: 8px;">地区：<span style="color: #999;">{{userList.province}}</span></div>
+              </li>
+            </ul>
+            <ul class="item">
+              <li>
+                <img src="../../static/images/zhinengxianbao_xuexiao.png" alt="">
+                <div style="margin-left: 8px;">学校：<span style="color: #999;">{{userList.school}}</span></div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengxianbao_banji.png" alt="">
+                <div style="margin-left: 8px;">班级：<span style="color: #999;">{{userList.banji}}</span></div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengxianbao_zhonghefu.png" alt="">
+                <div style="margin-left: 8px;">成绩：<span style="color: #999;">{{userList.score}}</span></div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengxianbao_weici.png" alt="">
+                <div style="margin-left: 8px;">位次：<span style="color: #999;">{{userList.ranking}}</span></div>
+              </li>
+              <li>
+                <img src="../../static/images/zhinengxianbao_weici.png" alt="">
+                <div style="margin-left: 8px;">
+                  批次：
+                  <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 0">提前批</span>
+                  <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 1">本科</span>
+                  <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 2">专科</span>
+                  <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 3">不限批次</span>
+                  <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 0">提前批</span>
+                  <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 1">本科一批</span>
+                  <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 2">本科二批</span>
+                  <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 3">专科</span>
+                  <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 4">不限批次</span>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="message">
-            <img :src="userList.userIcon" alt="">
-            <div class="message-list">
-              <ul class="item">
-                <li>
-                  <img src="../../static/images/denglu_zhanghao.png" alt="">
-                  <div style="margin-left: 8px;">姓名：<span style="color: #999;">{{userList.name}}</span></div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengxianbao_xingbie.png" alt="">
-                  <div style="margin-left: 8px;">性别：<span v-if="userList.sex == 0" style="color: #999;">男</span><span
-                      v-if="userList.sex == 1" style="color: #999;">女</span></div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengxianbao_xueke.png" alt="">
-                  <div style="margin-left: 8px;">
-                    文理科：
-                    <span v-if="userList.wlType == 0" style="color: #999;">文科</span>
-                    <span v-if="userList.wlType == 1" style="color: #999;">理科</span>
-                    <span v-if="userList.wlType == 2" style="color: #999;">不限</span>
-                  </div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengtianbao_dizhi.png" alt="">
-                  <div style="margin-left: 8px;">地区：<span style="color: #999;">{{userList.province}}</span></div>
-                </li>
-              </ul>
-              <ul class="item">
-                <li>
-                  <img src="../../static/images/zhinengxianbao_xuexiao.png" alt="">
-                  <div style="margin-left: 8px;">学校：<span style="color: #999;">{{userList.school}}</span></div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengxianbao_banji.png" alt="">
-                  <div style="margin-left: 8px;">班级：<span style="color: #999;">{{userList.banji}}</span></div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengxianbao_zhonghefu.png" alt="">
-                  <div style="margin-left: 8px;">成绩：<span style="color: #999;">{{userList.score}}</span></div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengxianbao_weici.png" alt="">
-                  <div style="margin-left: 8px;">位次：<span style="color: #999;">{{userList.ranking}}</span></div>
-                </li>
-                <li>
-                  <img src="../../static/images/zhinengxianbao_weici.png" alt="">
-                  <div style="margin-left: 8px;">
-                    批次：
-                    <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 0">提前批</span>
-                    <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 1">本科</span>
-                    <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 2">专科</span>
-                    <span style="color: #666;" v-if="applyProv == 1 && userList.batch == 3">不限批次</span>
-                    <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 0">提前批</span>
-                    <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 1">本科一批</span>
-                    <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 2">本科二批</span>
-                    <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 3">专科</span>
-                    <span style="color: #666;" v-if="applyProv == 0 && userList.batch == 4">不限批次</span>
-                  </div>
-                </li>
-              </ul>
+        </div>
+      </div>
+      <div class="list-item" v-if="show">
+        <div class="titles">
+          <div>意向志愿</div>
+          <div class="log" @click="goUrl">打印</div>
+        </div>
+        <div class="commons" v-if="list1.length > 0 || list2.length > 0">
+          <div class="batch" v-if="list2.length > 0">本科一批</div>
+          <div class="batch-box" v-if="list2.length > 0">
+            <div class="batch-list">
+              <div>志愿</div>
+              <div style="flex: 1.2;" class="school-name">院校名称</div>
+              <div style="flex: 1.2;">专业</div>
+              <div>年份</div>
+              <div>最低分</div>
+              <div>最低位次</div>
+            </div>
+            <div class="batch-item" v-for="(v,k) in list2" :key="k">
+              <div class="batch-list">
+                <div>{{v.volunteer}}</div>
+                <div style="flex: 1.2;" @click="goUniversity(v.schoolName)">{{v.schoolName}}</div>
+                <div style="flex: 1.2;">{{v.specialtyName}}</div>
+                <div>{{v.year}}</div>
+                <div>{{v.score}}</div>
+                <div>{{v.precedence}}</div>
+              </div>
+              <div class="log" @click="del(v.id, k, 2)">删除</div>
+            </div>
+          </div>
+          <div class="batch" v-if="list1.length > 0">本科二批</div>
+          <div class="batch-box" v-if="list1.length > 0">
+            <div class="batch-list">
+              <div>志愿</div>
+              <div style="flex: 1.2;" class="school-name">院校名称</div>
+              <div style="flex: 1.2;">专业</div>
+              <div>年份</div>
+              <div>最低分</div>
+              <div>最低位次</div>
+            </div>
+            <div class="batch-item" v-for="(v,k) in list1" :key="k">
+              <div class="batch-list">
+                <div>{{v.volunteer}}</div>
+                <div style="flex: 1.2;" @click="goUniversity(v.schoolName)">{{v.schoolName}}</div>
+                <div style="flex: 1.2;">{{v.specialtyName}}</div>
+                <div>{{v.year}}</div>
+                <div>{{v.score}}</div>
+                <div>{{v.precedence}}</div>
+              </div>
+              <div class="log" @click="del(v.id, k, 1)">删除</div>
             </div>
           </div>
         </div>
-        <div class="list-item" v-if="show">
-          <div class="titles">
-            <div>意向志愿</div>
-            <a class="log" :href="href" v-if="isSupreme == 1">打印</a>
-          </div>
-          <div class="commons" v-if="list1.length > 0 || list2.length > 0">
-            <div class="batch" v-if="list2.length > 0">本科一批</div>
-            <div class="batch-box" v-if="list2.length > 0">
-              <div class="batch-list">
-                <div>志愿</div>
-                <div style="flex: 1.2;" class="school-name">院校名称</div>
-                <div style="flex: 1.2;">专业</div>
-                <div>年份</div>
-                <div>最低分</div>
-                <div>最低位次</div>
-              </div>
-              <div class="batch-item" v-for="(v,k) in list2" :key="k">
-                <div class="batch-list">
-                  <div>{{v.volunteer}}</div>
-                  <div style="flex: 1.2;" @click="goUniversity(v.schoolName)">{{v.schoolName}}</div>
-                  <div style="flex: 1.2;">{{v.specialtyName}}</div>
-                  <div>{{v.year}}</div>
-                  <div>{{v.score}}</div>
-                  <div>{{v.precedence}}</div>
-                </div>
-                <div class="log" @click="del(v.id, k, 2)">删除</div>
-              </div>
+        <div class="commons" v-if="list3.length > 0">
+          <div class="batch" v-if="list3.length > 0">本科批</div>
+          <div class="batch-box" v-if="list3.length > 0">
+            <div class="batch-list">
+              <div>志愿</div>
+              <div style="flex: 1.2;">院校名称</div>
+              <div style="flex: 1.2;">专业</div>
+              <div>年份</div>
+              <div>最低分</div>
+              <div>最低位次</div>
             </div>
-            <div class="batch" v-if="list1.length > 0">本科二批</div>
-            <div class="batch-box" v-if="list1.length > 0">
+            <div class="batch-item" v-for="(v,k) in list3" :key="k">
               <div class="batch-list">
-                <div>志愿</div>
-                <div style="flex: 1.2;" class="school-name">院校名称</div>
-                <div style="flex: 1.2;">专业</div>
-                <div>年份</div>
-                <div>最低分</div>
-                <div>最低位次</div>
+                <div>{{v.volunteer}}</div>
+                <div style="flex: 1.2;" class="school-name" @click="goUniversity(v.schoolName)">{{v.schoolName}}</div>
+                <div style="flex: 1.2;">{{v.specialtyName}}</div>
+                <div>{{v.year}}</div>
+                <div>{{v.score}}</div>
+                <div>{{v.precedence}}</div>
               </div>
-              <div class="batch-item" v-for="(v,k) in list1" :key="k">
-                <div class="batch-list">
-                  <div>{{v.volunteer}}</div>
-                  <div style="flex: 1.2;" @click="goUniversity(v.schoolName)">{{v.schoolName}}</div>
-                  <div style="flex: 1.2;">{{v.specialtyName}}</div>
-                  <div>{{v.year}}</div>
-                  <div>{{v.score}}</div>
-                  <div>{{v.precedence}}</div>
-                </div>
-                <div class="log" @click="del(v.id, k, 1)">删除</div>
-              </div>
-            </div>
-          </div>
-          <div class="commons" v-if="list3.length > 0">
-            <div class="batch" v-if="list3.length > 0">本科批</div>
-            <div class="batch-box" v-if="list3.length > 0">
-              <div class="batch-list">
-                <div>志愿</div>
-                <div style="flex: 1.2;">院校名称</div>
-                <div style="flex: 1.2;">专业</div>
-                <div>年份</div>
-                <div>最低分</div>
-                <div>最低位次</div>
-              </div>
-              <div class="batch-item" v-for="(v,k) in list3" :key="k">
-                <div class="batch-list">
-                  <div>{{v.volunteer}}</div>
-                  <div style="flex: 1.2;" class="school-name" @click="goUniversity(v.schoolName)">{{v.schoolName}}</div>
-                  <div style="flex: 1.2;">{{v.specialtyName}}</div>
-                  <div>{{v.year}}</div>
-                  <div>{{v.score}}</div>
-                  <div>{{v.precedence}}</div>
-                </div>
-                <div class="log" @click="del(v.id, k, 3)">删除</div>
-              </div>
+              <div class="log" @click="del(v.id, k, 3)">删除</div>
             </div>
           </div>
         </div>
       </div>
-    </keep-alive>
+    </div>
     <chat></chat>
     <div class="footer" v-if="!control">
       <footers></footers>
     </div>
     <footers v-if="control"></footers>
+    <div class="mark" v-if="show2">
+      <div class="modals">
+        <div class="modals-title">提示</div>
+        <img @click="close2" src="../../static/images/close.png" alt="">
+        <div class="forms">
+          <div class="warn" style="font-size: 15px;">您的下载次数还剩{{2-parseInt(num)}}次</div>
+          <div class="url" @click="goUpload">下载</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -177,8 +185,11 @@
         show: false,
         applyProv: 0,
         isSupreme: 0,
+        show2: false,
         totalPage: 1,
         pages: 1,
+        num: 0,
+        loading: null,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
@@ -189,6 +200,8 @@
       Chat
     },
     created() {
+      this.loading = this.$loading.get({})
+      this.num = sessionStorage.getItem("dlCount")
       this.applyProv = sessionStorage.getItem("applyProv")
       this.isSupreme = sessionStorage.getItem("isSupreme")
       this.href = 'https://www.jxqcjy.cn/jinxiuqiancheng/api/downloadCollection?uid=' + sessionStorage.getItem("uid")
@@ -220,6 +233,35 @@
       }
     },
     methods: {
+      goUrl() {
+        if(!this.userList.score) {
+          this.$Message.warning('您的成绩不能为空，请去编辑信息')
+          return
+        }
+        if (sessionStorage.getItem("isSupreme") == 1) {
+          window.location.href = this.href
+        } else {
+          if (this.num == 2) {
+            this.$Message.warning('您的下载次数已用完')
+            return
+          } else {
+            this.show2 = true
+          }
+        }
+      },
+      close2() {
+        this.show2 = false
+      },
+      goUpload() {
+        this.show2 = false
+        this.num++
+        sessionStorage.setItem("dlCount", this.num)
+        this.loading.showLoading(false, false, '')
+        window.location.href = this.href
+        setTimeout(() => {
+          this.loading.hideLoading()
+        },3000)
+      },
       changeNav(k) {
         this.itemIndex = k
       },
@@ -229,6 +271,7 @@
           uid: sessionStorage.getItem("uid")
         }
         Request.postRequest('jinxiuqiancheng/api/personalCenter', datas).then(res => {
+          console.log(res)
           if (res.data.result == 0) {
             this.userList = res.data
             self.getList()
@@ -246,7 +289,7 @@
         Request.postRequest('jinxiuqiancheng/api/schoolDetail', datas).then(res => {
           if (res.data.result == 0) {
             let list = res.data
-            this.$store.commit('getType',0)
+            this.$store.commit('getType', 0)
             this.$router.push({
               name: 'schoolDetail',
               params: {
@@ -374,7 +417,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       margin: 40px auto 24px;
@@ -419,7 +462,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       margin: 40px 0 24px;
@@ -593,7 +636,7 @@
     width: 100%;
     text-align: center;
   }
-  
+
   .school-name:hover {
     color: #FF0350;
     cursor: pointer;
@@ -611,5 +654,72 @@
     position: fixed;
     left: 0;
     bottom: 0;
+  }
+
+  .mark {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .modals {
+    width: 15%;
+    border-radius: 6px;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .modals-title {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background: rgb(250, 250, 250);
+  }
+
+  .modals>img {
+    width: 10px;
+    position: absolute;
+    top: 11px;
+    right: 12px;
+  }
+
+  .forms {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .warn {
+    width: 100%;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 18px;
+    font-family: '楷体';
+  }
+
+  .url {
+    padding: 4px 10px;
+    font-size: 14px;
+    color: #FFFFFF;
+    background: #ff0350;
+    margin-top: 16px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 </style>

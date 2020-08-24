@@ -30,6 +30,16 @@
       <footers></footers>
     </div>
     <footers v-if="control"></footers>
+    <div class="mark" v-if="show2">
+      <div class="modals">
+        <div class="modals-title">提示</div>
+        <img @click="close2" src="../../static/images/close.png" alt="">
+        <div class="forms">
+          <div class="warn" style="font-size: 15px;">暂不提供服务请联系专家一对一</div>
+          <div class="url" @click="goPerson">点击跳转</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -42,11 +52,12 @@
   export default {
     data() {
       return {
-        itemIndex: 2,
+        itemIndex: 3,
         control: true,
         ptIcon: '',
         ysIcon: '',
         tyIcon: '',
+        show2: false,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
@@ -130,13 +141,23 @@
         })
       },
       goArt() {
-        this.$router.push({
-          name: 'commonArt'
-        })
+        // this.$router.push({
+        //   name: 'commonArt'
+        // })
+        this.show2 = true
       },
       goSports() {
+        // this.$router.push({
+        //   name: 'commonSports'
+        // })
+        this.show2 = true
+      },
+      close2() {
+        this.show2 = false
+      },
+      goPerson() {
         this.$router.push({
-          name: 'commonSports'
+          name: 'expert'
         })
       }
     }
@@ -144,7 +165,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       margin: 16px auto 40px;
@@ -161,7 +182,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       margin: 16px 0 40px;
@@ -312,5 +333,64 @@
     position: fixed;
     left: 0;
     bottom: 0;
+  }
+
+  .mark {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .modals-title {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background: rgb(250, 250, 250);
+  }
+
+  .modals>img {
+    width: 10px;
+    position: absolute;
+    top: 11px;
+    right: 12px;
+  }
+
+  .forms {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .warn {
+    width: 100%;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 18px;
+    font-family: '楷体';
+  }
+
+  .url {
+    padding: 4px 10px;
+    font-size: 14px;
+    color: #FFFFFF;
+    background: #ff0350;
+    margin-top: 16px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 </style>

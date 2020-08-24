@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import Global from '../api/global.js'
   import Headers from '../components/top.vue'
   import Footers from '../components/bottom.vue'
   import Navs from '../components/navs.vue'
@@ -47,6 +48,7 @@
         repeat: '',
         control: true,
         itemIndex: 0,
+        time: null,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
@@ -57,6 +59,9 @@
     },
     mounted() {
       this.pos()
+    },
+    created() {
+      clearInterval(Global.time)
     },
     watch: {
       bodyHeight() {
@@ -135,17 +140,25 @@
 
         let self = this
         Request.postRequest('jinxiuqiancheng/api/userLogin', datas).then(res => {
+          console.log(res)
           if (res.data.result == 0) {
             sessionStorage.setItem("uid", res.data.uid)
+            Global.token = res.data.token
             sessionStorage.setItem("isBind", res.data.isBind)
             sessionStorage.setItem("isSupreme", res.data.isSupreme)
             sessionStorage.setItem("isReport", res.data.isReport)
             sessionStorage.setItem("applyProv", res.data.applyProv)
+            sessionStorage.setItem("testNum", res.data.testNum)
+            sessionStorage.setItem("isTest", res.data.isTest)
+            sessionStorage.setItem("dlCount", res.data.dlCount)
             if (res.data.isBind == 0) {
               self.$router.push('/call')
             } else {
               this.$Message.warning('登录成功')
               setTimeout(() => {
+                Global.time = setInterval(() => {
+                  self.isLogin()
+                }, 2000)
                 if (self.$route.query.redirect) { //如果存在参数
                   let redirect = self.$route.query.redirect
                   let params = self.$route.query.params
@@ -164,13 +177,37 @@
         }).catch(res => {
           console.log(res)
         })
+      },
+      isLogin() {
+        console.log('111')
+        let self = this
+        let datas = {
+          uid: sessionStorage.getItem("uid")
+        }
+        Request.postRequest1('jinxiuqiancheng/api/checkLogin', datas).then(res => {
+          if (res.data.result == 0) {
+            if (Global.token != res.data.token) {
+              this.$Message.warning('该账号已再别处登陆')
+              setTimeout(() => {
+                sessionStorage.clear()
+                self.$router.push({
+                  name: 'cardLogin'
+                })
+              }, 500)
+            }
+          } else {
+            this.$Message.warning(res.data.resultNote)
+          }
+        }).catch(res => {
+          console.log(res)
+        })
       }
     }
   }
 </script>
 
 <style>
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .wrapper {
       width: 100%;
       height: 100%;
@@ -183,7 +220,7 @@
     }
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     .wrapper {
       width: 100%;
       height: 100%;

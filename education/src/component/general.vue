@@ -318,7 +318,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .login {
       width: 1200px;
       overflow: hidden;
@@ -334,7 +334,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .login {
       width: 100%;
       overflow: hidden;

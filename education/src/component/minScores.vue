@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="pages">
-          <Page :total="totalPage" :page-size="10" @on-change="getList" />
+          <Page :total="totalPage" :page-size="10" :current="pages" @on-change="getList" />
         </div>
       </div>
       <div class="list-search" style="font-size: 14px;text-align: center;" v-if="!show1">没有搜索到符合条件的大学 !</div>
@@ -87,6 +87,7 @@
         list: [],
         totalPage: 0,
         applyProv: 1,
+        pages: 1,
         classesList: [{
             value: 0,
             label: '文科'
@@ -220,6 +221,7 @@
         this.getList(1)
       },
       getList(page) {
+        this.pages = page
         let datas = {
           uid: sessionStorage.getItem("uid"),
           type: this.$route.params.type,
@@ -252,7 +254,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       display: flex;
@@ -278,7 +280,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       display: flex;

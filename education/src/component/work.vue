@@ -3,16 +3,18 @@
     <headers></headers>
     <navs :itemIndex="itemIndex" @change="change" @changeNav="changeNav"></navs>
     <div class="list">
-      <div class="titles">
-        <div class="names">{{title}}</div>
-        <div class="publics">
-          <span style="margin-right: 24px;">发布时间：{{list.adtime}}</span>
-          <span>阅读数量：{{list.readNum}}</span>
+      <div class="list-title">专业与就业</div>
+      <div class="detail">
+        <div class="detail-list" v-for="(v,k) in list" :key="k" @click="goDetail(v.id)">
+          <div class="circle"></div>
+          <div class="time">{{v.adtime}}</div>
+          <div class="content">{{v.title}}</div>
+        </div>
+        <div class="page" v-if="show && list.length > 0">
+          <Page :total="totalPage" :page-size="10" @on-change="getList" />
         </div>
       </div>
-      <p class="content" v-html="list.content"></p>
     </div>
-    <chat></chat>
     <div class="footer" v-if="!control">
       <footers></footers>
     </div>
@@ -24,50 +26,55 @@
   import Headers from '../components/top.vue'
   import Footers from '../components/bottom.vue'
   import Navs from '../components/navs.vue'
-  import Chat from '../components/chat.vue'
   import Request from '../../utils/request.js'
   export default {
     data() {
       return {
-        itemIndex: 6,
+        itemIndex: 1,
         control: true,
-        title: '',
-        list: {},
+        produceList: {},
+        greatestList: {},
+        companyList: {},
+        totalPage: 0,
+        list: [],
+        show: false,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
     components: {
       Headers,
       Navs,
-      Footers,
-      Chat
+      Footers
     },
     created() {
-      this.init()
-    },
-    mounted() {
+      this.getList(1)
       this.pos()
     },
     watch: {
-      list() {
-        this.$nextTick(() => {
-          this.pos()
-        })
+      bodyHeight() {
+        this.pos()
       }
     },
     methods: {
-      init() {
+      getList(page) {
         let self = this
-        this.title = this.$route.params.name
         let datas = {
-          id: this.$route.params.id,
-          type: this.$route.params.type
+          nowPage: page
         }
-        Request.postRequest('jinxiuqiancheng/api/detail', datas).then(res => {
+        Request.postRequest('jinxiuqiancheng/api/employmentList', datas).then(res => {
+          console.log(res)
           if (res.data.result == 0) {
-            this.list = res.data
-            console.log(this.list)
-            this.list.content = self.unescape(this.list.content)
+            this.list = []
+            if (res.data.dataList !== 'undefined' && res.data.dataList.length > 0) {
+              this.totalPage = res.data.totalPage * 10
+              this.list = res.data.dataList
+              this.show = true
+            } else {
+              this.show = false
+            }
+            this.$nextTick(() => {
+              this.pos()
+            })
           } else {
             this.$Message.warning(res.data.resultNote)
           }
@@ -76,22 +83,28 @@
         })
       },
       unescape(html) {
-        html = html.replace(/&lt;/g, "<")
-                .replace(/&gt;/g, ">")
-                .replace(/&amp;/g, "&")
-                .replace(/&quot;/g, '"')
-                .replace(/&#39;/g, "'")
-                .replace(/&nbsp;/g, '')
         return html
+          .replace(html ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">")
+          .replace(/&quot;/g, "\"")
+          .replace(/&#39;/g, "\'")
+          .replace(/&nbsp;/g, "''");
       },
       pos() {
         let bodyHeight = document.documentElement.offsetHeight || document.body.offsetHeight //获取当前body高度
         let winHeight = document.documentElement.clientHeight || document.body.clientHeight //获取当前页面高度
-        if (bodyHeight + 166 - winHeight > 0) {
+        if (bodyHeight - winHeight > 0) {
           this.control = true
         } else {
           this.control = false
         }
+      },
+      goDetail(id) {
+        sessionStorage.setItem("detailId", id)
+        this.$router.push({
+          name: 'workDetail'
+        })
       },
       change(k) {
         if (k == 0) {
@@ -135,77 +148,93 @@
   @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
-      margin: 40px auto;
+      margin: 40px auto 24px;
       display: flex;
       flex-direction: column;
-      border: 2px solid #eee;
-      border-radius: 6px;
+      align-items: center;
     }
   }
 
   @media screen and (max-width: 1024px) {
     .list {
-      width: 95%;
-      margin: 40px auto;
+      width: 100%;
+      margin: 40px 0 24px;
       display: flex;
       flex-direction: column;
-      border: 2px solid #eee;
-      border-radius: 6px;
-    }
-
-    .names {
-      width: 50%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      align-items: center;
     }
   }
 
   .wrapper {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    background: #f6f6f6;
   }
 
-  .titles {
+  .list-title {
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 50px;
+    line-height: 50px;
     font-size: 15px;
     color: #333;
     font-weight: 600;
     position: relative;
-    padding: 0 36px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding-left: 18px;
     box-sizing: border-box;
   }
 
-  .titles::before {
+  .list-title:before {
     content: '';
     position: absolute;
-    top: 24px;
-    left: 24px;
-    width: 2px;
-    height: 12px;
-    background: rgb(255, 3, 80);
+    width: 4px;
+    height: 14px;
+    top: 19px;
+    left: 0;
+    background: #FF0350;
+    border-radius: 30px;
+  }
+
+  .detail {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
     border-radius: 4px;
+    background: #fff;
+    margin-top: 24px;
+  }
+
+  .detail-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #999;
+    margin-right: 24px;
+  }
+
+  .time {
+    color: #999;
+    margin-right: 24px;
   }
 
   .content {
-    font-size: 14px;
-    color: #666;
-    padding: 24px;
-    border-top: 1px solid #eee;
-    box-sizing: border-box;
-    line-height: 20px;
+    color: #333;
   }
 
-  .publics {
+  .page {
+    width: 100%;
     display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: #666;
+    justify-content: center;
+    margin-top: 20px;
   }
 
   .footer {

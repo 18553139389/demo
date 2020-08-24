@@ -29,7 +29,7 @@
             <div>{{v.level}}</div>
           </li>
           <li class="pages">
-            <Page :total="totalPage" :page-size="10" @on-change="getList" />
+            <Page :total="totalPage" :page-size="10" :current="pages" @on-change="getList" />
           </li>
         </ul>
       </div>
@@ -60,6 +60,7 @@
         control: true,
         totalPage: 1,
         list: [],
+        pages: 1,
         yearsList: [{
             value: 1,
             label: '2017'
@@ -141,6 +142,7 @@
         this.getList(1)
       },
       getList(page) {
+        this.pages = page
         let datas = {
           specialtyName: this.names,
           year: this.years,
@@ -171,7 +173,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       display: flex;
@@ -209,7 +211,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       display: flex;

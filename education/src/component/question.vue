@@ -34,6 +34,33 @@
             <Page :total="totalPage" :page-size="5" @on-change="getList" />
           </li>
         </ul>
+        <ul class="list-detail" v-if="questionIndex == 3">
+          <li class="detail" v-for="(v,k) in list" :key="k" @click="goDetail(v.id,v.title)">
+            <div class="icon"></div>
+            <div class="titles">{{v.title}}</div>
+          </li>
+          <li class="pages">
+            <Page :total="totalPage" :page-size="5" @on-change="getList" />
+          </li>
+        </ul>
+        <ul class="list-detail" v-if="questionIndex == 4">
+          <li class="detail" v-for="(v,k) in list" :key="k" @click="goDetail1(v.id)">
+            <div class="icon"></div>
+            <div class="titles">{{v.name}}</div>
+          </li>
+          <li class="pages">
+            <Page :total="totalPage" :page-size="8" @on-change="getListSuc" />
+          </li>
+        </ul>
+        <ul class="list-detail" v-if="questionIndex == 5">
+          <li class="detail" v-for="(v,k) in list" :key="k" @click="goDetail2(v.id)">
+            <div class="icon"></div>
+            <div class="titles">{{v.name}}</div>
+          </li>
+          <li class="pages">
+            <Page :total="totalPage" :page-size="8" @on-change="getListExpert" />
+          </li>
+        </ul>
       </div>
     </div>
     <chat></chat>
@@ -53,9 +80,9 @@
   export default {
     data() {
       return {
-        itemIndex: 6,
+        itemIndex: 7,
         questionIndex: 0,
-        questions: ['常见问题', '操作教程', '公告通知'],
+        questions: ['常见问题', '操作教程', '公告通知', '热点资讯', '成功案例', '专家团队'],
         control: true,
         totalPage: 0,
         list: [],
@@ -69,7 +96,21 @@
       Chat
     },
     created() {
-      this.init(0, 1)
+      if (this.$route.params.tab == 0) {
+        this.questionIndex = 2
+        this.init(2, 1)
+      } else if (this.$route.params.tab == 1) {
+        this.questionIndex = 3
+        this.init(3, 1)
+      } else if (this.$route.params.tab == 2) {
+        this.questionIndex = 4
+        this.getSuc(1)
+      } else if (this.$route.params.tab == 3) {
+        this.questionIndex = 5
+        this.getListExpert(1)
+      } else {
+        this.init(0, 1)
+      }
     },
     watch: {
       bodyHeight() {
@@ -87,7 +128,9 @@
           nowPage: page
         }
         Request.postRequest('jinxiuqiancheng/api/questionList', datas).then(res => {
+          console.log(res)
           if (res.data.result == 0) {
+            self.totalPage = res.data.totalPage * 5
             self.list = res.data.dataList
             self.$nextTick(() => {
               self.initBottom()
@@ -99,13 +142,67 @@
           console.log(res)
         })
       },
-      getList() {
+      getSuc(page) {
+        let self = this
+        let datas = {
+          nowPage: page
+        }
+        Request.postRequest('jinxiuqiancheng/api/successCaseList', datas).then(res => {
+          console.log(res)
+          if (res.data.result == 0) {
+            this.list = []
+            if (res.data.dataList !== 'undefined' && res.data.dataList.length > 0) {
+              this.totalPage = res.data.totalPage * 8
+              this.list = res.data.dataList
+              self.$nextTick(() => {
+                self.initBottom()
+              })
+            }
+          } else {
+            this.$Message.warning(res.data.resultNote)
+          }
+        }).catch(res => {
+          console.log(res)
+        })
+      },
+      getList(page) {
         this.init(this.questionIndex, page)
+      },
+      getListSuc(page) {
+        this.getSuc(page)
+      },
+      getListExpert(page) {
+        let self = this
+        let datas = {
+          nowPage: page
+        }
+        Request.postRequest('jinxiuqiancheng/api/expertList', datas).then(res => {
+          console.log(res)
+          if (res.data.result == 0) {
+            this.teamList = []
+            if (res.data.dataList !== 'undefined' && res.data.dataList.length > 0) {
+              this.totalPage = res.data.totalPage * 8
+              this.list = res.data.dataList
+              self.$nextTick(() => {
+                self.initBottom()
+              })
+            }
+          } else {
+            this.$Message.warning(res.data.resultNote)
+          }
+        }).catch(res => {
+          console.log(res)
+        })
       },
       initBottom() {
         let bodyHeight = document.documentElement.offsetHeight || document.body.offsetHeight //获取当前body高度
         let winHeight = document.documentElement.clientHeight || document.body.clientHeight //获取当前页面高度
-        if (bodyHeight + 166 - winHeight > 0) {
+        if(this.control) {
+          bodyHeight = bodyHeight -208
+        }
+        console.log(bodyHeight)
+        console.log(winHeight)
+        if (bodyHeight + 208 - winHeight > 0) {
           this.control = true
         } else {
           this.control = false
@@ -145,7 +242,7 @@
       pos() {
         let bodyHeight = document.documentElement.offsetHeight || document.body.offsetHeight //获取当前body高度
         let winHeight = document.documentElement.clientHeight || document.body.clientHeight //获取当前页面高度
-        if (bodyHeight - winHeight > 0) {
+        if (bodyHeight + 166 - winHeight > 0) {
           this.control = true
         } else {
           this.control = false
@@ -156,7 +253,13 @@
           return
         }
         this.questionIndex = k
-        this.init(k, 1)
+        if(k != 4 && k!= 5) {
+          this.init(k, 1)
+        } else if(k == 4) {
+          this.getSuc(1)
+        } else {
+          this.getListExpert(1)
+        }
       },
       goDetail(id, title) {
         this.$router.push({
@@ -167,13 +270,29 @@
             type: this.questionIndex
           }
         })
+      },
+      goDetail1(id) {
+        this.$router.push({
+          name: 'exampleDetail',
+          params: {
+            id: id
+          }
+        })
+      },
+      goDetail2(id) {
+        this.$router.push({
+          name: 'expertDetail',
+          params: {
+            id: id
+          }
+        })
       }
     }
   }
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       display: flex;
@@ -183,7 +302,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       display: flex;

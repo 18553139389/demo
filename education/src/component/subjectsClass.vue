@@ -52,8 +52,8 @@
             </div>
           </div>
         </div>
-        <div class="pages">
-          <Page :total="totalPage" :page-size="10" @on-change="getList" />
+        <div class="pages" v-if="list.length > 0">
+          <Page :total="totalPage" :page-size="10" :current="pages" @on-change="getList" />
         </div>
       </div>
       <div class="list-search" style="font-size: 14px;text-align: center;" v-if="!show">没有搜索到符合条件的大学 !</div>
@@ -86,6 +86,7 @@
         list: [],
         totalPage: 0,
         applyProv: 0,
+        pages: 1,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
@@ -170,6 +171,7 @@
       },
       getList(page) {
         let self = this
+        this.pages = page
         let datas = {
           uid: sessionStorage.getItem("uid"),
           combinationId: sessionStorage.getItem("team"),
@@ -231,7 +233,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       display: flex;
@@ -270,7 +272,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       display: flex;

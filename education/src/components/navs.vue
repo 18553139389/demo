@@ -1,7 +1,12 @@
 <template>
   <nav class="navs">
     <ul class="nav">
-      <li v-for="(v,k) in nav" :key="k" :class="itemIndex == k ? 'active' : ''" @click="change(k)" @mouseenter="changeNav(k)">{{v}}</li>
+      <li v-for="(v,k) in nav" :key="k" :class="itemIndex == k ? 'active' : ''" @click="change(k)" @mouseenter="changeNav(k)">
+        <span>{{v}}</span>
+        <div class="types" v-if="k==1 && itemIndex == 1 && show1" @mouseleave="hideNav(k)">
+          <div :class="tabIndex == index ? 'items active' : 'items'" v-for="(item,index) in tabs" :key="index" @click.stop="changeUrl(index)" @mouseenter.stop="changeTab(index)">{{item}}</div>
+        </div>
+      </li>
       <li class="user" @mouseenter="showTab" @mouseleave="hideTab" v-if="uid">
         <img :src="list.userIcon ? list.userIcon : '../../static/images/list.jpg'" alt="">
         <div class="name">{{list.name}}</div>
@@ -24,10 +29,13 @@
     props: ['itemIndex'],
     data() {
       return {
-        nav: ['首页', '智能填报', '大数据查询', '专家一对一', '智能选科', '关于我们', '常见问题'],
+        nav: ['首页', '职业规划', '智能填报', '大数据查询', '专家一对一', '智能选科', '关于我们', '更多信息'],
+        tabs: ['兴趣测试', '专业与就业'],
         uid: '',
         list: {},
-        show: false
+        show: false,
+        show1: false,
+        tabIndex: -1
       }
     },
     created() {
@@ -54,7 +62,36 @@
         })
       },
       change(k) {
-        this.$emit('change', k)
+        // this.$emit('change', k)
+        if (k == 0) {
+          this.$router.push({
+            name: 'index'
+          })
+        } else if (k == 2) {
+          this.$router.push({
+            name: 'zhineng'
+          })
+        } else if (k == 3) {
+          this.$router.push({
+            name: 'bigData'
+          })
+        } else if (k == 4) {
+          this.$router.push({
+            name: 'expert'
+          })
+        } else if (k == 5) {
+          this.$router.push({
+            name: 'xuanke'
+          })
+        } else if (k == 6) {
+          this.$router.push({
+            name: 'about'
+          })
+        } else if (k == 7) {
+          this.$router.push({
+            name: 'question'
+          })
+        }
       },
       goLogin() {
         sessionStorage.clear()
@@ -79,14 +116,38 @@
         })
       },
       changeNav(k) {
+        this.show1 = true
         this.$emit('changeNav',k)
+      },
+      hideNav() {
+        this.show1 = false
+      },
+      changeTab(k) {
+        this.tabIndex = k
+      },
+      changeUrl(k) {
+        if(k == 0) {
+          if(sessionStorage.getItem("isTest") == 0) {
+            this.$router.push({
+              name: 'fun'
+            })
+          } else {
+            this.$router.push({
+              name: 'result'
+            })
+          }
+        } else {
+          this.$router.push({
+            name: 'work'
+          })
+        }
       }
     }
   }
 </script>
 
 <style scoped>
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .navs {
       width: 100%;
       height: 50px;
@@ -102,7 +163,7 @@
     }
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     .navs {
       width: 100%;
       height: 50px;
@@ -125,15 +186,36 @@
     align-items: center;
     font-size: 14px;
     color: #FFFFFF;
+    position: relative;
   }
 
   .nav>li:hover {
     cursor: pointer;
   }
 
+  .types {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background: rgb(255, 3, 80);
+    z-index: 99;
+  }
+
+  .items {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+  }
+
   .user {
     position: relative;
-    z-index: 9999;
+    z-index: 199;
   }
 
   .name {

@@ -62,7 +62,7 @@
   export default {
     data() {
       return {
-        itemIndex: 1,
+        itemIndex: 2,
         show: 0,
         show1: 0,
         show2: false,
@@ -138,17 +138,21 @@
         }
       },
       goCommon() {
-        if (sessionStorage.getItem("isReport") == 0) {
-          this.$router.push({
-            name: 'general',
-            params: {
-              type: 1
-            }
-          })
+        if(sessionStorage.getItem("applyProv") == 1) {
+          this.show2 = true
         } else {
-          this.$router.push({
-            name: 'personMessage'
-          })
+          if (sessionStorage.getItem("isReport") == 0) {
+            this.$router.push({
+              name: 'general',
+              params: {
+                type: 1
+              }
+            })
+          } else {
+            this.$router.push({
+              name: 'personMessage'
+            })
+          }
         }
       },
       close() {
@@ -182,7 +186,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       margin: 16px auto 40px;
@@ -207,7 +211,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       margin: 16px 0 40px;

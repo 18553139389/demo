@@ -19,9 +19,14 @@
         <div class="buy" v-else @click="buy">购买锦绣前程卡</div>
       </div>
       <div class="notice-right">
-        <div class="public">公告通知</div>
+        <div class="public">
+          <div class="public-all">
+            <div :class="itemsIndex == k ? 'public-item itemActive' : 'public-item'" v-for="(v,k) in items" :key="k" @mouseenter="changeItems(k)">{{v}}</div>
+          </div>
+          <div @click="goMore">更多 ></div>
+        </div>
         <ul class="notice-list">
-          <li v-for="(v,k) in gonggaoList" :key="k" @click="goDetail(v.id,v.title)">
+          <li v-for="(v,k) in gonggaoList" :key="k" @click="goDetail(v.id,v.title)" v-if="k<=9">
             <div class="notice-text">{{v.title}}</div>
           </li>
         </ul>
@@ -29,7 +34,10 @@
     </div>
     <div class="example">
       <div class="example-list">
-        <div class="common">成功案例</div>
+        <div class="common-all">
+          <div class="common">成功案例</div>
+          <div class="common-more" @click="goSuc">更多 ></div>
+        </div>
         <div class="example-item">
           <div class="notice-left" style="width: 22%;" v-for="(v,k) in successCaseList" :key="k" @click="goDetail1(v.id)">
             <div class="notice-cards">{{v.name}}</div>
@@ -40,7 +48,10 @@
     </div>
     <div class="example" style="background: #FFFFFF;">
       <div class="example-list">
-        <div class="common">专家团队</div>
+        <div class="common-all">
+          <div class="common">专家团队</div>
+          <div class="common-more" @click="goExperts">更多 ></div>
+        </div>
         <div class="example-item">
           <div class="notice-left" style="width: 22%;" v-for="(m,n) in expertList" :key="n" @click="goExpert(m.id)">
             <div class="notice-cards">{{m.name}}</div>
@@ -58,6 +69,7 @@
 </template>
 
 <script>
+  import Global from '../api/global.js'
   import Headers from '../components/top.vue'
   import Footers from '../components/bottom.vue'
   import Navs from '../components/navs.vue'
@@ -74,8 +86,12 @@
         endTime: '',
         bannerList: [],
         gonggaoList: [],
+        gonggaoList1: [],
+        gonggaoList2: [],
         successCaseList: [],
         expertList: [],
+        items: ['公告通知','热点资讯'],
+        itemsIndex: 0,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
@@ -88,6 +104,7 @@
     created() {
       this.isSupreme = sessionStorage.getItem("isSupreme")
       this.init()
+      this.getMessage()
     },
     watch: {
       bodyHeight() {
@@ -95,6 +112,30 @@
       }
     },
     methods: {
+      changeItems(k) {
+        this.itemsIndex = k
+        if(k == 0) {
+          this.gonggaoList = this.gonggaoList1
+        } else {
+          this.gonggaoList = this.gonggaoList2
+        }
+      },
+      getMessage() {
+        let datas = {
+          type: 3,
+          nowPage: 1
+        }
+        Request.postRequest('jinxiuqiancheng/api/questionList', datas).then(res => {
+          console.log(res)
+          if (res.data.result == 0) {
+            this.gonggaoList2 = res.data.dataList
+          } else {
+            this.$Message.warning(res.data.resultNote)
+          }
+        }).catch(res => {
+          console.log(res)
+        })
+      },
       init() {
         let datas = {
           uid: sessionStorage.getItem("uid")
@@ -106,6 +147,7 @@
             this.endTime = res.data.endTime
             this.bannerList = res.data.bannerList
             this.gonggaoList = res.data.gonggaoList
+            this.gonggaoList1 = res.data.gonggaoList
             if (res.data.successCaseList.length > 8) {
               for (let i = 0; i < 8; i++) {
                 this.successCaseList.push(res.data.successCaseList[i])
@@ -135,6 +177,14 @@
           }
         }).catch(res => {
           console.log(res)
+        })
+      },
+      goMore() {
+        this.$router.push({
+          name: 'question',
+          params: {
+            tab: this.itemsIndex
+          }
         })
       },
       goUrl(type) {
@@ -182,27 +232,27 @@
           this.$router.push({
             name: 'index'
           })
-        } else if (k == 1) {
+        } else if (k == 2) {
           this.$router.push({
             name: 'zhineng'
           })
-        } else if (k == 2) {
+        } else if (k == 3) {
           this.$router.push({
             name: 'bigData'
           })
-        } else if (k == 3) {
+        } else if (k == 4) {
           this.$router.push({
             name: 'expert'
           })
-        } else if (k == 4) {
+        } else if (k == 5) {
           this.$router.push({
             name: 'xuanke'
           })
-        } else if (k == 5) {
+        } else if (k == 6) {
           this.$router.push({
             name: 'about'
           })
-        } else if (k == 6) {
+        } else if (k == 7) {
           this.$router.push({
             name: 'question'
           })
@@ -219,7 +269,7 @@
           params: {
             id: id,
             name: title,
-            type: 2
+            type: this.itemsIndex == 0 ? 2 : 3
           }
         })
       },
@@ -241,13 +291,29 @@
       },
       changeNav(k) {
         this.itemIndex = k
+      },
+      goSuc() {
+        this.$router.push({
+          name: 'question',
+          params: {
+            tab: 2
+          }
+        })
+      },
+      goExperts() {
+        this.$router.push({
+          name: 'question',
+          params: {
+            tab: 3
+          }
+        })
       }
     }
   }
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .notice {
       width: 1200px;
       margin: 0 auto;
@@ -283,7 +349,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .notice {
       width: 100%;
       padding: 50px 20px;
@@ -436,13 +502,32 @@
     font-size: 15px;
     color: #FFFFFF;
     position: relative;
-    padding-left: 24px;
+    padding: 0 24px 0 0;
     box-sizing: border-box;
     font-weight: 600;
     background: #FF0350;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
   }
 
-  .public::before {
+  .public-all {
+    display: flex;
+  }
+
+  .public-item {
+    padding: 0 24px;
+    background: #FF0350;
+    color: #fff;
+  }
+
+  .itemActive {
+    background: #fff;
+    color: #FF0350;
+  }
+
+  /* .public::before {
     content: '';
     position: absolute;
     top: 10px;
@@ -451,7 +536,7 @@
     height: 12px;
     background: #ffffff;
     border-radius: 4px;
-  }
+  } */
 
   .notice-list {
     width: 100%;
@@ -492,6 +577,20 @@
     width: 100%;
     padding: 20px 0;
     background: rgb(250, 250, 250);
+  }
+
+  .common-all {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .common-more {
+    font-size: 15px;
+    color: #333;
+    margin-right: 68px;
+    cursor: pointer;
   }
 
   .common {

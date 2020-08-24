@@ -3,16 +3,16 @@
     <headers></headers>
     <navs :itemIndex="itemIndex" @change="change" @changeNav="changeNav"></navs>
     <div class="list">
-      <div class="titles">
-        <div class="names">{{title}}</div>
-        <div class="publics">
-          <span style="margin-right: 24px;">发布时间：{{list.adtime}}</span>
-          <span>阅读数量：{{list.readNum}}</span>
+      <div class="list-title">专业与就业</div>
+      <div class="detail">
+        <div class="detail-list">
+          <div class="content" style="color: #333;margin-right: 24px;">{{list.title}}</div>
+          <div class="time">发布时间：{{list.adtime}}</div>
+          <div class="content">阅读数量：{{list.readNum}}</div>
         </div>
+        <p class="contents" v-html="list.content"></p>
       </div>
-      <p class="content" v-html="list.content"></p>
     </div>
-    <chat></chat>
     <div class="footer" v-if="!control">
       <footers></footers>
     </div>
@@ -24,14 +24,12 @@
   import Headers from '../components/top.vue'
   import Footers from '../components/bottom.vue'
   import Navs from '../components/navs.vue'
-  import Chat from '../components/chat.vue'
   import Request from '../../utils/request.js'
   export default {
     data() {
       return {
-        itemIndex: 6,
+        itemIndex: 5,
         control: true,
-        title: '',
         list: {},
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
@@ -39,55 +37,53 @@
     components: {
       Headers,
       Navs,
-      Footers,
-      Chat
+      Footers
     },
     created() {
-      this.init()
-    },
-    mounted() {
+      let id = sessionStorage.getItem("detailId")
+      this.init(id)
       this.pos()
     },
     watch: {
-      list() {
-        this.$nextTick(() => {
-          this.pos()
-        })
+      bodyHeight() {
+        this.pos()
       }
     },
     methods: {
-      init() {
+      init(id) {
         let self = this
-        this.title = this.$route.params.name
         let datas = {
-          id: this.$route.params.id,
-          type: this.$route.params.type
+          id
         }
-        Request.postRequest('jinxiuqiancheng/api/detail', datas).then(res => {
+        Request.postRequest('jinxiuqiancheng/api/employmentDetail', datas).then(res => {
+          console.log(res)
           if (res.data.result == 0) {
-            this.list = res.data
-            console.log(this.list)
+            self.list = res.data
             this.list.content = self.unescape(this.list.content)
           } else {
             this.$Message.warning(res.data.resultNote)
           }
+          this.$nextTick(() => {
+            this.pos()
+          })
         }).catch(res => {
           console.log(res)
         })
       },
       unescape(html) {
-        html = html.replace(/&lt;/g, "<")
-                .replace(/&gt;/g, ">")
-                .replace(/&amp;/g, "&")
-                .replace(/&quot;/g, '"')
-                .replace(/&#39;/g, "'")
-                .replace(/&nbsp;/g, '')
         return html
+          .replace(html ? /&(?!#?\w+;)/g : /""/g, '&amp;')
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">")
+          .replace(/&quot;/g, "\"")
+          .replace(/&#39;/g, "\'")
+          .replace(/nbsp;/g, "")
+          .replace(/&amp;/g, "");
       },
       pos() {
         let bodyHeight = document.documentElement.offsetHeight || document.body.offsetHeight //获取当前body高度
         let winHeight = document.documentElement.clientHeight || document.body.clientHeight //获取当前页面高度
-        if (bodyHeight + 166 - winHeight > 0) {
+        if (bodyHeight - winHeight > 0) {
           this.control = true
         } else {
           this.control = false
@@ -135,77 +131,92 @@
   @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
-      margin: 40px auto;
+      margin: 40px auto 24px;
       display: flex;
       flex-direction: column;
-      border: 2px solid #eee;
-      border-radius: 6px;
+      align-items: center;
     }
   }
 
   @media screen and (max-width: 1024px) {
     .list {
-      width: 95%;
-      margin: 40px auto;
+      width: 100%;
+      margin: 40px 0 24px;
       display: flex;
       flex-direction: column;
-      border: 2px solid #eee;
-      border-radius: 6px;
-    }
-
-    .names {
-      width: 50%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      align-items: center;
     }
   }
 
   .wrapper {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    background: #f6f6f6;
   }
 
-  .titles {
+  .list-title {
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 50px;
+    line-height: 50px;
     font-size: 15px;
     color: #333;
     font-weight: 600;
     position: relative;
-    padding: 0 36px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding-left: 18px;
     box-sizing: border-box;
   }
 
-  .titles::before {
+  .list-title:before {
     content: '';
     position: absolute;
-    top: 24px;
-    left: 24px;
-    width: 2px;
-    height: 12px;
-    background: rgb(255, 3, 80);
+    width: 4px;
+    height: 14px;
+    top: 19px;
+    left: 0;
+    background: #FF0350;
+    border-radius: 30px;
+  }
+
+  .detail {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
     border-radius: 4px;
+    background: #fff;
+    margin-top: 24px;
+  }
+
+  .detail-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .time {
+    color: #999;
+    margin-right: 24px;
   }
 
   .content {
-    font-size: 14px;
-    color: #666;
-    padding: 24px;
-    border-top: 1px solid #eee;
-    box-sizing: border-box;
-    line-height: 20px;
+    color: #999;
   }
 
-  .publics {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
+  .contents {
+    width: 100%;
+    padding: 20px 0;
+    font-size: 14px;
     color: #666;
+  }
+
+  .page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 
   .footer {

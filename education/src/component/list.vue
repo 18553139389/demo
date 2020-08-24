@@ -1,37 +1,26 @@
 <template>
-  <div class="wrapper">
+  <div class="wrappers" ref="box">
     <headers></headers>
     <navs :itemIndex="itemIndex" @change="change" @changeNav="changeNav"></navs>
     <div class="list">
       <div class="list-search">
         <div class="list-item">
-          <!-- <div class="item">
-            <div class="user-msg">专业名称：</div>
-            <input type="text" v-model="zhuanye" placeholder="请输入专业名称">
-          </div> -->
-          <span class="user-msg" style="width: 12.5%;font-size: 14px;">填写专业：</span>
-          <Input placeholder="例: 英语 , 计算机 , 医学" v-model="zhuanye" class="choices" style="width: 50%;" />
-          <!-- <Select v-model="choice" multiple :max-tag-count="1" class="choices" style="width: 41%;">
-            <Option v-for="item in classList" :value="item.name" :key="item.id">{{ item.name }}</Option>
-          </Select> -->
-        </div>
-        <div class="list-item">
           <div class="item">
             <span class="user-msg">文理科：</span>
-            <Select v-model="scores" class="choices">
-              <Option v-for="(item,index) in scoresList" :value="item.value" :key="index">{{ item.label }}</Option>
-            </Select>
-          </div>
-          <div class="item" v-if="applyProv == 1">
-            <span class="user-msg">查询批次：</span>
             <Select v-model="classes" class="choices">
               <Option v-for="(item,index) in classesList" :value="item.value" :key="index">{{ item.label }}</Option>
             </Select>
           </div>
+          <div class="item" v-if="applyProv == 1">
+            <span class="user-msg">查询批次：</span>
+            <Select v-model="types" class="choices">
+              <Option v-for="(item,index) in typesList" :value="item.value" :key="index">{{ item.label }}</Option>
+            </Select>
+          </div>
           <div class="item" v-if="applyProv == 0">
             <span class="user-msg">查询批次：</span>
-            <Select v-model="classes" class="choices">
-              <Option v-for="(item,index) in classesList1" :value="item.value" :key="index">{{ item.label }}</Option>
+            <Select v-model="types" class="choices">
+              <Option v-for="(item,index) in typesList1" :value="item.value" :key="index">{{ item.label }}</Option>
             </Select>
           </div>
         </div>
@@ -44,60 +33,55 @@
           </div>
           <div class="item">
             <div class="user-msg">考生位次：</div>
-            <input type="text" class="choices" v-model="names" placeholder="请输入位次" style="width: 160px;">
-            <div class="btns-item" @click="goLook" style="margin-left: 28px;">查询位次</div>
+            <input type="text" v-model="names" style="width: 160px;" placeholder="请输入位次" />
+            <div class="btnSub-item" style="margin-left: 30px;" @click="goLook">查询位次</div>
           </div>
         </div>
         <div class="btnSub">
-          <div class="btns-item" @click="goSchool">搜索</div>
+          <div class="btnSub-item" @click="goSchool">搜索</div>
         </div>
       </div>
       <div class="list-search" v-if="show1 && list.length > 0">
-        <div class="schools-title" style="margin-bottom: 16px;">
+        <div class="schools-title" style="margin-bottom: 16px;padding-left: 74px;">
           <span>大学名称</span>
           <span>大学层次</span>
-          <span>专业名称</span>
           <span>最低分</span>
           <span>最低位次</span>
           <span>录取批次</span>
           <span>所在省份</span>
-          <span v-if="applyProv == 1" style="flex: 0.8;">选科要求</span>
-          <span v-if="applyProv == 1" style="flex: 0.8;">门数要求</span>
           <span>招生计划</span>
-          <span>收藏</span>
         </div>
         <div class="schools" v-for="(v,k) in list" :key="k">
-          <!-- <img :src="v.schoolLogo" alt=""> -->
+          <img :src="v.schoolLogo" alt="">
           <div class="schools-list">
-            <div class="schools-title" style="margin-top: 10px;">
+            <div class="schools-title">
               <span class="school-name" @click="goUniversity(v.schoolName)">{{v.schoolName}}</span>
               <span>{{v.level}}</span>
-              <span>{{v.specialtyName}}</span>
               <span>{{v.score}}</span>
               <span>{{v.precedence}}</span>
               <span>{{v.batch}}</span>
               <span>{{v.province}}</span>
-              <span v-if="applyProv == 1" style="flex: 0.8;">{{v.subjects}}</span>
-              <span v-if="applyProv == 1 && v.claim == 0" style="flex: 0.8;">不限科目</span>
-              <span v-if="applyProv == 1 && v.claim == 1" style="flex: 0.8;">一选一</span>
-              <span v-if="applyProv == 1 && v.claim == 2" style="flex: 0.8;">二选一</span>
-              <span v-if="applyProv == 1 && v.claim == 3" style="flex: 0.8;">二选二</span>
-              <span v-if="applyProv == 1 && v.claim == 4" style="flex: 0.8;">三选一</span>
-              <span v-if="applyProv == 1 && v.claim == 5" style="flex: 0.8;">三选二</span>
-              <span v-if="applyProv == 1 && v.claim == 6" style="flex: 0.8;">三选三</span>
-              <span>{{v.planNum}}</span>
-              <span>
-                <img class="store" :src="v.store == 1 ? '../../static/images/dashujuchaxan_hongxin.png' : '../../static/images/heart.png'"
-                  alt="" @click.stop="goStore(k,v.id)">
-              </span>
+              <span style="color: #1890FF;" @click="goSee(v.schoolId,v.schoolName)">查看</span>
             </div>
           </div>
         </div>
         <div class="pages">
-          <Page :total="totalPage" :page-size="10" :current="pages" @on-change="getList" />
+          <Page :total="totalPage" :page-size="10" @on-change="getList" />
         </div>
       </div>
       <div class="list-search" style="font-size: 14px;text-align: center;" v-if="!show1">没有搜索到符合条件的大学 !</div>
+    </div>
+    <div class="tool" v-if="see">
+      <div class="tables">
+        <div class="close" @click="goClose">X</div>
+        <div class="tool-title">{{schoolName}}2020招生计划</div>
+        <i-table :content="self" :data="tableData1" :columns="tableColumns1" stripe></i-table>
+        <div style="margin: 10px;overflow: hidden">
+          <div style="float: right;">
+            <Page :total="totalPages" :current="1" @on-change="changePage"></Page>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer" v-if="!control">
       <footers></footers>
@@ -131,27 +115,35 @@
   import Chat from '../components/chat.vue'
   import Request from '../../utils/request.js'
   export default {
-    beforeRouteLeave(to, from, next) {
-      from.meta.keepAlive = false
-      next()
-    },
     data() {
       return {
         show: false,
         itemIndex: 2,
-        classes: 0,
-        scores: 1,
-        score: '',
-        rank: '',
+        classes: 1,
+        types: 0,
         years: '2019',
         names: '',
-        zhuanye: '',
         control: true,
+        score: '',
+        rank: '',
+        list: [],
         totalPage: 0,
         show1: true,
-        list: [],
-        pages: 1,
+        see: false,
         classesList: [{
+            value: 0,
+            label: '文科'
+          },
+          {
+            value: 1,
+            label: '理科'
+          },
+          {
+            value: 2,
+            label: '不限'
+          }
+        ],
+        typesList: [{
             value: 0,
             label: '提前批'
           },
@@ -168,7 +160,7 @@
             label: '不限批次'
           }
         ],
-        classesList1: [{
+        typesList1: [{
             value: 0,
             label: '提前批'
           },
@@ -189,19 +181,6 @@
             label: '不限批次'
           }
         ],
-        scoresList: [{
-            value: 0,
-            label: '文科'
-          },
-          {
-            value: 1,
-            label: '理科'
-          },
-          {
-            value: 2,
-            label: '不限'
-          }
-        ],
         yearsList: [{
             value: 1,
             label: '2017'
@@ -215,10 +194,59 @@
             label: '2019'
           }
         ],
-        applyProv: 0,
-        choice: [],
-        classList: [],
-        bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
+        applyProv: 1,
+        schoolId: '',
+        schoolName: '',
+        self: this,
+        totalPages: 0,
+        tableData1: [],
+        tableColumns1: [{
+            title: '专业名称',
+            key: 'specialtyName'
+          },
+          {
+            title: '批次',
+            key: 'batch'
+          },
+          {
+            title: '文理',
+            key: 'wlType'
+          },
+          {
+            title: '计划数',
+            key: 'count'
+          },
+          {
+            title: '科目要求',
+            key: 'subjects'
+          },
+          {
+            title: '门数要求',
+            key: 'claim'
+          }
+        ]
+      }
+    },
+    beforeRouteLeave(to, from, next) {
+      from.meta.keepAlive = false
+      next()
+    },
+    created() {
+      this.applyProv = sessionStorage.getItem("applyProv")
+      if (this.applyProv == 0) {
+        this.types = 1
+      } else {
+        this.types = 1
+      }
+    },
+    mounted() {
+      this.pos()
+    },
+    watch: {
+      list() {
+        this.$nextTick(() => {
+          this.pos()
+        })
       }
     },
     components: {
@@ -227,48 +255,66 @@
       Footers,
       Chat
     },
-    created() {
-      this.applyProv = sessionStorage.getItem("applyProv")
-      if (this.applyProv == 0) {
-        this.classes = 1
-      } else {
-        this.classes = 1
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        this.pos()
-      })
-    },
-    watch: {
-      // zhuanye(newVal, oldVal) {
-      //   let self = this
-      //   if(newVal.indexOf('，') > -1) {
-      //     newVal = newVal.split('，').join(',')
-      //   }
-      //   let datas = {
-      //     specialtyName: newVal
-      //   }
-      //   Request.postRequest('jinxiuqiancheng/api/searchSpecialtyList', datas).then(res => {
-      //     if (res.data.result == 0) {
-      //       if (res.data.dataList !== 'undefined' && res.data.dataList.length > 0) {
-      //         self.classList = res.data.dataList
-      //       }
-      //     } else {
-      //       self.classList = []
-      //       this.$Message.warning(res.data.resultNote)
-      //     }
-      //   }).catch(res => {
-      //     console.log(res)
-      //   })
-      // },
-      list() {
-        this.$nextTick(() => {
-          this.pos()
-        })
-      }
-    },
     methods: {
+      goSee(id, name) {
+        this.schoolId = id
+        this.schoolName = name
+        this.see = true
+        this.mockTableData1()
+      },
+      goClose() {
+        this.see = false
+      },
+      changePage(page) {
+        console.log(page)
+        this.tableData1 = this.mockTableData1(page)
+      },
+      mockTableData1(page) {
+        let datas = {
+          uid: sessionStorage.getItem("uid"),
+          schoolId: this.schoolId,
+          nowPage: page
+        }
+        Request.postRequest('jinxiuqiancheng/api/enrollmentPlanList', datas).then(res => {
+          console.log(res)
+          if (res.data.result == 0) {
+            this.tableData1 = res.data.dataList
+            this.tableData1.forEach((item, index) => {
+              if (item.wlType == 0) {
+                item.wlType = '文科'
+              } else if (item.wlType == 1) {
+                item.wlType = '理科'
+              } else {
+                item.wlType = '不限'
+              }
+
+              if (item.claim == 0) {
+                item.claim = '不限科目要求'
+              } else if (item.claim == 1) {
+                item.claim = '1门科目考生必须选考方可报考'
+              } else if (item.claim == 2) {
+                item.claim = '2门科目考生选考其中一门即可报考'
+              } else if (item.claim == 3) {
+                item.claim = '2门科目考生均需选考方可报考'
+              } else if (item.claim == 4) {
+                item.claim = '3门科目考生选考其中一门即可报考'
+              } else if (item.claim == 5) {
+                item.claim = '3门科目考生选考其中二门即可报考'
+              } else if (item.claim == 6) {
+                item.claim = '3门科目考生均需选考方可报考'
+              }
+            })
+            this.totalPage = res.data.totalPage * 10
+          } else {
+            this.$Message.warning(res.data.resultNote)
+          }
+        }).catch(res => {
+          console.log(res)
+        })
+      },
+      changeNav(k) {
+        this.itemIndex = k
+      },
       change(k) {
         if (k == 0) {
           this.$router.push({
@@ -309,17 +355,6 @@
           this.control = false
         }
       },
-      goDetail() {
-        this.$router.push({
-          name: 'schoolDetail'
-        })
-      },
-      goLook() {
-        this.show = true
-      },
-      close() {
-        this.show = false
-      },
       goSearch() {
         if (this.score == '') {
           this.$Message.warning('成绩不能为空')
@@ -328,7 +363,7 @@
 
         let datas = {
           uid: sessionStorage.getItem("uid"),
-          wlType: this.scores,
+          wlType: this.classes,
           score: this.score
         }
 
@@ -349,6 +384,17 @@
           console.log(res)
         })
       },
+      goDetail() {
+        this.$router.push({
+          name: 'schoolDetail'
+        })
+      },
+      goLook() {
+        this.show = true
+      },
+      close() {
+        this.show = false
+      },
       goSchool() {
         if (this.names == '') {
           this.$Message.warning('位次不能为空')
@@ -359,21 +405,16 @@
         this.getList(1)
       },
       getList(page) {
-        this.pages = page
-        if (this.zhuanye.indexOf('，') > -1) {
-          this.zhuanye = this.zhuanye.split('，').join(',')
-        }
         let datas = {
           uid: sessionStorage.getItem("uid"),
-          wlType: this.scores,
-          specialtyName: this.zhuanye,
-          pcType: this.classes,
+          wlType: this.classes,
+          pcType: this.types,
           year: this.years,
           precedence: this.names,
           nowPage: page
         }
 
-        Request.postRequest('jinxiuqiancheng/api/specialtyPrecedenceList', datas).then(res => {
+        Request.postRequest('jinxiuqiancheng/api/schoolPrecedenceList', datas).then(res => {
           console.log(res)
           if (res.data.result == 0) {
             this.list = []
@@ -392,48 +433,18 @@
         })
       },
       goUniversity(val) {
-        console.log(val)
         let datas = {
           schoolName: val
         }
         Request.postRequest('jinxiuqiancheng/api/schoolDetail', datas).then(res => {
-          console.log(res)
           if (res.data.result == 0) {
             let list = res.data
-            this.$store.commit('getType', 0)
             this.$router.push({
               name: 'schoolDetail',
               params: {
                 list: JSON.stringify(list)
               }
             })
-          } else {
-            this.$Message.warning(res.data.resultNote)
-          }
-        }).catch(res => {
-          console.log(res)
-        })
-      },
-      changeNav(k) {
-        this.itemIndex = k
-      },
-      goStore(k, id) {
-        if (this.list[k].store == 0) {
-          this.list[k].store = 1
-        } else {
-          this.list[k].store = 0
-        }
-        let datas = {
-          uid: sessionStorage.getItem("uid"),
-          specialtyPrecedenceId: id
-        }
-        Request.postRequest('jinxiuqiancheng/api/collectionOrCancel', datas).then(res => {
-          if (res.data.result == 0) {
-            if (this.list[k].store == 1) {
-              this.$Message.success('收藏成功')
-            } else {
-              this.$Message.warning('取消收藏')
-            }
           } else {
             this.$Message.warning(res.data.resultNote)
           }
@@ -454,8 +465,13 @@
       margin: 40px auto;
     }
 
+    .choices {
+      width: 260px;
+    }
+
     .list-search {
       width: 80%;
+      height: auto;
       margin: 0 auto;
       border: 1px solid #eee;
       border-radius: 6px;
@@ -465,10 +481,6 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 40px;
-    }
-
-    .choices {
-      width: 260px;
     }
   }
 
@@ -480,8 +492,13 @@
       margin: 40px 0;
     }
 
+    .choices {
+      width: 160px;
+    }
+
     .list-search {
       width: 90%;
+      height: auto;
       margin: 0 auto;
       border: 1px solid #eee;
       border-radius: 6px;
@@ -492,15 +509,10 @@
       flex-direction: column;
       margin-bottom: 40px;
     }
-
-    .choices {
-      width: 160px;
-    }
   }
 
-  .wrapper {
+  .wrappers {
     width: 100%;
-    height: 100%;
   }
 
   .user-msg {
@@ -508,10 +520,57 @@
     width: 25%;
   }
 
+  .tool {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tool-title {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #E2E1E1;
+    font-size: 16px;
+    color: #333;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  .tables {
+    width: 70%;
+    padding: 24px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: #fff;
+    position: relative;
+  }
+
   .list-item {
     width: 100%;
     display: flex;
-    align-items: center;
     margin-bottom: 30px;
   }
 
@@ -541,15 +600,15 @@
     align-items: center;
   }
 
-  .btns-item {
+  .btnSub-item {
     padding: 6px 8px;
     font-size: 14px;
     color: #FFFFFF;
-    background: rgb(255, 3, 80);
+    background: rgb(190, 1, 59);
     border-radius: 4px;
   }
 
-  .btns-item:hover {
+  .btnSub-item:hover {
     cursor: pointer;
   }
 
@@ -557,19 +616,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    cursor: pointer;
+    margin-bottom: 12px;
   }
 
   .schools>img {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
   }
 
   .schools-list {
     flex: 1;
-    /* padding-left: 24px; */
+    padding-left: 24px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -656,11 +716,6 @@
     background: rgb(250, 250, 250);
     padding: 4px 10px;
     box-sizing: border-box;
-  }
-
-  .store {
-    width: 24px;
-    cursor: pointer;
   }
 
   .pages {

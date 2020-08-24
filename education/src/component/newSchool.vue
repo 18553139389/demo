@@ -29,24 +29,24 @@
           <li class="hot-list" style="font-weight: 500;" v-for="(v,k) in list" :key="k">
             <div @click="goUniversity(v.schoolName)" class="names">{{v.schoolName}}</div>
             <div>{{v.province}}</div>
-            <div v-if="v.type == ''">全部</div>
-            <div v-if="v.type == 0">理工类</div>
-            <div v-if="v.type == 1">综合类</div>
-            <div v-if="v.type == 2">语言类</div>
-            <div v-if="v.type == 3">医药类</div>
-            <div v-if="v.type == 4">财经类</div>
-            <div v-if="v.type == 5">艺术类</div>
-            <div v-if="v.type == 6">师范类</div>
-            <div v-if="v.type == 7">农林类</div>
-            <div v-if="v.type == 8">政法类</div>
-            <div v-if="v.type == 9">体育类</div>
-            <div v-if="v.type == 10">民族类</div>
-            <div v-if="v.type == 11">军事类</div>
-            <div>{{k + 1}}</div>
+            <div v-if="v.type === ''">全部</div>
+            <div v-if="v.type === '0'">理工类</div>
+            <div v-if="v.type === '1'">综合类</div>
+            <div v-if="v.type === '2'">语言类</div>
+            <div v-if="v.type === '3'">医药类</div>
+            <div v-if="v.type === '4'">财经类</div>
+            <div v-if="v.type === '5'">艺术类</div>
+            <div v-if="v.type === '6'">师范类</div>
+            <div v-if="v.type === '7'">农林类</div>
+            <div v-if="v.type === '8'">政法类</div>
+            <div v-if="v.type === '9'">体育类</div>
+            <div v-if="v.type === '10'">民族类</div>
+            <div v-if="v.type === '11'">军事类</div>
+            <div>{{10 * pages + (k + 1)}}</div>
           </li>
         </ul>
         <div class="pages" v-if="show1 && list.length > 0">
-          <Page :total="totalPage" :page-size="10" @on-change="getList" />
+          <Page :total="totalPage" :page-size="10" :current="currents" @on-change="getList" />
         </div>
         <div v-if="!show1" style="font-size: 14px;">没有符合条件的数据 !</div>
       </div>
@@ -78,6 +78,8 @@
         show1: true,
         totalPage: 0,
         typesList: [],
+        pages: 0,
+        currents: 1,
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
       }
     },
@@ -220,6 +222,8 @@
         })
       },
       getList(page) {
+        this.currents = page
+        this.pages = page - 1
         let types = this.types
         let address = this.address
         if (this.types == -1) {
@@ -255,7 +259,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       display: flex;
@@ -313,7 +317,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       display: flex;

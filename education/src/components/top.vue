@@ -61,7 +61,7 @@
 </script>
 
 <style scoped>
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .top {
       width: 100%;
       padding: 20px 0.5rem;
@@ -84,7 +84,7 @@
     }
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     .top {
       width: 1200px;
       padding: 20px 0;

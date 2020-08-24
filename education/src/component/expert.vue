@@ -60,7 +60,7 @@
   export default {
     data() {
       return {
-        itemIndex: 3,
+        itemIndex: 4,
         pages: 'pages',
         control: true,
         totalPage: 0,
@@ -172,7 +172,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       display: flex;
@@ -202,7 +202,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       display: flex;

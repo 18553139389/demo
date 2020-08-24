@@ -30,7 +30,7 @@
   export default {
     data() {
       return {
-        itemIndex: 4,
+        itemIndex: 5,
         control: true,
         list: '',
         bodyHeight: document.documentElement.offsetHeight || document.body.offsetHeight
@@ -119,7 +119,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       margin: 40px auto;
@@ -136,7 +136,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       margin: 40px 0;

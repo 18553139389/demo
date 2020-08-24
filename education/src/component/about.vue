@@ -42,7 +42,7 @@
   export default {
     data() {
       return {
-        itemIndex: 5,
+        itemIndex: 6,
         control: true,
         produceList: {},
         greatestList: {},
@@ -145,7 +145,7 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
       margin: 40px auto 24px;
@@ -155,7 +155,7 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
       margin: 40px 0 24px;

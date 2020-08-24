@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" ref="dom">
     <headers></headers>
     <navs :itemIndex="itemIndex" @change="change" @changeNav="changeNav"></navs>
     <div class="list">
@@ -20,9 +20,9 @@
     </div>
     <chat></chat>
     <div class="footer" v-if="!control">
-      <footers></footers>
+      <footers ref="foot"></footers>
     </div>
-    <footers v-if="control"></footers>
+    <footers v-if="control" ref="foot"></footers>
   </div>
 </template>
 
@@ -87,7 +87,9 @@
       pos() {
         let bodyHeight = document.documentElement.offsetHeight || document.body.offsetHeight //获取当前body高度
         let winHeight = document.documentElement.clientHeight || document.body.clientHeight //获取当前页面高度
-        if (bodyHeight + 166 - winHeight > 0) {
+        console.log(bodyHeight)
+        console.log(winHeight)
+        if (bodyHeight + 421 - winHeight > 0) {
           this.control = true
         } else {
           this.control = false
@@ -140,12 +142,13 @@
 </script>
 
 <style scoped="scoped">
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .list {
       width: 1200px;
-      margin: 40px auto;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
+      padding: 40px 0;
     }
 
     .example-text {
@@ -165,13 +168,14 @@
     }
   }
 
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 1024px) {
     .list {
       width: 100%;
-      margin: 40px 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
+      padding: 40px 0;
     }
 
     .example-text {

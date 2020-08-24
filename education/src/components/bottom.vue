@@ -43,6 +43,7 @@
         <img class="code" :src="list.qrCode" alt="">
       </div>
     </div>
+    <div class="cards" @click="goUrl">备案号: 鲁ICP备19061012号</div>
   </div>
 </template>
 
@@ -128,13 +129,16 @@
         this.$router.push({
           name: 'about'
         })
+      },
+      goUrl() {
+        window.location.href = 'http://www.beian.gov.cn/'
       }
     }
   }
 </script>
 
 <style scoped>
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .bottom {
       width: 100%;
       padding: 30px 0.5rem;
@@ -183,7 +187,7 @@
     }
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     .bottom {
       width: 100%;
       padding: 30px 0;
@@ -285,5 +289,14 @@
     margin-bottom: 12px;
     padding-left: 10px;
     box-sizing: border-box;
+  }
+
+  .cards {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-top: 30px;
+    cursor: pointer;
   }
 </style>
