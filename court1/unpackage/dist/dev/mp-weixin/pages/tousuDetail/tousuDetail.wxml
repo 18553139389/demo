@@ -1,1 +1,0 @@
-<view class="contain"><view class="list"><view>{{list.title}}</view></view><view class="lists"><view class="content">{{list.content}}</view></view></view>

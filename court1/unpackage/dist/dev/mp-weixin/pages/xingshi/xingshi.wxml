@@ -1,1 +1,0 @@
-<view class="contain"><view class="content"><u-parse vue-id="1" content="{{list}}" bind:__l="__l"></u-parse></view><view class="bottom"><view data-event-opts="{{[['tap',[['goPublic',['$event']]]]]}}" class="enter" bindtap="__e">我已阅读，进入提交</view></view></view>
