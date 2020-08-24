@@ -83,7 +83,7 @@
 					</div>
 				</li>
 				<li>
-					<span>目的地</span>
+					<span>装卸货地点</span>
 					<div class="choice">
 						<img src="../../static/img/right.png" alt="">
 						<input type="text" placeholder="请输入" v-model="location" />
@@ -275,6 +275,7 @@
 				this.shows1 = false
 			},
 			confirmStart(val) {
+
 				this.shows1 = false
 				this.start = this.dateFtt("yyyy-MM-dd hh:mm", val)
 			},
@@ -288,15 +289,15 @@
 				this.shows2 = false
 				this.end = this.dateFtt("yyyy-MM-dd hh:mm", val)
 			},
-			dateFtt(fmt, date) { //author: meizz   
+			dateFtt(fmt, date) { //author: meizz
 				var o = {
-					"M+": date.getMonth() + 1, //月份   
-					"d+": date.getDate(), //日   
-					"h+": date.getHours(), //小时   
-					"m+": date.getMinutes(), //分   
-					"s+": date.getSeconds(), //秒   
-					"q+": Math.floor((date.getMonth() + 3) / 3), //季度   
-					"S": date.getMilliseconds() //毫秒   
+					"M+": date.getMonth() + 1, //月份
+					"d+": date.getDate(), //日
+					"h+": date.getHours(), //小时
+					"m+": date.getMinutes(), //分
+					"s+": date.getSeconds(), //秒
+					"q+": Math.floor((date.getMonth() + 3) / 3), //季度
+					"S": date.getMilliseconds() //毫秒
 				}
 				if (/(y+)/.test(fmt))
 					fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length))
@@ -363,12 +364,12 @@
 									this.columns_five.push(this.sureData.timeList[i].remarks + '   ' + this.sureData.timeList[i].startTime + '-' +
 										this.sureData.timeList[i].endTime)
 								}
-								
+
 								if(localStorage.getItem('show1') == 0){
 									this.show1 = 0
 									this.path_type = ''
 								}
-								
+
 								if(localStorage.getItem('show2') == 0){
 									this.show2 = 0
 									this.path_section = ''

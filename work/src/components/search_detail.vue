@@ -22,10 +22,10 @@
 					<span>车牌号：</span>
 					<p>{{v.platesNumber}}</p>
 				</li>
-				<li class="content_list" v-if="v.pics.car_pic.length > 0">
+				<li class="content_list" v-if="v.pics&&v.pics.car_pic.length > 0">
 					<span>车辆照片</span>
 				</li>
-				<li class="picture" v-if="v.pics.car_pic.length > 0">
+				<li class="picture" v-if="v.pics&&v.pics.car_pic.length > 0">
 					<div class="pic_box">
 						<img :src="v.pics.car_pic[0]" alt="">
 						<span>车辆正前方</span>
@@ -87,15 +87,15 @@
 					<span>区域审核单位：</span>
 					<p>{{v.office.name}}</p>
 				</li>
-				<li class="content_list" v-if="v.pics.driving_y || v.pics.driver_licence">
+				<li class="content_list" v-if="(v.pics&&v.pics.driving_y) || (v.pics&&v.pics.driver_licence)">
 					<span style="color: #333;">证件照片</span>
 				</li>
 				<li class="picture">
-					<div class="pic_box" v-if="v.pics.driving_y">
-						<img :src="v.pics.driving_y" alt="">
+					<div class="pic_box" v-if="v.pics&&v.pics.driving_y">
+						<img :src="v.pics&&v.pics.driving_y" alt="">
 						<span>行驶证证明</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.driver_licence">
+					<div class="pic_box" v-if="v.pics&&v.pics.driver_licence">
 						<img :src="v.pics.driver_licence" alt="">
 						<span>驾驶证证明</span>
 					</div>
@@ -103,32 +103,32 @@
 				<li class="content_list">
 					<span style="color: #333;">资质证明</span>
 				</li>
-				<li class="picture">
-					<div class="pic_box" v-if="v.pics.train_certificate">
+				<li class="picture" v-if="v.pics">
+					<div class="pic_box" v-if="v.pics&&v.pics.train_certificate">
 						<img :src="v.pics.train_certificate" alt="">
 						<span>培训合格证明</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.clear_agree_form">
+					<div class="pic_box" v-if="v.pics&&v.pics.clear_agree_form">
 						<img :src="v.pics.clear_agree_form" alt="">
 						<span>清运审批表</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.hazardous_licence">
+					<div class="pic_box" v-if="v.pics&&v.pics.hazardous_licence">
 						<img :src="v.pics.hazardous_licence" alt="">
 						<span>危化品押运员证</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.transport_agree_licence">
+					<div class="pic_box" v-if="v.pics&&v.pics.transport_agree_licence">
 						<img :src="v.pics.transport_agree_licence" alt="">
 						<span>道路运输许可证</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.transport_on_licence">
+					<div class="pic_box" v-if="v.pics&&v.pics.transport_on_licence">
 						<img :src="v.pics.transport_on_licence" alt="">
 						<span>道路运输从业资格证</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.lnsurance_policy">
+					<div class="pic_box" v-if="v.pics&&v.pics.lnsurance_policy">
 						<img :src="v.pics.lnsurance_policy" alt="">
 						<span>保险单</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.reletive_data">
+					<div class="pic_box" v-if="v.pics&&v.pics.reletive_data">
 						<img :src="v.pics.reletive_data" alt="">
 						<span>相关备案证明资料</span>
 					</div>
@@ -152,12 +152,12 @@
 					<span>公司电话：</span>
 					<p>{{v.compayPhone}}</p>
 				</li>
-				<li class="picture" v-if="v.pics.businessLicense || v.pics.introductionLetter">
+				<li class="picture" v-if="(v.pics&&v.pics.businessLicense) || (v.pics&&v.pics.introductionLetter)">
 					<div class="pic_box" v-if="v.pics.businessLicense">
 						<img :src="v.pics.businessLicense" alt="">
 						<span>营业执照</span>
 					</div>
-					<div class="pic_box" v-if="v.pics.introductionLetter">
+					<div class="pic_box" v-if="(v.pics&&v.pics.introductionLetter)">
 						<img :src="v.pics.introductionLetter" alt="">
 						<span>介绍人照片</span>
 					</div>
@@ -173,10 +173,10 @@
 					<span>联系电话：</span>
 					<p>{{v.carOwnerPhone}}</p>
 				</li>
-				<li class="content_list" v-if="v.pics.idcard">
+				<li class="content_list" v-if="v.pics&&v.pics.idcard">
 					<span>身份证照片</span>
 				</li>
-				<li class="picture" v-if="v.pics.idcard">
+				<li class="picture" v-if="v.pics&&v.pics.idcard">
 					<div class="pic_box">
 						<img :src="v.pics.idcard[0]" alt="">
 						<span>身份证（正）</span>
@@ -344,7 +344,7 @@
 						console.log(res)
 					})
 				}).catch(() => {
-					
+
 				});
 			}
 		}
@@ -465,7 +465,7 @@
 		top: 2.4rem;
 		right: 0.4rem;
 	}
-	
+
 	.no {
 		width: 80%;
 		height: 6rem;
@@ -479,16 +479,16 @@
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.no img {
 		width: 40%;
 	}
-	
+
 	.no span {
 		font-size: 15px;
 		margin-top: 0.8rem;
 	}
-	
+
 	.load {
 		position: fixed;
 		top: 0;

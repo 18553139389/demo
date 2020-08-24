@@ -16,6 +16,7 @@
     "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
     "mand-mobile": "^2.3.0",
+    "mescroll.js": "^1.4.2",
     "px2rem-loader": "^0.1.9",
     "va-carousel": "^1.0.4",
     "vant": "^1.5.9",

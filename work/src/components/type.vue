@@ -52,6 +52,7 @@
 			let type = localStorage.getItem('timeNum')
 			this.num = obj
 			this.type = type
+      console.log(this.type)
 		},
 		methods: {
 			goBusiness() {
@@ -75,12 +76,12 @@
 					return
 				}
 				
-				if(this.num > 3) {
-					Toast('您已超过申请上限')
-					return
-				}else{
+				// if(this.num > 3) {
+				// 	Toast('您已超过申请上限')
+				// 	return
+				// }else{
 					this.$router.push('/person_one')
-				}
+				// }
 			},
 			back() {
 				this.$router.push('/first')

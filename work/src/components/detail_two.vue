@@ -19,7 +19,7 @@
 					<span>车牌号：</span>
 					<p>{{v.platesNumber}}</p>
 				</li>
-				<li class="content_list" v-if="v.pics.car_pic.length > 0">
+				<li class="content_list" v-if="v.pics && v.pics.car_pic && v.pics.car_pic.length > 0">
 					<span>车辆照片</span>
 				</li>
 				<li class="picture" v-if="v.pics.car_pic.length > 0">
@@ -76,10 +76,6 @@
 					<span>目的地：</span>
 					<p>{{v.destination}}</p>
 				</li>
-				<!-- <li class="content_list" v-if="v.office.name">
-					<span>区域审核单位：</span>
-					<p>{{v.office.name}}</p>
-				</li> -->
 				<li class="content_list">
 					<span>通行证开始日期：</span>
 					<p>{{startDate}}</p>
@@ -328,7 +324,6 @@
 				return new File([u8arr], filename, {
 					type: mime
 				});
-			
 			},
 			getDpr: function() {
 				if (window.devicePixelRatio && window.devicePixelRatio > 1) {
@@ -336,7 +331,7 @@
 				}
 				return 1
 			},
-			
+
 			/**
 			 * 将传入值转为整数
 			 * @param value
@@ -345,26 +340,26 @@
 			parseValue: function(value) {
 				return parseInt(value, 10);
 			},
-			
+
 			// 将图片转为base64格式
 			img2base64: function(url, crossOrigin) {
 				return new Promise(resolve => {
 					const img = new Image();
-			
+
 					img.onload = () => {
 						const c = document.createElement('canvas');
-			
+
 						c.width = img.naturalWidth;
 						c.height = img.naturalHeight;
-			
+
 						const cxt = c.getContext('2d');
-			
+
 						cxt.drawImage(img, 0, 0);
-			
+
 						// 得到图片的base64编码数据
 						resolve(c.toDataURL('image/png'));
 					};
-			
+
 					// 结合合适的CORS响应头，实现在画布中使用跨域<img>元素的图像
 					crossOrigin && img.setAttribute('crossOrigin', crossOrigin);
 					img.src = url
@@ -376,40 +371,40 @@
 			generateImage: function() {
 				console.log('保存图片')
 				var _this = this;
-			
+
 				// 获取想要转换的dom节点
 				// var dom = document.querySelector('body');
 				var dom = document.getElementById('contain');
 				var box = window.getComputedStyle(dom);
-			
+
 				// dom节点计算后宽高
 				var width = _this.parseValue(box.width);
 				var height = _this.parseValue(box.height);
-			
+
 				// 获取像素比
 				var scaleBy = _this.getDpr();
-			
+
 				// 创建自定义的canvas元素
 				var canvas = document.createElement('canvas');
-			
+
 				// 设置canvas元素属性宽高为 DOM 节点宽高 * 像素比
 				canvas.width = width * scaleBy;
 				canvas.height = height * scaleBy;
-			
+
 				// 设置canvas css 宽高为DOM节点宽高
 				canvas.style.width = width + 'px';
 				canvas.style.height = height + 'px';
-			
+
 				// 获取画笔
 				var context = canvas.getContext('2d');
-			
+
 				// 将所有绘制内容放大像素比倍
 				context.scale(scaleBy, scaleBy);
-			
+
 				// 设置需要生成的图片的大小，不限于可视区域（即可保存长图）
 				var w = document.getElementById('contain').style.width;
 				var h = document.getElementById('contain').style.height;
-			
+
 				html2canvas(dom, {
 					//如果有图片必须加上此参数
 					useCORS: true,
@@ -495,7 +490,7 @@
 						console.log(res)
 					})
 				}).catch(() => {
-					
+
 				});
 			}
 		}
@@ -508,7 +503,7 @@
   	height: 100%;
   	/* overflow: hidden; */
   }
-  
+
 	.step {
 		width: 100%;
 		padding: 0 0.6rem;
@@ -520,7 +515,7 @@
 		border-top: 10px solid #f2f2f2;
 		margin-top: 0.3rem;
 	}
-	
+
 	.distance {
 		padding-top: 24px !important;
 	}
@@ -626,7 +621,7 @@
 		top: 2.4rem;
 		right: 0.4rem;
 	}
-	
+
 	.loading {
 		position: fixed;
 		top: 0;
@@ -641,11 +636,11 @@
 		font-size: 15px;
 		color: #fff;
 	}
-	
+
 	.loading span {
 		margin-left: 0.3rem;
 	}
-	
+
 	.load {
 		position: fixed;
 		top: 0;
