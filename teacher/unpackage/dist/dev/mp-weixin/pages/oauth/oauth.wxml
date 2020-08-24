@@ -1,0 +1,1 @@
+<view class="contain data-v-424aadb6"><button open-type="getUserInfo" data-event-opts="{{[['getuserinfo',[['getuserinfo',['$event']]]]]}}" bindgetuserinfo="__e" class="data-v-424aadb6">点击授权</button></view>

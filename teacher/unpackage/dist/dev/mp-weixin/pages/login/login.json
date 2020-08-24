@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "净水器小程序师傅端",
+  "usingComponents": {
+    "jiuai-checkbox": "/components/jiuai-checkbox/jiuai-checkbox"
+  }
+}

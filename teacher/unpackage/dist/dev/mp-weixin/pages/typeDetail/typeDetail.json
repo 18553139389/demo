@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "维修详情",
+  "usingComponents": {
+    "xfl-select": "/components/xfl-select/xfl-select"
+  }
+}
