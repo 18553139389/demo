@@ -1,0 +1,83 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/login/login",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/register/register",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/forget/forget",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/law/law",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/question/question",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/example/example",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/example1/example1",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/my/my",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/user/user",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/myAsk/myAsk",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/mySuggest/mySuggest",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/link/link",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/detail/detail",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}, {
+		"path": "pages/web/web",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"usingComponents": true
+	}
+}
