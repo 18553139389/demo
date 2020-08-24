@@ -18,7 +18,7 @@
 					<picker-view-column>
 						<view class="w-picker-item" v-for="(item,index) in data.years" :key="index">{{item}}年</view>
 					</picker-view-column>
-					<picker-view-column>
+					<!-- <picker-view-column>
 						<view class="w-picker-item" v-for="(item,index) in data.months" :key="index">{{item}}月</view>
 					</picker-view-column>
 					<picker-view-column>
@@ -26,7 +26,7 @@
 					</picker-view-column>
 					<picker-view-column>
 						<view class="w-picker-item" v-for="(item,index) in data.areas" :key="index">{{item.label}}</view>
-					</picker-view-column>
+					</picker-view-column> -->
 				</picker-view>
 			</view>
 			<view class="w-picker-view" v-if="mode=='date'">
@@ -39,6 +39,13 @@
 					</picker-view-column>
 					<picker-view-column>
 						<view class="w-picker-item" v-for="(item,index) in data.days" :key="index">{{item}}日</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+			<view class="w-picker-view" v-if="mode=='year'">
+				<picker-view :indicator-style="itemHeight" :value="pickVal" @change="bindChange" @touchstart="touchStart" @touchend="touchEnd">
+					<picker-view-column>
+						<view class="w-picker-item" v-for="(item,index) in data.years" :key="index">{{item}}年</view>
 					</picker-view-column>
 				</picker-view>
 			</view>
@@ -60,7 +67,7 @@
 					<picker-view-column>
 						<view class="w-picker-item" v-for="(item,index) in data.months" :key="index">{{item}}月</view>
 					</picker-view-column>
-					<picker-view-column >
+					<!-- <picker-view-column >
 						<view class="w-picker-item" v-for="(item,index) in data.days" :key="index">{{item}}日</view>
 					</picker-view-column>
 					<picker-view-column>
@@ -71,7 +78,7 @@
 					</picker-view-column>
 					<picker-view-column>
 						<view class="w-picker-item" v-for="(item,index) in data.seconds" :key="index">{{item}}秒</view>
-					</picker-view-column>
+					</picker-view-column> -->
 				</picker-view>
 			</view>
 			<view class="w-picker-view" v-if="mode=='range'">
@@ -197,7 +204,7 @@
 			mode:{
 				type:String,
 				validator(mode){
-					let modeList=['half','date', 'dateTime', 'yearMonth','time','region','selector','limit','limitHour','range','linkage'];//过滤无效mode;
+					let modeList=['half','date','year', 'dateTime', 'yearMonth','time','region','selector','limit','limitHour','range','linkage'];//过滤无效mode;
 					return oneOf(mode,modeList);
 				},
 				default(){

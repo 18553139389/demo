@@ -24,19 +24,17 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.contain.data-v-8c9afb76 {
+.contain.data-v-82c60e86 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-      -ms-flex-direction: column;
           flex-direction: column;
 }
-.contain .fixed.data-v-8c9afb76 {
+.contain .fixed.data-v-82c60e86 {
     width: 100%;
 }
 

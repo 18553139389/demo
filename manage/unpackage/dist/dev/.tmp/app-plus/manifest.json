@@ -4,11 +4,11 @@
     "iPhone",
     "iPad"
   ],
-  "id": "__UNI__7280200",
+  "id": "__UNI__A9CF037",
   "name": "企业绩效管理",
   "version": {
-    "name": "3.1.6",
-    "code": "100"
+    "name": "3.3.6",
+    "code": 120
   },
   "description": "",
   "launch_path": "__uniappview.html",
@@ -29,8 +29,9 @@
       "concatenate": true
     },
     "splashscreen": {
-      "autoclose": false,
-      "waiting": true,
+      "target": "id:1",
+      "autoclose": true,
+      "waiting": false,
       "delay": 0
     },
     "popGesture": "close",
@@ -47,6 +48,9 @@
     },
     "usingComponents": true,
     "softinputMode": "adjustPan",
+    "compatible": {
+      "ignoreVersion": true
+    },
     "distribute": {
       "icons": {
         "android": {
@@ -82,9 +86,9 @@
       },
       "splashscreen": {
         "android": {
-          "hdpi": "C:/Users/Administrator/Desktop/私活/UI定稿/启动页.png",
-          "xhdpi": "C:/Users/Administrator/Desktop/私活/UI定稿/启动页.png",
-          "xxhdpi": "C:/Users/Administrator/Desktop/私活/UI定稿/启动页.png"
+          "hdpi": "",
+          "xhdpi": "",
+          "xxhdpi": ""
         }
       },
       "google": {
@@ -116,6 +120,11 @@
           "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
           "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
           "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+        ],
+        "abiFilters": [
+          "armeabi-v7a",
+          "arm64-v8a",
+          "x86"
         ]
       },
       "apple": {},
@@ -127,6 +136,7 @@
             "appsecret": "6ugNPd3kMb5gXuDSKNSD2"
           }
         },
+        "ad": {},
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"
@@ -136,10 +146,13 @@
     },
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "2.3.7",
+      "compilerVersion": "2.5.1",
       "control": "v8",
-      "nvueCompiler": "weex",
-      "renderer": "auto"
+      "nvueCompiler": "uni-app",
+      "renderer": "auto",
+      "nvue": {
+        "flex-direction": "column"
+      }
     }
   }
 }

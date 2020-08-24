@@ -9,7 +9,7 @@
 		<view class="wrapper">
 			<view class="box">
 				<view class="search">
-					<img src="../../static/images/search.png" alt="">
+					<image src="../../static/images/search.png" alt=""></image>
 					<input type="text" v-model="val" placeholder="产品查询" confirm-type="search" @confirm="goCar">
 				</view>
 				<view class="btn-search" @tap="goCar">查询</view>
@@ -18,12 +18,12 @@
 				<view style="margin-right: 24upx;">起止日期</view>
 				<view class="dates" @tap="choiceDate1">
 					<view>{{date1}}</view>
-					<img src="../../static/images/select.png" alt="">
+					<image src="../../static/images/select.png" alt=""></image>
 				</view>
 				<view style="margin: 0 14upx;">—</view>
 				<view @tap="choiceDate2" class="dates">
 					<view>{{date2}}</view>
-					<img src="../../static/images/select.png" alt="">
+					<image src="../../static/images/select.png" alt=""></image>
 				</view>
 			</view>
 			<view class="totals">
@@ -31,11 +31,11 @@
 				<view style="color: #00AAEF;" @tap="goTotal">统计</view>
 			</view>
 			<mescroll-uni :down="downOption" @down="downCallback" :up="upOption" @up="upCallback" @init="mescrollInit"
-			 @emptyclick="emptyClick" @topclick="topClick">
+			@topclick="topClick">
 				<ul class="team">
 					<li v-for="(v,k) in list" :key="k">
 						<view class="car">
-							<img :src="v.inorout == 1 ? '../../static/images/ruku.png' : '../../static/images/chuku.png'" alt="">
+							<image :src="v.inorout == 1 ? '../../static/images/ruku.png' : '../../static/images/chuku.png'" alt=""></image>
 							<view class="car-product">
 								<view style="margin-bottom: 24upx;">{{v.goodsname}}</view>
 								<view>{{v.addtime}}</view>
@@ -55,9 +55,7 @@
 </template>
 
 <script>
-	import {
-		ajax
-	} from '../../request/request.js'
+	import {ajax} from '../../request/request.js'
 	import Toast from '../../common/toast.js'
 	import MescrollUni from "../../components/mescroll-uni/mescroll-uni.vue"
 	import wPicker from "../../components/w-picker/w-picker.vue"
@@ -317,7 +315,7 @@
 					padding-left: 160upx;
 					box-sizing: border-box;
 
-					img {
+					image {
 						width: 36upx;
 						height: 36upx;
 					}
@@ -360,7 +358,7 @@
 					border-radius: 4px;
 					padding: 12upx;
 					
-					img {
+					image {
 						width: 30upx;
 						height: 30upx;
 						margin-left: 12upx;
@@ -405,7 +403,7 @@
 						display: flex;
 						align-items: center;
 						
-						img {
+						image {
 							width: 90upx;
 							height: 90upx;
 							margin-right: 30upx;

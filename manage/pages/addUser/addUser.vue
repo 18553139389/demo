@@ -37,8 +37,7 @@
 				</li>
 				<li class="lis">
 					<span>是否启用</span>
-					<img @tap="change" :src="check ? '../../static/images/kaiguan-kai.png' : '../../static/images/kaiguan-guan.png'"
-					 alt="">
+					<image @tap="change" :src="check ? '../../static/images/kaiguan-kai.png' : '../../static/images/kaiguan-guan.png'" alt=""></image>
 				</li>
 			</ul>
 			<view class="submit" @tap="goSubmit">提交</view>
@@ -320,7 +319,7 @@
 						}
 					}
 
-					img {
+					image {
 						width: 108upx;
 						height: 73upx;
 						margin-top: 10upx;

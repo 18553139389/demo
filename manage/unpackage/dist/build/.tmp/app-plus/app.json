@@ -14,19 +14,32 @@
     "pages/reset/reset",
     "pages/carsCount/carsCount",
     "pages/editor/editor",
-    "pages/text/text"
+    "pages/text/text",
+    "pages/check/check",
+    "pages/carNumber/carNumber",
+    "pages/list/list",
+    "pages/all/all",
+    "pages/carList/carList",
+    "pages/everyList/everyList",
+    "pages/useList/useList",
+    "pages/everyUse/everyUse",
+    "pages/useCar/useCar",
+    "pages/everyCar/everyCar",
+    "pages/rich/rich"
   ],
   "window": {
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
   },
-  "nvueCompiler": "weex",
+  "nvueCompiler": "uni-app",
   "renderer": "auto",
   "splashscreen": {
-    "alwaysShowBeforeRender": false,
-    "autoclose": true
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
   },
   "appname": "企业绩效管理",
-  "compilerVersion": "2.3.7",
-  "usingComponents": true
+  "compilerVersion": "2.5.1",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  }
 }

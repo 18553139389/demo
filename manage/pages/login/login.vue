@@ -1,23 +1,24 @@
 <template>
 	<view class="contain">
 		<view class="top">
-			<img class="bg" src="../../static/images/bg.png" alt="">
-			<img class="logo" src="../../static/images/logo.png" alt="">
+			<image class="bg" src="../../static/images/bg.png" alt=""></image>
+			<image class="logo" src="../../static/images/logo.png" alt=""></image>
 		</view>
+		
 		<view class="forms">
 			<view class="call">
-				<img src="../../static/images/shoujihao.png" alt="">
+				<image src="../../static/images/shoujihao.png" alt="" style="width: 40rpx;height: 40rpx;margin-right: 66rpx;"></image>
 				<input type="text" v-model="call" placeholder="请输入手机号" cursor-spacing="200">
 			</view>
 			<view class="call">
-				<img src="../../static/images/yanzhengma.png" alt="">
+				<image src="../../static/images/yanzhengma.png" alt=""></image>
 				<input type="password" v-model="pass" placeholder="请输入密码" cursor-spacing="150">
 			</view>
 			<view class="call" style="border-bottom: none;color: #999;" @tap="goForget">忘记密码？</view>
 		</view>
 		<view class="btns" @click="goIndex">登录</view>
 		<view class="content">
-			<img @click="goRead" :src="check ? '../../static/images/checked.png' : '../../static/images/check.png'" alt="">
+			<image @click="goRead" :src="check ? '../../static/images/checked.png' : '../../static/images/check.png'" alt=""></image>
 			<view @click="goAgree" class="mark">我已阅读并同意<span>《旗云员工绩效系统用户协议》</span></view>
 		</view>
 	</view>
@@ -52,11 +53,11 @@
 				this.pass = uni.getStorageSync('pass')
 			}
 
-			if (uni.getStorageSync('token')) {
-				uni.redirectTo({
-					url: '/pages/index/index'
-				})
-			}
+			// if (uni.getStorageSync('token')) {
+			// 	uni.redirectTo({
+			// 		url: '/pages/index/index'
+			// 	})
+			// }
 		},
 		methods: {
 			goRead() {
@@ -86,11 +87,13 @@
 						url: '/api/CompanyUser/login',
 						data: datas,
 						success: function(res) {
+							console.log(res)
 							if (res.data.Code == 0) {
 								Toast.hideLoading()
 								uni.setStorageSync('token', res.data.Customerdata.token)
 								uni.setStorageSync('call', self.call)
 								uni.setStorageSync('pass', self.pass)
+								uni.setStorageSync('apisecret', res.data.Customerdata.apisecret)
 								uni.redirectTo({
 									url: '/pages/index/index'
 								})
@@ -164,9 +167,9 @@
 				color: #333;
 				border-bottom: 1px solid #eee;
 
-				img {
-					width: 50upx;
-					height: 50upx;
+				image {
+					width: 46upx;
+					height: 46upx;
 					margin-right: 60upx;
 				}
 			}
@@ -190,7 +193,7 @@
 			display: flex;
 			align-items: center;
 
-			img {
+			image {
 				width: 40upx;
 				height: 40upx;
 				margin-right: 20upx;

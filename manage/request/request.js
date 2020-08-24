@@ -11,7 +11,7 @@ const ajax = (opt) => {
 	opt.fail = opt.fail || function() {}
 	console.log(opt.data)
 	uni.request({
-		url: 'http://39.99.254.186' + opt.url,
+		url: 'http://api.yykj8.cn' + opt.url,
 		data: opt.data,
 		method: opt.method,
 		header: opt.header,
@@ -22,7 +22,7 @@ const ajax = (opt) => {
 		fail: function(res) {
 			opt.fail(res)
 			uni.showToast({
-				title: '请稍后重试',
+				title: '请稍后重试:'+res,
 				icon: 'none'
 			})
 		}

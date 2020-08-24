@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "",
   "usingComponents": {
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
     "chun-lei-modal": "/components/chunLei-modal/chunLei-modal"
   }
 }

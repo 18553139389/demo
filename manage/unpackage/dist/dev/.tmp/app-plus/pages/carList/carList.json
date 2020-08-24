@@ -1,0 +1,8 @@
+{
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "w-picker": "/components/w-picker/w-picker",
+    "j-picker": "/components/J-Picker/jPicker"
+  }
+}

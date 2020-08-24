@@ -11,7 +11,7 @@
 			@emptyclick="emptyClick" @topclick="topClick">
 				<ul>
 					<li v-for="(v,k) in list" :key="k">
-						<img src="../../static/images/tongzhi.png" alt="">
+						<image src="../../static/images/tongzhi.png" alt=""></image>
 						<view class="item">
 							<view>{{v.content}}</view>
 							<view style="color: #999;">{{v.addtime}}</view>
@@ -188,7 +188,7 @@
 					align-items: center;
 					border-bottom: 1px solid #eee;
 					
-					img {
+					image {
 						width: 80upx;
 						height: 80upx;
 					}

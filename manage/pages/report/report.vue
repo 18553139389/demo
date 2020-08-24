@@ -8,31 +8,32 @@
 		</view>
 		<view class="wrapper">
 			<view class="box">
-				<view class="search">
-					<img src="../../static/images/search.png" alt="">
-					<input type="text" v-model="val" placeholder="车号查询" confirm-type="search" @confirm="goCar">
+				<view class="search" @tap="goNum">
+					<image src="../../static/images/search.png" alt=""></image>
+					<input type="text" v-model="val" placeholder="车号查询" disabled>
 				</view>
-				<view class="btn-search" @tap="goCar">查询</view>
+				<view class="btn-search" @tap="goCar">筛选</view>
 			</view>
 			<view class="time">
 				<view style="margin-right: 24upx;">起止日期</view>
 				<view class="dates" @tap="choiceDate1">
 					<view>{{date1}}</view>
-					<img src="../../static/images/select.png" alt="">
+					<image src="../../static/images/downs.png" alt=""></image>
 				</view>
 				<view style="margin: 0 14upx;">—</view>
 				<view @tap="choiceDate2" class="dates">
 					<view>{{date2}}</view>
-					<img src="../../static/images/select.png" alt="">
+					<image src="../../static/images/downs.png" alt=""></image>
 				</view>
 			</view>
-			<view class="totals" @tap="goTotal">
-				<view>{{total}}</view>
+			<view class="totals" v-if="total">
+				<view>出库 {{total.out_cnt}} 车次 {{total.out_summary}} 吨</view>
+				<view>入库 {{total.in_cnt}} 车次 {{total.in_summary}} 吨</view>
 			</view>
 			<mescroll-uni :down="downOption" @down="downCallback" :up="upOption" @up="upCallback" @init="mescrollInit"
-			@emptyclick="emptyClick" @topclick="topClick">
+			@topclick="topClick">
 				<ul class="team">
-					<li v-for="(v,k) in list" :key="k">
+					<li v-for="(v,k) in list" :key="k" @tap="viewRecord('详细信息',v.billno)">
 						<view class="cars">
 							<view>{{v.carnum}}</view>
 							<view class="names">
@@ -41,8 +42,8 @@
 									<view style="margin-bottom: 8upx;text-decoration: line-through;" v-if="v.inorout == 2">-{{v.modi_oriweight}}{{v.goodsweightunit}}</view>
 									<view>{{v.modi_cnname}}</view>
 								</view>
-								<view v-if="v.inorout == 1" @tap="changeWeight(v.id)">+{{v.goodsjsweight}}{{v.goodsweightunit}}</view>
-								<view v-if="v.inorout == 2" style="color: red;" @tap="changeWeight(v.id)">-{{v.goodsjsweight}}{{v.goodsweightunit}}</view>
+								<view v-if="v.inorout == 1" @tap="changeWeight(v.id,v)">+{{v.goodsjsweight}}{{v.goodsweightunit}}</view>
+								<view v-if="v.inorout == 2" style="color: red;" @tap="changeWeight(v.id,v)">-{{v.goodsjsweight}}{{v.goodsweightunit}}</view>
 							</view>
 						</view>
 						<view class="msg">
@@ -51,8 +52,8 @@
 							<view>{{v.goodsname}}</view>
 						</view>
 						<view class="msg">
-							<view>{{v.addtime}}</view>
 							<view>操作员：{{v.adduser}}</view>
+							<view>{{v.addtime}}</view>
 						</view>
 					</li>
 				</ul>
@@ -62,7 +63,7 @@
 		themeColor="#00AAEF"></w-picker>
 		<w-picker mode="date" startYear="2015" endYear="2030" step="1" :current="false" @confirm="onConfirm2" ref="picker2"
 		themeColor="#00AAEF"></w-picker>
-		<chunLei-modal v-model="value" :mData="inputData" :type="type1" @onConfirm="onConfirm3" @cancel="cancel3" navMask="false" nav="false"></chunLei-modal>
+		<chunLei-modal v-model="value" :mData="inputData" :type="type1" @onConfirm="onConfirm3" @cancel="cancel3" :navMask="false" :nav="false"></chunLei-modal>
 	</view>
 </template>
 
@@ -86,6 +87,7 @@
 					content: [{
 						title: '货物重量：',
 						content: '',
+						unit:'',
 						type: 'number',
 						placeholder: ''
 					}]
@@ -150,6 +152,13 @@
 			let d = oneweekdate.getDate() > 9 ? oneweekdate.getDate() : '0' + oneweekdate.getDate()
 			this.date1 = y + '-' + m + '-' + d;
 		},
+		onShow() {
+			this.val = this.$store.state.carNum
+			if(this.mescroll) {
+				this.list = []
+				this.mescroll.resetUpScroll()
+			}
+		},
 		components: {
 			MescrollUni,
 			wPicker,
@@ -193,42 +202,38 @@
 			},
 			init(mescroll) {
 				let self = this
+				let pageNum = mescroll.num // 页码, 默认从1开始
+				let pageSize = mescroll.size // 页长, 默认每页10条
 				//进出记录
-				let datas1 = {}
-				if (this.type == 0) {
-					datas1 = {
-						token: uni.getStorageSync('token'),
-						begintime: this.date1,
-						endtime: this.date2,
-						pageno: 1,
-						pagesize: 6,
-						os: uni.getSystemInfoSync().platform,
-						osversion: uni.getSystemInfoSync().system,
-						appversion: uni.getStorageSync('appversion')
-					}
-				} else {
-					datas1 = {
-						token: uni.getStorageSync('token'),
-						begintime: this.date1,
-						endtime: this.date2,
-						carnum: this.val,
-						pageno: 1,
-						pagesize: 6,
-						os: uni.getSystemInfoSync().platform,
-						osversion: uni.getSystemInfoSync().system,
-						appversion: uni.getStorageSync('appversion')
-					}
+				let productItem = this.$store.state.productItem
+				let productState = this.$store.state.productState
+				let carNum = this.$store.state.carNum
+				let datas1 = {
+					token: uni.getStorageSync('token'),
+					adduser: '',
+					inorout: productState,
+					buyorsale: 0,
+					goodsname: productItem,
+					begintime: this.date1,
+					endtime: this.date2,
+					carnum: this.val,
+					pageno: mescroll.num,
+					pagesize: mescroll.size,
+					os: uni.getSystemInfoSync().platform,
+					osversion: uni.getSystemInfoSync().system,
+					appversion: uni.getStorageSync('appversion')
 				}
+				
 				let data = {
 					url: '/api/Truck/AllRecords',
 					data: datas1,
 					success: function(res) {
-						console.log(JSON.stringify(res))
+						console.log(res)
 						if (res.data.Code == 0) {
 							res.data.Customerdata.forEach((item) => {
 								self.list.push(item)
 							})
-							self.total = res.data.Extra.Summary
+							self.total = res.data.Extra
 						} else if (res.data.Code == -2 || res.data.Code == -1) {
 							Toast.showToast(res.data.Description)
 							uni.removeStorageSync('token')
@@ -249,10 +254,27 @@
 				}
 				ajax(data)
 			},
+			viewRecord(title, billno) {
+				if(billno == '' || billno == null) {
+					return
+				}
+				uni.navigateTo({
+					url: '/pages/text/text?title=' + title + '&billno=' + billno + '&apisecret=' + uni.getStorageSync('apisecret')
+				})
+			},
 			goCar() {
-				this.type = 1
-				this.list = []
-				this.mescroll.resetUpScroll()
+				// this.type = 1
+				// this.list = []
+				// this.mescroll.resetUpScroll()
+				//前往筛选页面选择产品查询
+				uni.navigateTo({
+					url: '/pages/check/check'
+				})
+			},
+			goNum() {
+				uni.navigateTo({
+					url: '/pages/carNumber/carNumber'
+				})
 			},
 			choiceDate1() {
 				this.$refs.picker1.show()
@@ -267,6 +289,8 @@
 				let m = (d2.getMonth() + 1) > 9 ? (d2.getMonth() + 1) : '0' + (d2.getMonth() + 1)
 				let d = d2.getDate() > 9 ? d2.getDate() : '0' + d2.getDate()
 				this.date2 = d2.getFullYear() + '-' + m + '-' + d
+				this.list = []
+				this.mescroll.resetUpScroll()
 			},
 			onConfirm2(e) {
 				let date1 = this.date1.replace(/-/g, '/')
@@ -287,12 +311,14 @@
 					url: '/pages/carsCount/carsCount'
 				})
 			},
-			changeWeight(id) {
+			changeWeight(id,item) {
 				if(uni.getStorageSync('enable') == 0) {
 					return
 				}
 				this.value = true
 				this.ids = id
+				this.inputData.content[0].content = item.goodsweight
+				this.inputData.content[0].unit = item.goodsweightunit
 			},
 			onConfirm3(e) {
 				let self = this
@@ -392,7 +418,7 @@
 					padding-left: 160upx;
 					box-sizing: border-box;
 
-					img {
+					image {
 						width: 36upx;
 						height: 36upx;
 					}
@@ -420,8 +446,9 @@
 				height: 90upx;
 				display: flex;
 				align-items: center;
-				justify-content: center;
+				justify-content: space-between;
 				box-sizing: border-box;
+				padding: 0 20rpx;
 
 				view {
 					font-size: 14px;
@@ -431,11 +458,12 @@
 				.dates {
 					display: flex;
 					align-items: center;
-					border: 1px solid #eee;
-					border-radius: 4px;
+					// border: 1px solid #eee;
+					background: #fff;
+					border-radius: 30px;
 					padding: 12upx;
 					
-					img {
+					image {
 						width: 30upx;
 						height: 30upx;
 						margin-left: 12upx;
@@ -448,8 +476,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				background: #FFFFFF;
-				border-radius: 4px;
+				background: #E1F2F9;
 				margin-bottom: 30upx;
 				font-size: 14px;
 				color: #333;

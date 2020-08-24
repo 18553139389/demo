@@ -24,21 +24,19 @@
 			</view>
 			<view class="common" style="border-bottom: 1px solid #eee;">
 				<view>车辆出行发送APP通知</view>
-				<img @tap="change1" :src="check1 ? '../../static/images/kaiguan-kai.png' : '../../static/images/kaiguan-guan.png'"
-				 alt="">
+				<image @tap="change1" :src="check1 ? '../../static/images/kaiguan-kai.png' : '../../static/images/kaiguan-guan.png'" alt=""></image>
 			</view>
 			<view class="common">
 				<view>货物进出发送APP通知</view>
-				<img @tap="change2" :src="check2 ? '../../static/images/kaiguan-kai.png' : '../../static/images/kaiguan-guan.png'"
-				 alt="">
+				<image @tap="change2" :src="check2 ? '../../static/images/kaiguan-kai.png' : '../../static/images/kaiguan-guan.png'" alt=""></image>
 			</view>
 			<view class="common" @tap="modifyPass" style="border-bottom: 1px solid #eee;">
 				<view>修改密码</view>
-				<img class="right" src="../../static/images/jiantou.png" alt="">
+				<image class="right" src="../../static/images/jiantou.png" alt=""></image>
 			</view>
 			<view class="common" @tap="goRead" style="border-bottom: 1px solid #eee;">
 				<view>使用协议</view>
-				<img class="right" src="../../static/images/jiantou.png" alt="">
+				<image class="right" src="../../static/images/jiantou.png" alt=""></image>
 			</view>
 			<view class="common" style="border-bottom: 1px solid #eee;" @tap="goVersion">
 				<view>版本号</view>
@@ -290,6 +288,7 @@
 								self.ids = self.radio
 								uni.setStorageSync('id', self.radio)
 								uni.setStorageSync('token', res.data.Customerdata.token)
+								uni.setStorageSync('apisecret', res.data.Customerdata.apisecret)
 								self.init()
 							} else if (res.data.Code == -2 || res.data.Code == -1) {
 								Toast.hideLoading()
@@ -471,7 +470,7 @@
 					}
 				}
 
-				img {
+				image {
 					width: 108upx;
 					height: 73upx;
 					margin-top: 10upx;

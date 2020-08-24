@@ -77,7 +77,7 @@
 		{
 			"path": "pages/carsCount/carsCount",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTextStyle": "white"
 			}
 		},
 		{
@@ -90,6 +90,72 @@
 			"path": "pages/text/text",
 			"style": {
 				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/check/check",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/carNumber/carNumber",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/list/list",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/all/all",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/carList/carList",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/everyList/everyList",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/useList/useList",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/everyUse/everyUse",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/useCar/useCar",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/everyCar/everyCar",
+			"style": {
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/rich/rich",
+			"style": {
+				"navigationBarTextStyle": "white"
 			}
 		}
 	],

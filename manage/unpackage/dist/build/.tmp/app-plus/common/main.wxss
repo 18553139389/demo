@@ -82,8 +82,7 @@ textarea,
 label,
 navigator,
 image {
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .round {
 	border-radius: 5000rpx;
@@ -155,10 +154,8 @@ switch::before {
 	text-align: center;
 	pointer-events: none;
 	-webkit-transform: scale(0, 0);
-	    -ms-transform: scale(0, 0);
 	        transform: scale(0, 0);
 	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
 	transition: all 0.3s ease-in-out 0s;
 	z-index: 9;
 	bottom: 0;
@@ -169,20 +166,17 @@ switch::before {
 	content: "\E646";
 	right: 0;
 	-webkit-transform: scale(1, 1);
-	    -ms-transform: scale(1, 1);
 	        transform: scale(1, 1);
 	left: auto;
 }
 switch[checked]::after,
 switch.checked::after {
 	-webkit-transform: scale(1, 1);
-	    -ms-transform: scale(1, 1);
 	        transform: scale(1, 1);
 }
 switch[checked]::before,
 switch.checked::before {
 	-webkit-transform: scale(0, 0);
-	    -ms-transform: scale(0, 0);
 	        transform: scale(0, 0);
 }
 
@@ -200,10 +194,8 @@ checkbox::before {
 	line-height: 16px;
 	pointer-events: none;
 	-webkit-transform: scale(1, 1);
-	    -ms-transform: scale(1, 1);
 	        transform: scale(1, 1);
 	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
 	transition: all 0.3s ease-in-out 0s;
 	z-index: 9;
 }
@@ -223,7 +215,6 @@ checkbox.round .uni-checkbox-input {
 
 switch[checked]::before {
 	-webkit-transform: scale(0, 0);
-	    -ms-transform: scale(0, 0);
 	        transform: scale(0, 0);
 }
 switch .wx-switch-input,
@@ -250,20 +241,16 @@ switch .uni-switch-input::after {
 	bottom: 0rpx;
 	position: absolute;
 	-webkit-transform: scale(0.9, 0.9);
-	    -ms-transform: scale(0.9, 0.9);
 	        transform: scale(0.9, 0.9);
 	-webkit-transition: all 0.1s ease-in-out 0s;
-	-o-transition: all 0.1s ease-in-out 0s;
 	transition: all 0.1s ease-in-out 0s;
 }
 switch .wx-switch-input.wx-switch-input-checked::after,
 switch .uni-switch-input.uni-switch-input-checked::after {
 	margin: auto;
 	left: 22px;
-	-webkit-box-shadow: none;
-	        box-shadow: none;
+	box-shadow: none;
 	-webkit-transform: scale(0.9, 0.9);
-	    -ms-transform: scale(0.9, 0.9);
 	        transform: scale(0.9, 0.9);
 }
 radio-group {
@@ -634,14 +621,11 @@ radio.white.checked .uni-radio-input {
 	left: 0;
 	border-radius: inherit;
 	-webkit-transform: scale(0.5);
-	    -ms-transform: scale(0.5);
 	        transform: scale(0.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	pointer-events: none;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .solid::after {
 	border: 1rpx solid rgba(0, 0, 0, 0.1);
@@ -700,8 +684,7 @@ radio.white.checked .uni-radio-input {
 }
 .shadow-warp {
 	position: relative;
-	-webkit-box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-	        box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 .shadow-warp:before,
 .shadow-warp:after {
@@ -711,10 +694,8 @@ radio.white.checked .uni-radio-input {
 	bottom: 30rpx;
 	left: 20rpx;
 	width: 50%;
-	-webkit-box-shadow: 0 30rpx 20rpx rgba(0, 0, 0, 0.2);
-	        box-shadow: 0 30rpx 20rpx rgba(0, 0, 0, 0.2);
+	box-shadow: 0 30rpx 20rpx rgba(0, 0, 0, 0.2);
 	-webkit-transform: rotate(-3deg);
-	    -ms-transform: rotate(-3deg);
 	        transform: rotate(-3deg);
 	z-index: -1;
 }
@@ -722,7 +703,6 @@ radio.white.checked .uni-radio-input {
 	right: 20rpx;
 	left: auto;
 	-webkit-transform: rotate(3deg);
-	    -ms-transform: rotate(3deg);
 	        transform: rotate(3deg);
 }
 .shadow-blur {
@@ -742,11 +722,9 @@ radio.white.checked .uni-radio-input {
 	z-index: -1;
 	opacity: 0.4;
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	border-radius: inherit;
 	-webkit-transform: scale(1, 1);
-	    -ms-transform: scale(1, 1);
 	        transform: scale(1, 1);
 }
 
@@ -758,18 +736,14 @@ radio.white.checked .uni-radio-input {
 	border: 0rpx;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	padding: 0 30rpx;
 	font-size: 28rpx;
 	height: 64rpx;
@@ -779,7 +753,6 @@ radio.white.checked .uni-radio-input {
 	overflow: visible;
 	margin-left: initial;
 	-webkit-transform: translate(0rpx, 0rpx);
-	    -ms-transform: translate(0rpx, 0rpx);
 	        transform: translate(0rpx, 0rpx);
 	margin-right: initial;
 }
@@ -802,13 +775,10 @@ radio.white.checked .uni-radio-input {
 	left: 0;
 	border: 1rpx solid currentColor;
 	-webkit-transform: scale(0.5);
-	    -ms-transform: scale(0.5);
 	        transform: scale(0.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	border-radius: 12rpx;
 	z-index: 1;
 	pointer-events: none;
@@ -855,7 +825,6 @@ button.icon.lg {
 }
 .cu-btn.button-hover {
 	-webkit-transform: translate(1rpx, 1rpx);
-	    -ms-transform: translate(1rpx, 1rpx);
 	        transform: translate(1rpx, 1rpx);
 }
 .block {
@@ -864,7 +833,6 @@ button.icon.lg {
 .cu-btn.block {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 }
 .cu-btn[disabled] {
@@ -881,18 +849,14 @@ button.icon.lg {
 	position: relative;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	padding: 0rpx 16rpx;
 	height: 48rpx;
 	font-family: Helvetica Neue, Helvetica, sans-serif;
@@ -910,13 +874,10 @@ button.icon.lg {
 	left: 0;
 	border: 1rpx solid currentColor;
 	-webkit-transform: scale(0.5);
-	    -ms-transform: scale(0.5);
 	        transform: scale(0.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	border-radius: inherit;
 	z-index: 1;
 	pointer-events: none;
@@ -941,7 +902,6 @@ button.icon.lg {
 .cu-capsule {
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	vertical-align: middle;
 }
@@ -1013,16 +973,13 @@ button.icon.lg {
 	padding: 0;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	text-align: center;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	background-color: #ccc;
 	color: var(--white);
@@ -1078,11 +1035,9 @@ button.icon.lg {
 	background-color: #ebeef5;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	width: 100%;
 }
@@ -1101,30 +1056,24 @@ button.icon.lg {
 	height: 100%;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	justify-items: flex-end;
 	-webkit-justify-content: space-around;
-	    -ms-flex-pack: distribute;
 	        justify-content: space-around;
 	font-size: 20rpx;
 	color: var(--white);
 	-webkit-transition: width 0.6s ease;
-	-o-transition: width 0.6s ease;
 	transition: width 0.6s ease;
 }
 .cu-progress text {
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	font-size: 20rpx;
 	color: var(--black);
@@ -1134,7 +1083,7 @@ button.icon.lg {
 	padding-right: 60rpx;
 }
 .cu-progress.striped view {
-	background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+	background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 	background-size: 72rpx 72rpx;
 }
@@ -1212,24 +1161,19 @@ to {
 	height: 260rpx;
 	background-color: var(--white);
 	border-radius: 10rpx;
-	-webkit-box-shadow: 0 0 0rpx 2000rpx rgba(0, 0, 0, 0.5);
-	        box-shadow: 0 0 0rpx 2000rpx rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 0rpx 2000rpx rgba(0, 0, 0, 0.5);
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
 	        flex-direction: column;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 	font-size: 28rpx;
 	z-index: 9999;
@@ -1275,7 +1219,6 @@ to {
 	height: 4rpx;
 	overflow: hidden;
 	-webkit-transition: all 200ms ease 0s;
-	-o-transition: all 200ms ease 0s;
 	transition: all 200ms ease 0s;
 }
 .load-progress .load-progress-spinner {
@@ -1290,7 +1233,6 @@ to {
 	display: block;
 	width: 24rpx;
 	height: 24rpx;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	border: solid 4rpx transparent;
 	border-top-color: inherit;
@@ -1332,15 +1274,12 @@ to {
 }
 .cu-list>.cu-item {
 	-webkit-transition: all .6s ease-in-out 0s;
-	-o-transition: all .6s ease-in-out 0s;
 	transition: all .6s ease-in-out 0s;
 	-webkit-transform: translateX(0rpx);
-	    -ms-transform: translateX(0rpx);
 	        transform: translateX(0rpx)
 }
 .cu-list>.cu-item.move-cur {
 	-webkit-transform: translateX(-260rpx);
-	    -ms-transform: translateX(-260rpx);
 	        transform: translateX(-260rpx)
 }
 .cu-list>.cu-item .move {
@@ -1348,30 +1287,24 @@ to {
 	right: 0;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	width: 260rpx;
 	height: 100%;
 	-webkit-transform: translateX(100%);
-	    -ms-transform: translateX(100%);
 	        transform: translateX(100%)
 }
 .cu-list>.cu-item .move view {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center
 }
 .cu-list.menu-avatar {
@@ -1381,18 +1314,15 @@ to {
 	position: relative;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	padding-right: 10rpx;
 	height: 140rpx;
 	background-color: var(--white);
 	-webkit-box-pack: end;
 	-webkit-justify-content: flex-end;
-	    -ms-flex-pack: end;
 	        justify-content: flex-end;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center
 }
 .cu-list.menu-avatar>.cu-item>.cu-avatar {
@@ -1415,11 +1345,9 @@ to {
 	font-size: 30rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center
 }
 .cu-list.menu-avatar>.cu-item .content .cu-tag.sm {
@@ -1442,7 +1370,6 @@ to {
 	width: auto;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 }
 .cu-list.menu-avatar.comment>.cu-item {
@@ -1451,25 +1378,21 @@ to {
 }
 .cu-list.menu-avatar.comment .cu-avatar {
 	-webkit-align-self: flex-start;
-	    -ms-flex-item-align: start;
 	        align-self: flex-start
 }
 .cu-list.menu>.cu-item {
 	position: relative;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	padding: 0 30rpx;
 	min-height: 100rpx;
 	background-color: var(--white);
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
-	    -ms-flex-pack: justify;
 	        justify-content: space-between;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center
 }
 .cu-list.menu>.cu-item:last-child:after {
@@ -1479,18 +1402,15 @@ to {
 	position: absolute;
 	top: 0;
 	left: 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	width: 200%;
 	height: 200%;
 	border-bottom: 1rpx solid #ddd;
 	border-radius: inherit;
 	content: " ";
 	-webkit-transform: scale(.5);
-	    -ms-transform: scale(.5);
 	        transform: scale(.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	pointer-events: none
 }
@@ -1524,7 +1444,6 @@ to {
 	background-color: transparent;
 	-webkit-box-pack: start;
 	-webkit-justify-content: flex-start;
-	    -ms-flex-pack: start;
 	        justify-content: flex-start
 }
 .cu-list.menu>.cu-item button.content:after {
@@ -1536,11 +1455,9 @@ to {
 .cu-list.menu>.cu-item .content>view:first-child {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center
 }
 .cu-list.menu>.cu-item .content>text[class*=cuIcon] {
@@ -1561,7 +1478,6 @@ to {
 	line-height: 1.6em;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1
 }
 .cu-list.menu>.cu-item .content .cu-tag.sm {
@@ -1586,24 +1502,20 @@ to {
 	position: relative;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	padding: 20rpx 0 30rpx;
 	-webkit-transition-duration: 0s;
-	     -o-transition-duration: 0s;
 	        transition-duration: 0s;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
 	        flex-direction: column
 }
 .cu-list.grid>.cu-item:after {
 	position: absolute;
 	top: 0;
 	left: 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	width: 200%;
 	height: 200%;
 	border-right: 1px solid rgba(0, 0, 0, .1);
@@ -1611,10 +1523,8 @@ to {
 	border-radius: inherit;
 	content: " ";
 	-webkit-transform: scale(.5);
-	    -ms-transform: scale(.5);
 	        transform: scale(.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	pointer-events: none
 }
@@ -1669,32 +1579,26 @@ to {
 .cu-bar {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	position: relative;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	min-height: 100rpx;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
-	    -ms-flex-pack: justify;
 	        justify-content: space-between;
 }
 .cu-bar .action {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	height: 100%;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 	max-width: 100%;
 }
@@ -1785,8 +1689,7 @@ to {
 	line-height: 60rpx;
 	cursor: none;
 	pointer-events: none;
-	-o-text-overflow: ellipsis;
-	   text-overflow: ellipsis;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
@@ -1798,7 +1701,6 @@ to {
 }
 .cu-bar.btn-group {
 	-webkit-justify-content: space-around;
-	    -ms-flex-pack: distribute;
 	        justify-content: space-around;
 }
 .cu-bar.btn-group button {
@@ -1807,7 +1709,6 @@ to {
 .cu-bar.btn-group button {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	margin: 0 20rpx;
 	max-width: 50%;
@@ -1820,15 +1721,12 @@ to {
 	color: var(--black);
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	margin: 0 30rpx;
 }
@@ -1838,7 +1736,6 @@ to {
 .cu-bar .search-form input {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	padding-right: 30rpx;
 	height: 64rpx;
@@ -1865,8 +1762,7 @@ to {
 	width: 100%;
 	bottom: 0;
 	z-index: 1024;
-	-webkit-box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
-	        box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+	box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 .cu-bar.tabbar {
 	padding: 0;
@@ -1878,15 +1774,13 @@ to {
 	height: calc(100rpx + env(safe-area-inset-bottom) / 2);
 }
 .cu-bar.tabbar.shadow {
-	-webkit-box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
-	        box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+	box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 .cu-bar.tabbar .action {
 	font-size: 22rpx;
 	position: relative;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	text-align: center;
 	padding: 0;
@@ -1901,7 +1795,6 @@ to {
 	width: 140rpx;
 	-webkit-box-flex: initial;
 	-webkit-flex: initial;
-	    -ms-flex: initial;
 	        flex: initial;
 }
 .cu-bar.tabbar .action.add-action {
@@ -1932,8 +1825,7 @@ to {
 	left: 0;
 	right: 0;
 	margin: auto;
-	-webkit-box-shadow: 0 -3rpx 8rpx rgba(0, 0, 0, 0.08);
-	        box-shadow: 0 -3rpx 8rpx rgba(0, 0, 0, 0.08);
+	box-shadow: 0 -3rpx 8rpx rgba(0, 0, 0, 0.08);
 	border-radius: 50rpx;
 	background-color: inherit;
 	z-index: 0;
@@ -1953,18 +1845,14 @@ to {
 .cu-bar.tabbar .btn-group {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-justify-content: space-around;
-	    -ms-flex-pack: distribute;
 	        justify-content: space-around;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	padding: 0 10rpx;
 }
@@ -1991,36 +1879,29 @@ to {
 .cu-bar.tabbar .submit {
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 	text-align: center;
 	position: relative;
 	-webkit-box-flex: 2;
 	-webkit-flex: 2;
-	    -ms-flex: 2;
 	        flex: 2;
 	-webkit-align-self: stretch;
-	    -ms-flex-item-align: stretch;
 	        align-self: stretch;
 }
 .cu-bar.tabbar .submit:last-child {
 	-webkit-box-flex: 2.6;
 	-webkit-flex: 2.6;
-	    -ms-flex: 2.6;
 	        flex: 2.6;
 }
 .cu-bar.tabbar .submit+.submit {
 	-webkit-box-flex: 2;
 	-webkit-flex: 2;
-	    -ms-flex: 2;
 	        flex: 2;
 }
 .cu-bar.tabbar.border .action::before {
@@ -2031,10 +1912,8 @@ to {
 	top: 0;
 	left: 0;
 	-webkit-transform: scale(0.5);
-	    -ms-transform: scale(0.5);
 	        transform: scale(0.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	border-right: 1rpx solid rgba(0, 0, 0, 0.1);
 	z-index: 3;
@@ -2053,7 +1932,6 @@ to {
 	min-height: 64rpx;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	font-size: 30rpx;
 	margin: 0 20rpx;
@@ -2088,8 +1966,7 @@ to {
 	min-height: 0px;
 	
 	
-	-webkit-box-shadow: 0rpx 0rpx 0rpx;
-	        box-shadow: 0rpx 0rpx 0rpx;
+	box-shadow: 0rpx 0rpx 0rpx;
 	z-index: 2000;
 }
 .cu-custom .cu-bar .border-custom {
@@ -2107,14 +1984,11 @@ to {
 	left: 0;
 	border-radius: inherit;
 	-webkit-transform: scale(0.5);
-	    -ms-transform: scale(0.5);
 	        transform: scale(0.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	pointer-events: none;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	border: 1rpx solid var(--white);
 	opacity: 0.5;
 }
@@ -2128,14 +2002,11 @@ to {
 	right: 0;
 	margin: auto;
 	-webkit-transform: scale(0.5);
-	    -ms-transform: scale(0.5);
 	        transform: scale(0.5);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	pointer-events: none;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	opacity: 0.6;
 	background-color: var(--white);
 }
@@ -2143,7 +2014,6 @@ to {
 	display: block;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	margin: auto !important;
 	text-align: center;
@@ -2251,18 +2121,15 @@ to {
 .cu-chat {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
 	        flex-direction: column;
 }
 .cu-chat .cu-item {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	padding: 30rpx 30rpx 70rpx;
 	position: relative;
@@ -2276,11 +2143,9 @@ to {
 	margin: 0 40rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 }
 .cu-chat .cu-item>image {
@@ -2291,12 +2156,10 @@ to {
 	border-radius: 6rpx;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	max-width: 100%;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	font-size: 30rpx;
 	position: relative;
@@ -2320,18 +2183,15 @@ to {
 	padding: 0 30rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 }
 .cu-chat .cu-item>.main .content::after {
 	content: "";
 	top: 27rpx;
 	-webkit-transform: rotate(45deg);
-	    -ms-transform: rotate(45deg);
 	        transform: rotate(45deg);
 	position: absolute;
 	z-index: 100;
@@ -2351,7 +2211,6 @@ to {
 	content: "";
 	top: 30rpx;
 	-webkit-transform: rotate(45deg);
-	    -ms-transform: rotate(45deg);
 	        transform: rotate(45deg);
 	position: absolute;
 	z-index: -1;
@@ -2377,7 +2236,6 @@ to {
 .cu-chat .cu-item.self {
 	-webkit-box-pack: end;
 	-webkit-justify-content: flex-end;
-	    -ms-flex-pack: end;
 	        justify-content: flex-end;
 	text-align: right;
 }
@@ -2488,7 +2346,6 @@ to {
 .cu-card.article>.cu-item .content {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	padding: 0 30rpx;
 }
@@ -2501,20 +2358,16 @@ to {
 .cu-card.article>.cu-item .content .desc {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
 	        flex-direction: column;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
-	    -ms-flex-pack: justify;
 	        justify-content: space-between;
 }
 .cu-card.article>.cu-item .content .text-content {
@@ -2532,16 +2385,13 @@ to {
 	padding: 1rpx 30rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	min-height: 100rpx;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
-	    -ms-flex-pack: justify;
 	        justify-content: space-between;
 }
 .cu-form-group+.cu-form-group {
@@ -2558,7 +2408,6 @@ to {
 .cu-form-group input {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	font-size: 30rpx;
 	color: #555;
@@ -2567,8 +2416,7 @@ to {
 .cu-form-group>text[class*="cuIcon-"] {
 	font-size: 36rpx;
 	padding: 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .cu-form-group textarea {
 	margin: 32rpx 0 30rpx;
@@ -2577,7 +2425,6 @@ to {
 	line-height: 1.2em;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	font-size: 28rpx;
 	padding: 0;
@@ -2590,7 +2437,6 @@ to {
 .cu-form-group picker {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	padding-right: 40rpx;
 	overflow: hidden;
@@ -2599,8 +2445,7 @@ to {
 .cu-form-group picker .picker {
 	line-height: 100rpx;
 	font-size: 28rpx;
-	-o-text-overflow: ellipsis;
-	   text-overflow: ellipsis;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 	width: 100%;
@@ -2639,7 +2484,6 @@ to {
 	opacity: 0;
 	outline: 0;
 	text-align: center;
-	-ms-transform: scale(1.185);
 	-webkit-transform: scale(1.185);
 	        transform: scale(1.185);
 	-webkit-backface-visibility: hidden;
@@ -2648,7 +2492,6 @@ to {
 	        perspective: 2000rpx;
 	background: rgba(0, 0, 0, 0.6);
 	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
 	transition: all 0.3s ease-in-out 0s;
 	pointer-events: none;
 }
@@ -2661,9 +2504,7 @@ to {
 .cu-modal.show {
 	opacity: 1;
 	-webkit-transition-duration: 0.3s;
-	     -o-transition-duration: 0.3s;
 	        transition-duration: 0.3s;
-	-ms-transform: scale(1);
 	-webkit-transform: scale(1);
 	        transform: scale(1);
 	overflow-x: hidden;
@@ -2697,11 +2538,9 @@ to {
 }
 .cu-modal.drawer-modal {
 	-webkit-transform: scale(1);
-	    -ms-transform: scale(1);
 	        transform: scale(1);
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 }
 .cu-modal.drawer-modal .cu-dialog {
@@ -2710,22 +2549,18 @@ to {
 	border-radius: 0;
 	margin: initial;
 	-webkit-transition-duration: 0.3s;
-	     -o-transition-duration: 0.3s;
 	        transition-duration: 0.3s;
 }
 .cu-modal.drawer-modal.justify-start .cu-dialog {
 	-webkit-transform: translateX(-100%);
-	    -ms-transform: translateX(-100%);
 	        transform: translateX(-100%);
 }
 .cu-modal.drawer-modal.justify-end .cu-dialog {
 	-webkit-transform: translateX(100%);
-	    -ms-transform: translateX(100%);
 	        transform: translateX(100%);
 }
 .cu-modal.drawer-modal.show .cu-dialog {
 	-webkit-transform: translateX(0%);
-	    -ms-transform: translateX(0%);
 	        transform: translateX(0%);
 }
 .cu-modal .cu-dialog>.cu-bar:first-child .action{
@@ -2750,16 +2585,13 @@ swiper[class*="-dot"] .a-swiper-dots,
 swiper[class*="-dot"] .uni-swiper-dots {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	width: 100%;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 }
 swiper.square-dot .wx-swiper-dot,
@@ -2826,8 +2658,7 @@ swiper.round-dot .uni-swiper-dot.uni-swiper-dot-active {
 .card-swiper swiper-item {
 	width: 610rpx !important;
 	left: 70rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	padding: 40rpx 0rpx 70rpx;
 	overflow: initial;
 }
@@ -2837,19 +2668,15 @@ swiper.round-dot .uni-swiper-dot.uni-swiper-dot-active {
 	height: 100%;
 	border-radius: 10rpx;
 	-webkit-transform: scale(0.9);
-	    -ms-transform: scale(0.9);
 	        transform: scale(0.9);
 	-webkit-transition: all 0.2s ease-in 0s;
-	-o-transition: all 0.2s ease-in 0s;
 	transition: all 0.2s ease-in 0s;
 	overflow: hidden;
 }
 .card-swiper swiper-item.cur .swiper-item {
 	-webkit-transform: none;
-	    -ms-transform: none;
 	        transform: none;
 	-webkit-transition: all 0.2s ease-in 0s;
-	-o-transition: all 0.2s ease-in 0s;
 	transition: all 0.2s ease-in 0s;
 }
 .tower-swiper {
@@ -2867,7 +2694,6 @@ swiper.round-dot .uni-swiper-dot.uni-swiper-dot-active {
 	left: 50%;
 	margin: auto;
 	-webkit-transition: all 0.2s ease-in 0s;
-	-o-transition: all 0.2s ease-in 0s;
 	transition: all 0.2s ease-in 0s;
 	opacity: 1;
 }
@@ -2887,7 +2713,6 @@ swiper.round-dot .uni-swiper-dot.uni-swiper-dot-active {
 .cu-steps {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 }
 scroll-view.cu-steps {
@@ -2900,7 +2725,6 @@ scroll-view.cu-steps .cu-item {
 .cu-steps .cu-item {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 	text-align: center;
 	position: relative;
@@ -2950,7 +2774,6 @@ scroll-view.cu-steps .cu-item {
 	border-bottom: 1px solid currentColor;
 	width: 0px;
 	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
 	transition: all 0.3s ease-in-out 0s;
 }
 .cu-steps .cu-item[class*="text-"]::after {
@@ -2985,25 +2808,20 @@ scroll-view.cu-steps .cu-item {
 	bottom: 0;
 	margin: auto;
 	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
 	transition: all 0.3s ease-in-out 0s;
 	-webkit-transform: translateY(0rpx);
-	    -ms-transform: translateY(0rpx);
 	        transform: translateY(0rpx);
 }
 .cu-steps .cu-item[class*="text-"] .num::before {
 	-webkit-transform: translateY(-40rpx);
-	    -ms-transform: translateY(-40rpx);
 	        transform: translateY(-40rpx);
 	color: var(--white);
 }
 .cu-steps .cu-item .num::after {
 	-webkit-transform: translateY(40rpx);
-	    -ms-transform: translateY(40rpx);
 	        transform: translateY(40rpx);
 	color: var(--white);
 	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
 	transition: all 0.3s ease-in-out 0s;
 }
 .cu-steps .cu-item[class*="text-"] .num::after {
@@ -3011,7 +2829,6 @@ scroll-view.cu-steps .cu-item {
 	font-family: 'cuIcon';
 	color: var(--white);
 	-webkit-transform: translateY(0rpx);
-	    -ms-transform: translateY(0rpx);
 	        transform: translateY(0rpx);
 }
 .cu-steps .cu-item[class*="text-"] .num.err::after {
@@ -3026,141 +2843,116 @@ scroll-view.cu-steps .cu-item {
 .flex {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 }
 .basis-xs {
 	-webkit-flex-basis: 20%;
-	    -ms-flex-preferred-size: 20%;
 	        flex-basis: 20%;
 }
 .basis-sm {
 	-webkit-flex-basis: 40%;
-	    -ms-flex-preferred-size: 40%;
 	        flex-basis: 40%;
 }
 .basis-df {
 	-webkit-flex-basis: 50%;
-	    -ms-flex-preferred-size: 50%;
 	        flex-basis: 50%;
 }
 .basis-lg {
 	-webkit-flex-basis: 60%;
-	    -ms-flex-preferred-size: 60%;
 	        flex-basis: 60%;
 }
 .basis-xl {
 	-webkit-flex-basis: 80%;
-	    -ms-flex-preferred-size: 80%;
 	        flex-basis: 80%;
 }
 .flex-sub {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
-	    -ms-flex: 1;
 	        flex: 1;
 }
 .flex-twice {
 	-webkit-box-flex: 2;
 	-webkit-flex: 2;
-	    -ms-flex: 2;
 	        flex: 2;
 }
 .flex-treble {
 	-webkit-box-flex: 3;
 	-webkit-flex: 3;
-	    -ms-flex: 3;
 	        flex: 3;
 }
 .flex-direction {
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
 	        flex-direction: column;
 }
 .flex-wrap {
 	-webkit-flex-wrap: wrap;
-	    -ms-flex-wrap: wrap;
 	        flex-wrap: wrap;
 }
 .align-start {
 	-webkit-box-align: start;
 	-webkit-align-items: flex-start;
-	    -ms-flex-align: start;
 	        align-items: flex-start;
 }
 .align-end {
 	-webkit-box-align: end;
 	-webkit-align-items: flex-end;
-	    -ms-flex-align: end;
 	        align-items: flex-end;
 }
 .align-center {
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 }
 .align-stretch {
 	-webkit-box-align: stretch;
 	-webkit-align-items: stretch;
-	    -ms-flex-align: stretch;
 	        align-items: stretch;
 }
 .self-start {
 	-webkit-align-self: flex-start;
-	    -ms-flex-item-align: start;
 	        align-self: flex-start;
 }
 .self-center {
 	-webkit-align-self: flex-center;
-	    -ms-flex-item-align: flex-center;
 	        align-self: flex-center;
 }
 .self-end {
 	-webkit-align-self: flex-end;
-	    -ms-flex-item-align: end;
 	        align-self: flex-end;
 }
 .self-stretch {
 	-webkit-align-self: stretch;
-	    -ms-flex-item-align: stretch;
 	        align-self: stretch;
 }
 .align-stretch {
 	-webkit-box-align: stretch;
 	-webkit-align-items: stretch;
-	    -ms-flex-align: stretch;
 	        align-items: stretch;
 }
 .justify-start {
 	-webkit-box-pack: start;
 	-webkit-justify-content: flex-start;
-	    -ms-flex-pack: start;
 	        justify-content: flex-start;
 }
 .justify-end {
 	-webkit-box-pack: end;
 	-webkit-justify-content: flex-end;
-	    -ms-flex-pack: end;
 	        justify-content: flex-end;
 }
 .justify-center {
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 }
 .justify-between {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
-	    -ms-flex-pack: justify;
 	        justify-content: space-between;
 }
 .justify-around {
 	-webkit-justify-content: space-around;
-	    -ms-flex-pack: distribute;
 	        justify-content: space-around;
 }
 
@@ -3168,10 +2960,8 @@ scroll-view.cu-steps .cu-item {
 .grid {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-flex-wrap: wrap;
-	    -ms-flex-wrap: wrap;
 	        flex-wrap: wrap;
 }
 .grid.grid-square {
@@ -3197,20 +2987,16 @@ scroll-view.cu-steps .cu-item {
 	right: 0;
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
 	        justify-content: center;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
-	    -ms-flex-align: center;
 	        align-items: center;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
 	        flex-direction: column;
 }
 .grid.grid-square>view {
@@ -3655,8 +3441,7 @@ scroll-view.cu-steps .cu-item {
 	color: var(--white);
 } */
 .bg-shadeBottom {
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.01)), to(rgba(0, 0, 0, 1)));
-	background-image: -o-linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
+	background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
 	background-image: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
 	color: var(--white);
 }
@@ -3733,64 +3518,49 @@ scroll-view.cu-steps .cu-item {
 	color: var(--white);
 }
 .shadow[class*="-red"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--redShadow);
-	        box-shadow: var(--ShadowSize) var(--redShadow);
+	box-shadow: var(--ShadowSize) var(--redShadow);
 }
 .shadow[class*="-orange"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--orangeShadow);
-	        box-shadow: var(--ShadowSize) var(--orangeShadow);
+	box-shadow: var(--ShadowSize) var(--orangeShadow);
 }
 .shadow[class*="-yellow"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--yellowShadow);
-	        box-shadow: var(--ShadowSize) var(--yellowShadow);
+	box-shadow: var(--ShadowSize) var(--yellowShadow);
 }
 .shadow[class*="-olive"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--oliveShadow);
-	        box-shadow: var(--ShadowSize) var(--oliveShadow);
+	box-shadow: var(--ShadowSize) var(--oliveShadow);
 }
 .shadow[class*="-green"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--greenShadow);
-	        box-shadow: var(--ShadowSize) var(--greenShadow);
+	box-shadow: var(--ShadowSize) var(--greenShadow);
 }
 .shadow[class*="-cyan"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--cyanShadow);
-	        box-shadow: var(--ShadowSize) var(--cyanShadow);
+	box-shadow: var(--ShadowSize) var(--cyanShadow);
 }
 .shadow[class*="-blue"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--blueShadow);
-	        box-shadow: var(--ShadowSize) var(--blueShadow);
+	box-shadow: var(--ShadowSize) var(--blueShadow);
 }
 .shadow[class*="-purple"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--purpleShadow);
-	        box-shadow: var(--ShadowSize) var(--purpleShadow);
+	box-shadow: var(--ShadowSize) var(--purpleShadow);
 }
 .shadow[class*="-mauve"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--mauveShadow);
-	        box-shadow: var(--ShadowSize) var(--mauveShadow);
+	box-shadow: var(--ShadowSize) var(--mauveShadow);
 }
 .shadow[class*="-pink"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--pinkShadow);
-	        box-shadow: var(--ShadowSize) var(--pinkShadow);
+	box-shadow: var(--ShadowSize) var(--pinkShadow);
 }
 .shadow[class*="-brown"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--brownShadow);
-	        box-shadow: var(--ShadowSize) var(--brownShadow);
+	box-shadow: var(--ShadowSize) var(--brownShadow);
 }
 .shadow[class*="-grey"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--greyShadow);
-	        box-shadow: var(--ShadowSize) var(--greyShadow);
+	box-shadow: var(--ShadowSize) var(--greyShadow);
 }
 .shadow[class*="-gray"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--grayShadow);
-	        box-shadow: var(--ShadowSize) var(--grayShadow);
+	box-shadow: var(--ShadowSize) var(--grayShadow);
 }
 .shadow[class*="-black"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--blackShadow);
-	        box-shadow: var(--ShadowSize) var(--blackShadow);
+	box-shadow: var(--ShadowSize) var(--blackShadow);
 }
 .shadow[class*="-white"] {
-	-webkit-box-shadow: var(--ShadowSize) var(--blackShadow);
-	        box-shadow: var(--ShadowSize) var(--blackShadow);
+	box-shadow: var(--ShadowSize) var(--blackShadow);
 }
 .text-shadow[class*="-red"] {
 	text-shadow: var(--ShadowSize) var(--redShadow);
@@ -3868,7 +3638,6 @@ scroll-view.cu-steps .cu-item {
 	display: block;
 	height: 100%;
 	width: 100%;
-	-o-object-fit: cover;
 	object-fit: cover;
 	position: absolute;
 	top: 0;
@@ -3918,8 +3687,7 @@ scroll-view.cu-steps .cu-item {
 	margin-right: 4rpx;
 }
 .text-cut {
-	-o-text-overflow: ellipsis;
-	   text-overflow: ellipsis;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }

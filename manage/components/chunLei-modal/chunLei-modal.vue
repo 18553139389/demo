@@ -34,12 +34,12 @@
 				</checkbox-group>
 			</view>
 		</block>
-		<block v-if="type=='advert'">
+		<!-- <block v-if="type=='advert'">
 			<view class="advert-view">
 				<image :src="mData.src" class="image confirm" @tap.stop="tapConfirm" :style="{width:mData.width?mData.width:'500rpx',height:mData.height?mData.height:'700rpx'}"></image>
 				<image class="image cancel" @tap.stop="tapCancel" src="../../static/chunLei-modal/close.png"></image>
 			</view>
-		</block>
+		</block> -->
 		<block v-if="type=='notify'">
 			<view class="notify-view">
 				<view class="title" v-if="mData.title">{{mData.title}}</view>
@@ -61,7 +61,7 @@
 					<view v-for="(item,index) in mData.content" :key="index" class="input-box">
 						<view class="view">{{item.title}}</view>
 						<block v-if="item.type=='number'">
-							<input class="input" v-model="item.content" type="number" :password="item.type=='password'" :placeholder="item.placeholder" />吨
+							<input class="input" v-model="item.content" type="number" :password="item.type=='password'" :placeholder="item.placeholder" />{{item.unit}}
 						</block>
 						<block v-if="item.type=='password'">
 							<input class="input" v-model="item.content" :password="item.type=='password'" :placeholder="item.placeholder" />

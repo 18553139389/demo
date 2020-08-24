@@ -24,83 +24,71 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.contain.data-v-90556eea {
+.contain.data-v-c67421fa {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-      -ms-flex-direction: column;
           flex-direction: column;
 }
-.contain .fixed.data-v-90556eea {
+.contain .fixed.data-v-c67421fa {
     width: 100%;
 }
-.contain .wrapper.data-v-90556eea {
+.contain .wrapper.data-v-c67421fa {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
-        -ms-flex-direction: column;
             flex-direction: column;
     border-top: 24rpx solid #FAFAFA;
 }
-.contain .wrapper ._ul.data-v-90556eea {
+.contain .wrapper ._ul.data-v-c67421fa {
       width: 100%;
       display: -webkit-box;
       display: -webkit-flex;
-      display: -ms-flexbox;
       display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
       -webkit-flex-direction: column;
-          -ms-flex-direction: column;
               flex-direction: column;
 }
-.contain .wrapper ._ul ._li.data-v-90556eea {
+.contain .wrapper ._ul ._li.data-v-c67421fa {
         width: 100%;
         height: 90rpx;
         padding: 0 28rpx;
-        -webkit-box-sizing: border-box;
-                box-sizing: border-box;
+        box-sizing: border-box;
         border-bottom: 1px solid #eee;
         display: -webkit-box;
         display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         -webkit-box-align: center;
         -webkit-align-items: center;
-            -ms-flex-align: center;
                 align-items: center;
         font-size: 14px;
         color: #333;
 }
-.contain .wrapper ._ul ._li .left.data-v-90556eea {
+.contain .wrapper ._ul ._li .left.data-v-c67421fa {
           width: 25%;
 }
-.contain .wrapper ._ul ._li .right.data-v-90556eea {
+.contain .wrapper ._ul ._li .right.data-v-c67421fa {
           width: 75%;
           display: -webkit-box;
           display: -webkit-flex;
-          display: -ms-flexbox;
           display: flex;
           -webkit-box-pack: justify;
           -webkit-justify-content: space-between;
-              -ms-flex-pack: justify;
                   justify-content: space-between;
           -webkit-box-align: center;
           -webkit-align-items: center;
-              -ms-flex-align: center;
                   align-items: center;
 }
-.contain .wrapper ._ul ._li .right .codes.data-v-90556eea {
+.contain .wrapper ._ul ._li .right .codes.data-v-c67421fa {
             height: 50rpx;
             line-height: 50rpx;
             background: #0081FF;
@@ -109,7 +97,7 @@
             color: #FFFFFF;
             margin: 0;
 }
-.contain .wrapper .btns.data-v-90556eea {
+.contain .wrapper .btns.data-v-c67421fa {
       width: 70%;
       height: 90rpx;
       line-height: 90rpx;

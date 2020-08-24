@@ -61,7 +61,6 @@
 /*下拉刷新--高度重置的过渡动画*/
 .mescroll-downwarp-reset {
 	-webkit-transition: height 300ms;
-	-o-transition: height 300ms;
 	transition: height 300ms;
 }
 

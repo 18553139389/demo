@@ -3,21 +3,21 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
-		uid: '',
-		history: [],
-		count: 0
+		productItem: '',
+		productState: '',
+		carNum: ''
 	},
 	//切记：Vuex中store数据改变的唯一方法就是mutation！
 	mutations: {
-		changeUid(state, item) {
-			state.uid = item
+		changeProductItem(state, item) {
+			state.productItem = item
 		},
-		changeHistory(state, item) {
-			state.history = item
+		changeProductState(state, item) {
+			state.productState = item
 		},
-		changeCount(state, item) {
-			state.count = item
-		}
+		changeCarNum(state, item) {
+			state.carNum = item
+		},
 	}
 })
 

@@ -9,7 +9,7 @@
 		<view class="wrapper">
 			<view class="box">
 				<view class="search">
-					<img src="../../static/images/search.png" alt="">
+					<image src="../../static/images/search.png" alt=""></image>
 					<input type="text" v-model="val" placeholder="请输入车牌号" confirm-type="search" @confirm="goSearch">
 				</view>
 				<view class="btn-search" @tap="goSearch">查询</view>
@@ -26,7 +26,7 @@
 					</view>
 					<view class="msg">
 						<view>自重：{{v.weight}}{{v.weightunit}}</view>
-						<img src="../../static/images/right.png" alt="">
+						<image src="../../static/images/right.png" alt=""></image>
 					</view>
 				</li>
 			</ul>
@@ -140,7 +140,7 @@
 					padding-left: 160upx;
 					box-sizing: border-box;
 					
-					img {
+					image {
 						width: 36upx;
 						height: 36upx;
 					}
@@ -202,7 +202,7 @@
 						font-size: 14px;
 						color: #333;
 						
-						img {
+						image {
 							width: 32upx;
 							height: 32upx;
 						}
