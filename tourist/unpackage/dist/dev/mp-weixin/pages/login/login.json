@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "环渡",
+  "navigationBarTextStyle": "black",
+  "onReachBottomDistance": 100,
+  "usingComponents": {
+    "w-picker": "/components/areaPicker",
+    "mescroll-uni": "/node-modules/mescroll-uni/mescroll-uni"
+  }
+}

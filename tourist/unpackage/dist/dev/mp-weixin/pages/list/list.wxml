@@ -1,0 +1,1 @@
+<view bind:__l="__l"><view>{{$store.state.count}}</view><button data-event-opts="{{[['tap',[['increment',['$event']]]]]}}" class="cu-btn round" bindtap="__e">圆角</button></view>

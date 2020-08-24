@@ -1,0 +1,863 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/shop/shop",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{ 
+			"path": "pages/vip/vip",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/apply/apply",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/bind/bind",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/opened/opened",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/backCard/backCard",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/replaceCard/replaceCard",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/sucResult/sucResult",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/vipDetail/vipDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/vipRoom/vipRoom",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/vipProduce/vipProduce",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/appointment/appointment",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/vipAppointment/vipAppointment",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/assistant/assistant",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/vipOrder/vipOrder",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/vipRoomOrder/vipRoomOrder",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/flight/flight",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/airList/airList",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/airDetail/airDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/messageDetail/messageDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/airTicket/airTicket",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-left",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/selectCity/selectCity",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/selectTime/selectTime",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/singleAir/singleAir",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/singleAirDetail/singleAirDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/airOrder/airOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/editorAir/editorAir",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/score/score",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/scoreDetail/scoreDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/orderAir/orderAir",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/orderAirDetail/orderAirDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/editor/editor",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/no/no",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/content/content",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/airStart/airStart",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/serviceContent/serviceContent",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/friends/friends",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/flightTab/flightTab",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotDetail/hotDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/noOpen/noOpen",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/doubleDate/doubleDate",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/airEnd/airEnd",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/doubleOrder/doubleOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/startAirDetail/startAirDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/endAirDetail/endAirDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/vipOrderList/vipOrderList",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/vipListDetail/vipListDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/sucAir/sucAir",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopSearch/shopSearch",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopDetail/shopDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopOrder/shopOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopPay/shopPay",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopAddress/shopAddress",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/addAddress/addAddress",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopSuc/shopSuc",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopType/shopType",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopList/shopList",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopListDetail/shopListDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/logistics/logistics",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/service/service",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/shopScore/shopScore",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/stage/stage",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/stageMessage/stageMessage",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/stagePay/stagePay",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/stageOrder/stageOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/stageDetail/stageDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/very/very",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/veryProduce/veryProduce",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/veryAppointment/veryAppointment",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/veryPay/veryPay",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/veryOrder/veryOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/veryDetail/veryDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/businessCard/businessCard",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/cardsPublic/cardsPublic",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/cardsDetail/cardsDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/cardsEditor/cardsEditor",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/train/train",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/selectTrain/selectTrain",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/trainList/trainList",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/trainOrder/trainOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/editorTrain/editorTrain",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/trainState/trainState",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/trainDetail/trainDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotel/hotel",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelDate/hotelDate",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelList/hotelList",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelMap/hotelMap",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelDetail/hotelDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelComments/hotelComments",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelProduce/hotelProduce",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelSub/hotelSub",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelSuc/hotelSuc",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelOrder/hotelOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/hotelOrderDetail/hotelOrderDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/comment/comment",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/setPass/setPass",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/setForget/setForget",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/suggest/suggest",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/together/together",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/selectHotel/selectHotel",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/bill/bill",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		},
+		{
+			"path": "pages/billDetail/billDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"animationType": "slide-in-right",
+				"animationDuration": 500
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "white",
+		"usingComponents": true
+	},
+	"permission": {
+		"scope.userLocation": {
+			"desc": "你的位置信息将用于定位"
+		}
+	},
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#E42417",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/bar/icon1_select.png",
+			"selectedIconPath": "static/bar/icon1.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/shop/shop",
+			"iconPath": "static/bar/icon2_select.png",
+			"selectedIconPath": "static/bar/icon2.png",
+			"text": "纪念币商城"
+		}, {
+			"pagePath": "pages/vip/vip",
+			"iconPath": "static/bar/icon3_select.png",
+			"selectedIconPath": "static/bar/icon3.png",
+			"text": "驿站会员"
+		}, {
+			"pagePath": "pages/mine/mine",
+			"iconPath": "static/bar/icon4_select.png",
+			"selectedIconPath": "static/bar/icon4.png",
+			"text": "我的"
+		}]
+	}
+}
