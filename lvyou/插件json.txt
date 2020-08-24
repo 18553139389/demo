@@ -1,0 +1,46 @@
+"van-row": "/path/to/vant-weapp/dist/row/index",
+    "van-col": "/path/to/vant-weapp/dist/col/index",
+    "panel": "../../components/panel"
+
+
+// 请求方法
+const HTTP = require("../../utils/http-list.js");
+const http = new HTTP();
+//getApp()的数据
+let gd = getApp().globalData;
+
+<view class="s_2" style="background-color:#F8F8F8"></view>
+
+
+
+
+// 地图转换
+const map=require("../../utils/map.js");
+
+工具引用
+
+const wxutil=require("../../utils/wxutil.js");
+
+//提示 toast
+
+
+uid:gd.userId || "de8a58b195c5413e9792b41295c3e43c",
+
+
+1 7
+28
+3
+45
+
+https://callme.lixinapp.com/weixiu/userfiles/1/files/authimage/2019/04/201904161812222BY8.jpg
+
+
+取消订单
+评价
+
+
+wx.navigateTo({
+      url:"/pages/web/web?url="+event.currentTarget.dataset.url
+    })
+
+优惠券数据格式不对
