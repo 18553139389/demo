@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.contain.data-v-01e9d727 {
+.contain.data-v-6fc18132 {
   width: 100%;
   height: 100vh;
   display: -webkit-box;
@@ -37,14 +37,14 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  padding-top: 30%;
+  padding-top: 25%;
   overflow: hidden;
 }
-.contain .logo.data-v-01e9d727 {
-    width: 320rpx;
-    height: 320rpx;
+.contain .logo.data-v-6fc18132 {
+    width: 400rpx;
+    height: 400rpx;
 }
-.contain .forms.data-v-01e9d727 {
+.contain .forms.data-v-6fc18132 {
     width: 80%;
     display: -webkit-box;
     display: -webkit-flex;
@@ -53,9 +53,9 @@
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
             flex-direction: column;
-    margin-top: 100rpx;
+    margin-top: 40rpx;
 }
-.contain .common.data-v-01e9d727 {
+.contain .common.data-v-6fc18132 {
     width: 100%;
     height: 90rpx;
     display: -webkit-box;
@@ -68,14 +68,14 @@
     padding: 0 10rpx;
     box-sizing: border-box;
 }
-.contain .common > input.data-v-01e9d727 {
+.contain .common > input.data-v-6fc18132 {
     font-size: 14px;
     color: #333;
 }
-.contain .user.data-v-01e9d727 {
+.contain .user.data-v-6fc18132 {
     margin-bottom: 20rpx;
 }
-.contain .forget.data-v-01e9d727 {
+.contain .forget.data-v-6fc18132 {
     width: 100%;
     height: 100rpx;
     line-height: 100rpx;
@@ -84,7 +84,7 @@
     padding: 0 10rpx;
     box-sizing: border-box;
 }
-.contain .login.data-v-01e9d727 {
+.contain .login.data-v-6fc18132 {
     width: 80%;
     height: 80rpx;
     line-height: 80rpx;
@@ -95,7 +95,7 @@
     color: #FFFFFF;
     margin-top: 40rpx;
 }
-.contain .mark.data-v-01e9d727 {
+.contain .mark.data-v-6fc18132 {
     width: 80%;
     height: 140rpx;
     line-height: 140rpx;
@@ -103,7 +103,7 @@
     font-size: 14px;
     color: #666;
 }
-.contain .service.data-v-01e9d727 {
+.contain .service.data-v-6fc18132 {
     width: 90%;
     height: 90rpx;
     display: -webkit-box;
@@ -117,12 +117,12 @@
             align-items: center;
     margin-top: 100rpx;
 }
-.contain .service > ._img.data-v-01e9d727 {
+.contain .service > ._img.data-v-6fc18132 {
     width: 40rpx;
     height: 40rpx;
     margin-right: 30rpx;
 }
-.contain .service > ._span.data-v-01e9d727 {
+.contain .service > ._span.data-v-6fc18132 {
     color: #0081FF;
 }
 

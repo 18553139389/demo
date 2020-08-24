@@ -54,8 +54,8 @@
             align-items: center;
 }
 .contain .wrapper .logo.data-v-26a5308a {
-      width: 320rpx;
-      height: 320rpx;
+      width: 400rpx;
+      height: 400rpx;
       margin: 80rpx 0;
 }
 .contain .wrapper ._ul.data-v-26a5308a {

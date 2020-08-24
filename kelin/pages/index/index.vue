@@ -27,7 +27,7 @@
 			</view>
 			<div class="list">
 				<div class="item" v-if="show1">
-					<div class="titles">客车空调系统</div>
+					<div class="titles">科林空调产品</div>
 					<swiper class="swiper" :indicator-dots="status1" indicator-active-color="#2076FF">
 						<swiper-item v-for="(item,index) in total1" :key="index">
 							<ul class="list-items">
@@ -40,7 +40,7 @@
 					</swiper>
 				</div>
 				<div class="item" v-if="show2">
-					<div class="titles">智能工业中央空调</div>
+					<div class="titles">之铂空调产品</div>
 					<swiper class="swiper" :indicator-dots="status2" indicator-active-color="#2076FF">
 						<swiper-item v-for="(item,index) in total2" :key="index">
 							<ul class="list-items">

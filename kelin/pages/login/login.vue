@@ -93,19 +93,19 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding-top: 30%;
+		padding-top: 25%;
 		overflow: hidden;
 
 		.logo {
-			width: 320upx;
-			height: 320upx;
+			width: 400upx;
+			height: 400upx;
 		}
 
 		.forms {
 			width: 80%;
 			display: flex;
 			flex-direction: column;
-			margin-top: 100upx;
+			margin-top: 40upx;
 		}
 
 		.common {

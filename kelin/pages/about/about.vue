@@ -103,8 +103,8 @@
 			align-items: center;
 			
 			.logo {
-				width: 320upx;
-				height: 320upx;
+				width: 400upx;
+				height: 400upx;
 				margin: 80upx 0;
 			}
 			
