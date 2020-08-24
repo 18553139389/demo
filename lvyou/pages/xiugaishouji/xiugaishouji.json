@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "van-field": "/path/to/vant-weapp/dist/field/index",
-    "panel": "../../components/panel"
-  },
-  "navigationBarTitleText":"修改手机号"
-}

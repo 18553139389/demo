@@ -1,6 +1,0 @@
-/* pages/sousuo/sousuo.wxss */
-.ss_1{padding:20rpx;position:relative;}
-.ss_2{position:absolute;right:40rpx;top:20rpx;}
-.ss_3{display:flex;padding:20rpx 0;flex-wrap:wrap;}
-.ss_4{display: block;padding:10rpx 20rpx;background-color:#F8F8F8;margin:0 10rpx 10rpx 0;font-size:28rpx;
-color:rgba(17,17,17,1);}

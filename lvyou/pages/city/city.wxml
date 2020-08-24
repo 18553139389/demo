@@ -1,3 +1,0 @@
-<view>
-  <text class="city_1" wx:for="{{list}}" wx:key="{{index}}" bindtap="gotoindex" data-city="{{item.name}}">{{item.name}}</text>
-</view>

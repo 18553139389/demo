@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "van-search": "/path/to/vant-weapp/dist/search/index",
-    "van-row": "/path/to/vant-weapp/dist/row/index",
-    "van-col": "/path/to/vant-weapp/dist/col/index"
-  },
-  "navigationBarTitleText":"订单搜索"
-}

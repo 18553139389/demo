@@ -1,7 +1,0 @@
-<view class="o_h">
-  <view class="yyfk_1">
-    <textarea placeholder="请输入您的反馈意见" class="yyfk_2" placeholder-class="yyfk_3" bindinput="sub"></textarea>
-  </view>
-  <view class="s_10"></view>
-  <view class="btn b_btn" bindtap="tiji"><text>提交</text></view>
-</view>

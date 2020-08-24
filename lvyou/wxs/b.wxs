@@ -1,7 +1,0 @@
-var bar = function (d) {
-  return d + "1";
-}
-module.exports = {
-  foo: foo,
-  bar: bar
-};

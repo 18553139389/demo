@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-popup": "/path/to/vant-weapp/dist/popup/index"
-    
-  }
-}

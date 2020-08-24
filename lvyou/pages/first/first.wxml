@@ -1,4 +1,0 @@
-<view class="contain">
-  <image class="bg" src="https://oss.huandugj.com/201909271504027z7n.jpg"></image>
-  <view class="content" bindtap="goIndex">跳过广告 {{time}}s</view>
-</view>
