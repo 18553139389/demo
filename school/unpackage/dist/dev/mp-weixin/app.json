@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/auth/auth",
+    "pages/add/add",
+    "pages/index/index",
+    "pages/order/order",
+    "pages/holiday/holiday",
+    "pages/my/my",
+    "pages/detail/detail",
+    "pages/success/success",
+    "pages/send/send",
+    "pages/orderList/orderList",
+    "pages/user/user",
+    "pages/suggest/suggest",
+    "pages/message/message",
+    "pages/school/school",
+    "pages/gree/gree",
+    "pages/adds/adds",
+    "pages/web/web"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#F91D37",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/img1_no.png",
+        "selectedIconPath": "static/images/img1.png",
+        "text": "菜谱"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/images/img2_no.png",
+        "selectedIconPath": "static/images/img2.png",
+        "text": "充值"
+      },
+      {
+        "pagePath": "pages/holiday/holiday",
+        "iconPath": "static/images/img3_no.png",
+        "selectedIconPath": "static/images/img3.png",
+        "text": "请假"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/images/img4_no.png",
+        "selectedIconPath": "static/images/img4.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap83.json"
+}

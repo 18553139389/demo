@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "min-picker": "/components/min-picker/min-picker",
+    "min-popup": "/components/min-picker/min-popup"
+  }
+}
