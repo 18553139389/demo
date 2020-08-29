@@ -244,6 +244,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _toast = _interopRequireDefault(__webpack_require__(/*! ../../common/toast.js */ 19));
 var _request = __webpack_require__(/*! ../../request/request.js */ 20);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -354,7 +360,18 @@ var _request = __webpack_require__(/*! ../../request/request.js */ 20);function 
 //
 //
 //
-var MinPopup = function MinPopup() {__webpack_require__.e(/*! require.ensure | components/min-picker/min-popup */ "components/min-picker/min-popup").then((function () {return resolve(__webpack_require__(/*! ../../components/min-picker/min-popup.vue */ 165));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MinPicker = function MinPicker() {__webpack_require__.e(/*! require.ensure | components/min-picker/min-picker */ "components/min-picker/min-picker").then((function () {return resolve(__webpack_require__(/*! ../../components/min-picker/min-picker.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { Color: '#333', school: '请选择所在学校', schoolId: '', gree: '请选择所在班级', greeId: '', user: '', count: '', type: '', birthday: '', name: '', call: '', address: '', sex: ['女', '男'], sexIndex: 0, show: false, startTimes: [2002, 1, 1], endTime: 2021, show1: false };}, onShow: function onShow() {if (this.$store.state.school) {this.school = this.$store.state.school;this.schoolId = this.$store.state.schoolId;}if (this.$store.state.greeId) {this.gree = this.$store.state.gree;this.greeId = this.$store.state.greeId;} else {this.gree = '请选择所在班级';this.greeId = '';}}, components: { MinPopup: MinPopup, MinPicker: MinPicker }, methods: { changeNav: function changeNav(k) {this.sexIndex = k;}, goSchool: function goSchool() {uni.navigateTo({ url: '/pages/school/school' });}, goGree: function goGree() {if (!this.$store.state.schoolId) {_toast.default.showToast('请先选择学校');return;}uni.navigateTo({ url: '/pages/gree/gree' });}, goSubmit: function goSubmit() {if (this.schoolId == '') {_toast.default.showToast('请选择学校');return;}if (this.greeId == '') {_toast.default.showToast('请选择班级');return;}if (this.user == '') {_toast.default.showToast('请填写学生名字');return;}if (this.call == '') {_toast.default.showToast('手机号不能为空');return;} else if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[01235678]|18[0-9]|19[189])\d{8}$/.test(this.call)) {_toast.default.showToast('手机号格式不正确');return;}if (this.address == '') {_toast.default.showToast('请填写家长住址');return;}this.show = true;}, goCancel: function goCancel() {this.show = false;}, goSure: function goSure() {var self = this;var data1 = { uid: uni.getStorageSync('uid'), studentId: '', icon: '', schoolId: this.schoolId, classisId: this.greeId, username: this.user, account: this.count, sex: this.sexIndex, nation: this.type, birthday: this.birthday, parentName: this.name, phone: this.call, address: this.address };var data = { url: '/saveStudent', data: data1,
+//
+//
+//
+//
+//
+//
+var MinPopup = function MinPopup() {__webpack_require__.e(/*! require.ensure | components/min-picker/min-popup */ "components/min-picker/min-popup").then((function () {return resolve(__webpack_require__(/*! ../../components/min-picker/min-popup.vue */ 165));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MinPicker = function MinPicker() {__webpack_require__.e(/*! require.ensure | components/min-picker/min-picker */ "components/min-picker/min-picker").then((function () {return resolve(__webpack_require__(/*! ../../components/min-picker/min-picker.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { Color: '#333', school: '请选择所在学校', schoolId: '', gree: '请选择所在班级', greeId: '', user: '', count: '', type: '汉族', birthday: '', name: '', call: '', address: '', sex: ['女', '男'], zu: ['汉族', '回族'], zuIndex: 0, sexIndex: 0, show: false, startTimes: [2002, 1, 1], endTime: 2021, show1: false };}, onShow: function onShow() {if (this.$store.state.school) {this.school = this.$store.state.school;this.schoolId = this.$store.state.schoolId;}if (this.$store.state.greeId) {this.gree = this.$store.state.gree;this.greeId = this.$store.state.greeId;} else {this.gree = '请选择所在班级';this.greeId = '';}}, components: { MinPopup: MinPopup, MinPicker: MinPicker }, methods: { changeNav: function changeNav(k) {this.sexIndex = k;}, changeZu: function changeZu(k) {this.zuIndex = k;if (k == 0) {this.type = '汉族';} else {this.type = '回族';}console.log(this.type);}, goSchool: function goSchool() {uni.navigateTo({ url: '/pages/school/school' });}, goGree: function goGree() {if (!this.$store.state.schoolId) {_toast.default.showToast('请先选择学校');return;}uni.navigateTo({ url: '/pages/gree/gree' });}, goSubmit: function goSubmit() {if (this.schoolId == '') {_toast.default.showToast('请选择学校');return;}if (this.greeId == '') {_toast.default.showToast('请选择班级');return;}if (this.user == '') {_toast.default.showToast('请填写学生名字');return;}if (this.call == '') {_toast.default.showToast('手机号不能为空');return;} else if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[01235678]|18[0-9]|19[189])\d{8}$/.test(this.call)) {_toast.default.showToast('手机号格式不正确');return;}if (this.address == '') {_toast.default.showToast('请填写家长住址');return;}this.show = true;}, goCancel: function goCancel() {this.show = false;}, goSure: function goSure() {var self = this;var data1 = { uid: uni.getStorageSync('uid'), studentId: '', icon: '', schoolId: this.schoolId, classisId: this.greeId, username: this.user, account: this.count, sex: this.sexIndex, nation: this.type, birthday: this.birthday, parentName: this.name, phone: this.call,
+        address: this.address };
+
+      var data = {
+        url: '/saveStudent',
+        data: data1,
         success: function success(res) {
           console.log(res);
           if (res.data.result == 0) {

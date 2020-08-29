@@ -164,7 +164,7 @@
 					}
 				}
 				uni.navigateTo({
-				    url: '/pages/detail/detail?date=' + this.arr[type] + '&id=' + ids
+				    url: '/pages/detail/detail?date=' + this.arr[type - 1] + '&id=' + ids
 				})
 			},
 			studentList() {

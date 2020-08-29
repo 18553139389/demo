@@ -31,7 +31,7 @@
 			}
 		},
 		onLoad() {
-			if(uni.getStorageSync('uid')) {
+			if(uni.getStorageSync('uid') && uni.getStorageSync('studentId')) {
 				uni.switchTab({
 				    url: '/pages/index/index'
 				})

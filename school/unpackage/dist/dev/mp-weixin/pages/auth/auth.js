@@ -179,7 +179,7 @@ var _request = __webpack_require__(/*! ../../request/request.js */ 20);function 
 //
 //
 //
-var _default = { data: function data() {return { Color: '#333', code: '', show: false, userInfo: {} };}, onLoad: function onLoad() {if (uni.getStorageSync('uid')) {uni.switchTab({ url: '/pages/index/index' });}}, methods: { getuserinfos: function getuserinfos(e) {var self = this;uni.getSetting({
+var _default = { data: function data() {return { Color: '#333', code: '', show: false, userInfo: {} };}, onLoad: function onLoad() {if (uni.getStorageSync('uid') && uni.getStorageSync('studentId')) {uni.switchTab({ url: '/pages/index/index' });}}, methods: { getuserinfos: function getuserinfos(e) {var self = this;uni.getSetting({
         success: function success(res) {
           if (!res.authSetting['scope.userInfo']) {
             //这里调用授权

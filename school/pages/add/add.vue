@@ -51,10 +51,6 @@
 						<view :class="sexIndex == k ? 'active sex-item' : 'sex-item'" v-for="(v,k) in sex" :key="k" @tap="changeNav(k)">{{v}}</view>
 					</view>
 				</view>
-				<view class="head">
-					<view>民族</view>
-					<input type="text" v-model="type" placeholder="请填写学生民族">
-				</view>
 				<view class="head" @tap="showPop">
 					<view>生日</view>
 					<view class="boxs">
@@ -65,6 +61,16 @@
 				<view class="head">
 					<view>家长</view>
 					<input type="text" v-model="name" placeholder="请填写家长姓名">
+				</view>
+				<view class="head">
+					<view class="head-left">
+						<view style="color: red;margin-right: 20rpx;">*</view>
+						<view>民族</view>
+					</view>
+					<view class="sex">
+						<view :class="zuIndex == k ? 'active sex-item' : 'sex-item'" v-for="(v,k) in zu" :key="k" @tap="changeZu(k)">{{v}}</view>
+					</view>
+					<!-- <input type="text" v-model="type" placeholder="请填写学生民族"> -->
 				</view>
 				<view class="head">
 					<view class="head-left">
@@ -122,12 +128,14 @@
 				greeId: '',
 				user: '',
 				count: '',
-				type: '',
+				type: '汉族',
 				birthday: '',
 				name: '',
 				call: '',
 				address: '',
 				sex: ['女','男'],
+				zu: ['汉族','回族'],
+				zuIndex: 0,
 				sexIndex: 0,
 				show: false,
 				startTimes: [2002,1,1],
@@ -155,6 +163,15 @@
 		methods: {
 			changeNav(k) {
 				this.sexIndex = k
+			},
+			changeZu(k) {
+				this.zuIndex = k
+				if(k == 0) {
+					this.type = '汉族'
+				} else {
+					this.type = '回族'
+				}
+				console.log(this.type)
 			},
 			goSchool() {
 				uni.navigateTo({

@@ -35,8 +35,8 @@
 				</view>
 				<view class="warn">
 					<view style="margin-bottom: 8rpx;">请假规则：</view>
-					<view style="margin-bottom: 8rpx;">1、每晚8点之间可请明天的假</view>
-					<view>2、每晚8点之后只能请后天之后的假</view>
+					<view style="margin-bottom: 8rpx;">1、每天14：30之前可请明天的假</view>
+					<view>2、14：30以后只能请后天以后的假</view>
 				</view>
 			</view>
 		</view>
